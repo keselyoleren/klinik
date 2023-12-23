@@ -1,0 +1,21 @@
+{% load breadcrumb_tags %}
+
+<div class="block-header">
+    <div class="row">
+        <div class="col-lg-7 col-md-6 col-sm-12">
+            <h2>{{header}}</h2>
+            <br>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href=""><i class="zmdi zmdi-home"></i> Klinik</a></li>
+                {% breadcrumb as breadcrumbs %}
+                {% for crumb in breadcrumbs %}
+                    <li class="breadcrumb-item"><a href="{{ crumb.url }}">{{ crumb.title }}</a></li>
+                {% endfor %}
+            </ul>
+            <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
+        </div>
+        <div class="col-lg-5 col-md-6 col-sm-12">                
+            <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i class="zmdi zmdi-arrow-right"></i></button>                                
+        </div>
+    </div>
+</div>
