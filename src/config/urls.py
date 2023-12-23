@@ -22,5 +22,6 @@ class IndexPage(TemplateView):
 urlpatterns = [
     path('', IndexPage.as_view(), name='index'),
     path("", include('manage_users.urls'), name="manage_users"),
+    path("", include('pasien.urls'), name="manage_pasien"),
     path('admin/', admin.site.urls),
 ]

@@ -1,52 +1,48 @@
 {% extends 'layouts/main.html' %}
 {% block content %}
-<section class="content">
-    <div class="body_scroll">
-        {% include 'component/content_header.html' %}
-
-        <div class="container-fluid">
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="card">
-                        <div class="body">
-                            {% if  btn_add %}
-                                <a href="{{ create_url }}" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> {{ header }}</a>
-                            {% endif %} 
-
-                            <div class="table-responsive">
-                                <table id="datatable" class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                           <th>Username</th>
-                                           <th>Email</th>
-                                           <th>Nama Depan</th>
-                                           <th>Nama Belakang</th>
-                                           <th>Role User</th>
-                                           <th>Action</th>
-                                        </tr>
-                                     </thead>
-                                     <tbody>
-                                      {% for item in list_users %}
-                                          <tr role="row" class="even">
-                                              <td>{{item.username}}</td>
-                                              <td>{{item.email}}</td>
-                                              <td>{{item.last_name}}</td>
-                                              <td>{{item.first_name}}</td>
-                                              <td>{{item.puskeswan}}</td>
-                                              <td>
-                                                  <a class="btn btn-outline-info" href="{% url 'user-update' item.id  %}"><i class="zmdi zmdi-edit"></i></a>
-                                                  {% comment %} <a href="{% url 'change-password-admin' item.id %}" class="btn btn-outline-warning"><i class="zmdi zmdi-key"></i></a> {% endcomment %}
-                                                  <a class="btn btn-outline-danger" href="{% url 'user-delete' item.id  %}"><i class="zmdi zmdi-delete"></i></a>
-                                              </td>
-                                          </tr>
-                                      {% endfor %}
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+<div class="content-wrapper">
+    {% include 'component/content_header.html' %}
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">{{ header_title }}</h6>
+            </div>
+            <div class="card-body">
+                {% if btn_add %}
+                    <a href="{{ create_url }}" class="btn btn-primary"><i class="fa fa-plus"></i> {{ header }}</a>
+                {% endif %}
+                <br>
+                <div class="table-responsive">
+                    <table id="datatable" class="table table-striped">
+                        <thead>
+                            <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Nama Depan</th>
+                            <th>Nama Belakang</th>
+                            <th>Role User</th>
+                            <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in list_users %}
+                            <tr role="row" class="even">
+                                <td>{{item.username}}</td>
+                                <td>{{item.email}}</td>
+                                <td>{{item.last_name}}</td>
+                                <td>{{item.first_name}}</td>
+                                <td>{{item.puskeswan}}</td>
+                                <td>
+                                    <a class="btn btn-outline-info" href="{% url 'user-update' item.id  %}"><i class="fa fa-edit"></i></a>
+                                    {% comment %} <a href="{% url 'change-password-admin' item.id %}" class="btn btn-outline-warning"><i class="zmdi zmdi-key"></i></a> {% endcomment %}
+                                    <a class="btn btn-outline-danger" href="{% url 'user-delete' item.id  %}"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
 {% endblock  %}

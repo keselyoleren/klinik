@@ -24,3 +24,6 @@ class Pasien(BaseModel):
     alamat_domisili = models.TextField(_("Alamat Domisili"), blank=True, null=True)
     status = models.CharField(_("Status"), max_length=255, choices=StatusPasien.choices, default=StatusPasien.AKTIF)
     
+
+    def __str__(self) -> str:
+        return self.full_name

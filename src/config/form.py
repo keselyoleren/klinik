@@ -14,9 +14,9 @@ class AbstractForm(forms.ModelForm):
         for field in self.fields:
             self.fields[field].widget.attrs['class'] = 'form-control'
 
-            if field == 'date_discovered':
-                self.fields['date_discovered'].widget = forms.DateTimeInput(attrs={
-                    'type':'datetime-local',
+            if field == 'tanggal_lahir':
+                self.fields['tanggal_lahir'].widget = forms.DateInput(attrs={
+                    'type':'date',
                     'class': 'form-control',
                 })
 

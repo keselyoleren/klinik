@@ -1,82 +1,78 @@
-{% load static %}
-<!doctype html>
-<html class="no-js " lang="en">
 
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
-    <title>:: Aero Bootstrap4 Admin :: Home</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
-    <link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css'%}">
-    <link rel="stylesheet" href="{% static 'assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css'%}"/>
-    <link rel="stylesheet" href="{% static 'assets/plugins/charts-c3/plugin.css'%}"/>
-
-    <link rel="stylesheet" href="{% static 'assets/plugins/morrisjs/morris.min.css'%}" />
-    <!-- Custom Css -->
-    <link rel="stylesheet" href="{% static 'assets/css/style.min.css'%}">
-    <link rel="stylesheet" href="{% static 'assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css'%}">
-    {% block css %}{% endblock  %}
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Melody Admin</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="{% static 'vendors/iconfonts/font-awesome/css/all.min.css'%}">
+  <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.base.css'%}">
+  <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.addons.css'%}">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="{% static 'css/style.css'%}">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="http://www.urbanui.com/" />
+  {% block css %}{% endblock  %}
 </head>
-<body class="theme-blush">
+<body>
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    {% include 'layouts/navbar.html' %}
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_settings-panel.html -->
+      {% include 'layouts/settings-panel.html' %}
+      <!-- partial -->
+      <!-- partial:partials/_sidebar.html -->
+      {% include 'layouts/sidebar.html' %}
+      <!-- partial -->
+      <div class="main-panel">
+        {% block content %}{% endblock  %}
+        
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        {% include 'layouts/footer.html' %}
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
 
-<!-- Page Loader -->
-
-<!-- Overlay For Sidebars -->
-<div class="overlay"></div>
-
-<!-- Main Search -->
-<div id="search">
-    <button id="close" type="button" class="close btn btn-primary btn-icon btn-icon-mini btn-round">x</button>
-    <form>
-      <input type="search" value="" placeholder="Search..." />
-      <button type="submit" class="btn btn-primary">Search</button>
-    </form>
-</div>
-
-
-<!-- Right Icon menu Sidebar -->
-{% include 'layouts/sidebar_r.html' %}
-
-<!-- Left Sidebar -->
-{% include 'layouts/sidebar_l.html' %}
-
-<!-- Right Sidebar -->
-{% include 'layouts/sidebar_r_menu.html' %}
-
-<!-- Main Content -->
-
-{% block content %}{% endblock  %}
-
-
-<!-- Jquery Core Js --> 
-<script src="{% static 'assets/bundles/libscripts.bundle.js'%}"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) --> 
-<script src="{% static 'assets/bundles/vendorscripts.bundle.js'%}"></script> <!-- slimscroll, waves Scripts Plugin Js -->
-
-<script src="{% static 'assets/bundles/jvectormap.bundle.js'%}"></script> <!-- JVectorMap Plugin Js -->
-<script src="{% static 'assets/bundles/sparkline.bundle.js'%}"></script> <!-- Sparkline Plugin Js -->
-<script src="{% static 'assets/bundles/c3.bundle.js'%}"></script>
-
-{% comment %} <script src="{% static 'assets/bundles/datatablescripts.bundle.js'%}"></script> {% endcomment %}
-{% comment %} <script src="{% static 'assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js'%}"></script> {% endcomment %}
-{% comment %} <script src="{% static 'assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js'%}"></script> {% endcomment %}
-{% comment %} <script src="{% static 'assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js'%}"></script> {% endcomment %}
-{% comment %} <script src="{% static 'assets/plugins/jquery-datatable/buttons/buttons.flash.min.js'%}"></script> {% endcomment %}
-{% comment %} <script src="{% static 'assets/plugins/jquery-datatable/buttons/buttons.html5.min.js'%}"></script> {% endcomment %}
-{% comment %} <script src="{% static 'assets/plugins/jquery-datatable/buttons/buttons.print.min.js'%}"></script> {% endcomment %}
-
-{% comment %} <script src="{% static 'assets/bundles/mainscripts.bundle.js'%}"></script> {% endcomment %}
-<script src="{% static 'assets/js/pages/index.js'%}"></script>
-<script>
-    $(document).ready(function() {
-        var table = $('#datatable').DataTable( {
-            lengthChange: false,    
-        } );
-    } );
-</script>  
-
-{% block js %}{% endblock  %}
+  <!-- plugins:js -->
+  <script src="{% static 'vendors/js/vendor.bundle.base.js'%}"></script>
+  <script src="{% static 'vendors/js/vendor.bundle.addons.js'%}"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="{% static 'js/off-canvas.js'%}"></script>
+  <script src="{% static 'js/hoverable-collapse.js'%}"></script>
+  <script src="{% static 'js/misc.js'%}"></script>
+  <script src="{% static 'js/settings.js'%}"></script>
+  <script src="{% static 'js/todolist.js' %}"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="{% static 'js/dashboard.js'%}"></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+  <script>
+    new DataTable('#datatable');
+  </script>
+  
+  
+  <!-- End custom js for this page-->
+  {% block js %}{% endblock  %}
 </body>
+
+
 </html>

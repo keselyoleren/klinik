@@ -5,59 +5,51 @@
 {% block content %}
     <!-- Page Heading -->
 
-<section class="content">
-    <div class="body_scroll">
-        {% include 'component/content_header.html' %}
-    </div>
-    <div class="container-fluid">
-        <div class="row clearfix">
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="card">
-                    <div class="body">
-                        <form action="." method="POST" id="myForm" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {% for fields in form.visible_fields %}
-                                <div class="row clearfix">
-                                    <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
-                                        <label for="{{ fields.label_tag.id }}">
-                                            <h6>
-                                                {{ fields.label_tag }}
-                                                {% if fields.field.required %}
-                                                    <span class="text-red" style="color: red;">*</span>
-                                                {% endif %}
-                                            </h6>
-                                        </label>
-                                    </div>
-                                    <div class="col-lg-10 col-md-10 col-sm-8">
-                                        <div class="form-group">
-                                            {{ fields.help_text }}
-                                                <span class="text-red">
-                                                    {{ fields.errors }}
-                                                </span>
-                                                {{ fields }}
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                            <div class="row clearfix">
-                                <div class="col-sm-8 offset-sm-2">
-                                    <input type="submit" value="Save" class="btn btn btn-outline-success  btn-primary  waves-effect"></button>
+<div class="content-wrapper">
+    {% include 'component/content_header.html' %}
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">{{ header_title }}</h6>
+            </div>
+            <div class="card-body">
+                <form action="." method="POST" id="myForm" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for fields in form.visible_fields %}
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                <label for="{{ fields.label_tag.id }}">
+                                    <h6>
+                                        {{ fields.label_tag }}
+                                        {% if fields.field.required %}
+                                            <span class="text-red" style="color: red;">*</span>
+                                        {% endif %}
+                                    </h6>
+                                </label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-8">
+                                <div class="form-group">
+                                    {{ fields.help_text }}
+                                        <span class="text-red">
+                                            {{ fields.errors }}
+                                        </span>
+                                        {{ fields }}
                                 </div>
                             </div>
-                        </form>
+                        </div>
+                    {% endfor %}
+                    <div class="row clearfix">
+                        <div class="col-sm-8 offset-sm-2">
+                            <input type="submit" value="Save" class="btn btn-primary mr-2"></button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
-
-    
-</section>
-    
-    
+</div>
 
 {% endblock  %}
-
 {% block js %}
 {{ form.media.js }}
 {% endblock %}
