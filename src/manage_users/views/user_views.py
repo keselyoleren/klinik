@@ -6,12 +6,12 @@ from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate
 from django.http import HttpResponseRedirect
 from config.choice import RoleUser
-from config.permis import IsAuthenticated, IsPuskeswan
+from config.permis import IsAuthenticated, IsAuthenticated
 from manage_users.form.user_form import AccountUserForm, UserForm
 from manage_users.models import AccountUser
 
 
-class AccountUserListView(IsPuskeswan, ListView):
+class AccountUserListView(IsAuthenticated, ListView):
     model = AccountUser
     template_name = 'users/list.html'
     context_object_name = 'list_users'
@@ -25,7 +25,7 @@ class AccountUserListView(IsPuskeswan, ListView):
         context['create_url'] = reverse_lazy('user-create')
         return context
 
-class AccountUserCreateView(IsPuskeswan, CreateView):
+class AccountUserCreateView(IsAuthenticated, CreateView):
     model = AccountUser
     template_name = 'component/form.html'
     form_class = AccountUserForm
@@ -40,7 +40,7 @@ class AccountUserCreateView(IsPuskeswan, CreateView):
     def form_valid(self, form):
         return super().form_valid(form)
 
-class AccountUserUpdateView(IsPuskeswan, UpdateView):
+class AccountUserUpdateView(IsAuthenticated, UpdateView):
     model = AccountUser
     template_name = 'component/form.html'
     form_class = UserForm
@@ -52,7 +52,7 @@ class AccountUserUpdateView(IsPuskeswan, UpdateView):
         context['header_title'] = 'Edit User'
         return context
 
-class AccountUserDeleteView(IsPuskeswan, DeleteView):
+class AccountUserDeleteView(IsAuthenticated, DeleteView):
     model = AccountUser
     template_name = 'component/delete.html'
     success_url = reverse_lazy('user-list')

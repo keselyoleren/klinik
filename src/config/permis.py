@@ -81,12 +81,6 @@ class LoginViewMixinUser(AccessMixin):
             return redirect('/')
         return super().dispatch(request, *args, **kwargs)
         
-class IsAuthenticated(AccessMixin):
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated and self.request.user.is_superuser:
-            return super().dispatch(request, *args, **kwargs) 
-        else:
-            return self.handle_no_permission()
 
 class IsPublicAuth(AccessMixin):
     def dispatch(self, request, *args, **kwargs):
@@ -95,7 +89,7 @@ class IsPublicAuth(AccessMixin):
         else:
             self.handle_no_permission()
 
-class IsPuskeswan(AccessMixin):
+class IsAuthenticated(AccessMixin):
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_superuser:
             return super().dispatch(request, *args, **kwargs)

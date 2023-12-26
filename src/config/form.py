@@ -19,9 +19,28 @@ class AbstractForm(forms.ModelForm):
                     'type':'date',
                     'class': 'form-control',
                 })
+            if field == 'waktu_konsultasi':
+                self.fields['waktu_konsultasi'].widget = forms.DateTimeInput(attrs={
+                    'type':'datetime-local',
+                    'class': 'form-control',
+                })
+
+            if field == 'jam_mulai':
+                self.fields['jam_mulai'].widget = forms.TimeInput(attrs={
+                    'type':'time',
+                    'class': 'form-control',
+                })
+
+            if field == 'jam_selesai':
+                self.fields['jam_selesai'].widget = forms.TimeInput(attrs={
+                    'type':'time',
+                    'class': 'form-control',
+                })
 
             if field == 'created_by' and not get_user().is_superuser:
                 self.fields['created_by'].widget = forms.HiddenInput()
             
             if field == 'harga_bersih':
                 self.fields['harga_bersih'].widget = forms.HiddenInput()
+
+            

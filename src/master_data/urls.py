@@ -3,6 +3,7 @@ from django.urls import path, include
 from master_data.views.layanan_views import *
 from master_data.views.poliklinik_views import *
 from master_data.views.tenaga_medis_view import *
+from master_data.views.jadwal_praktik import *
 
 
 
@@ -26,4 +27,13 @@ urlpatterns = [
         path('update/<uuid:pk>/', TenagaMedisUpdateView.as_view(), name='tenaga_medis-update'),
         path('delete/<uuid:pk>/', TenagaMedisDeleteView.as_view(), name='tenaga_medis-delete'),
     ])),
+
+    path("jadwal-tenaga-medis/", include([
+        path('', JadwalTenagaMedisListView.as_view(), name='jadwal-list'),
+        path('create/', JadwalTenagaMedisCreateView.as_view(), name='jadwal-create'),
+        path('update/<uuid:pk>/', JadwalTenagaMedisUpdateView.as_view(), name='jadwal-update'),
+        path('delete/<uuid:pk>/', JadwalTenagaMedisDeleteView.as_view(), name='jadwal-delete'),
+    ])),
+
+    path('jadwal/', JadwalView.as_view(), name='jadwal-view'),
 ]

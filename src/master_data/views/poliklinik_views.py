@@ -6,13 +6,13 @@ from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate
 from django.http import HttpResponseRedirect
 from config.choice import RoleUser
-from config.permis import IsAuthenticated, IsPuskeswan
+from config.permis import IsAuthenticated, IsAuthenticated
 from master_data.form.poliklinik_form import PoliKlinikForm
 from master_data.models import PoliKlinik
 
 
 
-class PoliKlinikListView(IsPuskeswan, ListView):
+class PoliKlinikListView(IsAuthenticated, ListView):
     model = PoliKlinik
     template_name = 'poliklinik/list.html'
     context_object_name = 'list_poliklinik'
@@ -26,7 +26,7 @@ class PoliKlinikListView(IsPuskeswan, ListView):
         context['create_url'] = reverse_lazy('poliklinik-create')
         return context
 
-class PoliKlinikCreateView(IsPuskeswan, CreateView):
+class PoliKlinikCreateView(IsAuthenticated, CreateView):
     model = PoliKlinik
     template_name = 'component/form.html'
     form_class = PoliKlinikForm
@@ -41,7 +41,7 @@ class PoliKlinikCreateView(IsPuskeswan, CreateView):
     def form_valid(self, form):
         return super().form_valid(form)
 
-class PoliKlinikUpdateView(IsPuskeswan, UpdateView):
+class PoliKlinikUpdateView(IsAuthenticated, UpdateView):
     model = PoliKlinik
     template_name = 'component/form.html'
     form_class = PoliKlinikForm
@@ -53,7 +53,7 @@ class PoliKlinikUpdateView(IsPuskeswan, UpdateView):
         context['header_title'] = 'Edit Poli Klinik'
         return context
 
-class PoliKlinikDeleteView(IsPuskeswan, DeleteView):
+class PoliKlinikDeleteView(IsAuthenticated, DeleteView):
     model = PoliKlinik
     template_name = 'component/delete.html'
     success_url = reverse_lazy('poliklinik-list')

@@ -6,12 +6,12 @@ from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate
 from django.http import HttpResponseRedirect
 from config.choice import RoleUser
-from config.permis import IsAuthenticated, IsPuskeswan
+from config.permis import IsAuthenticated, IsAuthenticated
 from pasien.models import Pasien
 from pasien.form.pasien_form import PasienForm
 
 
-class PasienListView(IsPuskeswan, ListView):
+class PasienListView(IsAuthenticated, ListView):
     model = Pasien
     template_name = 'pasien/list.html'
     context_object_name = 'list_pasien'
@@ -25,7 +25,7 @@ class PasienListView(IsPuskeswan, ListView):
         context['create_url'] = reverse_lazy('pasien-create')
         return context
 
-class PasienCreateView(IsPuskeswan, CreateView):
+class PasienCreateView(IsAuthenticated, CreateView):
     model = Pasien
     template_name = 'component/form.html'
     form_class = PasienForm
@@ -40,7 +40,7 @@ class PasienCreateView(IsPuskeswan, CreateView):
     def form_valid(self, form):
         return super().form_valid(form)
 
-class PasienUpdateView(IsPuskeswan, UpdateView):
+class PasienUpdateView(IsAuthenticated, UpdateView):
     model = Pasien
     template_name = 'component/form.html'
     form_class = PasienForm
@@ -52,7 +52,7 @@ class PasienUpdateView(IsPuskeswan, UpdateView):
         context['header_title'] = 'Edit Pasien'
         return context
 
-class PasienDeleteView(IsPuskeswan, DeleteView):
+class PasienDeleteView(IsAuthenticated, DeleteView):
     model = Pasien
     template_name = 'component/delete.html'
     success_url = reverse_lazy('pasien-list')

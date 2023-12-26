@@ -6,12 +6,12 @@ from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate
 from django.http import HttpResponseRedirect
 from config.choice import RoleUser
-from config.permis import IsAuthenticated, IsPuskeswan
+from config.permis import IsAuthenticated, IsAuthenticated
 from master_data.models import Layanan
 from master_data.form.layanan_form import LayananForm
 
 
-class LayananListView(IsPuskeswan, ListView):
+class LayananListView(IsAuthenticated, ListView):
     model = Layanan
     template_name = 'layanan/list.html'
     context_object_name = 'list_layanan'
@@ -25,7 +25,7 @@ class LayananListView(IsPuskeswan, ListView):
         context['create_url'] = reverse_lazy('layanan-create')
         return context
 
-class LayananCreateView(IsPuskeswan, CreateView):
+class LayananCreateView(IsAuthenticated, CreateView):
     model = Layanan
     template_name = 'component/form.html'
     form_class = LayananForm
@@ -40,7 +40,7 @@ class LayananCreateView(IsPuskeswan, CreateView):
     def form_valid(self, form):
         return super().form_valid(form)
 
-class LayananUpdateView(IsPuskeswan, UpdateView):
+class LayananUpdateView(IsAuthenticated, UpdateView):
     model = Layanan
     template_name = 'component/form.html'
     form_class = LayananForm
@@ -52,7 +52,7 @@ class LayananUpdateView(IsPuskeswan, UpdateView):
         context['header_title'] = 'Edit Layanan'
         return context
 
-class LayananDeleteView(IsPuskeswan, DeleteView):
+class LayananDeleteView(IsAuthenticated, DeleteView):
     model = Layanan
     template_name = 'component/delete.html'
     success_url = reverse_lazy('layanan-list')

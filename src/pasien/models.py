@@ -1,7 +1,7 @@
 
 from pyexpat import model
 from django.utils.translation import gettext as _
-from config.choice import JenisKelamin, StatusPasien
+from config.choice import JenisKelamin, StatusPasien, StatusRawatJalan
 from config.models import BaseModel
 from django.db import models
 
@@ -27,3 +27,14 @@ class Pasien(BaseModel):
 
     def __str__(self) -> str:
         return self.full_name
+
+
+class RawatJalan(BaseModel):
+    pasien = models.ForeignKey(Pasien, verbose_name=_("Pasien"), on_delete=models.CASCADE)
+    poli_klinik = models.ForeignKey('master_data.PoliKlinik', verbose_name=_("Poli Klinik"), on_delete=models.CASCADE)
+    dokter = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Dokter"), on_delete=models.CASCADE)
+    waktu_konsultasi = models.DateTimeField(_("Waktu Konsultasi"), blank=True, null=True)
+    status = models.CharField(_("Status"), max_length=255, choices=StatusRawatJalan.choices, default=StatusPasien.AKTIF)
+
+    def __str__(self) -> str:
+        return self.pasien.full_name

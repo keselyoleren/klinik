@@ -3,6 +3,7 @@ import email
 from statistics import mode
 from tkinter.tix import Tree
 from django.db import models
+from config.choice import Hari
 from config.models import BaseModel
 from django.utils.translation import gettext as _
 # Create your models here.
@@ -54,3 +55,13 @@ class TenagaMedis(BaseModel):
     def __str__(self) -> str:
         return self.nama
 
+
+class JadwalTenagaMedis(BaseModel):
+    tenaga_medis = models.ForeignKey(TenagaMedis, verbose_name=_("Tenaga Medis"), on_delete=models.CASCADE)
+    hari = models.CharField(_("Hari"), choices=Hari.choices, max_length=20)
+    jam_mulai = models.TimeField(_("Jam Mulai"))
+    jam_selesai = models.TimeField(_("Jam Selesai"))
+    is_active = models.BooleanField(_("Status Aktif"), default=True)
+
+    def __str__(self) -> str:
+        return self.tenaga_medis.nama

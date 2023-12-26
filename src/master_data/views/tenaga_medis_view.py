@@ -6,14 +6,14 @@ from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate
 from django.http import HttpResponseRedirect
 from config.choice import RoleUser
-from config.permis import IsAuthenticated, IsPuskeswan
+from config.permis import IsAuthenticated, IsAuthenticated
 from master_data.form.tenaga_medis_form import TenagaMedisForm
 
 from master_data.models import TenagaMedis
 
 
 
-class TenagaMedisListView(IsPuskeswan, ListView):
+class TenagaMedisListView(IsAuthenticated, ListView):
     model = TenagaMedis
     template_name = 'tenage_medis/list.html'
     context_object_name = 'list_tenaga_medis'
@@ -27,7 +27,7 @@ class TenagaMedisListView(IsPuskeswan, ListView):
         context['create_url'] = reverse_lazy('tenaga_medis-create')
         return context
 
-class TenagaMedisCreateView(IsPuskeswan, CreateView):
+class TenagaMedisCreateView(IsAuthenticated, CreateView):
     model = TenagaMedis
     template_name = 'component/form.html'
     form_class = TenagaMedisForm
@@ -42,7 +42,7 @@ class TenagaMedisCreateView(IsPuskeswan, CreateView):
     def form_valid(self, form):
         return super().form_valid(form)
 
-class TenagaMedisUpdateView(IsPuskeswan, UpdateView):
+class TenagaMedisUpdateView(IsAuthenticated, UpdateView):
     model = TenagaMedis
     template_name = 'component/form.html'
     form_class = TenagaMedisForm
@@ -54,7 +54,7 @@ class TenagaMedisUpdateView(IsPuskeswan, UpdateView):
         context['header_title'] = 'Edit Tenaga Medis'
         return context
 
-class TenagaMedisDeleteView(IsPuskeswan, DeleteView):
+class TenagaMedisDeleteView(IsAuthenticated, DeleteView):
     model = TenagaMedis
     template_name = 'component/delete.html'
     success_url = reverse_lazy('tenaga_medis-list')
