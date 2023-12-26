@@ -1,0 +1,54 @@
+{% extends 'layouts/main.html' %}
+{% block content %}
+{% load humanize %}
+<div class="content-wrapper">
+    {% include 'component/content_header.html' %}
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">{{ header_title }}</h6>
+            </div>
+            <div class="card-body">
+                {% if btn_add %}
+                    <a href="{{ create_url }}" class="btn btn-primary"><i class="fa fa-plus"></i> {{ header }}</a>
+                {% endif %}
+                <br><br>
+                <div class="table-responsive">
+                    <table id="datatable" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Photo</th>
+                                <th>Nama</th>
+                                <th>Alamat</th>
+                                <th>No Hp</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in list_tenaga_medis %}
+                            <tr role="row" class="even">
+                                <td>
+                                    <a href="#" class="pop">
+                                        {% if item.photo %}
+                                            <img src="{{ item.photo.url }}" class="img-lg rounded" alt="">
+                                        {% endif %}
+                                    </a>
+                                </td>
+                                <td>{{item.nama}}</td>
+                                <td>{{item.alamat}}</td>
+                                <td>{{item.no_hp}}</td>
+                                <td>{{item.email}}</td>
+                                <td>
+                                    <a class="btn btn-outline-info" href="{% url 'tenaga_medis-update' item.id  %}"><i class="fa fa-edit"></i></a>
+                                    <a class="btn btn-outline-danger" href="{% url 'tenaga_medis-delete' item.id  %}"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock  %}

@@ -18,12 +18,15 @@ DJANGO_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
+
     'django_filters',
     'corsheaders',
 ]
 
 LOCAL_APP = [
     'manage_users',
+    'master_data',
     'pasien',
 ] 
 

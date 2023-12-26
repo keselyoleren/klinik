@@ -15,7 +15,7 @@ def breadcrumb(context):
                 url = f'/{"/".join(breadcrumbs + [part])}/'
                 view = resolve(url)
                 breadcrumbs.append({
-                    'title': view.url_name.replace('-', ' ').title(),
+                    'title': view.url_name.replace('_', ' ').replace('-', ' ').title(),
                     'url': url
                 })
         return breadcrumbs

@@ -11,7 +11,8 @@
                 {% if btn_add %}
                     <a href="{{ create_url }}" class="btn btn-primary"><i class="fa fa-plus"></i> {{ header }}</a>
                 {% endif %}
-                <br>
+                <br><br>
+                
                 <div class="table-responsive">
                     <table id="datatable" class="table table-striped">
                         <thead>
@@ -31,7 +32,7 @@
                                 <td>{{item.email}}</td>
                                 <td>{{item.last_name}}</td>
                                 <td>{{item.first_name}}</td>
-                                <td>{{item.puskeswan}}</td>
+                                <td>{{item.role}}</td>
                                 <td>
                                     <a class="btn btn-outline-info" href="{% url 'user-update' item.id  %}"><i class="fa fa-edit"></i></a>
                                     {% comment %} <a href="{% url 'change-password-admin' item.id %}" class="btn btn-outline-warning"><i class="zmdi zmdi-key"></i></a> {% endcomment %}

@@ -1,4 +1,4 @@
-<nav class="sidebar sidebar-offcanvas" id="sidebar">
+<nav class="sidebar sidebar-offcanvas menu-native-scroll" id="sidebar">
     <ul class="nav">
       <li class="nav-item nav-profile">
         <div class="nav-link">
@@ -30,8 +30,9 @@
         <div class="collapse" id="page-layouts">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{% url 'user-list' %}">Akun User</a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/layout/rtl-layout.html">RTL</a></li>
-            <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="pages/layout/horizontal-menu.html">Horizontal Menu</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{% url 'layanan-list' %}">Layanan</a></li>
+            <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{% url 'poliklinik-list' %}">Poli Klinik</a></li>
+            <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{% url 'tenaga_medis-list' %}">Tenaga Medis</a></li>
           </ul>
         </div>
       </li>
