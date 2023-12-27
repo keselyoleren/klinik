@@ -1,12 +1,26 @@
 from webbrowser import get
 from django import forms
 from config.choice import RoleUser
+from django import forms
+from django.forms.widgets import Select
 from django.contrib.admin.widgets import (
     FilteredSelectMultiple,
     AdminDateWidget,
     AdminSplitDateTime,
 )
 from config.request import get_user
+
+class Select2Widget(Select):
+    def __init__(self, attrs=None, choices=(), *args, **kwargs):
+        if attrs is None:
+            attrs = {}
+        attrs['class'] = attrs.get('class', '') + ' select2 form-control'
+        super().__init__(attrs=attrs, choices=choices, *args, **kwargs)
+
+    def build_attrs(self, *args, **kwargs):
+        attrs = super().build_attrs(*args, **kwargs)
+        attrs.update({'class': ' '.join(attrs.get('class', '').split() + ['select2', 'form-control'])})
+        return attrs
 
 class AbstractForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
