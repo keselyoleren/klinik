@@ -2,6 +2,7 @@
 from django.urls import path, include
 from pasien.views.pasien_views import *
 from pasien.views.rawat_jalan_views import *
+from pasien.views.rekam_medis_views import ListRawatJalanView
 
 urlpatterns = [
     path("pasien/", include([
@@ -16,5 +17,9 @@ urlpatterns = [
         path('create/', RawatJalanCreateView.as_view(), name='rawat_jalan-create'),
         path('update/<uuid:pk>/', RawatJalanUpdateView.as_view(), name='rawat_jalan-update'),
         path('delete/<uuid:pk>/', RawatJalanDeleteView.as_view(), name='rawat_jalan-delete'),
+    ])),
+
+    path("rekam-medis/", include([
+        path('list-pasien', ListRawatJalanView.as_view(), name='rekam_medis-list-pasien'),
     ])),
 ]

@@ -25,6 +25,7 @@ class StatusPasien(TextChoices):
 
 class StatusRawatJalan(TextChoices):
     RESERVASI = 'RESERVASI'
+    REGISTRASI = 'REGISTRASI'
     DIPERIKSA = 'DIPERIKSA'
     SELESAI = 'SELESAI'
 

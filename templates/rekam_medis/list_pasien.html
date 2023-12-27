@@ -34,15 +34,7 @@
                                 <td>{{item.waktu_konsultasi}}</td>
                                 
                                 <td>
-                                    {% if item.status == 'REGISTRASI' %}
-                                        <div class="badge badge-warning badge-pill">{{ item.status }}</div>
-                                    {% elif item.status == 'RESERVASI' %}
-                                        <div class="badge badge-primary badge-pill">{{ item.status }}</div>
-                                    {% elif item.status == 'DIPERIKSA' %}
-                                        <div class="badge badge-info badge-pill">{{ item.status }}</div>
-                                    {% elif item.status == 'SELESAI' %}
-                                        <div class="badge badge-success badge-pill">{{ item.status }}</div>
-                                    {% endif %}
+                                    <div class="badge badge-warning badge-pill">{{ item.status }}</div>
                                 </td>
                                 
                                 <td>

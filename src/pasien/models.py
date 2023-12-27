@@ -34,7 +34,7 @@ class RawatJalan(BaseModel):
     poli_klinik = models.ForeignKey('master_data.PoliKlinik', verbose_name=_("Poli Klinik"), on_delete=models.CASCADE)
     dokter = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Dokter"), on_delete=models.CASCADE)
     waktu_konsultasi = models.DateTimeField(_("Waktu Konsultasi"), blank=True, null=True)
-    status = models.CharField(_("Status"), max_length=255, choices=StatusRawatJalan.choices, default=StatusPasien.AKTIF)
+    status = models.CharField(_("Status"), max_length=255, choices=StatusRawatJalan.choices, default=StatusRawatJalan.REGISTRASI)
 
     def __str__(self) -> str:
         return self.pasien.full_name
