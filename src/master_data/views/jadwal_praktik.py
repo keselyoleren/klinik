@@ -1,30 +1,53 @@
 # myapp/views.py
-
-from urllib import request
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from django.contrib.auth import login, authenticate
-from django.http import HttpResponseRedirect
-from config.choice import DAY_CODE, RoleUser
+
+
+from config.choice import DAY_CODE
 from django.views.generic import TemplateView
 from config.permis import IsAuthenticated, IsAuthenticated
+from django.db.models import Count
 
 from master_data.form.jadwal_form import JadwalTenagaMedisForm
 from master_data.models import JadwalTenagaMedis
 
-
-
 class JadwalTenagaMedisListView(IsAuthenticated, ListView):
+    model = JadwalTenagaMedis
+    template_name = 'jadwal_tenage_medis/list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Jadwal Tenaga Medis'
+        nama_list = JadwalTenagaMedis.objects.values('tenaga_medis').annotate(count=Count('tenaga_medis'))
+        unique_jadwal_list = []
+        for jadwal in nama_list:
+            jadwal_obj = JadwalTenagaMedis.objects.filter(tenaga_medis=jadwal['tenaga_medis']).first()
+            unique_jadwal_list.append(jadwal_obj)
+        context['header_title'] = 'List jadwal Tenaga Medis'
+        context['list_jadwal'] = unique_jadwal_list
+        context['btn_add'] = True
+        context['is_list'] = True
+        context['create_url'] = reverse_lazy('jadwal-create')
+        return context
+
+class JadwalTenagaMedisDetailView(IsAuthenticated, ListView):
     model = JadwalTenagaMedis
     template_name = 'jadwal_tenage_medis/list.html'
     context_object_name = 'list_jadwal'
     
+    def get_queryset(self):
+        jadwal = JadwalTenagaMedis.objects.filter(id=self.kwargs['pk']).first()
+        return super().get_queryset().filter(tenaga_medis=jadwal.tenaga_medis)
+
     
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['header'] = 'Jadwal Tenaga Medis'
-        context['header_title'] = 'List jadwal Tenaga Medis'
+        jadwal = JadwalTenagaMedis.objects.filter(id=self.kwargs['pk']).first()
+        context['header'] = f'Jadwal {jadwal.tenaga_medis}'
+        context['header_title'] = f'List jadwal {jadwal.tenaga_medis}'
         context['btn_add'] = True
+        context['is_list'] = False
         context['create_url'] = reverse_lazy('jadwal-create')
         return context
 

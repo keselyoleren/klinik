@@ -1,5 +1,6 @@
 {% extends 'layouts/main.html' %}
 {% block content %}
+{% load breadcrumb_tags %}
 {% load humanize %}
 <div class="content-wrapper">
     {% include 'component/content_header.html' %}
@@ -28,11 +29,23 @@
                         {% for item in list_jadwal %}
                             <tr role="row" class="even">
                                 <td>{{item.tenaga_medis}}</td>
-                                <td>{{item.hari}}</td>
+                                {% if is_list %}
+                                    <td>
+                                        {% for day in item.tenaga_medis|get_days  %}
+                                            {{day.hari}}, 
+                                        {% endfor %}
+                                    </td>
+                                {% else %}
+                                    <td>{{ item.hari }}</td>
+                                {% endif %}
                                 <td>{{item.jam_mulai}}</td>
                                 <td>{{item.jam_selesai}}</td>
                                 <td>
-                                    <a class="btn btn-outline-info" href="{% url 'jadwal-update' item.id  %}"><i class="fa fa-edit"></i></a>
+                                    {% if is_list %}
+                                        <a class="btn btn-outline-info" href="{% url 'jadwal-detail' item.id  %}"><i class="fa fa-edit"></i></a>
+                                    {% else %}
+                                        <a class="btn btn-outline-info" href="{% url 'jadwal-update' item.id  %}"><i class="fa fa-edit"></i></a>
+                                    {% endif %}
                                     <a class="btn btn-outline-danger" href="{% url 'jadwal-delete' item.id  %}"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>

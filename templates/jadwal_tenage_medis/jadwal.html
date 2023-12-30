@@ -1,7 +1,13 @@
 {% extends 'layouts/main.html' %}
 {% load static %}
 {% block css %}
-
+<style>
+    .fc-event-title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+</style>
 {% endblock  %}
 
 {% block content %}
@@ -37,7 +43,7 @@
             },
             navLinks: true, // can click day/week names to navigate views
             editable: true,
-            eventLimit: true, // allow "more" link when too many events
+            eventLimit:false, // allow "more" link when too many events
             eventRender: function(event, element) {
                 element.css('height', 'auto');  // Set the height to auto to fit content
             },

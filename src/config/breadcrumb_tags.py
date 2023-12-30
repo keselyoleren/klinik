@@ -1,6 +1,8 @@
 from django import template
 from django.urls import resolve
 
+from master_data.models import JadwalTenagaMedis
+
 register = template.Library()
 
 @register.simple_tag(takes_context=True)
@@ -19,5 +21,9 @@ def breadcrumb(context):
                     'url': url
                 })
         return breadcrumbs
-    except:
+    except Exception:
         return []
+
+@register.filter(takes_context=True)
+def get_days(tenaga_medis):
+    return JadwalTenagaMedis.objects.filter(tenaga_medis=tenaga_medis)

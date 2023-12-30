@@ -60,7 +60,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
             'libraries':{
-                'breadcrumb_tags': 'config.breadcrumb_tags',
+                'breadcrumb_tags': 'config.breadcrumb_tags'
             }
         },
     },

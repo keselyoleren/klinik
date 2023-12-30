@@ -32,6 +32,7 @@ urlpatterns = [
         path('', JadwalTenagaMedisListView.as_view(), name='jadwal-list'),
         path('create/', JadwalTenagaMedisCreateView.as_view(), name='jadwal-create'),
         path('update/<uuid:pk>/', JadwalTenagaMedisUpdateView.as_view(), name='jadwal-update'),
+        path('detail/<uuid:pk>/', JadwalTenagaMedisDetailView.as_view(), name='jadwal-detail'),
         path('delete/<uuid:pk>/', JadwalTenagaMedisDeleteView.as_view(), name='jadwal-delete'),
     ])),
 
