@@ -42,7 +42,7 @@
                                 <td>{{item.jam_selesai}}</td>
                                 <td>
                                     {% if is_list %}
-                                        <a class="btn btn-outline-info" href="{% url 'jadwal-detail' item.id  %}"><i class="fa fa-edit"></i></a>
+                                        <a class="btn btn-outline-info" href="{% url 'jadwal-detail' item.id  %}"><i class="fa fa-eye"></i></a>
                                     {% else %}
                                         <a class="btn btn-outline-info" href="{% url 'jadwal-update' item.id  %}"><i class="fa fa-edit"></i></a>
                                     {% endif %}
