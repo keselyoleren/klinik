@@ -1,5 +1,3 @@
-
-from pyexpat import model
 from django.utils.translation import gettext as _
 from config.choice import JenisKelamin, StatusPasien, StatusRawatJalan
 from config.models import BaseModel
@@ -40,3 +38,10 @@ class RawatJalan(BaseModel):
         return self.pasien.full_name
 
 
+class RekamMedis(BaseModel):
+    pasien = models.ForeignKey(Pasien, verbose_name=_("Nama Pasien"), on_delete=models.CASCADE)
+    tenaga_medis = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Tenaga Medis"), on_delete=models.CASCADE)
+    keluhan_utama = models.TextField(_("Keluhan Utama"), blank=True, null=True)
+    riwayat_penyakit = models.CharField(_("Riwayat Penyakit"), max_length=255, blank=True, null=True)
+    riwayat_alergi = models.CharField(_("Riwayat Alergi"), max_length=255, blank=True, null=True)
+    tanda_vital = models.JSONField(_("Tanda - tanda  Vital"), blank=True, null=True)

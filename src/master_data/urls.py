@@ -7,6 +7,7 @@ from master_data.views.jadwal_praktik import *
 
 
 
+
 urlpatterns = [
     path("layanan/", include([
         path('', LayananListView.as_view(), name='layanan-list'),
@@ -35,6 +36,7 @@ urlpatterns = [
         path('detail/<uuid:pk>/', JadwalTenagaMedisDetailView.as_view(), name='jadwal-detail'),
         path('delete/<uuid:pk>/', JadwalTenagaMedisDeleteView.as_view(), name='jadwal-delete'),
     ])),
+
 
     path('jadwal/', JadwalView.as_view(), name='jadwal-view'),
 ]

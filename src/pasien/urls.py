@@ -1,8 +1,10 @@
 # myapp/urls.py
 from django.urls import path, include
+from pasien.models import RekamMedis
 from pasien.views.pasien_views import *
 from pasien.views.rawat_jalan_views import *
-from pasien.views.rekam_medis_views import ListRawatJalanView
+from pasien.views.rekam_medis_views import *
+from pasien.views.rekam_medis_views import *
 
 urlpatterns = [
     path("pasien/", include([
@@ -20,6 +22,10 @@ urlpatterns = [
     ])),
 
     path("rekam-medis/", include([
+        path('', RekamMedisListView.as_view(), name='rekam_medis-list'),
+        path('create/', RekamMedisCreateView.as_view(), name='rekam_medis-create'),
+        path('update/<uuid:pk>/', RekamMedisUpdateView.as_view(), name='rekam_medis-update'),
+        path('delete/<uuid:pk>/', RekamMedisDeleteView.as_view(), name='rekam_medis-delete'),
         path('list-pasien', ListRawatJalanView.as_view(), name='rekam_medis-list-pasien'),
     ])),
 ]

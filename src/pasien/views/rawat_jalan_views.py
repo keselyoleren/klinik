@@ -52,6 +52,10 @@ class RawatJalanUpdateView(IsAuthenticated, UpdateView):
         context['header_title'] = 'Edit Rawat Jalan'
         return context
 
+    def form_valid(self, form):
+        print('testing')
+        return super().form_valid(form)
+
 class RawatJalanDeleteView(IsAuthenticated, DeleteView):
     model = RawatJalan
     template_name = 'component/delete.html'

@@ -1,5 +1,6 @@
 {% extends 'layouts/main.html' %}
 {% block content %}
+{% load humanize %}
 <div class="content-wrapper">
     {% include 'component/content_header.html' %}
     <div class="col-lg-12 grid-margin stretch-card">
@@ -17,30 +18,28 @@
                         <thead>
                             <tr>
                             <th>Nama Pasien</th>
-                            <th>Tgl Lahir</th>
-                            <th>Status</th>
+                            <th>Poli Klinik</th>
+                            <th>Nama Doketer</th>
+                            <th>Waktu Konsultasi</th>
+                            <th>status</th>
                             <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                        {% for item in list_pasien %}
+                        {% for item in list_rekam_medis %}
                             <tr role="row" class="even">
-                                <td>{{item.full_name}}</td>
-                                <td>{{item.tanggal_lahir}}</td>
+                                <td>{{item.pasien}}</td>
+                                <td>{{item.poli_klinik}}</td>
+                                <td>{{item.dokter}}</td>
+                                <td>{{item.waktu_konsultasi}}</td>
+                                
                                 <td>
-                                    {% if item.status  == 'RAWAT JALAN' %}
-                                        <div class="badge badge-warning badge-pill">{{ item.status }}</div>
-                                    {% elif item.status == 'RAWAT INAP' %}
-                                        <div class="badge badge-info badge-pill">{{ item.status }}</div>
-                                    {% elif item.status == 'AKTIF' %}
-                                        <div class="badge badge-success badge-pill">{{ item.status }}</div>
-                                    {% elif item.status == 'NONAKTIF' %}
-                                        <div class="badge badge-danger badge-pill">{{ item.status }}</div>
-                                    {% endif %}
+                                    <div class="badge badge-warning badge-pill">{{ item.status }}</div>
                                 </td>
+                                
                                 <td>
-                                    <a class="btn btn-outline-info" href="{% url 'pasien-update' item.id  %}"><i class="fa fa-edit"></i></a>
-                                    <a class="btn btn-outline-danger" href="{% url 'pasien-delete' item.id  %}"><i class="fa fa-trash"></i></a>
+                                    <a class="btn btn-outline-info" href="{% url 'rawat_jalan-update' item.id  %}"><i class="fa fa-edit"></i></a>
+                                    <a class="btn btn-outline-danger" href="{% url 'rawat_jalan-delete' item.id  %}"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                         {% endfor %}
