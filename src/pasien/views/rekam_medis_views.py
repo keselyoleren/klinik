@@ -18,7 +18,7 @@ class ListRawatJalanView(IsAuthenticated, ListView):
     context_object_name = 'list_rawat_jalan'
     
     def get_queryset(self):
-        return super().get_queryset().filter(status=StatusRawatJalan.REGISTRASI)
+        return super().get_queryset().filter(status__in=[StatusRawatJalan.REGISTRASI])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -27,51 +27,74 @@ class ListRawatJalanView(IsAuthenticated, ListView):
         return context
 
 
+class RiwayatRekamMedisListView(IsAuthenticated, ListView):
+    model = RekamMedis
+    template_name = 'rekam_medis/riwayat.html'
+    context_object_name = 'list_rekam_medis'
+    
+    def get_queryset(self):
+        return super().get_queryset().filter(pasien=self.kwargs['pasien_id'])
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Riwayat Rekam Medis'
+        context['pasien'] = Pasien.objects.get(pk=self.kwargs['pasien_id'])
+        context['header_title'] = 'Riwayat Rekam Medis'
+        return context
+
 class RekamMedisListView(IsAuthenticated, ListView):
     model = RekamMedis
     template_name = 'rekam_medis/list.html'
     context_object_name = 'list_rekam_medis'
     
-    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Rekam Medis'
+        
         context['header_title'] = 'List Rekam Medis'
-        context['btn_add'] = True
-        context['create_url'] = reverse_lazy('rekam_medis-create')
         return context
 
 class RekamMedisCreateView(IsAuthenticated, CreateView):
     model = RekamMedis
-    template_name = 'component/form.html'
+    template_name = 'rekam_medis/form.html'
     form_class = RekamMedisForm
     success_url = reverse_lazy('rekam_medis-list')
 
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['pasien'] = Pasien.objects.get(pk=self.kwargs['pasien_id'])
         context['header'] = 'Rekam Medis'
         context['header_title'] = 'Tambah Rekam Medis'
         return context
 
     def form_valid(self, form):
+        form.instance.pasien = Pasien.objects.get(id=self.kwargs['pasien_id'])
+        form.save()
+        
+        rawat_jalan = RawatJalan.objects.filter(pasien=form.instance.pasien).first()
+        rawat_jalan.status = StatusRawatJalan.SELESAI
+        rawat_jalan.save()
+        
         return super().form_valid(form)
 
 class RekamMedisUpdateView(IsAuthenticated, UpdateView):
     model = RekamMedis
-    template_name = 'component/form.html'
+    template_name = 'rekam_medis/form.html'
     form_class = RekamMedisForm
     success_url = reverse_lazy('rekam_medis-list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['header'] = 'RekamMedis'
+        context['pasien'] = self.get_object().pasien
+        context['header'] = 'Rekam Medis'
         context['header_title'] = 'Edit Rekam Medis'
         return context
 
 class RekamMedisDeleteView(IsAuthenticated, DeleteView):
     model = RekamMedis
     template_name = 'component/delete.html'
-    success_url = reverse_lazy('relam_medis-list')
+    success_url = reverse_lazy('rekam_medis-list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

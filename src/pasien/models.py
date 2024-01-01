@@ -39,7 +39,7 @@ class RawatJalan(BaseModel):
 
 
 class RekamMedis(BaseModel):
-    pasien = models.ForeignKey(Pasien, verbose_name=_("Nama Pasien"), on_delete=models.CASCADE)
+    pasien = models.ForeignKey(Pasien, verbose_name=_("Nama Pasien"), on_delete=models.CASCADE, blank=True, null=True)
     tenaga_medis = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Tenaga Medis"), on_delete=models.CASCADE)
     keluhan_utama = models.TextField(_("Keluhan Utama"), blank=True, null=True)
     riwayat_penyakit = models.CharField(_("Riwayat Penyakit"), max_length=255, blank=True, null=True)

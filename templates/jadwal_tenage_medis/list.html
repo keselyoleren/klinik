@@ -30,9 +30,9 @@
                             <tr role="row" class="even">
                                 <td>{{item.tenaga_medis}}</td>
                                 {% if is_list %}
-                                    <td>
+                                    <td class="font-weight-bold">
                                         {% for day in item.tenaga_medis|get_days  %}
-                                            {{day.hari}}, 
+                                            <label class="badge-info badge-pill">{{ day.hari }}</label>
                                         {% endfor %}
                                     </td>
                                 {% else %}

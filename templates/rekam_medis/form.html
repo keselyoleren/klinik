@@ -1,0 +1,152 @@
+{% extends 'layouts/main.html' %}
+
+{% load static %}
+
+{% block css %}
+{{ form.media.css }}
+{% endblock %}
+
+{% block content %}
+    <!-- Page Heading -->
+
+<div class="content-wrapper">
+    {% include 'component/content_header.html' %}
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Data Pasien {{ pasien.full_name }}</h6>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="">
+                            <p class="clearfix">
+                              <span class="float-left">
+                                <b>Nama Lengkap</b>
+                              </span>
+                              <span class="float-right text-muted">
+                                {{ pasien.full_name }}
+                              </span>
+                            </p>
+                            <p class="clearfix">
+                              <span class="float-left">
+                                <b>Phone</b>
+                              </span>
+                              <span class="float-right text-muted">
+                                {{ pasien.phone }}
+                              </span>
+                            </p>
+                            <p class="clearfix">
+                              <span class="float-left">
+                                <b>Mail</b>
+                              </span>
+                              <span class="float-right text-muted">
+                                {{ pasien.email }}
+                              </span>
+                            </p>
+                            <p class="clearfix">
+                              <span class="float-left">
+                                <b>Tempat Tanggal Lahir</b>
+                              </span>
+                              <span class="float-right text-muted">
+                                <a href="#">{{ pasien.tempat_lahir }} {{ pasien.tanggal_lahir }}</a>
+                              </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="">
+                            <p class="clearfix">
+                              <span class="float-left">
+                                <b>NIK</b>
+                              </span>
+                              <span class="float-right text-muted">
+                                {{ pasien.nik }}
+                              </span>
+                            </p>
+                            <p class="clearfix">
+                              <span class="float-left">
+                                <b>Agama</b>
+                              </span>
+                              <span class="float-right text-muted">
+                                {{ pasien.agama }}
+                              </span>
+                            </p>
+                            <p class="clearfix">
+                              <span class="float-left">
+                                <b>Alamat Kartu Identitas</b>
+                              </span>
+                              <span class="float-right text-muted">
+                                {{ pasien.alamat_kartu_identitas }}
+                              </span>
+                            </p>
+                            <p class="clearfix">
+                              <span class="float-left">
+                                <b>Alamat Domisili</b>
+                              </span>
+                              <span class="float-right text-muted">
+                                {{ pasien.alamat_domisili }}
+                              </span>
+                            </p>
+                            <p class="clearfix">
+                              <span class="float-left">
+                                <b>Pekerjaan</b>
+                              </span>
+                              <span class="float-right text-muted">
+                                {{ pasien.pekerjaan }}
+                              </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">{{ header_title }}</h6>
+            </div>
+            <div class="card-body">
+                <form action="." method="POST" id="myForm" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for fields in form.visible_fields %}
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                <label for="{{ fields.label_tag.id }}">
+                                    <h6>
+                                        {{ fields.label_tag }}
+                                        {% if fields.field.required %}
+                                            <span class="text-red" style="color: red;">*</span>
+                                        {% endif %}
+                                    </h6>
+                                </label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-8">
+                                <div class="form-group">
+                                    {{ fields.help_text }}
+                                        <span class="text-red">
+                                            {{ fields.errors }}
+                                        </span>
+                                        {{ fields }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="row clearfix">
+                        <div class="col-sm-8 offset-sm-2">
+                            <input type="submit" value="Save" class="btn btn-primary mr-2"></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock  %}
+{% block js %}
+{{ form.media.js }}
+{% endblock %}
+

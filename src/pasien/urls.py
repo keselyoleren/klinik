@@ -23,7 +23,8 @@ urlpatterns = [
 
     path("rekam-medis/", include([
         path('', RekamMedisListView.as_view(), name='rekam_medis-list'),
-        path('create/', RekamMedisCreateView.as_view(), name='rekam_medis-create'),
+        path('create/<uuid:pasien_id>/', RekamMedisCreateView.as_view(), name='rekam_medis-create'),
+        path('riwayat/<uuid:pasien_id>/', RiwayatRekamMedisListView.as_view(), name='riwayat_rekam_medis'),
         path('update/<uuid:pk>/', RekamMedisUpdateView.as_view(), name='rekam_medis-update'),
         path('delete/<uuid:pk>/', RekamMedisDeleteView.as_view(), name='rekam_medis-delete'),
         path('list-pasien', ListRawatJalanView.as_view(), name='rekam_medis-list-pasien'),

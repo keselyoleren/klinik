@@ -62,3 +62,4 @@ class PasienDeleteView(IsAuthenticated, DeleteView):
         context['header'] = 'Pasien'
         context['header_title'] = 'Delete Pasien'
         return context
+

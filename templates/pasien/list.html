@@ -18,6 +18,7 @@
                             <tr>
                             <th>Nama Pasien</th>
                             <th>Tgl Lahir</th>
+                            <th>Email</th>
                             <th>Status</th>
                             <th>Action</th>
                             </tr>
@@ -27,20 +28,38 @@
                             <tr role="row" class="even">
                                 <td>{{item.full_name}}</td>
                                 <td>{{item.tanggal_lahir}}</td>
+                                <td>{{item.email}}</td>
                                 <td>
                                     {% if item.status  == 'RAWAT JALAN' %}
-                                        <div class="badge badge-warning badge-pill">{{ item.status }}</div>
+                                        <label class="badge-warning badge-pill">{{ item.status }}</label>
                                     {% elif item.status == 'RAWAT INAP' %}
-                                        <div class="badge badge-info badge-pill">{{ item.status }}</div>
+                                        <label class="badge-info badge-pill">{{ item.status }}</label>
                                     {% elif item.status == 'AKTIF' %}
-                                        <div class="badge badge-success badge-pill">{{ item.status }}</div>
+                                        <label class="badge-success badge-pill">{{ item.status }}</label>
                                     {% elif item.status == 'NONAKTIF' %}
-                                        <div class="badge badge-danger badge-pill">{{ item.status }}</div>
+                                        <label class="badge-danger badge-pill">{{ item.status }}</label>
                                     {% endif %}
                                 </td>
                                 <td>
-                                    <a class="btn btn-outline-info" href="{% url 'pasien-update' item.id  %}"><i class="fa fa-edit"></i></a>
-                                    <a class="btn btn-outline-danger" href="{% url 'pasien-delete' item.id  %}"><i class="fa fa-trash"></i></a>
+                                    <a class="nav-link " href="#" data-toggle="dropdown" id="{{ item.id }}">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="{{item.id}}">
+                                        <a class="dropdown-item" href="{% url 'riwayat_rekam_medis' item.id %}" >
+                                            <i class="fas fa-history text-primary"></i>
+                                            Riwayat Rekam Medis
+                                          </a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{% url 'pasien-update' item.id %}" >
+                                          <i class="fas fa-edit text-primary"></i>
+                                          Update
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{% url 'pasien-delete' item.id %}">
+                                          <i class="fa fa-trash text-danger"></i>
+                                          Delete
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         {% endfor %}
