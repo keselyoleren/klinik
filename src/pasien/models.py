@@ -1,5 +1,5 @@
 from django.utils.translation import gettext as _
-from config.choice import JenisKelamin, StatusPasien, StatusRawatJalan
+from config.choice import JenisKelamin, StatusPasien, StatusPerokok, StatusRawatJalan
 from config.models import BaseModel
 from django.db import models
 
@@ -42,6 +42,18 @@ class RekamMedis(BaseModel):
     pasien = models.ForeignKey(Pasien, verbose_name=_("Nama Pasien"), on_delete=models.CASCADE, blank=True, null=True)
     tenaga_medis = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Tenaga Medis"), on_delete=models.CASCADE)
     keluhan_utama = models.TextField(_("Keluhan Utama"), blank=True, null=True)
+    status_perokok = models.CharField(_("Status Perokok"), max_length=20, choices=StatusPerokok.choices, blank=True, null=True)
     riwayat_penyakit = models.CharField(_("Riwayat Penyakit"), max_length=255, blank=True, null=True)
     riwayat_alergi = models.CharField(_("Riwayat Alergi"), max_length=255, blank=True, null=True)
-    tanda_vital = models.JSONField(_("Tanda - tanda  Vital"), blank=True, null=True)
+    suhu_tubuh = models.CharField(_("Suhu Tubuh"), max_length=255)
+    nadi = models.CharField(_("Nadi"), max_length=20)
+    sistole = models.CharField(_("Sistole"), max_length=20)
+    diastole = models.CharField(_("Diastole"), max_length=20)
+    frekuensi_pernafasan = models.CharField(_("Frekuensi Pernafasan"), max_length=20)
+    tinggi_badan = models.CharField(_("Tinggi Badan"), max_length=20)
+    berat_badan = models.CharField(_("Berat Badan"), max_length=20)
+    imt = models.CharField(_("IMT"), max_length=20)
+
+
+    def __str__(self) -> str:
+        return self.pasien.full_name

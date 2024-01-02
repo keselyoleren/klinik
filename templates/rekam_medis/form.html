@@ -111,29 +111,275 @@
             <div class="card-body">
                 <form action="." method="POST" id="myForm" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {% for fields in form.visible_fields %}
-                        <div class="row clearfix">
-                            <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
-                                <label for="{{ fields.label_tag.id }}">
-                                    <h6>
-                                        {{ fields.label_tag }}
-                                        {% if fields.field.required %}
-                                            <span class="text-red" style="color: red;">*</span>
-                                        {% endif %}
-                                    </h6>
-                                </label>
-                            </div>
-                            <div class="col-lg-10 col-md-10 col-sm-8">
-                                <div class="form-group">
-                                    {{ fields.help_text }}
-                                        <span class="text-red">
-                                            {{ fields.errors }}
-                                        </span>
-                                        {{ fields }}
-                                </div>
+                    <div class="row clearfix">
+                        <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                            <label for="{{ form.tenaga_medis.label_tag.id }}">
+                                <h6>
+                                    {{ form.tenaga_medis.label_tag }}
+                                    {% if form.tenaga_medis.field.required %}
+                                        <span class="text-red" style="color: red;">*</span>
+                                    {% endif %}
+                                </h6>
+                            </label>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-8">
+                            <div class="form-group">
+                                {{ form.tenaga_medis.help_text }}
+                                    <span class="text-red">
+                                        {{ form.tenaga_medis.errors }}
+                                    </span>
+                                    {{ form.tenaga_medis }}
                             </div>
                         </div>
-                    {% endfor %}
+                    </div>
+                    <div class="row clearfix">
+                      <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                          <label for="{{ form.tenaga_medis.label_tag.id }}">
+                              <h6>
+                                  {{ form.keluhan_utama.label_tag }}
+                                  {% if form.keluhan_utama.field.required %}
+                                      <span class="text-red" style="color: red;">*</span>
+                                  {% endif %}
+                              </h6>
+                          </label>
+                      </div>
+                      <div class="col-lg-10 col-md-10 col-sm-8">
+                          <div class="form-group">
+                              {{ form.keluhan_utama.help_text }}
+                                  <span class="text-red">
+                                      {{ form.keluhan_utama.errors }}
+                                  </span>
+                                  {{ form.keluhan_utama }}
+                          </div>
+                      </div>
+                    </div>
+                    <div class="row clearfix">
+                      <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                          <label for="{{ form.status_perokok.label_tag.id }}">
+                              <h6>
+                                  {{ form.status_perokok.label_tag }}
+                                  {% if form.status_perokok.field.required %}
+                                      <span class="text-red" style="color: red;">*</span>
+                                  {% endif %}
+                              </h6>
+                          </label>
+                      </div>
+                      <div class="col-lg-10 col-md-10 col-sm-8">
+                          <div class="form-group">
+                              {{ form.status_perokok.help_text }}
+                                  <span class="text-red">
+                                      {{ form.status_perokok.errors }}
+                                  </span>
+                                  {{ form.status_perokok }}
+                          </div>
+                      </div>
+                    </div>
+                    <div class="row clearfix">
+                      <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                          <label for="{{ form.riwayat_penyakit.label_tag.id }}">
+                              <h6>
+                                  {{ form.riwayat_penyakit.label_tag }}
+                                  {% if form.riwayat_penyakit.field.required %}
+                                      <span class="text-red" style="color: red;">*</span>
+                                  {% endif %}
+                              </h6>
+                          </label>
+                      </div>
+                      <div class="col-lg-10 col-md-10 col-sm-8">
+                          <div class="form-group">
+                              {{ form.riwayat_penyakit.help_text }}
+                                  <span class="text-red">
+                                      {{ form.riwayat_penyakit.errors }}
+                                  </span>
+                                  {{ form.riwayat_penyakit }}
+                          </div>
+                      </div>
+                    </div>
+                    <div class="row clearfix">
+                      <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                          <label for="{{ form.riwayat_alergi.label_tag.id }}">
+                              <h6>
+                                  {{ form.riwayat_alergi.label_tag }}
+                                  {% if form.riwayat_alergi.field.required %}
+                                      <span class="text-red" style="color: red;">*</span>
+                                  {% endif %}
+                              </h6>
+                          </label>
+                      </div>
+                      <div class="col-lg-10 col-md-10 col-sm-8">
+                          <div class="form-group">
+                              {{ form.riwayat_alergi.help_text }}
+                                  <span class="text-red">
+                                      {{ form.riwayat_alergi.errors }}
+                                  </span>
+                                  {{ form.riwayat_alergi }}
+                          </div>
+                      </div>
+                    </div>
+                    <hr>
+                    <h4 class="card-title">Tanda - Tanda vital</h4>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label" for="{{ form.suhu_tubuh.label_tag.id }}">
+                            <h6>
+                              {{ form.suhu_tubuh.label_tag }}
+                              {% if form.suhu_tubuh.field.required %}
+                                  <span class="text-red" style="color: red;">*</span>
+                              {% endif %}
+                            </h6>
+                          </label>
+                          <div class="col-sm-9">
+                            {{ form.suhu_tubuh.help_text }}
+                                <span class="text-red">
+                                  {{ form.suhu_tubuh.errors }}
+                                </span>
+                            {{ form.suhu_tubuh }}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label" for="{{ form.nadi.label_tag.id }}">
+                            <h6>
+                              {{ form.nadi.label_tag }}
+                              {% if form.nadi.field.required %}
+                                  <span class="text-red" style="color: red;">*</span>
+                              {% endif %}
+                            </h6>
+                          </label>
+                          <div class="col-sm-9">
+                            {{ form.nadi.help_text }}
+                                <span class="text-red">
+                                  {{ form.nadi.errors }}
+                                </span>
+                            {{ form.nadi }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label" for="{{ form.suhu_tubuh.label_tag.id }}">
+                            <h6>
+                              {{ form.sistole.label_tag }}
+                              {% if form.sistole.field.required %}
+                                  <span class="text-red" style="color: red;">*</span>
+                              {% endif %}
+                            </h6>
+                          </label>
+                          <div class="col-sm-9">
+                            {{ form.sistole.help_text }}
+                                <span class="text-red">
+                                  {{ form.sistole.errors }}
+                                </span>
+                            {{ form.sistole }}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label" for="{{ form.diastole.label_tag.id }}">
+                            <h6>
+                              {{ form.diastole.label_tag }}
+                              {% if form.diastole.field.required %}
+                                  <span class="text-red" style="color: red;">*</span>
+                              {% endif %}
+                            </h6>
+                          </label>
+                          <div class="col-sm-9">
+                            {{ form.diastole.help_text }}
+                                <span class="text-red">
+                                  {{ form.diastole.errors }}
+                                </span>
+                            {{ form.diastole }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label" for="{{ form.frekuensi_pernafasan.label_tag.id }}">
+                            <h6>
+                              {{ form.frekuensi_pernafasan.label_tag }}
+                              {% if form.frekuensi_pernafasan.field.required %}
+                                  <span class="text-red" style="color: red;">*</span>
+                              {% endif %}
+                            </h6>
+                          </label>
+                          <div class="col-sm-9">
+                            {{ form.frekuensi_pernafasan.help_text }}
+                                <span class="text-red">
+                                  {{ form.frekuensi_pernafasan.errors }}
+                                </span>
+                            {{ form.frekuensi_pernafasan }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <hr>
+                    <h4 class="card-title">Pemeriksaan Fisik</h4>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label" for="{{ form.tinggi_badan.label_tag.id }}">
+                            <h6>
+                              {{ form.tinggi_badan.label_tag }}
+                              {% if form.tinggi_badan.field.required %}
+                                  <span class="text-red" style="color: red;">*</span>
+                              {% endif %}
+                            </h6>
+                          </label>
+                          <div class="col-sm-9">
+                            {{ form.tinggi_badan.help_text }}
+                                <span class="text-red">
+                                  {{ form.tinggi_badan.errors }}
+                                </span>
+                            {{ form.tinggi_badan }}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label" for="{{ form.berat_badan.label_tag.id }}">
+                            <h6>
+                              {{ form.berat_badan.label_tag }}
+                              {% if form.berat_badan.field.required %}
+                                  <span class="text-red" style="color: red;">*</span>
+                              {% endif %}
+                            </h6>
+                          </label>
+                          <div class="col-sm-9">
+                            {{ form.berat_badan.help_text }}
+                                <span class="text-red">
+                                  {{ form.berat_badan.errors }}
+                                </span>
+                            {{ form.berat_badan }}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label" for="{{ form.imt.label_tag.id }}">
+                            <h6>
+                              {{ form.imt.label_tag }}
+                              {% if form.imt.field.required %}
+                                  <span class="text-red" style="color: red;">*</span>
+                              {% endif %}
+                            </h6>
+                          </label>
+                          <div class="col-sm-9">
+                            {{ form.imt.help_text }}
+                                <span class="text-red">
+                                  {{ form.imt.errors }}
+                                </span>
+                            {{ form.imt }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     <div class="row clearfix">
                         <div class="col-sm-8 offset-sm-2">
                             <input type="submit" value="Save" class="btn btn-primary mr-2"></button>

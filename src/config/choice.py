@@ -39,6 +39,10 @@ class Hari(TextChoices):
     SABTU = 'SABTU'
     MINGGU = 'MINGGU'
 
+class StatusPerokok(TextChoices):
+    MEROKOK = 'MEROKOK'
+    TIDAK_MEROKOK = 'TIDAK MEROKOK'
+
 DAY_CODE = {
     Hari.MINGGU: 0,
     Hari.SENIN: 1,
