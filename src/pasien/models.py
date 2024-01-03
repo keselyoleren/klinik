@@ -56,4 +56,7 @@ class RekamMedis(BaseModel):
 
 
     def __str__(self) -> str:
-        return self.pasien.full_name
+        try:
+            return self.pasien.full_name
+        except:
+            return ""

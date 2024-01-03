@@ -1,12 +1,13 @@
 # myapp/views.py
 
 from urllib import request
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate
 from django.http import HttpResponseRedirect
 from config.choice import RoleUser, StatusRawatJalan
 from config.permis import IsAuthenticated, IsAuthenticated
+from config.report import GeneratePDF
 from pasien.form.rekam_medis_form import RekamMedisForm
 from pasien.models import RawatJalan, Pasien, RekamMedis
 from pasien.form.rawat_jalan_form import RawatJalanForm
@@ -101,4 +102,20 @@ class RekamMedisDeleteView(IsAuthenticated, DeleteView):
         context['header'] = 'Rekam Medis'
         context['header_title'] = 'Delete Rekam Medis'
         return context
+
+class DownloadRekamMedisView(IsAuthenticated, DetailView, GeneratePDF):
+    model = RekamMedis
+    template_name = 'rekam_medis/download.html'
+    context_object_name = 'rekam_medis'
+    
+    def get(self, request, *args, **kwargs):
+        rekam_medis = self.get_object()
+        return self.render_to_pdf(
+            {
+                'rekam_medis': rekam_medis,
+            },
+            self.template_name,
+            '/css/pdf.css',
+            'Rekam Medis.pdf'
+        )
 
