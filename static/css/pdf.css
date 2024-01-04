@@ -1,122 +1,144 @@
 @page {
-    size: A4;
-    margin: 1cm;
-  }
-  .page-break {
-    page-break-after: always;
-  }
-  body {
-    font-size: 14px;
-  }
-  table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  .content-header {
-    margin-bottom: 20pt;
-  }
-  .content-header table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  .content-header table th, .content-header table td {
-    border: 1px solid #ddd;
-    padding: 1px;
-    border: none;
-  }
-  .content-table {
-    margin-top: 10px;
-    margin-bottom: 5px;
-  }
-  table th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: rgb(255, 255, 255);
-    color: black;
-  }
-  table th, table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  .sapaan {
-    margin-bottom: 5px;
-  }
-  .sapaan p {
-    line-height: 5px;
-  }
-  .kop {
-    margin-top: 0em;
-  }
-  .kop .date-and-no {
-    line-height: 5px;
-  }
-  .footer-sender p {
-    line-height: 5px;
-  }
-  .logo_1 {
-    float: left;
-    margin-top: -1cm;
-  }
-  .logo_2 {
-    float: right;
-    margin-top: -1cm;
-  }
-  .spacer {
-    padding-left: 20px;
-    line-height: 5px;
-  }
+  size: A4;
+  margin: 1cm;
+}
+.page-break {
+  page-break-after: always;
+}
+body {
+  font-size: 14px;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.content-header {
+  margin-bottom: 20pt;
+}
+.content-header table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.content-header table th, .content-header table td {
+  border: 1px solid #ddd;
+  padding: 1px;
+  border: none;
+}
+.content-table {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgb(53, 144, 218);
+  color: black;
+}
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+.sapaan {
+  margin-bottom: 5px;
+}
+.sapaan p {
+  line-height: 5px;
+}
+.kop {
+  margin-top: 0em;
+}
+.kop .date-and-no {
+  line-height: 5px;
+}
+.footer-sender p {
+  line-height: 5px;
+}
+.logo_1 {
+  float: left;
+  margin-top: -1cm;
+}
+.logo_2 {
+  float: right;
+  margin-top: -1cm;
+}
+.spacer {
+  padding-left: 20px;
+  line-height: 5px;
+}
 
-  /* footer */
-  footer .ttd {
-    float: right;
-    line-height: 5px;
-  }
-  footer .ttd .ttd-name {
-    margin-top: 5em;
-  }
+/* footer */
+footer .ttd {
+  float: right;
+  line-height: 5px;
+}
+footer .ttd .ttd-name {
+  margin-top: 5em;
+}
 
-  footer .ttd {
-    float: right;
-    line-height: 5px;
-  }
-  footer .ttd .ttd-name {
-    margin-top: 5em;
-  }
+footer .ttd {
+  float: right;
+  line-height: 5px;
+}
+footer .ttd .ttd-name {
+  margin-top: 5em;
+}
 
-  footer .ttd-l {
-    float: left;
-    line-height: 5px;
-  }
-  footer .ttd-l .ttd-l-name {
-    margin-top: 5em;
-  }
+footer .ttd-l {
+  float: left;
+  line-height: 5px;
+}
+footer .ttd-l .ttd-l-name {
+  margin-top: 5em;
+}
 
-  footer .ttd-l {
-    float: left;
-    line-height: 5px;
-  }
-  footer .ttd-l .ttd-l-name {
-    margin-top: 5em;
-  }
-  .img_cop {
-    padding: 0em;
-    width: 120px;
-  }
+footer .ttd-l {
+  float: left;
+  line-height: 5px;
+}
+footer .ttd-l .ttd-l-name {
+  margin-top: 5em;
+}
+.img_cop {
+  padding: 0em;
+  width: 120px;
+}
 
-  .img_check{
-    width: 20px;
-    height: 20px;
-  }
+.img_check{
+  width: 20px;
+  height: 20px;
+}
 
-  .row {
-    --bs-gutter-x: 1.5rem;
-    --bs-gutter-y: 0;
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: calc(-1 * var(--bs-gutter-y));
-    margin-right: calc(-.5 * var(--bs-gutter-x));
-    margin-left: calc(-.5 * var(--bs-gutter-x));
+.row {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(-1 * var(--bs-gutter-y));
+  margin-right: calc(-.5 * var(--bs-gutter-x));
+  margin-left: calc(-.5 * var(--bs-gutter-x));
+}
+.patient-data {
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.patient-data p {
+  text-align: left;
+  margin: 10px 0;
+}
+
+.patient-data .label {
+  display: inline-block;
+  text-align: left;
+  width: 100px; /* Adjust width as needed */
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.patient-data .contents {
+  display: inline-block;
+  text-align: left;
 }
 
 .col-md-2{flex:0 0 auto;width:16.66666667%}

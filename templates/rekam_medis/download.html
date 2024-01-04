@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="{% static '/css/pdf.css'%}" />
+        <title>Service report</title>
+    </head>
+    <body>
+        <header>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="kop col-md-6">
+            <center>
+                <div style="line-height: 0%;">
+                <h3>Klinik Refa</h3>
+                </div>
+                <div class="date-and-no">
+                <h4><p>Maguwoharjo, Sleman, Yogyakarta</p></h4>
+                </div>
+                <div class="date-and-no">
+                <p>Phone. 0000-000-0000 | https://klinikrefa.com</p>
+                </div>
+            </center>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+        <hr />
+        </header>
+        <section class="content">
+        <div class="kop col-md-12">
+            <center>
+            <div class="date-and-no">
+                <u><h1>Rekam Medis</h1></u>
+                <p style="line-height: 1px;">No. {{ rekam_medis.request_service.srv_code }}/xx/xx/XII/xxx</p>
+            </div>
+            </center>
+        </div>
+        <div class="content-header">
+            <h1>Data Pasien</h1>
+            <div class="content-header">
+              <div class="patient-data">
+                <p><span class="label">Nama Pasien</span>: <span class="contents">{{ rekam_medis.pasien.full_name }}</span></p>
+                <p><span class="label">Phone</span>: <span class="contents">{{ rekam_medis.pasien.phone }}</span></p>
+                <p><span class="label">Tempat Tanggal Lahir</span>: <span class="contents">{{ rekam_medis.pasien.tempat_lahir }} {{ rekam_medis.pasien.tanggal_lahir }}</span></p>
+                <p><span class="label">Alamat</span>: <span class="contents">{{ rekam_medis.pasien.alamat_domisili }}</span></p>
+                <p><span class="label">Keluhan</span>: <span class="contents">{{ rekam_medis.keluhan_utama }}</span></p>
+                <p><span class="label">Status Perokok</span>: <span class="contents">{{ rekam_medis.status_perokok }}</span></p>
+                <p><span class="label">Riwayat Penyakit</span>: <span class="contents">{{ rekam_medis.riwayat_penyakit }}</span></p>
+                <p><span class="label">Riwayat Alergi</span>: <span class="contents">{{ rekam_medis.riwayat_alergi }}</span></p>
+              </div>
+            </div>
+        </div>
+
+        <br />
+        <div class="content close">
+            <h1>Tand Tanda Vital</h1>
+            <div>
+            <div style="padding-left: 15px;">
+                <div class="content-table">
+                  <table>
+                      <thead>
+                        <tr>
+                            <th>Suhu Tubuh</th>
+                            <th>Nadi</th>
+                            <th>Sostole</th>
+                            <th>Diastole</th>
+                            <th>Frekuensi Pernafasan</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                            <td>{{ rekam_medis.suhu_tubuh }}</td>
+                            <td>{{ rekam_medis.nadi }}</td>
+                            <td>{{ rekam_medis.sistole }}</td>
+                            <td>{{ rekam_medis.diastole }}</td>
+                            <td>{{ rekam_medis.frekuensi_pernafasan }}</td>
+                        </tr>
+                      </tbody>
+                  </table>
+                </div>
+            </div>
+            </div>
+            <h1>Pemeriksaan Fisik</h1>
+            <div style="padding-left: 15px;">
+              <div class="content-table">
+                <table>
+                    <thead>
+                      <tr>
+                          <th>Tinggi Badan</th>
+                          <th>Berat Badan</th>
+                          <th>Imt</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                          <td>{{ rekam_medis.tinggi_badan }}</td>
+                          <td>{{ rekam_medis.berat_badan }}</td>
+                          <td>{{ rekam_medis.imt }}</td>
+                      </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+        </div>
+        </section>
+        <br /><br />
+
+        <footer>
+        <div class="ttd-l">
+            <center>
+            <p>Nama Pasien</p>
+            <p class="ttd-l-name">{{ rekam_medis.pasien.full_name }}</p>
+            </center>
+        </div>
+        <div class="ttd">
+            <center>
+            <p>Yogyakarta, {{ rekam_medis.created_at|date:'d M Y' }}</p>
+            <p>Tenaga Medis</p>
+            <p class="ttd-name">{{ rekam_medis.tenaga_medis }}</p>
+            </center>
+        </div>
+        </footer>
+    </body>
+</html>

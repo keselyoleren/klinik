@@ -92,6 +92,11 @@ class RekamMedisUpdateView(IsAuthenticated, UpdateView):
         context['header_title'] = 'Edit Rekam Medis'
         return context
 
+
+    def form_valid(self, form):
+        form.instance.pasien = self.get_object().pasien
+        return super().form_valid(form)
+
 class RekamMedisDeleteView(IsAuthenticated, DeleteView):
     model = RekamMedis
     template_name = 'component/delete.html'
@@ -107,6 +112,9 @@ class DownloadRekamMedisView(IsAuthenticated, DetailView, GeneratePDF):
     model = RekamMedis
     template_name = 'rekam_medis/download.html'
     context_object_name = 'rekam_medis'
+
+    # def get_context_data(self, **kwargs):
+    #     return super().get_context_data(**kwargs)
     
     def get(self, request, *args, **kwargs):
         rekam_medis = self.get_object()
@@ -116,6 +124,6 @@ class DownloadRekamMedisView(IsAuthenticated, DetailView, GeneratePDF):
             },
             self.template_name,
             '/css/pdf.css',
-            'Rekam Medis.pdf'
+            f'Rekam Medis_{rekam_medis.pasien.full_name}'
         )
 
