@@ -2,6 +2,7 @@
 from django.urls import path, include
 from pasien.models import RekamMedis
 from pasien.views.assesment_rawat_jalan_views import *
+from pasien.views.catatan_terintegrasi_views import *
 from pasien.views.pasien_views import *
 from pasien.views.rawat_jalan_views import *
 from pasien.views.rekam_medis_views import *
@@ -20,7 +21,13 @@ urlpatterns = [
         path('create/', RawatJalanCreateView.as_view(), name='rawat_jalan-create'),
         path('update/<uuid:pk>/', RawatJalanUpdateView.as_view(), name='rawat_jalan-update'),
         path('assesment/create/<uuid:pasien_id>/', AssesmentRawatJalanCreateView.as_view(), name='assesment-awal-rawat-jalan-create'),
+        path('assesment/update/<uuid:pk>/', AssesmentRawatJalanUpdateView.as_view(), name='assesment-rawat-jalan-update'),
+        path('assesment/delete/<uuid:pk>/', AssesmentRawatJalanDeleteView.as_view(), name='assesment-awal-rawat-jalan-delete'),
         path('delete/<uuid:pk>/', RawatJalanDeleteView.as_view(), name='rawat_jalan-delete'),
+        path('catatan-terintegrasi/<uuid:pasien_rawat_jalan_id>/', CatanTerintegrasiListView.as_view(), name='catatan-terintegrasi-list'),
+        path('catatan-terintegrasi/create/<uuid:pasien_rawat_jalan_id>/', CatanTerintegrasiCreateView.as_view(), name='catatan-terintegrasi-create'),
+        path('catatan-terintegrasi/update/<uuid:pk>/', CatanTerintegrasiUpdateView.as_view(), name='catatan-terintegrasi-update'),
+        path('catatan-terintegrasi/delete/<uuid:pk>/', CatanTerintegrasiDeleteView.as_view(), name='catatan-terintegrasi-delete'),
     ])),
 
     path("rekam-medis/", include([

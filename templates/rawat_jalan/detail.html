@@ -1,0 +1,103 @@
+{% extends 'layouts/main.html' %}
+
+{% load static %}
+
+{% block css %}
+{{ form.media.css }}
+{% endblock %}
+
+{% block content %}
+    <!-- Page Heading -->
+
+<div class="content-wrapper">
+    {% include 'component/content_header.html' %}
+    <div class="row">
+        <div class="col-lg-9 grid-margin stretch-card">
+            <div class="card  mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Data Pasien {{ pasien.full_name }}</h6>
+                </div>
+                <div class="card-body">
+                    {% include 'component/pasien.html' %}
+                </div>
+                
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">{{ header_title }}</h6>
+                </div>
+                
+                <div class="card-body">
+                    <form action="." method="POST" id="myForm" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% for fields in form.visible_fields %}
+                            <div class="row clearfix">
+                                <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                    <label for="{{ fields.label_tag.id }}">
+                                        <h6>
+                                            {{ fields.label_tag }}
+                                            {% if fields.field.required %}
+                                                <span class="text-red" style="color: red;">*</span>
+                                            {% endif %}
+                                        </h6>
+                                    </label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-8">
+                                    <div class="form-group">
+                                        {{ fields.help_text }}
+                                            <span class="text-red">
+                                                {{ fields.errors }}
+                                            </span>
+                                            {{ fields }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <div class="row clearfix">
+                            <div class="col-sm-8 offset-sm-2">
+                                <input type="submit" value="Save" class="btn btn-primary mr-2"></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 grid-margin">
+            <div>
+                <div class="card">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Action</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="template-demo">
+                            {% if btn_assesment_create %}
+                                <a  href="{% url 'assesment-awal-rawat-jalan-create' rawat_jalan.id %}" class="btn btn-dark btn-block">
+                                    <i class="fa fa-plus"></i>                      
+                                    Assesment Awal
+                                </a>
+                            {% endif %}
+                            {% if btn_assesment_update %}
+                                <a  href="{{ btn_assesment_url }}" class="btn btn-dark btn-block">
+                                    <i class="fa fa-edit"></i>                      
+                                    Assesment Awal
+                                </a>
+                            {% endif %}
+
+                            <a href="{% url 'catatan-terintegrasi-list' rawat_jalan.id %}" class="btn btn-primary btn-block">
+                                <i class="fa fa-book"></i>                      
+                                Catatan Terintegrasi 
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+</div>
+
+{% endblock  %}
+{% block js %}
+{{ form.media.js }}
+{% endblock %}
+

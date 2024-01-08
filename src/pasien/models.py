@@ -39,7 +39,7 @@ class RawatJalan(BaseModel):
         return self.pasien.full_name
 
 class AssesmentRawatJalan(BaseModel):
-    pasien = models.ForeignKey(Pasien, verbose_name=_("Pasien"), on_delete=models.CASCADE, blank=True, null=True)
+    pasien_rawat_jalan = models.ForeignKey(RawatJalan, verbose_name=_("Pasien"), on_delete=models.CASCADE, blank=True, null=True)
     alergi = models.CharField(_("Alergi"), max_length=255, blank=True, null=True, choices=StatusAlergi.choices)
 
     # skrining
@@ -82,11 +82,11 @@ class AssesmentRawatJalan(BaseModel):
     tenaga_medis = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Tenaga Medis"), on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return self.pasien.full_name
+        return self.pasien_rawat_jalan.pasien.full_name
 
 
 class RawatJalanTerIntegrasi(BaseModel):
-    pasien_rawat_jalan = models.ForeignKey(RawatJalan, verbose_name=_("Pasien Rawat Jalan"), on_delete=models.CASCADE)
+    pasien_rawat_jalan = models.ForeignKey(RawatJalan, verbose_name=_("Pasien Rawat Jalan"), on_delete=models.CASCADE, blank=True, null=True)
     tanggal = models.DateField(_("Tanggal"), blank=True, null=True)
     jam = models.TimeField(_("Jam"), blank=True, null=True)
     catatan = models.TextField(_("Catatan"), help_text="Catatan Kemajuan, Rencana Tindakan dan Terapi", blank=True, null=True)
@@ -94,7 +94,7 @@ class RawatJalanTerIntegrasi(BaseModel):
     tenaga_medis = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Tenaga Medis"), on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return self.assesment.pasien.full_name
+        return self.pasien_rawat_jalan.pasien.full_name
 
     
 

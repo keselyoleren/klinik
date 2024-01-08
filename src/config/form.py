@@ -57,4 +57,17 @@ class AbstractForm(forms.ModelForm):
             if field == 'harga_bersih':
                 self.fields['harga_bersih'].widget = forms.HiddenInput()
 
-            
+            if field == 'pasien_rawat_jalan':
+                self.fields['pasien_rawat_jalan'].widget = forms.HiddenInput()
+
+            if field == 'tanggal':
+                self.fields['tanggal'].widget = forms.DateInput(attrs={
+                    'type':'date',
+                    'class': 'form-control',
+                })
+
+            if field == 'jam':
+                self.fields['jam'].widget = forms.TimeInput(attrs={
+                    'type':'time',
+                    'class': 'form-control',
+                })

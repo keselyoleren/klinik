@@ -21,6 +21,7 @@
                                 <th>NIK</th>
                                 <th>Tgl Lahir</th>
                                 <th>Email</th>
+                                <th>Waktu Konsultasi</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -28,27 +29,23 @@
                         <tbody>
                         {% for item in list_rawat_jalan %}
                             <tr role="row" class="even">
-                                <td>{{item.full_name}}</td>
-                                <td>{{item.nik}}</td>
-                                <td>{{item.tanggal_lahir}}</td>
-                                <td>{{item.email}}</td>
+                                <td>{{item.pasien.full_name}}</td>
+                                <td>{{item.pasien.nik}}</td>
+                                <td>{{item.pasien.tanggal_lahir}}</td>
+                                <td>{{item.pasien.email}}</td>
+                                <td>{{item.waktu_konsultasi}}</td>
                                 <td>
-                                    <label class="badge-warning badge-pill">{{ item.status }}</label>
+                                    <label class="badge-info badge-pill">{{ item.status }}</label>
                                 </td>
                                 <td>
                                     <a class="nav-link " href="#" data-toggle="dropdown" id="{{ item.id }}">
                                         <i class="fas fa-ellipsis-v"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="{{item.id}}">
-                                        <a class="dropdown-item" href="{% url 'riwayat_rekam_medis' item.id %}" >
-                                            <i class="fas fa-history text-primary"></i>
-                                            Riwayat Rekam Medis
+                                        <a class="dropdown-item" href="{% url 'rawat_jalan-update' item.id %}" >
+                                            <i class="fas fa-edit text-primary"></i>
+                                            Detail
                                           </a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="{% url 'assesment-awal-rawat-jalan-create' item.id %}" >
-                                          <i class="fas fa-edit text-primary"></i>
-                                          Assesment Awal
-                                        </a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="{% url 'rawat_jalan-delete' item.id %}">
                                           <i class="fa fa-trash text-danger"></i>
