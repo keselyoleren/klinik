@@ -43,6 +43,10 @@ class StatusPerokok(TextChoices):
     MEROKOK = 'MEROKOK'
     TIDAK_MEROKOK = 'TIDAK MEROKOK'
 
+class StatusAlergi(TextChoices):
+    YA = 'Ya'
+    TIDAK = 'Tidak'
+
 DAY_CODE = {
     Hari.MINGGU: 0,
     Hari.SENIN: 1,

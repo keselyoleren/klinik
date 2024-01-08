@@ -1,5 +1,6 @@
+from statistics import mode
 from django.utils.translation import gettext as _
-from config.choice import JenisKelamin, StatusPasien, StatusPerokok, StatusRawatJalan
+from config.choice import JenisKelamin, StatusAlergi, StatusPasien, StatusPerokok, StatusRawatJalan
 from config.models import BaseModel
 from django.db import models
 
@@ -37,6 +38,65 @@ class RawatJalan(BaseModel):
     def __str__(self) -> str:
         return self.pasien.full_name
 
+class AssesmentRawatJalan(BaseModel):
+    pasien = models.ForeignKey(Pasien, verbose_name=_("Pasien"), on_delete=models.CASCADE, blank=True, null=True)
+    alergi = models.CharField(_("Alergi"), max_length=255, blank=True, null=True, choices=StatusAlergi.choices)
+
+    # skrining
+    tinggi_badan = models.CharField(_("Tinggi Badan"), max_length=20, blank=True, null=True)
+    berat_badan = models.CharField(_("Berat Badan"), max_length=20, blank=True, null=True)
+
+    # vital sign
+    suhu_tubuh = models.CharField(_("Suhu Tubuh"), max_length=20, blank=True, null=True)
+    nadi = models.CharField(_("Nadi"), max_length=20, blank=True, null=True)
+    td = models.CharField(_("TD"), max_length=20, blank=True, null=True)
+    rr = models.CharField(_("RR"), max_length=20, blank=True, null=True)
+
+    # assesment
+    riwayat_penhakit = models.CharField(_("Riwayat Penyakit"), max_length=255, blank=True, null=True)
+    keluhan_utama = models.TextField(_("Keluhan Utama"), blank=True, null=True)
+    obat = models.TextField(_("Obat-obatan"),  help_text="Obat-obatan yang sedang dikonsumsi dan/atau dibawa pasien saat ini", blank=True, null=True)
+    pemerkiksaan = models.TextField(_("Pemeriksaan"), blank=True, null=True, help_text="Pemeriksaan Penunjang dan hasil yang sudah ada")
+
+    # status general
+    kondisi_umum = models.CharField(_("Kondisi Umum"), max_length=255, blank=True, null=True)
+
+    # jantung
+    inspeksi = models.CharField(_("Inspeksi"), max_length=255, blank=True, null=True)
+    palpasi = models.CharField(_("Palpasi"), max_length=255, blank=True, null=True)
+    perkusi = models.CharField(_("Perkusi"), max_length=255, blank=True, null=True)
+    auskultasi = models.CharField(_("Auskultasi"), max_length=255, blank=True, null=True)
+
+    # paru
+    inspeksi_paru = models.CharField(_("Inspeksi"), max_length=255, blank=True, null=True)
+    palpasi_paru = models.CharField(_("Palpasi"), max_length=255, blank=True, null=True)
+    perkusi_paru = models.CharField(_("Perkusi"), max_length=255, blank=True, null=True)
+    auskultasi_paru = models.CharField(_("Auskultasi"), max_length=255, blank=True, null=True)
+
+    # status lokalis
+    status_lokalis = models.CharField(_("Status Lokalis"), max_length=255, blank=True, null=True, help_text="(Pemeriksaan terkait keluhan saat ini)")
+
+    informasi_tambahan = models.TextField(_("Informasi Tambahan"), blank=True, null=True)
+    diagnosis = models.TextField(_("Diagnosis Kerja / Diagnosis Banding"), blank=True, null=True)
+    instruksi_awal_dokter = models.TextField(_("Instruksi Awal Dokter"), blank=True, null=True)
+    tenaga_medis = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Tenaga Medis"), on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return self.pasien.full_name
+
+
+class RawatJalanTerIntegrasi(BaseModel):
+    pasien_rawat_jalan = models.ForeignKey(RawatJalan, verbose_name=_("Pasien Rawat Jalan"), on_delete=models.CASCADE)
+    tanggal = models.DateField(_("Tanggal"), blank=True, null=True)
+    jam = models.TimeField(_("Jam"), blank=True, null=True)
+    catatan = models.TextField(_("Catatan"), help_text="Catatan Kemajuan, Rencana Tindakan dan Terapi", blank=True, null=True)
+    profesi = models.CharField(_("Profesi"), max_length=255, blank=True, null=True)
+    tenaga_medis = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Tenaga Medis"), on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return self.assesment.pasien.full_name
+
+    
 
 class RekamMedis(BaseModel):
     pasien = models.ForeignKey(Pasien, verbose_name=_("Nama Pasien"), on_delete=models.CASCADE, blank=True, null=True)

@@ -7,47 +7,33 @@ from django.contrib.auth import login, authenticate
 from django.http import HttpResponseRedirect
 from config.choice import RoleUser, StatusPasien
 from config.permis import IsAuthenticated, IsAuthenticated
-from pasien.models import RawatJalan, Pasien
-from pasien.form.rawat_jalan_form import RawatJalanForm
+from pasien.form.assesment_rawat_jalan_form import AssesmentRawatJalanForm
+from pasien.models import AssesmentRawatJalan, Pasien
 
 
-class RawatJalanListView(IsAuthenticated, ListView):
-    model = Pasien
-    template_name = 'rawat_jalan/list.html'
-    context_object_name = 'list_rawat_jalan'
-
-    def get_queryset(self):
-        return super().get_queryset().filter(status=StatusPasien.RAWAT_JALAN)
-    
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['header'] = 'Pasien Rawat Jalan'
-        context['header_title'] = 'List Pasien Rawat Jalan'
-        context['btn_add'] = True
-        
-        context['create_url'] = reverse_lazy('rawat_jalan-create')
-        return context
-
-class RawatJalanCreateView(IsAuthenticated, CreateView):
-    model = RawatJalan
-    template_name = 'component/form.html'
-    form_class = RawatJalanForm
+class AssesmentRawatJalanCreateView(IsAuthenticated, CreateView):
+    model = AssesmentRawatJalan
+    template_name = 'rawat_jalan/form_assesment.html'
+    form_class = AssesmentRawatJalanForm
     success_url = reverse_lazy('rawat_jalan-list')
 
     def get_context_data(self, **kwargs):
+        print(Pasien.objects.get(pk=self.kwargs['pasien_id']))
         context = super().get_context_data(**kwargs)
-        context['header'] = 'Rawat Jalan'
-        context['header_title'] = 'Tambah Rawat Jalan'
+        context['header'] = 'Assesmen Awal Pasien Rawat Jalan'
+        context['header_title'] = 'Assesmen Awal Pasien Rawat Jalan'
+        context['pasien'] = Pasien.objects.get(pk=self.kwargs['pasien_id'])
         return context
 
     def form_valid(self, form):
+        form.instance.pasien = Pasien.objects.get(id=self.kwargs['pasien_id'])
+        form.save()
         return super().form_valid(form)
 
-class RawatJalanUpdateView(IsAuthenticated, UpdateView):
-    model = RawatJalan
+class AssesmentRawatJalanUpdateView(IsAuthenticated, UpdateView):
+    model = AssesmentRawatJalan
     template_name = 'component/form.html'
-    form_class = RawatJalanForm
+    form_class = AssesmentRawatJalanForm
     success_url = reverse_lazy('rawat_jalan-list')
 
     def get_context_data(self, **kwargs):
@@ -57,11 +43,11 @@ class RawatJalanUpdateView(IsAuthenticated, UpdateView):
         return context
 
     def form_valid(self, form):
-        print('testing')
+        form.instance.pasien = self.get_object().pasien
         return super().form_valid(form)
 
-class RawatJalanDeleteView(IsAuthenticated, DeleteView):
-    model = RawatJalan
+class AssesmentRawatJalanDeleteView(IsAuthenticated, DeleteView):
+    model = AssesmentRawatJalan
     template_name = 'component/delete.html'
     success_url = reverse_lazy('rawat_jalan-list')
 
