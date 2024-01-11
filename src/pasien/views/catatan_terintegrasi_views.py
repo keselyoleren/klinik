@@ -1,12 +1,13 @@
 # myapp/views.py
 
 from urllib import request
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate
 from django.http import HttpResponseRedirect
 from config.choice import RoleUser, StatusPasien
 from config.permis import IsAuthenticated, IsAuthenticated
+from config.report import GeneratePDF
 from pasien.form.catatan_terintegrasi_form import CatanTerintegrasiForm
 
 from pasien.models import  Pasien, RawatJalan, RawatJalanTerIntegrasi
@@ -35,6 +36,7 @@ class CatanTerintegrasiListView(IsAuthenticated, ListView):
         context['btn_add'] = True
         context['pasien'] = self.get_pasien_rawat_jalan().pasien
         context['create_url'] = reverse_lazy('catatan-terintegrasi-create', kwargs={'pasien_rawat_jalan_id': self.kwargs['pasien_rawat_jalan_id']})
+        context['download_url'] = reverse_lazy('catatan-terintegrasi-download', kwargs={'pasien_rawat_jalan_id': self.kwargs['pasien_rawat_jalan_id']})
         return context
 
 
@@ -98,3 +100,33 @@ class CatanTerintegrasiDeleteView(IsAuthenticated, DeleteView):
         context['header'] = 'Catatan Terintegrasi'
         context['header_title'] = 'Delete Catatan Terintegrasi'
         return context
+
+
+class DownloadCatatanTerIntegrasi(IsAuthenticated, GeneratePDF, ListView):
+    model = RawatJalanTerIntegrasi
+    template_name = 'rawat_jalan/export/catatan_integrasi.html'
+    context_object_name = 'list_integrasi'
+
+    def get_pasien_rawat_jalan(self):
+        try:
+            return RawatJalan.objects.get(pk=self.kwargs['pasien_rawat_jalan_id'])
+        except Exception:
+            return None
+    
+    def get_queryset(self):
+        try:
+            return super().get_queryset().filter(pasien_rawat_jalan=self.get_pasien_rawat_jalan())
+        except Exception:
+            return super().get_queryset()
+    
+    def get(self, request, *args, **kwargs):
+        return self.render_to_pdf(
+            {
+                'list_integrasi': self.get_queryset(),
+                'pasien':self.get_pasien_rawat_jalan(),
+            },
+            self.template_name,
+            '/css/pdf.css',
+            f'Catatan Terintegrasi Pasien {self.get_pasien_rawat_jalan().pasien.full_name}'
+        )
+

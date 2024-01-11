@@ -79,6 +79,21 @@
                                     </span>
                                     {{ form.berat_badan }}
                                 </div>
+                                <div class="col">
+                                    <label for="{{ form.imt.label_tag.id }}">
+                                        <h6>
+                                            {{ form.imt.label_tag }}
+                                            {% if form.imt.field.required %}
+                                                <span class="text-red" style="color: red;">*</span>
+                                            {% endif %}
+                                        </h6>
+                                    </label>
+                                    {{ form.imt.help_text }}
+                                    <span class="text-red">
+                                        {{ form.imt.errors }}
+                                    </span>
+                                    {{ form.imt }}
+                                </div>
                             </div>
 
                             <h4 class="card-title">Tanda-tanda vital</h4>
@@ -448,15 +463,20 @@
                     </div>
                     <div class="card-body">
                         <div class="template-demo">
-                            <button type="button" class="btn btn-primary btn-block">
-                                <i class="fa fa-download"></i>                      
-                                Assesment Awal 
-                            </button>
                             {% if btn_delete %}
+                                <a href="{% url 'assesment-awal-rawat-jalan-download' assesment.id %}"  class="btn btn-primary btn-block">
+                                    <i class="fa fa-download"></i>                      
+                                    Assesment Awal 
+                                </a>
                                 <a  href="{% url 'assesment-awal-rawat-jalan-delete' assesment.id %}" class="btn btn-danger btn-block">
                                     <i class="fa fa-trash"></i>                      
                                     Assesment Awal
                                 </a>
+                            {% else %}
+                                <button type="button" disabled class="btn btn-primary desabled btn-block">
+                                    <i class="fa fa-download"></i>                      
+                                    Assesment Awal 
+                                </button>
                             {% endif %}
                         </div>
                         

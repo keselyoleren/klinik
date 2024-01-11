@@ -45,6 +45,7 @@ class AssesmentRawatJalan(BaseModel):
     # skrining
     tinggi_badan = models.CharField(_("Tinggi Badan"), max_length=20, blank=True, null=True)
     berat_badan = models.CharField(_("Berat Badan"), max_length=20, blank=True, null=True)
+    imt = models.CharField(_("IMT"), max_length=20, blank=True, null=True)
 
     # vital sign
     suhu_tubuh = models.CharField(_("Suhu Tubuh"), max_length=20, blank=True, null=True)

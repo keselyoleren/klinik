@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="{% static '/css/pdf.css'%}" />
+        <title>Catatan Terintegrasi</title>
+    </head>
+    <body>
+        <header>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="kop col-md-6">
+            <center>
+                <div style="line-height: 0%;">
+                <h3>Klinik Refa</h3>
+                </div>
+                <div class="date-and-no">
+                <h4><p>Maguwoharjo, Sleman, Yogyakarta</p></h4>
+                </div>
+                <div class="date-and-no">
+                <p>Phone. 0000-000-0000 | https://klinikrefa.com</p>
+                </div>
+            </center>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+        <hr />
+        </header>
+        <section class="content">
+        <div class="kop col-md-12">
+            <center>
+            <div class="date-and-no">
+                <u><h1>Catatan Terintegrasi</h1></u>
+                <p style="line-height: 1px;">No. {{ item.request_service.srv_code }}/xx/xx/XII/xxx</p>
+            </div>
+            </center>
+        </div>
+        <br />
+        <div class="content close">
+            <div style="padding-left: 15px;">
+                <div class="content-table">
+                  <table>
+                        <tr>
+                            <td>
+                                <center><b>TERINTEGRASI</b></center>
+                            </td>
+                            <td>
+                                <div class="content-header">
+                                    <div class="patient-data">
+                                      <p><span class="label">Nama Pasien</span>: <span class="contents">{{ pasien.pasien.full_name }}</span></p>
+                                      <p><span class="label">Tgl Lahir</span>: <span class="contents">{{ pasien.pasien.tanggal_lahir }}</span></p>
+                                      <p><span class="label">Jenis Kelamin</span>: <span class="contents">{{ pasien.pasien.jenis_kelamin }}</span></p>
+                                      <p><span class="label">No Registrasi</span>: <span class="contents">{{ pasien.id }}</span></p>
+                                      <p><span class="label">Tgl Masuk</span>: <span class="contents">{{ pasien.waktu_konsultasi }}</span></p>
+                                      <p><span class="label">Nama DPJP</span>: <span class="contents"></span></p>
+                                      <p><span class="label">Nama PPJP</span>: <span class="contents"></span></p>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                  </table>
+                </div>
+            </div>
+            <div style="padding-left: 15px;">
+                <div class="content-table">
+                  <table>
+                      <thead>
+                        <tr>
+                            <th>Tanggal </th>
+                            <th>Jam</th>
+                            <th>Catatan Kemajuan, Rencana Tindakan dan Terapi</th>
+                            <th>Profesi</th>
+                            <th>Nama Terang</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for item in list_integrasi  %}
+                            <tr>
+                                <td>{{ item.jam }}</td>
+                                <td>{{ item.tanggal }}</td>
+                                <td>{{ item.catatan }}</td>
+                                <td>{{ item.profesi }}</td>
+                                <td>{{ item.tenaga_medis }}</td>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                  </table>
+                </div>
+            </div>
+        </div>
+        </section>
+        <br /><br />
+
+        <footer>
+        <div class="ttd-l">
+            <center>
+            <p>Nama Pasien</p>
+            <p class="ttd-l-name">{{ pasien.pasien.full_name }}</p>
+            </center>
+        </div>
+        <div class="ttd">
+            <center>
+            <p>Yogyakarta, {{ item.created_at|date:'d M Y' }}</p>
+            <p>Tenaga Medis</p>
+            <p class="ttd-name">{{ pasien.dokter }}</p>
+            </center>
+        </div>
+        </footer>
+    </body>
+</html>

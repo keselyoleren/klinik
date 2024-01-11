@@ -23,11 +23,16 @@ urlpatterns = [
         path('assesment/create/<uuid:pasien_id>/', AssesmentRawatJalanCreateView.as_view(), name='assesment-awal-rawat-jalan-create'),
         path('assesment/update/<uuid:pk>/', AssesmentRawatJalanUpdateView.as_view(), name='assesment-rawat-jalan-update'),
         path('assesment/delete/<uuid:pk>/', AssesmentRawatJalanDeleteView.as_view(), name='assesment-awal-rawat-jalan-delete'),
+        path('assesment/download/<uuid:pk>/', DownloadAssesmentView.as_view(), name='assesment-awal-rawat-jalan-download'),
         path('delete/<uuid:pk>/', RawatJalanDeleteView.as_view(), name='rawat_jalan-delete'),
+        
+        
         path('catatan-terintegrasi/<uuid:pasien_rawat_jalan_id>/', CatanTerintegrasiListView.as_view(), name='catatan-terintegrasi-list'),
         path('catatan-terintegrasi/create/<uuid:pasien_rawat_jalan_id>/', CatanTerintegrasiCreateView.as_view(), name='catatan-terintegrasi-create'),
         path('catatan-terintegrasi/update/<uuid:pk>/', CatanTerintegrasiUpdateView.as_view(), name='catatan-terintegrasi-update'),
         path('catatan-terintegrasi/delete/<uuid:pk>/', CatanTerintegrasiDeleteView.as_view(), name='catatan-terintegrasi-delete'),
+        path('catatan-terintegrasi/export/<uuid:pasien_rawat_jalan_id>/', DownloadCatatanTerIntegrasi.as_view(), name='catatan-terintegrasi-download'),
+
     ])),
 
     path("rekam-medis/", include([
