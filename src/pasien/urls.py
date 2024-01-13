@@ -9,6 +9,8 @@ from pasien.views.rawat_inap_views import *
 from pasien.views.rawat_jalan_views import *
 from pasien.views.rekam_medis_views import *
 from pasien.views.rekam_medis_views import *
+from pasien.views.resume_views import DownloadResume, ResumeCreateView, ResumeDeleteView, ResumeListView, ResumeUpdateView
+from pasien.views.rincian_biaya_views import DownloadRincianBiaya, RincianBiayaCreateView, RincianBiayaDeleteView, RincianBiayaListView, RincianBiayaUpdateView
 
 urlpatterns = [
     path("pasien/", include([
@@ -52,6 +54,24 @@ urlpatterns = [
         path('delete/<uuid:pk>/', ObatDeleteView.as_view(), name='obat-delete'),
         path('export/<uuid:pasien_rawat_inap_id>/', DownloadObat.as_view(), name='obat-download'),
     ])),
+
+    path("resume/", include([
+        path('<uuid:pasien_id>/', ResumeListView.as_view(), name='resume-list'),
+        path('create/<uuid:pasien_id>/', ResumeCreateView.as_view(), name='resume-create'),
+        path('update/<uuid:pk>/', ResumeUpdateView.as_view(), name='resume-update'),
+        path('delete/<uuid:pk>/', ResumeDeleteView.as_view(), name='resume-delete'),
+        path('export/<uuid:pasien_id>/', DownloadResume.as_view(), name='resume-download'),
+    ])),
+
+
+    path("rincian-biaya/", include([
+        path('<uuid:pasien_rawat_inap_id>/', RincianBiayaListView.as_view(), name='rincian-biaya-list'),
+        path('create/<uuid:pasien_rawat_inap_id>/', RincianBiayaCreateView.as_view(), name='rincian-biaya-create'),
+        path('update/<uuid:pk>/', RincianBiayaUpdateView.as_view(), name='rincian-biaya-update'),
+        path('delete/<uuid:pk>/', RincianBiayaDeleteView.as_view(), name='rincian-biaya-delete'),
+        path('export/<uuid:pasien_rawat_inap_id>/', DownloadRincianBiaya.as_view(), name='rincian-biaya-download'),
+    ])),
+
 
 
     path("rekam-medis/", include([

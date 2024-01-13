@@ -1,0 +1,96 @@
+{% extends 'layouts/main.html' %}
+
+{% load static %}
+
+{% block css %}
+{{ form.media.css }}
+{% endblock %}
+
+{% block content %}
+    <!-- Page Heading -->
+
+<div class="content-wrapper">
+    {% include 'component/content_header.html' %}
+    <div class="row">
+        <div class="col-lg-9 grid-margin stretch-card">
+            <div class="card  mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Data Pasien {{ pasien.full_name }}</h6>
+                </div>
+                <div class="card-body">
+                    {% include 'component/pasien.html' %}
+                </div>
+                
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">{{ header_title }}</h6>
+                </div>
+                
+                <div class="card-body">
+                    {% if btn_add %}
+                        <a href="{{ create_url }}" class="btn btn-primary"><i class="fa fa-plus"></i> {{ header }}</a>
+                    {% endif %}
+                    <br><br>
+                    <div class="table-responsive">
+                        <table id="datatable" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Nama Layanan</th>
+                                    <th>Harga </th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in list_biaya %}
+                                <tr role="row" class="even">
+                                    <td>{{item.nama_layanan}}</td>
+                                    <td>Rp {{item.harga}}</td>
+                                    <td>
+                                        <a class="nav-link " href="#" data-toggle="dropdown" id="{{ item.id }}">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="{{item.id}}">
+                                            <a class="dropdown-item" href="{% url 'rincian-biaya-update' item.id %}" >
+                                            <i class="fas fa-eye text-primary"></i>
+                                            Update
+                                            </a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="{% url 'rincian-biaya-delete' item.id %}">
+                                            <i class="fa fa-trash text-danger"></i>
+                                            Delete
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 grid-margin">
+            <div>
+                <div class="card">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Action</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="template-demo">
+                            <a href="{{ download_url }}" type="button" class="btn btn-primary btn-block">
+                                <i class="fa fa-download"></i>                      
+                                Rincian Biaya
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+{% endblock  %}
+{% block js %}
+{{ form.media.js }}
+{% endblock %}
+

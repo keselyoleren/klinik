@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="{% static '/css/pdf.css'%}" />
+        <title>Rincian Biaya</title>
+    </head>
+    <body>
+        <header>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="kop col-md-6">
+            <center>
+                <div style="line-height: 0%;">
+                <h3>Klinik Refa</h3>
+                </div>
+                <div class="date-and-no">
+                <h4><p>Maguwoharjo, Sleman, Yogyakarta</p></h4>
+                </div>
+                <div class="date-and-no">
+                <p>Phone. 0000-000-0000 | https://klinikrefa.com</p>
+                </div>
+            </center>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+        <hr />
+        </header>
+        <section class="content">
+        <div class="kop col-md-12">
+            <center>
+            <div class="date-and-no">
+                <u><h1>Rincian Biaya</h1></u>
+                <p style="line-height: 1px;">No. {{ item.request_service.srv_code }}/xx/xx/XII/xxx</p>
+            </div>
+            </center>
+        </div>
+        <br />
+        <div class="content close">
+            <table>
+                <tr>
+                    <td>
+                        <div class="content-header">
+                            <div class="patient-data">
+                              <p><span class="label">Nama Pasien</span>: <span class="contents">{{ pasien.pasien.full_name }}</span></p>
+                              <p><span class="label">Tgl Lahir</span>: <span class="contents">{{ pasien.pasien.tanggal_lahir }}</span></p>
+                              <p><span class="label">Jenis Kelamin</span>: <span class="contents">{{ pasien.pasien.jenis_kelamin }}</span></p>
+                              <p><span class="label">No Registrasi</span>: <span class="contents">{{ pasien.id }}</span></p>
+                              <p><span class="label">Tgl Masuk</span>: <span class="contents">{{ pasien.waktu_konsultasi }}</span></p>
+                              <p><span class="label">Nama DPJP</span>: <span class="contents"></span></p>
+                              <p><span class="label">Nama PPJP</span>: <span class="contents"></span></p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="content-header">
+                            <div class="patient-data">
+                              <p><span class="label">Nama Pasien</span>: <span class="contents">{{ pasien.pasien.full_name }}</span></p>
+                              <p><span class="label">Tgl Lahir</span>: <span class="contents">{{ pasien.pasien.tanggal_lahir }}</span></p>
+                              <p><span class="label">Jenis Kelamin</span>: <span class="contents">{{ pasien.pasien.jenis_kelamin }}</span></p>
+                              <p><span class="label">No Registrasi</span>: <span class="contents">{{ pasien.id }}</span></p>
+                              <p><span class="label">Tgl Masuk</span>: <span class="contents">{{ pasien.waktu_konsultasi }}</span></p>
+                              <p><span class="label">Nama DPJP</span>: <span class="contents"></span></p>
+                              <p><span class="label">Nama PPJP</span>: <span class="contents"></span></p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>    
+            </table>
+            <br><hr>
+            
+            <div >
+                <div class="content-table">
+                    <table id="datatable" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nama Layanan</th>
+                                <th>Harga </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in list_biaya %}
+                            <tr role="row" class="even">
+                                <td>{{item.nama_layanan}}</td>
+                                <td>Rp {{item.harga}}</td>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+                            <td><b>Total Biaya</b></td>
+                            <td>Rp {{ total_harga }} </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        </section>
+        <br /><br />
+
+        <footer>
+        <div class="ttd-l">
+            <center>
+            <p>Nama Pasien</p><br>
+            <p class="ttd-l-name">{{ pasien.pasien.full_name }}</p>
+            </center>
+        </div>
+        <div class="ttd">
+            <center>
+            <p>Yogyakarta, {{ item.created_at|date:'d M Y' }}</p><br>
+            <p>Tenaga Medis</p>
+            <p class="ttd-name">{{ pasien.dokter }}</p>
+            </center>
+        </div>
+        </footer>
+    </body>
+</html>

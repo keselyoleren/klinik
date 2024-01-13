@@ -157,8 +157,30 @@ class Obat(BaseModel):
     pasien_rawat_inap = models.ForeignKey(RawatInap, verbose_name=_("Pasien Rawat Inap"), on_delete=models.CASCADE, blank=True, null=True)
     jenis_obat = models.CharField(_("Jenis Obat"), max_length=255, blank=True, null=True)
     nama = models.CharField(_("Nama Obat"), max_length=255, blank=True, null=True)
-    jumblah = models.CharField(_("Jumblah"), max_length=255, blank=True, null=True)
+    jumblah = models.IntegerField(_("Jumblah"),  blank=True, null=True)
     harga = models.IntegerField(_("Harga"), blank=True, null=True)
     
     def __str__(self) -> str:
         return self.nama
+
+class RincianBiaya(BaseModel):
+    pasien_rawat_jalan = models.ForeignKey(RawatJalan, verbose_name=_("Pasien Rawat Jalan"), on_delete=models.CASCADE, blank=True, null=True)
+    nama_layanan = models.CharField(_("Nama Layanan"), max_length=255, blank=True, null=True)
+    harga = models.IntegerField(_("Harga"),  blank=True, null=True, help_text="Harga Layanan Rp.-")
+
+    def __str__(self) -> str:
+        return self.nama_layanan
+
+
+class Resume(BaseModel):
+    pasien_rawat_jalan = models.ForeignKey(RawatJalan, verbose_name=_("Pasien Rawat Jalan"), on_delete=models.CASCADE, blank=True, null=True)
+    pasien_rawat_inap = models.ForeignKey(RawatInap, verbose_name=_("Pasien Rawat inap"), on_delete=models.CASCADE, blank=True, null=True)
+    dignosis = models.CharField(_("Dignosis"), max_length=255, blank=True, null=True)
+    terapi = models.CharField(_("Terapi / Tindakan"), max_length=255, blank=True, null=True)
+    tenaga_medis = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Nama Tenaga Medis"), on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.dignosis
+    
+
+    

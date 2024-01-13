@@ -28,13 +28,13 @@ table {
   margin-top: 10px;
   margin-bottom: 5px;
 }
-table th {
+/* table th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
   background-color: rgb(53, 144, 218);
   color: black;
-}
+} */
 table th, table td {
   border: 1px solid #ddd;
   padding: 8px;
