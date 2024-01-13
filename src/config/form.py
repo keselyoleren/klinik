@@ -59,9 +59,24 @@ class AbstractForm(forms.ModelForm):
 
             if field == 'pasien_rawat_jalan':
                 self.fields['pasien_rawat_jalan'].widget = forms.HiddenInput()
+            
+            if field == 'pasien_rawat_inap':
+                self.fields['pasien_rawat_inap'].widget = forms.HiddenInput()
 
             if field == 'tanggal':
                 self.fields['tanggal'].widget = forms.DateInput(attrs={
+                    'type':'date',
+                    'class': 'form-control',
+                })
+
+            if field == 'tgl_masuk':
+                self.fields['tgl_masuk'].widget = forms.DateInput(attrs={
+                    'type':'date',
+                    'class': 'form-control',
+                })
+            
+            if field == 'tgl_keluar':
+                self.fields['tgl_keluar'].widget = forms.DateInput(attrs={
                     'type':'date',
                     'class': 'form-control',
                 })

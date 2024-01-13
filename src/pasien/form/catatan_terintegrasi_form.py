@@ -1,7 +1,7 @@
 
 from config.choice import StatusRawatJalan
 from config.form import AbstractForm, Select2Widget
-from pasien.models import AssesmentRawatJalan, Pasien, RawatJalan, RawatJalanTerIntegrasi
+from pasien.models import AssesmentRawatJalan, Pasien, RawatJalan, CatatanTerIntegrasi
 from django import forms
 from master_data.models import TenagaMedis
 
@@ -11,7 +11,7 @@ class CatanTerintegrasiForm(AbstractForm):
     
 
     class Meta:
-        model = RawatJalanTerIntegrasi
+        model = CatatanTerIntegrasi
         fields = '__all__'
 
     def __init__(self, *args, **kwargs):

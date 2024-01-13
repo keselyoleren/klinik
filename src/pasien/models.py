@@ -1,6 +1,6 @@
 from statistics import mode
 from django.utils.translation import gettext as _
-from config.choice import JenisKelamin, StatusAlergi, StatusPasien, StatusPerokok, StatusRawatJalan
+from config.choice import CaraMasuk, JenisKasus, JenisKelamin, StatusAlergi, StatusImunisasi, StatusPasien, StatusPerokok, StatusPeserta, StatusRawatJalan, KeadaanWaktuKeluar
 from config.models import BaseModel
 from django.db import models
 
@@ -86,16 +86,6 @@ class AssesmentRawatJalan(BaseModel):
         return self.pasien_rawat_jalan.pasien.full_name
 
 
-class RawatJalanTerIntegrasi(BaseModel):
-    pasien_rawat_jalan = models.ForeignKey(RawatJalan, verbose_name=_("Pasien Rawat Jalan"), on_delete=models.CASCADE, blank=True, null=True)
-    tanggal = models.DateField(_("Tanggal"), blank=True, null=True)
-    jam = models.TimeField(_("Jam"), blank=True, null=True)
-    catatan = models.TextField(_("Catatan"), help_text="Catatan Kemajuan, Rencana Tindakan dan Terapi", blank=True, null=True)
-    profesi = models.CharField(_("Profesi"), max_length=255, blank=True, null=True)
-    tenaga_medis = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Tenaga Medis"), on_delete=models.CASCADE)
-
-    def __str__(self) -> str:
-        return self.pasien_rawat_jalan.pasien.full_name
 
     
 
@@ -121,3 +111,54 @@ class RekamMedis(BaseModel):
             return self.pasien.full_name
         except:
             return ""
+
+class RawatInap(BaseModel):
+    pasien = models.ForeignKey(Pasien, verbose_name=_("Nama Pasien"), on_delete=models.CASCADE)
+    no_rm = models.CharField(_("No RM"), max_length=255)
+    kelas = models.CharField(_("Kelas"), max_length=255)
+    kelas = models.CharField(_("Kelas"), max_length=255)
+    peserta = models.CharField(_("Peserta"), max_length=255, choices=StatusPeserta.choices, blank=True, null=True, help_text="Peserta BPJS / Umum")
+    cara_masuk = models.CharField(_("Cara Masuk"), max_length=255, choices=CaraMasuk.choices)
+    jenis_kasus = models.CharField(_("Jenis Kasus"), max_length=255, choices=JenisKasus.choices)
+    tgl_masuk = models.DateTimeField(_("Tanggal Masuk"), null=True, blank=True)
+    tgl_keluar = models.DateTimeField(_("Tanggal Keluar"), null=True, blank=True)
+    lama_rawat = models.CharField(_("Lama Rawat"), max_length=100, blank=True, null=True)
+    golongan_darah = models.CharField(_("Hasil PA / Golongan Darah"), max_length=100, blank=True, null=True)
+    infeksi_nosokomial = models.CharField(_("Infeksi Nosokomial"), max_length=100, blank=True, null=True)
+    diagnosis_masuk = models.TextField(_("Diagnosis Masuk"), max_length=100, blank=True, null=True)
+    diagnosis_akhir = models.TextField(_("Diagnosis akhir"), max_length=100, blank=True, null=True)
+    status_imunisasi = models.CharField(_("Status Imunisasi"), choices=StatusImunisasi.choices, blank=True, null=True, max_length=100)
+    cara_keluar = models.CharField(_("Cara Keluar"), max_length=255, blank=True, null=True)
+    keaddan_waktu_keluar = models.CharField(_("Keadaan Waktu Keluar"), choices=KeadaanWaktuKeluar.choices, max_length=100, blank=True, null=True)
+    dokter = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Dokter yang Merawat"), on_delete=models.CASCADE)
+    
+    
+    def __str__(self) -> str:
+        try:
+            return self.pasien.full_name
+        except Exception:
+            return ""
+
+class CatatanTerIntegrasi(BaseModel):
+    pasien_rawat_jalan = models.ForeignKey(RawatJalan, verbose_name=_("Pasien Rawat Jalan"), on_delete=models.CASCADE, blank=True, null=True)
+    pasien_rawat_inap = models.ForeignKey(RawatInap, verbose_name=_("Pasien Rawat inap"), on_delete=models.CASCADE, blank=True, null=True)
+    catatan = models.TextField(_("Catatan"), help_text="Catatan Kemajuan, Rencana Tindakan dan Terapi", blank=True, null=True)
+    profesi = models.CharField(_("Profesi"), max_length=255, blank=True, null=True)
+    tenaga_medis = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Tenaga Medis"), on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        try:
+            return self.pasien_rawat_jalan.pasien.full_name
+        except:
+            return self.pasien_rawat_inap.pasien.full_name
+
+
+class Obat(BaseModel):
+    pasien_rawat_inap = models.ForeignKey(RawatInap, verbose_name=_("Pasien Rawat Inap"), on_delete=models.CASCADE, blank=True, null=True)
+    jenis_obat = models.CharField(_("Jenis Obat"), max_length=255, blank=True, null=True)
+    nama = models.CharField(_("Nama Obat"), max_length=255, blank=True, null=True)
+    jumblah = models.CharField(_("Jumblah"), max_length=255, blank=True, null=True)
+    harga = models.IntegerField(_("Harga"), blank=True, null=True)
+    
+    def __str__(self) -> str:
+        return self.nama
