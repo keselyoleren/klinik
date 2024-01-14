@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="{% static '/css/pdf.css'%}" />
+        <title>{{ title }}</title>
+    </head>
+    <body>
+        {% include 'component/head_pdf.html' %}
+        <section class="content">
+        <div class="kop col-md-12">
+            <center>
+            <div class="date-and-no">
+                <u><h3>{{ title }}</h3></u>
+                <p style="font-size:medium; line-height: 1px;">No. {{ item.request_service.srv_code }}/xx/xx/XII/xxx</p>
+            </div>
+            </center>
+        </div>
+        <br>
+        <br>
+        <div class="patient-data">
+            <p style="font-size: medium;">Dengan ini menerangkan bahwa berdasarkan hasil pemeriksaan yang telah dilakukan kepada   pasien :</p>
+        </div>
+        <br />
+        <div class="content close">
+            <div class="content-header">
+                <div class="patient-data">
+                  <p style="font-size: medium;"><span class="label">Nama Pasien</span>: <span class="contents">{{ item.pasien.full_name }}</span></p>
+                  <p style="font-size: medium;"><span class="label">Tgl Lahir</span>: <span class="contents">{{ item.pasien.tanggal_lahir }}</span></p>
+                  <p style="font-size: medium;"><span class="label">Alamat</span>: <span class="contents">{{ item.pasien.jenis_kelamin }}</span></p>
+                  <p style="font-size: medium;"><span class="label">Pekerjaan</span>: <span class="contents">{{ item.pasien }}</span></p>
+                  <p style="font-size: medium;"><span class="label">Diagnosa</span>: <span class="contents">{{ item.diangnosa }}</span></p>
+                </div>
+            </div>
+        </div>
+        </section>
+        <br />
+        <div class="patient-data">
+            <p style="font-size: medium;"> Berdasarkan hasil pemeriksaan yang telah dilakukan, pasien tersebut bahwa dalam keadaan sakit sehingga perlu diberikan istirahat.  terhitung mulai tanggal <b>{{item.start}}</b>  s/d <b>{{item.end}}.`</b> <br>
+                Demikian surat keterangan ini  diberikan untuk diketahui dan dipergunakan semestinya.</p>
+        </div>
+        <br><br><br><br><br><br><br><br><br><br>
+       {% include 'component/footer_pdf.html' %} 
+    </body>
+</html>

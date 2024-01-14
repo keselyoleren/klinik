@@ -79,6 +79,9 @@ class KeadaanWaktuKeluar(TextChoices):
     MENINGGAL_KURANG = 'Meninggal setelah < 24 jam rawat'
     MENINGGAL_LEBIH = 'Meninggal setelah > 24 jam rawat'
 
+class HasilRapidAntigen(TextChoices):
+    NEGATIF = 'Negatif'
+    POSITIF = 'Positif'
 
 DAY_CODE = {
     Hari.MINGGU: 0,

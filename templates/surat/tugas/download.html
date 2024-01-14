@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="{% static '/css/pdf.css'%}" />
+        <title>{{ title }}</title>
+    </head>
+    <body>
+        {% include 'component/head_pdf.html' %}
+        <section class="content">
+            <div class="kop col-md-12">
+                <center>
+                <div class="date-and-no">
+                    <u><h3>{{ title }}</h3></u>
+                    <p style="font-size:medium; line-height: 1px;">No. {{ item.request_service.srv_code }}/xx/xx/XII/xxx</p>
+                </div>
+                </center>
+            </div>
+            <br>
+            <br>
+            <div class="content close">
+                <div class="content-header">
+                    <div class="patient-data">
+                        <p style="font-size: medium;"><span >Dasar</span>: <span class="contents">{{ item.dasar }}</span></p>
+                        <p style="font-size: medium;"><span >Dengan Ini</span>: <span class="contents">Pimpinan Klinik Refa Pratama</span></p>
+                    </div>
+                </div>
+            </div>
+            <center>
+                <u><h3>MEMBERITAHUKAN</h3></u>
+            </center>
+            <div class="patient-data">
+                <p style="font-size: medium;">Kepada</p>
+            </div>
+            <div class="content close">
+                <div class="content-header">
+                    <div class="patient-data">
+                        <p style="font-size: medium;"><span class="label">Nama</span>: <span class="contents">{{ item.tenaga_medis.nama }}</span></p>
+                        <p style="font-size: medium;"><span class="label">NIP</span>: <span class="contents">{{ item.tenaga_medis.nip }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Pangkat/Gol</span>: <span class="contents">{{ item.tenaga_medis.pangkat }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Jabatan</span>: <span class="contents">{{ item.tenaga_medis.jabatan }}</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="patient-data">
+                <p style="font-size: medium;">Untuk : <b>{{ item.tujuan }}</b></p>
+            </div>
+            <div class="patient-data">
+                <p style="font-size: medium;"> Demikian Surat Tugas ini dibuat untuk dapat digunakan sebagaimana mestinya.</p>
+            </div>
+        </section>
+        <br><br><br><br><br><br><br><br><br>
+       {% include 'component/footer_pdf.html' %} 
+    </body>
+</html>

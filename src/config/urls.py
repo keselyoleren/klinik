@@ -16,6 +16,7 @@ urlpatterns = [
     path("", include('manage_users.urls'), name="manage_users"),
     path("", include('pasien.urls'), name="manage_pasien"),
     path("", include('master_data.urls'), name="manage_layanan"),
+    path("", include('surat.urls'), name="surat"),
     path("auth/", include([
         path("login/", UserLoginView.as_view(), name="login"),
         path("logout/", LogoutView.as_view(), name="logout"),

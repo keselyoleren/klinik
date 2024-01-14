@@ -1,0 +1,43 @@
+{% extends 'layouts/main.html' %}
+{% block content %}
+<div class="content-wrapper">
+    {% include 'component/content_header.html' %}
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card  mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">{{ header_title }}</h6>
+            </div>
+            <div class="card-body">
+                {% if btn_add %}
+                    <a href="{{ create_url }}" class="btn btn-primary"><i class="fa fa-plus"></i> {{ header }}</a>
+                {% endif %}
+                <br><br>
+                
+                <div class="table-responsive">
+                    <table id="datatable" class="table table-striped">
+                        <thead>
+                            <tr>
+                            <th>Pasien</th>
+                            <th>Hasil</th>
+                            <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in list_rapid %}
+                            <tr role="row" class="even">
+                                <td>{{item.pasien.full_name}}</td>
+                                <td>{{item.hasil}}</td>
+                                <td>
+                                    <a class="btn btn-outline-info" href="{% url 'rapid-update' item.id  %}"><i class="fa fa-edit"></i></a>
+                                    <a class="btn btn-outline-success" href="{% url 'rapid-download' item.id  %}"><i class="fa fa-download"></i></a>
+                                    <a class="btn btn-outline-danger" href="{% url 'rapid-delete' item.id  %}"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock  %}

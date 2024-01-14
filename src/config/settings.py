@@ -28,6 +28,7 @@ LOCAL_APP = [
     'manage_users',
     'master_data',
     'pasien',
+    'surat',
 ] 
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APP 

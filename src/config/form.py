@@ -33,6 +33,13 @@ class AbstractForm(forms.ModelForm):
                     'type':'date',
                     'class': 'form-control',
                 })
+
+            if field == 'tanggal_kematian':
+                self.fields['tanggal_kematian'].widget = forms.DateInput(attrs={
+                    'type':'date',
+                    'class': 'form-control',
+                })
+
             if field == 'waktu_konsultasi':
                 self.fields['waktu_konsultasi'].widget = forms.DateTimeInput(attrs={
                     'type':'datetime-local',
@@ -65,6 +72,18 @@ class AbstractForm(forms.ModelForm):
 
             if field == 'tanggal':
                 self.fields['tanggal'].widget = forms.DateInput(attrs={
+                    'type':'date',
+                    'class': 'form-control',
+                })
+
+            if field == 'start':
+                self.fields['start'].widget = forms.DateInput(attrs={
+                    'type':'date',
+                    'class': 'form-control',
+                })
+
+            if field == 'end':
+                self.fields['end'].widget = forms.DateInput(attrs={
                     'type':'date',
                     'class': 'form-control',
                 })

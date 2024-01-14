@@ -1,11 +1,8 @@
 # myapp/views.py
-
-from urllib import request
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate
-from django.http import HttpResponseRedirect
-from config.choice import RoleUser, StatusRawatJalan
+from config.choice import StatusRawatJalan
 from config.permis import IsAuthenticated, IsAuthenticated
 from config.report import GeneratePDF
 from pasien.form.rekam_medis_form import RekamMedisForm

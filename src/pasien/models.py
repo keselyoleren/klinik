@@ -1,4 +1,3 @@
-from statistics import mode
 from django.utils.translation import gettext as _
 from config.choice import CaraMasuk, JenisKasus, JenisKelamin, StatusAlergi, StatusImunisasi, StatusPasien, StatusPerokok, StatusPeserta, StatusRawatJalan, KeadaanWaktuKeluar
 from config.models import BaseModel

@@ -56,6 +56,24 @@
         </a>
       </li>
       
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#surat" aria-expanded="false" aria-controls="rawat_jalan">
+          <i class="fa fa-hospital menu-icon"></i>
+          <span class="menu-title">Surat Menyurat</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="surat" style="">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="{% url 'keterangan-sakit-list' %}"> Keterangan Sakit </a></li>
+            <li class="nav-item"> <a class="nav-link" href="{% url 'keterangan-sehat-list' %}"> Keterangan Sehat </a></li>
+            <li class="nav-item"> <a class="nav-link" href="{% url 'rujukan-list' %}"> Surat Rujukan </a></li>
+            <li class="nav-item"> <a class="nav-link" href="{% url 'kelahiran-list' %}"> Surat Kelahiran </a></li>
+            <li class="nav-item"> <a class="nav-link" href="{% url 'kematian-list' %}"> Surat Kematian </a></li>
+            <li class="nav-item"> <a class="nav-link" href="{% url 'rapid-list' %}"> Surat Rapid Antigen </a></li>
+            <li class="nav-item"> <a class="nav-link" href="{% url 'tugas-list' %}"> Surat Perintah Tugas </a></li>
+          </ul>
+        </div>
+      </li>
 
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#rawat_jalan" aria-expanded="false" aria-controls="rawat_jalan">

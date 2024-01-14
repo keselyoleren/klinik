@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="{% static '/css/pdf.css'%}" />
+        <title>{{ title }}</title>
+    </head>
+    <body>
+        {% include 'component/head_pdf.html' %}
+        <section class="content">
+            <div class="kop col-md-12">
+                <center>
+                <div class="date-and-no">
+                    <u><h3>{{ title }}</h3></u>
+                    <p style="font-size:medium; line-height: 1px;">No. {{ item.request_service.srv_code }}/xx/xx/XII/xxx</p>
+                </div>
+                </center>
+            </div>
+            <br>
+            <br>
+            <div class="patient-data">
+                <p style="font-size: medium;">Yang bertanda tangan dibawah ini menerangkan bahwa</p>
+            </div>
+            <br />
+            <div class="content close">
+                <div class="content-header">
+                    <div class="patient-data">
+                        <p style="font-size: medium;"><span class="label">Hari</span>: <span class="contents">{{ item.hari }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Tanggal Lahir</span>: <span class="contents">{{ item.tanggal_lahir }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Jam</span>: <span class="contents">{{ item.jam }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Di</span>: <span class="contents">{{ item.tempat }}</span></p>    
+                    </div>
+                </div>
+            </div>
+            <div class="patient-data">
+                <p style="font-size: medium;"> Telah lahir seorang anak yang diberi nama :  <b>{{ item.nama_bayi }}</b> <br>
+            </div>
+            <div class="content close">
+                <div class="content-header">
+                    <div class="patient-data">
+                        <p style="font-size: medium;"><span class="label">Jenis Kelamin</span>: <span class="contents">{{ item.jenis_kelamin }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Berat Badan</span>: <span class="contents">{{ item.berat_badan }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Panjang Badan</span>: <span class="contents">{{ item.panjang_badan }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Nama Ayah</span>: <span class="contents">{{ item.mana_ayah }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Nama Ibu</span>: <span class="contents">{{ item.maba_ibu }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Alamat</span>: <span class="contents">{{ item.alamat }}</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="patient-data">
+                <p style="font-size: medium;"> Demikian surat keterangan ini dibuat dengan sebenarnya untuk dapat digunakan seperlunya.</b> <br>
+            </div>
+        </section>
+        <br><br><br><br><br><br>
+       {% include 'component/footer_pdf.html' %} 
+    </body>
+</html>
