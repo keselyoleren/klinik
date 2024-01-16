@@ -1,12 +1,10 @@
 # myapp/urls.py
 from django.urls import path, include
+from master_data.views.inventory_obat_views import *
 from master_data.views.layanan_views import *
 from master_data.views.poliklinik_views import *
 from master_data.views.tenaga_medis_view import *
 from master_data.views.jadwal_praktik import *
-
-
-
 
 urlpatterns = [
     path("layanan/", include([
@@ -37,6 +35,13 @@ urlpatterns = [
         path('delete/<uuid:pk>/', JadwalTenagaMedisDeleteView.as_view(), name='jadwal-delete'),
     ])),
 
+    path("inventory-obat", include([
+        path('', InventoryObatListView.as_view(), name='inventory-obat-list'),
+        path('create/', InventoryObatCreateView.as_view(), name='inventory-obat-create'),
+        path('update/<uuid:pk>/', InventoryObatUpdateView.as_view(), name='inventory-obat-update'),
+        path('detail/<uuid:pk>/', InventoryObatDetailView.as_view(), name='inventory-obat-detail'),
+        path('delete/<uuid:pk>/', InventoryObatDeleteView.as_view(), name='inventory-obat-delete'),
+    ])),
 
     path('jadwal/', JadwalView.as_view(), name='jadwal-view'),
 ]

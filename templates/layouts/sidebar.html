@@ -31,7 +31,7 @@
           <ul class="nav flex-column sub-menu">
             <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{% url 'user-list' %}">Akun User</a></li>
             <li class="nav-item"> <a class="nav-link" href="{% url 'layanan-list' %}">Layanan</a></li>
-            <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{% url 'poliklinik-list' %}">Poli Klinik</a></li>
+            {% comment %} <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{% url 'poliklinik-list' %}">Poli Klinik</a></li> {% endcomment %}
             <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{% url 'tenaga_medis-list' %}">Tenaga Medis</a></li>
           </ul>
         </div>
@@ -55,10 +55,31 @@
           <span class="menu-title">Pasien</span>
         </a>
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'rawat_jalan-list' %}">
+          <i class="fa fa-user-md menu-icon"></i>
+          <span class="menu-title">Rawat Jalan</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'rawat_inap-list' %}">
+          <i class="fa fa-stethoscope menu-icon"></i>
+          <span class="menu-title">Rawat Inap</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'inventory-obat-list' %}">
+          <i class="fa fa-medkit menu-icon"></i>
+          <span class="menu-title">Obat - obatan</span>
+        </a>
+      </li>
       
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#surat" aria-expanded="false" aria-controls="rawat_jalan">
-          <i class="fa fa-hospital menu-icon"></i>
+          <i class="fa fa-paper-plane menu-icon"></i>
           <span class="menu-title">Surat Menyurat</span>
           <i class="menu-arrow"></i>
         </a>
@@ -74,47 +95,5 @@
           </ul>
         </div>
       </li>
-
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#rawat_jalan" aria-expanded="false" aria-controls="rawat_jalan">
-          <i class="fa fa-hospital menu-icon"></i>
-          <span class="menu-title">Rawat Jalan</span>
-          <i class="menu-arrow"></i>
-        </a>
-        <div class="collapse" id="rawat_jalan" style="">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="{% url 'rawat_jalan-list' %}"> Pasien </a></li>
-            <li class="nav-item"> <a class="nav-link" href="{% url 'rekam_medis-list' %}"> Resume </a></li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#rawat_inap" aria-expanded="false" aria-controls="rawat_jalan">
-          <i class="fa fa-hospital menu-icon"></i>
-            <span class="menu-title">Rawat Inap</span>
-          <i class="menu-arrow"></i>
-        </a>
-        <div class="collapse" id="rawat_inap" style="">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="{% url 'rawat_inap-list' %}"> Pasien </a></li>
-          </ul>
-        </div>
-      </li>
-      
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false" aria-controls="error">
-          <i class="fa fa-address-book menu-icon"></i>
-          <span class="menu-title">Rekam Medis</span>
-          <i class="menu-arrow"></i>
-        </a>
-        <div class="collapse" id="error" style="">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="{% url 'rekam_medis-list-pasien' %}"> List Pasien </a></li>
-            <li class="nav-item"> <a class="nav-link" href="{% url 'rekam_medis-list' %}"> Pemeriksaan </a></li>
-          </ul>
-        </div>
-      </li>
-   
     </ul>
   </nav>

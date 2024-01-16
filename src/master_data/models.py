@@ -38,7 +38,6 @@ class PoliKlinik(BaseModel):
 
 
 class TenagaMedis(BaseModel):
-    poliklinik = models.ManyToManyField(PoliKlinik, verbose_name=_("Poliklinik"))
     nama = models.CharField(_("Nama"), max_length=255)
     alamat = models.TextField(_("Alamat"), blank=True, null=True)
     email = models.EmailField(_("Email"), blank=True, null=True)
@@ -65,3 +64,42 @@ class JadwalTenagaMedis(BaseModel):
 
     def __str__(self) -> str:
         return self.tenaga_medis.nama
+
+
+class InventoryObat(BaseModel):
+    name = models.CharField(_("Nama Obat"), max_length=255)
+    code_obat = models.CharField(_("Kode Obat"), max_length=255, blank=True, null=True)
+    satuan = models.CharField(_("Satuan"), max_length=255, blank=True, null=True, help_text='Contoh: Botol, Strip, Tablet, dll')
+    stok = models.IntegerField(_("Stok"), default=0)
+    keterangan = models.CharField(_("Keterangan"), max_length=255, blank=True, null=True)
+
+    def __str__(self) -> str:
+        return self.name
+
+
+class ObatMasuk(BaseModel):
+    obat = models.ForeignKey(InventoryObat, verbose_name=_("Obat"), on_delete=models.CASCADE)
+    jumlah = models.IntegerField(_("Jumlah"))
+    keterangan = models.TextField(_("Keterangan"), blank=True, null=True)
+
+    def __str__(self) -> str:
+        return self.obat.name
+
+    def save(self, *args, **kwargs):
+        self.obat.stok += self.jumlah
+        self.obat.save()
+        super(ObatMasuk, self).save(*args, **kwargs)
+
+class ObatKeluar(BaseModel):
+    obat = models.ForeignKey(InventoryObat, verbose_name=_("Obat"), on_delete=models.CASCADE)
+    jumlah = models.IntegerField(_("Jumlah"))
+    keterangan = models.TextField(_("Keterangan"), blank=True, null=True)
+
+    def __str__(self) -> str:
+        return self.obat.name
+
+    def save(self, *args, **kwargs):
+        self.obat.stok -= self.jumlah
+        self.obat.save()
+        super(ObatKeluar, self).save(*args, **kwargs)
+
