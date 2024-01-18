@@ -58,6 +58,9 @@ class AbstractForm(forms.ModelForm):
                     'class': 'form-control',
                 })
 
+            if field == 'obat':
+                self.fields['obat'].widget = forms.HiddenInput()
+
             if field == 'created_by' and not get_user().is_superuser:
                 self.fields['created_by'].widget = forms.HiddenInput()
             

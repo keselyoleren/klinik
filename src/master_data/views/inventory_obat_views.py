@@ -1,10 +1,11 @@
 # myapp/views.py
+from django.db import models
 
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
 from config.permis import IsAuthenticated, IsAuthenticated
 from master_data.form.inventory_obat_form import InfentoryObatForm
-from master_data.models import InventoryObat
+from master_data.models import InventoryObat, ObatKeluar, ObatMasuk
 
 class InventoryObatListView(IsAuthenticated, ListView):
     model = InventoryObat
@@ -49,12 +50,17 @@ class InventoryObatUpdateView(IsAuthenticated, UpdateView):
 class InventoryObatDetailView(IsAuthenticated, DetailView):
     model = InventoryObat
     template_name = 'inventory_obat/detail.html'
-    context_object_name = 'detail_inventory_obat'
+    context_object_name = 'obat'
 
     def get_context_data(self, **kwargs):
+        masuk = ObatMasuk.objects.aggregate(total=models.Sum('jumlah'))
+        keluar = ObatKeluar.objects.aggregate(total=models.Sum('jumlah'))
+
         context = super().get_context_data(**kwargs)
-        context['header'] = 'Inventory Obat'
-        context['header_title'] = 'Detail Inventory Obat'
+        context['header'] = f'Obat {self.get_object().name}'
+        context['header_title'] = f'Detail  Obat {self.get_object().name}'
+        context['obat_masuk'] = masuk['total'] or 0
+        context['obat_keluar'] = keluar['total'] or 0
         return context
 
 class InventoryObatDeleteView(IsAuthenticated, DeleteView):

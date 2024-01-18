@@ -2,9 +2,11 @@
 from django.urls import path, include
 from master_data.views.inventory_obat_views import *
 from master_data.views.layanan_views import *
+from master_data.views.obat_keluar import *
 from master_data.views.poliklinik_views import *
 from master_data.views.tenaga_medis_view import *
 from master_data.views.jadwal_praktik import *
+from master_data.views.obat_masuk import *
 
 urlpatterns = [
     path("layanan/", include([
@@ -35,12 +37,26 @@ urlpatterns = [
         path('delete/<uuid:pk>/', JadwalTenagaMedisDeleteView.as_view(), name='jadwal-delete'),
     ])),
 
-    path("inventory-obat", include([
+    path("inventory-obat/", include([
         path('', InventoryObatListView.as_view(), name='inventory-obat-list'),
         path('create/', InventoryObatCreateView.as_view(), name='inventory-obat-create'),
         path('update/<uuid:pk>/', InventoryObatUpdateView.as_view(), name='inventory-obat-update'),
         path('detail/<uuid:pk>/', InventoryObatDetailView.as_view(), name='inventory-obat-detail'),
         path('delete/<uuid:pk>/', InventoryObatDeleteView.as_view(), name='inventory-obat-delete'),
+    ])),
+
+    path("inventory-obat-masuk/", include([
+        path('<uuid:inv_obat_id>/', ObatMasukListView.as_view(), name='obat-masuk-list'),
+        path('create/<uuid:inv_obat_id>/', ObatMasukCreateView.as_view(), name='obat-masuk-create'),
+        path('update/<uuid:pk>/', ObatMasukUpdateView.as_view(), name='obat-masuk-update'),
+        path('delete/<uuid:pk>/', ObatMasukDeleteView.as_view(), name='obat-masuk-delete'),
+    ])),
+
+    path("inventory-obat-keluar/", include([
+        path('<uuid:inv_obat_id>/', ObatKeluarListView.as_view(), name='obat-keluar-list'),
+        path('create/<uuid:inv_obat_id>/', ObatKeluarCreateView.as_view(), name='obat-keluar-create'),
+        path('update/<uuid:pk>/', ObatKeluarUpdateView.as_view(), name='obat-keluar-update'),
+        path('delete/<uuid:pk>/', ObatKeluarDeleteView.as_view(), name='obat-keluar-delete'),
     ])),
 
     path('jadwal/', JadwalView.as_view(), name='jadwal-view'),

@@ -17,22 +17,16 @@
                     <table id="datatable" class="table table-striped">
                         <thead>
                             <tr>
-                            <th>Nama Layanan</th>
-                            <th>Kode Layanan</th>
-                            <th>Harga Dasar</th>
-                            <th>Diskon</th>
-                            <th>Harga Bersih</th>
-                            <th>Action</th>
+                                <th>Nama Layanan</th>
+                                <th>Keterangan</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                         {% for item in list_layanan %}
                             <tr role="row" class="even">
                                 <td>{{item.nama_layanan}}</td>
-                                <td>{{item.kode_layanan}}</td>
-                                <td>Rp {{item.harga_dasar|intcomma}}</td>
-                                <td>{{item.diskon}} %</td>
-                                <td>Rp {{item.harga_bersih|intcomma}}</td>
+                                <td>{{item.ke}}</td>
                                 <td>
                                     <a class="btn btn-outline-info" href="{% url 'layanan-update' item.id  %}"><i class="fa fa-edit"></i></a>
                                     <a class="btn btn-outline-danger" href="{% url 'layanan-delete' item.id  %}"><i class="fa fa-trash"></i></a>

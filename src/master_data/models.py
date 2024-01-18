@@ -10,21 +10,21 @@ from django.utils.translation import gettext as _
 
 class Layanan(BaseModel):
     nama_layanan = models.CharField(_("Nama Layanan"), max_length=255)
-    kode_layanan = models.CharField(_("Kode Layanan"), max_length=255, blank=True, null=True)
-    harga_dasar = models.IntegerField(_("Harga Dasar"))
-    diskon = models.IntegerField(_("Diskon"), default=0)
-    harga_bersih = models.IntegerField(_("Harga Bersih"), null=True, blank=True, default=0)
+    # kode_layanan = models.CharField(_("Kode Layanan"), max_length=255, blank=True, null=True)
+    # harga_dasar = models.IntegerField(_("Harga Dasar"))
+    # diskon = models.IntegerField(_("Diskon"), default=0)
+    # harga_bersih = models.IntegerField(_("Harga Bersih"), null=True, blank=True, default=0)
     keterangan = models.TextField(_("Keterangan"), blank=True, null=True)
 
     def __str__(self) -> str:
         return self.nama_layanan
 
     def save(self, *args, **kwargs):
-        if self.diskon == 0:
-            self.harga_bersih = self.harga_dasar
-        else:
-            total_diskon = (self.harga_dasar * self.diskon) / 100
-            self.harga_bersih = self.harga_dasar - total_diskon
+        # if self.diskon == 0:
+        #     self.harga_bersih = self.harga_dasar
+        # else:
+        #     total_diskon = (self.harga_dasar * self.diskon) / 100
+        #     self.harga_bersih = self.harga_dasar - total_diskon
         super(Layanan, self).save(*args, **kwargs)
 
 
@@ -78,20 +78,18 @@ class InventoryObat(BaseModel):
 
 
 class ObatMasuk(BaseModel):
-    obat = models.ForeignKey(InventoryObat, verbose_name=_("Obat"), on_delete=models.CASCADE)
+    obat = models.ForeignKey(InventoryObat, verbose_name=_("Obat"), on_delete=models.CASCADE, blank=True, null=True)
     jumlah = models.IntegerField(_("Jumlah"))
     keterangan = models.TextField(_("Keterangan"), blank=True, null=True)
 
     def __str__(self) -> str:
         return self.obat.name
 
-    def save(self, *args, **kwargs):
-        self.obat.stok += self.jumlah
-        self.obat.save()
-        super(ObatMasuk, self).save(*args, **kwargs)
+        
+
 
 class ObatKeluar(BaseModel):
-    obat = models.ForeignKey(InventoryObat, verbose_name=_("Obat"), on_delete=models.CASCADE)
+    obat = models.ForeignKey(InventoryObat, verbose_name=_("Obat"), on_delete=models.CASCADE, blank=True, null=True)
     jumlah = models.IntegerField(_("Jumlah"))
     keterangan = models.TextField(_("Keterangan"), blank=True, null=True)
 
@@ -99,7 +97,7 @@ class ObatKeluar(BaseModel):
         return self.obat.name
 
     def save(self, *args, **kwargs):
-        self.obat.stok -= self.jumlah
+        self.obat.stok -= self.jumlah 
         self.obat.save()
         super(ObatKeluar, self).save(*args, **kwargs)
 

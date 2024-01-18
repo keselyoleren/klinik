@@ -1,0 +1,79 @@
+{% extends 'layouts/main.html' %}
+
+{% load static %}
+
+{% block css %}
+{{ form.media.css }}
+{% endblock %}
+
+{% block content %}
+    <!-- Page Heading -->
+
+<div class="content-wrapper">
+    {% include 'component/content_header.html' %}
+    <div class="row">
+        <div class="col-md-6 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title mb-0">Total Obat {{obat.name}}</h1>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-inline-block pt-3">
+                            <div class="d-md-flex">
+                                <h2 class="mb-0">{{ obat.stok }}  {{ obat.satuan }}</h2>
+                                <div class="d-flex align-items-center ml-md-2 mt-2 mt-md-0">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-inline-block">
+                            <i class="fas fa-chart-pie text-info icon-lg"></i>                                    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card  mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">{{ header_title }}</h6>
+                </div>
+                
+                <div class="card-body">
+                    {% if btn_add %}
+                        <a href="{{ create_url }}" class="btn btn-primary"><i class="fa fa-plus"></i> {{ header }}</a>
+                    {% endif %}
+                    <br><br>
+                    <div class="table-responsive">
+                        <table id="datatable" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Jumblah</th>
+                                    <th>Keterangan </th>
+                                    <th>Waktu Keluar </th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in obat_keluar %}
+                                <tr role="row" class="even">
+                                    <td>{{item.jumlah}} {{obat.satuan}}</td>
+                                    <td>{{item.keterangan}}</td>
+                                    <td>{{item.created_at}}</td>
+                                    <td>
+                                        <a class="btn btn-outline-danger" href="{% url 'obat-keluar-delete' item.id  %}"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+{% endblock  %}
+{% block js %}
+{{ form.media.js }}
+{% endblock %}
+

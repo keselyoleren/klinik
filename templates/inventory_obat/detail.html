@@ -3,42 +3,42 @@
 {% load humanize %}
 <div class="content-wrapper">
     {% include 'component/content_header.html' %}
-    <div class="col-lg-12 grid-margin stretch-card">
-        <div class="card mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">{{ header_title }}</h6>
+    <div class="row">
+        <div class="col-md-6 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title mb-0">Total Obat Masuk {{obat.name}}</h1>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-inline-block pt-3">
+                            <div class="d-md-flex">
+                                <h2 class="mb-0">{{ obat_masuk }}  {{ obat.satuan }}</h2>
+                                <div class="d-flex align-items-center ml-md-2 mt-2 mt-md-0">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-inline-block">
+                            <i class="fas fa-chart-pie text-info icon-lg"></i>                                    
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                {% if btn_add %}
-                    <a href="{{ create_url }}" class="btn btn-primary"><i class="fa fa-plus"></i> {{ header }}</a>
-                {% endif %}
-                <br><br>
-                <div class="table-responsive">
-                    <table id="datatable" class="table table-striped">
-                        <thead>
-                            <tr>
-                            <th>Nama Obat</th>
-                            <th>Code Obat</th>
-                            <th>Satuan</th>
-                            <th>Stok Obat</th>
-                            <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {% for item in list_inventory_obat %}
-                            <tr role="row" class="even">
-                                <td>{{item.name}}</td>
-                                <td>{{item.code_obat}}</td>
-                                <td>{{item.satuan}}</td>
-                                <td>{{item.stok}}</td>
-                                <td>
-                                    <a class="btn btn-outline-success" href="{% url 'inventory-obat-detail' item.id  %}"><i class="fa fa-eyes"></i></a>
-                                    <a class="btn btn-outline-info" href="{% url 'inventory-obat-update' item.id  %}"><i class="fa fa-edit"></i></a>
-                                    <a class="btn btn-outline-danger" href="{% url 'inventory-obat-delete' item.id  %}"><i class="fa fa-trash"></i></a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </table>
+        </div>
+        <div class="col-md-6 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title mb-0">Total Obat Keluar {{obat.name}}</h1>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-inline-block pt-3">
+                            <div class="d-md-flex">
+                                <h2 class="mb-0">{{ obat_keluar }}  {{ obat.satuan }}</h2>
+                                <div class="d-flex align-items-center ml-md-2 mt-2 mt-md-0">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-inline-block">
+                            <i class="fas fa-chart-pie text-info icon-lg"></i>                                    
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
