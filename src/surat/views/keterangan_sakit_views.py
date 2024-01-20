@@ -70,7 +70,8 @@ class DownloadKeteranganSakit(IsAuthenticated, DetailView, GeneratePDF):
             {
                 'item': self.get_object(),
                 'ttd_keterangan':'Yang Memeriksa',
-                'title': 'Surat Keterangan Sakit'
+                'title': 'Surat Keterangan Sakit',
+                'host' : f"{self.request.scheme}://{self.request.META['HTTP_HOST']}"
             },
             self.template_name,
             '/css/pdf.css',

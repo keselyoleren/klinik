@@ -119,7 +119,8 @@ class DownloadRincianBiaya(IsAuthenticated, GeneratePDF, ListView):
             {
                 'list_biaya': self.get_queryset(),
                 'pasien':self.get_pasien(),
-                "total_harga" : self.get_queryset().aggregate(Sum('harga'))['harga__sum']
+                "total_harga" : self.get_queryset().aggregate(Sum('harga'))['harga__sum'],
+                'host' : f"{self.request.scheme}://{self.request.META['HTTP_HOST']}"
 
             },
             self.template_name,

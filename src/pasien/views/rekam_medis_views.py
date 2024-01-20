@@ -118,6 +118,7 @@ class DownloadRekamMedisView(IsAuthenticated, DetailView, GeneratePDF):
         return self.render_to_pdf(
             {
                 'rekam_medis': rekam_medis,
+                'host' : f"{self.request.scheme}://{self.request.META['HTTP_HOST']}"
             },
             self.template_name,
             '/css/pdf.css',

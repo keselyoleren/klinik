@@ -70,7 +70,8 @@ class DownloadSuratPerintahTugas(IsAuthenticated, DetailView, GeneratePDF):
             {
                 'item': self.get_object(),
                 'ttd_keterangan':'Pimpinan Klinik Refa Pratama',
-                'title': 'SURAT PERINTAH TUGAS '
+                'title': 'SURAT PERINTAH TUGAS ',
+                'host' : f"{self.request.scheme}://{self.request.META['HTTP_HOST']}"
             },
             self.template_name,
             '/css/pdf.css',

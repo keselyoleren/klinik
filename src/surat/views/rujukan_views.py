@@ -70,7 +70,8 @@ class DownloadSuratRujukan(IsAuthenticated, DetailView, GeneratePDF):
             {
                 'item': self.get_object(),
                 'ttd_keterangan':'Mengetahui,',
-                'title': 'Surat Rujukan'
+                'title': 'Surat Rujukan',
+                'host' : f"{self.request.scheme}://{self.request.META['HTTP_HOST']}"
             },
             self.template_name,
             '/css/pdf.css',

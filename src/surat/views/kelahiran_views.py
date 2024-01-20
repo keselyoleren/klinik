@@ -70,7 +70,8 @@ class DownloadSuratKelahiran(IsAuthenticated, DetailView, GeneratePDF):
             {
                 'item': self.get_object(),
                 'ttd_keterangan':'Mengetahui',
-                'title': 'Surat Kelahiran'
+                'title': 'Surat Kelahiran',
+                'host' : f"{self.request.scheme}://{self.request.META['HTTP_HOST']}"
             },
             self.template_name,
             '/css/pdf.css',

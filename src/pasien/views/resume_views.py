@@ -152,6 +152,7 @@ class DownloadResume(IsAuthenticated, GeneratePDF, ListView):
                 'list_resume': self.get_queryset(),
                 'pasien':query_pasien,
                 'title':title,
+                'host' : f"{self.request.scheme}://{self.request.META['HTTP_HOST']}"
             },
             self.template_name,
             '/css/pdf.css',

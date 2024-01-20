@@ -70,7 +70,8 @@ class DownloadSuratRapidAntigen(IsAuthenticated, DetailView, GeneratePDF):
             {
                 'item': self.get_object(),
                 'ttd_keterangan':'Mengetahui',
-                'title': 'SURAT KETERANGAN COVID-19 '
+                'title': 'SURAT KETERANGAN COVID-19 ',
+                'host' : f"{self.request.scheme}://{self.request.META['HTTP_HOST']}"
             },
             self.template_name,
             '/css/pdf.css',

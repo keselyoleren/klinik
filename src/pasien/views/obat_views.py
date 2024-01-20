@@ -121,6 +121,7 @@ class DownloadObat(IsAuthenticated, GeneratePDF, ListView):
             {
                 'list_obat': self.get_queryset(),
                 'pasien':self.get_pasien(),
+                'host' : f"{self.request.scheme}://{self.request.META['HTTP_HOST']}"
             },
             self.template_name,
             '/css/pdf.css',

@@ -27,7 +27,7 @@ class PasienListView(IsAuthenticated, ListView):
 
 class PasienCreateView(IsAuthenticated, CreateView):
     model = Pasien
-    template_name = 'component/form.html'
+    template_name = 'pasien/form.html'
     form_class = PasienForm
     success_url = reverse_lazy('pasien-list')
 

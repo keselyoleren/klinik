@@ -78,6 +78,7 @@ class DownloadAssesmentView(IsAuthenticated, GeneratePDF,  UpdateView):
             {
                 'assesment': self.get_object(),
                 'pasien':self.get_object().pasien_rawat_jalan,
+                'host' : f"{self.request.scheme}://{self.request.META['HTTP_HOST']}"
             },
             self.template_name,
             '/css/pdf.css',
