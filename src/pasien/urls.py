@@ -19,6 +19,11 @@ urlpatterns = [
         path('create/', PasienCreateView.as_view(), name='pasien-create'),
         path('update/<uuid:pk>/', PasienUpdateView.as_view(), name='pasien-update'),
         path('delete/<uuid:pk>/', PasienDeleteView.as_view(), name='pasien-delete'),
+        path('register/', include([
+            path('rawat-jalan/<uuid:pasien_id>/', PasienRawatJalanRegisterViwe.as_view(), name='register-rawat-jalan'),
+            path('rawat-inap/<uuid:pasien_id>/', PasienRawatInapRegisterView.as_view(), name='register-rawat-inap'),
+            path('fisio-terapi/<uuid:pasien_id>/', PasienFisioTerapiRegisterView.as_view(), name='register-fisio-terapi'),
+        ])),
     ])),
 
     path("rawat-jalan/", include([

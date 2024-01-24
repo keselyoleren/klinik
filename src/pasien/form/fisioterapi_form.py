@@ -16,3 +16,15 @@ class PasienFisioterapiForm(AbstractForm):
         super(PasienFisioterapiForm, self).__init__(*args, **kwargs)
         choices_pasien = [(p.id, p.full_name) for p in Pasien.objects.all()]
         self.fields['pasien'].choices = choices_pasien
+
+
+class RegisterPasienFisioterapiForm(AbstractForm):
+    class Meta:
+        model = PasienFisioterapi
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(RegisterPasienFisioterapiForm, self).__init__(*args, **kwargs)
+        self.fields['pasien'].widget = forms.HiddenInput()
+
+

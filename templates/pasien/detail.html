@@ -15,14 +15,7 @@
         <div class="col-lg-9 grid-margin stretch-card">
             <div class="card  mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Data Pasien {{ pasien.full_name }}</h6>
-                </div>
-                <div class="card-body">
-                    {% include 'component/pasien.html' %}
-                </div>
-                
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">{{ header_title }}</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Edit Pasien {{ pasien.full_name }}</h6>
                 </div>
                 
                 <div class="card-body">
@@ -64,44 +57,25 @@
             <div>
                 <div class="card">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Action</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Layanan</h6>
                     </div>
                     <div class="card-body">
                         <div class="template-demo">
-                            {% if btn_assesment_create %}
-                                <a  href="" class="btn btn-dark btn-block">
-                                    <i class="fa fa-plus"></i>                      
-                                    Assesment Awal
-                                </a>
-                            {% endif %}
-                            {% if btn_assesment_update %}
-                                <a  href="{{ btn_assesment_url }}" class="btn btn-dark btn-block">
-                                    <i class="fa fa-edit"></i>                      
-                                    Assesment Awal
-                                </a>
-                            {% endif %}
-
-                            <a href="" class="btn btn-primary btn-block">
+                            <a href="{% url 'register-rawat-jalan' pasien.id %}" class="btn btn-primary btn-block">
                                 <i class="fa fa-book"></i>                      
-                                Catatan Terintegrasi 
+                                Rawat Jalan 
                             </a>
                             
-                            <a href="" class="btn btn-primary btn-block">
+                            <a href="{% url 'register-rawat-inap' pasien.id %}" class="btn btn-primary btn-block">
                                 <i class="fa fa-book"></i>                      
-                                Rincian Obat
+                                Rawat Inap
                             </a>
 
-                            <a href="" class="btn btn-primary btn-block">
+                            <a href="{% url 'register-fisio-terapi' pasien.id %}" class="btn btn-primary btn-block">
                                 <i class="fa fa-book"></i>                      
-                                Rincian Biaya
-                            </a>
-                            
-                            <a href="" class="btn btn-info btn-block">
-                                <i class="fa fa-book"></i>                      
-                                Resume Rawat Inap
+                                Fisio Terapi
                             </a>
                         </div>
-                        
                     </div>
                 </div>
             </div>

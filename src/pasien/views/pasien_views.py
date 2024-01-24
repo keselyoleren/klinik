@@ -7,7 +7,10 @@ from django.contrib.auth import login, authenticate
 from django.http import HttpResponseRedirect
 from config.choice import RoleUser
 from config.permis import IsAuthenticated, IsAuthenticated
-from pasien.models import Pasien
+from pasien.form.fisioterapi_form import PasienFisioterapiForm, RegisterPasienFisioterapiForm
+from pasien.form.rawat_inap import RegisterPasienRawatInapForm
+from pasien.form.rawat_jalan_form import RegisterPasienRawatJalanForm
+from pasien.models import Pasien, PasienFisioterapi, RawatInap, RawatJalan
 from pasien.form.pasien_form import PasienForm
 
 
@@ -42,13 +45,28 @@ class PasienCreateView(IsAuthenticated, CreateView):
 
 class PasienUpdateView(IsAuthenticated, UpdateView):
     model = Pasien
-    template_name = 'component/form.html'
+    template_name = 'pasien/detail.html'
     form_class = PasienForm
     success_url = reverse_lazy('pasien-list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Pasien'
+        
+        if pasien_rawat_jalan := RawatJalan.objects.filter(pasien=self.get_object()).first():
+            context['btn_rawat_jalan_update'] = True
+            context['btn_rawat_jalan_url'] = reverse_lazy('rawat_jalan-update', kwargs={'pk': pasien_rawat_jalan.id})
+
+        if pasien_rawat_inap := RawatInap.objects.filter(pasien=self.get_object()).first():
+            context['btn_rawat_inap_update'] = True
+            context['btn_rawat_inap_url'] = reverse_lazy('rawat_inap-update', kwargs={'pk': pasien_rawat_inap.id})
+        
+        if pasien_fisio_terapi := PasienFisioterapi.objects.filter(pasien=self.get_object()).first():
+            context['btn_fisio_terapi_update'] = True
+            context['btn_fisio_terapi_url'] = reverse_lazy('fisio_terapi-update', kwargs={'pk': pasien_fisio_terapi.id})
+
+        context['pasien'] = self.get_object()
+
         context['header_title'] = 'Edit Pasien'
         return context
 
@@ -63,3 +81,74 @@ class PasienDeleteView(IsAuthenticated, DeleteView):
         context['header_title'] = 'Delete Pasien'
         return context
 
+
+
+class PasienRawatJalanRegisterViwe(IsAuthenticated, CreateView):
+    model = RawatJalan
+    template_name = 'component/form.html'
+    form_class = RegisterPasienRawatJalanForm
+    success_url = reverse_lazy('pasien-list')
+
+    def get_pasien_rawat_jalan(self):
+        return RawatJalan.objects.filter(pasien_id=self.kwargs['pasien_id']).first()
+
+    def get_success_url(self):
+        return reverse_lazy('rawat_jalan-update', kwargs={'pk': self.get_pasien_rawat_jalan().id})
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Pasien Rawat Jalan'
+        context['header_title'] = 'Register Pasien Rawat Jalan'
+        return context
+
+    def form_valid(self, form):
+        form.instance.pasien_id = self.kwargs['pasien_id']
+        form.save()
+        return super().form_valid(form)
+
+
+class PasienRawatInapRegisterView(IsAuthenticated, CreateView):
+    model = RawatInap
+    template_name = 'component/form.html'
+    form_class = RegisterPasienRawatInapForm
+    success_url = reverse_lazy('pasien-list')
+
+    def get_pasien_rawat_inap(self):
+        return RawatInap.objects.filter(pasien_id=self.kwargs['pasien_id']).first()
+
+    def get_success_url(self):
+        return reverse_lazy('rawat_inap-update', kwargs={'pk': self.get_pasien_rawat_inap().id})
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Pasien Rawat Inap'
+        context['header_title'] = 'Register Pasien Rawat Inap'
+        return context
+
+    def form_valid(self, form):
+        form.instance.pasien_id = self.kwargs['pasien_id']
+        form.save()
+        return super().form_valid(form)
+
+class PasienFisioTerapiRegisterView(IsAuthenticated, CreateView):
+    model = PasienFisioterapi
+    template_name = 'component/form.html'
+    form_class = RegisterPasienFisioterapiForm
+    success_url = reverse_lazy('pasien-list')
+
+    def get_pasien_fisio_terapi(self):
+        return PasienFisioterapi.objects.filter(pasien_id=self.kwargs['pasien_id']).first()
+
+    def get_success_url(self):
+        return reverse_lazy('fisio_terapi-update', kwargs={'pk': self.get_pasien_fisio_terapi().id})
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Pasien Fisio Terapi'
+        context['header_title'] = 'Register Pasien Fisio Terapi'
+        return context
+
+    def form_valid(self, form):
+        form.instance.pasien_id = self.kwargs['pasien_id']
+        form.save()
+        return super().form_valid(form)

@@ -20,3 +20,15 @@ class RawatInapForm(AbstractForm):
         choices_pasien = [(p.id, p.full_name) for p in Pasien.objects.all()]
         self.fields['dokter'].choices = choices_dokter
         self.fields['pasien'].choices = choices_pasien
+
+
+class RegisterPasienRawatInapForm(AbstractForm):
+    class Meta:
+        model = RawatInap
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(RegisterPasienRawatInapForm, self).__init__(*args, **kwargs)
+        self.fields['pasien'].widget = forms.HiddenInput()
+
+
