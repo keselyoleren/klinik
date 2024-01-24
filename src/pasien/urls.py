@@ -3,6 +3,7 @@ from django.urls import path, include
 from pasien.models import RekamMedis
 from pasien.views.assesment_rawat_jalan_views import *
 from pasien.views.catatan_terintegrasi_views import *
+from pasien.views.fisio_terapi_views import *
 from pasien.views.obat_views import * 
 from pasien.views.pasien_views import *
 from pasien.views.rawat_inap_views import * 
@@ -72,6 +73,13 @@ urlpatterns = [
         path('export/<uuid:pasien_rawat_inap_id>/', DownloadRincianBiaya.as_view(), name='rincian-biaya-download'),
     ])),
 
+    
+    path("fisioterapi/", include([
+        path('', PasienFisioterapiListView.as_view(), name='fisio_terapi-list'),
+        path('create/', PasienFisioterapiCreateView.as_view(), name='fisio_terapi-create'),
+        path('update/<uuid:pk>/', PasienFisioterapiUpdateView.as_view(), name='fisio_terapi-update'),
+        path('delete/<uuid:pk>/', PasienFisioterapiDeleteView.as_view(), name='fisio_terapi-delete'),
+    ])),
 
 
     path("rekam-medis/", include([

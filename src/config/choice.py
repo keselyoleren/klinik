@@ -23,7 +23,7 @@ class StatusPasien(TextChoices):
     AKTIF = 'AKTIF'
     NONAKTIF = 'NONAKTIF'
 
-class StatusRawatJalan(TextChoices):
+class StatusRawatPasien(TextChoices):
     RESERVASI = 'RESERVASI'
     REGISTRASI = 'REGISTRASI'
     DIPERIKSA = 'DIPERIKSA'

@@ -1,5 +1,5 @@
 
-from config.choice import StatusRawatJalan
+from config.choice import StatusRawatPasien
 from config.form import AbstractForm, Select2Widget
 from pasien.models import AssesmentRawatJalan, Pasien, RawatJalan, CatatanTerIntegrasi
 from django import forms

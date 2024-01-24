@@ -1,0 +1,64 @@
+{% extends 'layouts/main.html' %}
+{% block content %}
+{% load humanize %}
+<div class="content-wrapper">
+    {% include 'component/content_header.html' %}
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">{{ header_title }}</h6>
+            </div>
+            <div class="card-body">
+                {% if btn_add %}
+                    <a href="{{ create_url }}" class="btn btn-primary"><i class="fa fa-plus"></i> {{ header }}</a>
+                {% endif %}
+                <br><br>
+                <div class="table-responsive">
+                    <table id="datatable" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nama Pasien</th>
+                                <th>NIK</th>
+                                <th>Tgl Lahir</th>
+                                <th>Email</th>
+                                <th>Tanggal Masuk</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in list_rawat_inap %}
+                            <tr role="row" class="even">
+                                <td>{{item.pasien.full_name}}</td>
+                                <td>{{item.pasien.nik}}</td>
+                                <td>{{item.pasien.tanggal_lahir}}</td>
+                                <td>{{item.pasien.email}}</td>
+                                <td>{{item.tgl_masuk}}</td>
+                                <td>
+                                    <label class="badge-info badge-pill">{{ item.status }}</label>
+                                </td>
+                                <td>
+                                    <a class="nav-link " href="#" data-toggle="dropdown" id="{{ item.id }}">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="{{item.id}}">
+                                        <a class="dropdown-item" href="{% url 'rawat_inap-update' item.id %}" >
+                                            <i class="fas fa-edit text-primary"></i>
+                                            Detail
+                                          </a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{% url 'rawat_inap-delete' item.id %}">
+                                          <i class="fa fa-trash text-danger"></i>
+                                          Delete
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock  %}

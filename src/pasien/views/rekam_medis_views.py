@@ -2,7 +2,7 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate
-from config.choice import StatusRawatJalan
+from config.choice import StatusRawatPasien
 from config.permis import IsAuthenticated, IsAuthenticated
 from config.report import GeneratePDF
 from pasien.form.rekam_medis_form import RekamMedisForm
@@ -16,7 +16,7 @@ class ListRawatJalanView(IsAuthenticated, ListView):
     context_object_name = 'list_rawat_jalan'
     
     def get_queryset(self):
-        return super().get_queryset().filter(status__in=[StatusRawatJalan.REGISTRASI])
+        return super().get_queryset().filter(status__in=[StatusRawatPasien.REGISTRASI])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -71,7 +71,7 @@ class RekamMedisCreateView(IsAuthenticated, CreateView):
         form.save()
         
         rawat_jalan = RawatJalan.objects.filter(pasien=form.instance.pasien).first()
-        rawat_jalan.status = StatusRawatJalan.SELESAI
+        rawat_jalan.status = StatusRawatPasien.SELESAI
         rawat_jalan.save()
         
         return super().form_valid(form)

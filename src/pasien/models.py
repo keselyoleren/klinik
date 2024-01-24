@@ -1,5 +1,5 @@
 from django.utils.translation import gettext as _
-from config.choice import CaraMasuk, JenisKasus, JenisKelamin, StatusAlergi, StatusImunisasi, StatusPasien, StatusPerokok, StatusPeserta, StatusRawatJalan, KeadaanWaktuKeluar
+from config.choice import CaraMasuk, JenisKasus, JenisKelamin, StatusAlergi, StatusImunisasi, StatusPasien, StatusPerokok, StatusPeserta, StatusRawatPasien, KeadaanWaktuKeluar
 from config.models import BaseModel
 from django.db import models
 
@@ -29,7 +29,7 @@ class RawatJalan(BaseModel):
     poli_klinik = models.ForeignKey('master_data.PoliKlinik', verbose_name=_("Poli Klinik"), on_delete=models.CASCADE)
     dokter = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Dokter"), on_delete=models.CASCADE)
     waktu_konsultasi = models.DateTimeField(_("Waktu Konsultasi"), blank=True, null=True)
-    status = models.CharField(_("Status"), max_length=255, choices=StatusRawatJalan.choices, default=StatusRawatJalan.REGISTRASI)
+    status = models.CharField(_("Status"), max_length=255, choices=StatusRawatPasien.choices, default=StatusRawatPasien.REGISTRASI)
 
     def __str__(self) -> str:
         return self.pasien.full_name
@@ -179,4 +179,10 @@ class Resume(BaseModel):
         return self.dignosis
     
 
-    
+class PasienFisioterapi(BaseModel):
+    pasien = models.ForeignKey(Pasien, verbose_name=_("Nama Pasien"), on_delete=models.CASCADE)
+    status = models.CharField(_("Status"), max_length=255, choices=StatusRawatPasien.choices, default=StatusRawatPasien.REGISTRASI)
+
+
+    def __str__(self) -> str:
+        return super().__str__()
