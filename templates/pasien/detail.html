@@ -61,20 +61,42 @@
                     </div>
                     <div class="card-body">
                         <div class="template-demo">
-                            <a href="{% url 'register-rawat-jalan' pasien.id %}" class="btn btn-primary btn-block">
-                                <i class="fa fa-book"></i>                      
-                                Rawat Jalan 
-                            </a>
-                            
-                            <a href="{% url 'register-rawat-inap' pasien.id %}" class="btn btn-primary btn-block">
-                                <i class="fa fa-book"></i>                      
-                                Rawat Inap
-                            </a>
+                            {% if update_pasien_rawat_jalan %}
+                                <a href="{{btn_update_pasien_rawat_jalan}}" class="btn btn-primary btn-block">
+                                    <i class="fa fa-history"></i>                      
+                                    Rawat Jalan 
+                                </a>
+                            {% else %}
+                                <a href="{% url 'register-rawat-jalan' pasien.id %}" class="btn btn-primary btn-block">
+                                    <i class="fa fa-book"></i>                      
+                                    Rawat Jalan 
+                                </a>    
+                            {% endif %}
 
-                            <a href="{% url 'register-fisio-terapi' pasien.id %}" class="btn btn-primary btn-block">
-                                <i class="fa fa-book"></i>                      
-                                Fisio Terapi
-                            </a>
+                            {% if update_pasien_rawat_inap %}
+                                <a href="{{ btn_update_pasien_rawat_inap }}" class="btn btn-primary btn-block">
+                                    <i class="fa fa-history"></i>                      
+                                    Rawat Inap
+                                </a>
+                            {% else %}
+                                <a href="{% url 'register-rawat-inap' pasien.id %}" class="btn btn-primary btn-block">
+                                    <i class="fa fa-book"></i>                      
+                                    Rawat Inap
+                                </a>
+                            {% endif %}
+                            
+                            {% if update_pasien_fisio_terapi %}
+                                <a href="{{ btn_update_pasien_fisio_terapi }}" class="btn btn-primary btn-block">
+                                    <i class="fa fa-history"></i>                      
+                                    Fisio Terapi
+                                </a>
+                            {% else %}
+                                <a href="{% url 'register-fisio-terapi' pasien.id %}" class="btn btn-primary btn-block">
+                                    <i class="fa fa-book"></i>                      
+                                    Fisio Terapi
+                                </a>
+                            {% endif %}
+      
                         </div>
                     </div>
                 </div>

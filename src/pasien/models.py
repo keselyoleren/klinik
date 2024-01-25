@@ -1,5 +1,5 @@
 from django.utils.translation import gettext as _
-from config.choice import CaraMasuk, JenisKasus, JenisKelamin, StatusAlergi, StatusImunisasi, StatusPasien, StatusPerokok, StatusPeserta, StatusRawatPasien, KeadaanWaktuKeluar
+from config.choice import CaraMasuk, JenisKasus, JenisKelamin, StatusAlergi, StatusImunisasi, StatusPasien, StatusPerokok, StatusPeserta, StatusRawatPasien, KeadaanWaktuKeluar, UnitLayanan
 from config.models import BaseModel
 from django.db import models
 
@@ -17,7 +17,9 @@ class Pasien(BaseModel):
     agama = models.CharField(_("Agama"), max_length=255, blank=True, null=True)
     pekerjaan = models.CharField(_("Pekerjaan"), max_length=255, blank=True, null=True)
     alamat = models.TextField(_("Alamat Kartu Identitas"), blank=True, null=True)
+    unit = models.TextField(_("Unit Layanan"), choices=UnitLayanan.choices, blank=True, null=True)
     status = models.CharField(_("Status"), max_length=255, choices=StatusPasien.choices, default=StatusPasien.AKTIF)
+    
     
 
     def __str__(self) -> str:
@@ -26,7 +28,6 @@ class Pasien(BaseModel):
 
 class RawatJalan(BaseModel):
     pasien = models.ForeignKey(Pasien, verbose_name=_("Pasien"), on_delete=models.CASCADE, blank=True, null=True)
-    poli_klinik = models.ForeignKey('master_data.PoliKlinik', verbose_name=_("Poli Klinik"), on_delete=models.CASCADE)
     dokter = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Dokter"), on_delete=models.CASCADE)
     waktu_konsultasi = models.DateTimeField(_("Waktu Konsultasi"), blank=True, null=True)
     status = models.CharField(_("Status"), max_length=255, choices=StatusRawatPasien.choices, default=StatusRawatPasien.REGISTRASI)

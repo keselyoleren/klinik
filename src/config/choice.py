@@ -1,4 +1,3 @@
-from typing import Text
 from django.db.models import TextChoices
 
 class RoleUser(TextChoices):
@@ -18,8 +17,6 @@ class JenisKelamin(TextChoices):
     PEREMPUAN = 'PEREMPUAN'
 
 class StatusPasien(TextChoices):
-    RAWAT_JALAN = 'RAWAT JALAN'
-    RAWAT_INAP = 'RAWAT INAP'
     AKTIF = 'AKTIF'
     NONAKTIF = 'NONAKTIF'
 
@@ -71,6 +68,11 @@ class StatusPeserta(TextChoices):
     BPJS = 'BPJS'
     UMUM = 'UMUM'
     
+class UnitLayanan(TextChoices):
+    RAWAT_JALAN = 'Rawat Jalan'
+    RAWAT_INAP = 'Rawat Inap'
+    FISIOTERAPI = 'Fisioterapi'
+    LABORATORIUM = 'Laboratorium'
 
 class KeadaanWaktuKeluar(TextChoices):
     SEMBUH = 'Sembuh'

@@ -19,6 +19,7 @@
                             <th>Nama Pasien</th>
                             <th>Tgl Lahir</th>
                             <th>Email</th>
+                            <th>Unit Layanan</th>
                             <th>Status</th>
                             <th>Action</th>
                             </tr>
@@ -30,11 +31,18 @@
                                 <td>{{item.tanggal_lahir}}</td>
                                 <td>{{item.email}}</td>
                                 <td>
-                                    {% if item.status  == 'RAWAT JALAN' %}
-                                        <label class="badge-warning badge-pill">{{ item.status }}</label>
-                                    {% elif item.status == 'RAWAT INAP' %}
-                                        <label class="badge-info badge-pill">{{ item.status }}</label>
-                                    {% elif item.status == 'AKTIF' %}
+                                    {% if item.unit  == 'Rawat Jalan' %}
+                                        <label class="badge-warning badge-pill">{{ item.unit }}</label>
+                                    {% elif item.unit == 'Rawat Inap' %}
+                                        <label class="badge-info badge-pill">{{ item.unit }}</label>
+                                    {% elif item.unit == 'Fisioterapi' %}
+                                        <label class="badge-success badge-pill">{{ item.unit }}</label>
+                                    {% elif item.unit == 'Laboratorium' %}
+                                        <label class="badge-danger badge-pill">{{ item.unit }}</label>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if item.status  == 'AKTIF' %}
                                         <label class="badge-success badge-pill">{{ item.status }}</label>
                                     {% elif item.status == 'NONAKTIF' %}
                                         <label class="badge-danger badge-pill">{{ item.status }}</label>
