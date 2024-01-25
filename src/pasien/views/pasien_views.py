@@ -4,8 +4,9 @@ from urllib import request
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate
-from django.http import HttpResponseRedirect
-from config.choice import RoleUser, StatusRawatPasien, UnitLayanan
+
+from django.contrib import messages
+from config.choice import UnitLayanan
 from config.permis import IsAuthenticated, IsAuthenticated
 from pasien.form.fisioterapi_form import PasienFisioterapiForm, RegisterPasienFisioterapiForm
 from pasien.form.rawat_inap import RegisterPasienRawatInapForm
@@ -41,6 +42,7 @@ class PasienCreateView(IsAuthenticated, CreateView):
         return context
 
     def form_valid(self, form):
+        messages.success(self.request, "Create Pasien Berhasil")
         return super().form_valid(form)
 
 class PasienUpdateView(IsAuthenticated, UpdateView):
@@ -67,6 +69,11 @@ class PasienUpdateView(IsAuthenticated, UpdateView):
 
         context['pasien'] = self.get_object()
         context['header_title'] = 'Edit Pasien'
+        return context
+
+    def form_valid(self, form):
+        context = super().form_valid(form)
+        messages.success(self.request, "Update Pasien Berhasil")
         return context
 
 class PasienDeleteView(IsAuthenticated, DeleteView):
@@ -107,6 +114,7 @@ class PasienRawatJalanRegisterViwe(IsAuthenticated, CreateView):
         form.instance.pasien_id = self.kwargs['pasien_id']
         form.save()
         self.get_pasien().update(status=UnitLayanan.RAWAT_JALAN)
+        messages.success(self.request, "Register Pasien Rawat Jalan Berhasil")
         return super().form_valid(form)
 
 
@@ -135,6 +143,7 @@ class PasienRawatInapRegisterView(IsAuthenticated, CreateView):
         form.instance.pasien_id = self.kwargs['pasien_id']
         form.save()
         self.get_pasien().update(status=UnitLayanan.RAWAT_INAP)
+        messages.success(self.request, "Register Pasien Rawat Inap Berhasil")
         return super().form_valid(form)
 
 class PasienFisioTerapiRegisterView(IsAuthenticated, CreateView):
@@ -162,4 +171,5 @@ class PasienFisioTerapiRegisterView(IsAuthenticated, CreateView):
         form.instance.pasien_id = self.kwargs['pasien_id']
         form.save()
         self.get_pasien().update(status=UnitLayanan.FISIOTERAPI)
+        messages.success(self.request, "Register Pasien Fisioterapi Berhasil")
         return super().form_valid(form)

@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="{% static 'css/style.css'%}">
   <!-- endinject -->
   <link rel="shortcut icon" href="{% static 'images/logo.jpeg'%}" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.6/dist/sweetalert2.min.css">
   
   {% block css %}{% endblock  %}
 </head>
@@ -69,6 +70,7 @@
   <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.6/dist/sweetalert2.all.min.js"></script>
   <script>
     new DataTable('#datatable');
     $(document).ready(function() {
@@ -77,7 +79,15 @@
   </script>
 
 
-  
+  {% if messages %}
+  <script>
+      document.addEventListener('DOMContentLoaded', function() {
+      {% for message in messages %}
+          swal.fire('{{ message.tags }}', '{{ message }}', '{{ message.tags }}');
+      {% endfor %}
+      });
+  </script>
+  {% endif %}  
   
   <!-- End custom js for this page-->
   {% block js %}{% endblock  %}
