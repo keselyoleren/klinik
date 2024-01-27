@@ -1,0 +1,627 @@
+{% extends 'layouts/main.html' %}
+
+{% load static %}
+
+{% block css %}
+{{ form.media.css }}
+{% endblock %}
+
+{% block content %}
+    <!-- Page Heading -->
+
+<div class="content-wrapper">
+    {% include 'component/content_header.html' %}
+    <div class="row">
+        <div class="col-lg-9 grid-margin stretch-card">
+            <div class="card mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Data Pasien {{ pasien.full_name }}</h6>
+                </div>
+                <div class="card-body">
+                    {% include 'component/pasien.html' %}
+                </div>
+        
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">{{ header_title }}</h6>
+                </div>
+                <div class="card-body">
+                    <form class="forms-sample" enctype="multipart/form-data" method="POST" action=".">
+                        {% csrf_token %}
+
+                        <fieldset class="form-group border p-3">
+                            <legend>Anamnese</legend>
+                            <div class="form-group">
+                                <div class="col">
+                                    <label for="{{ form.keluhan_utama.label_tag.id }}">
+                                        <h6>
+                                            {{ form.keluhan_utama.label_tag }}
+                                            {% if form.keluhan_utama.field.required %}
+                                                <span class="text-red" style="color: red;">*</span>
+                                            {% endif %}
+                                        </h6>
+                                    </label>
+                                    {{ form.keluhan_utama.help_text }}
+                                    <span class="text-red">
+                                        {{ form.keluhan_utama.errors }}
+                                    </span>
+                                    {{ form.keluhan_utama }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col">
+                                    <label for="{{ form.riwayat_penyakit_sekarang.label_tag.id }}">
+                                        <h6>
+                                            {{ form.riwayat_penyakit_sekarang.label_tag }}
+                                            {% if form.riwayat_penyakit_sekarang.field.required %}
+                                                <span class="text-red" style="color: red;">*</span>
+                                            {% endif %}
+                                        </h6>
+                                    </label>
+                                    {{ form.riwayat_penyakit_sekarang.help_text }}
+                                    <span class="text-red">
+                                        {{ form.riwayat_penyakit_sekarang.errors }}
+                                    </span>
+                                    {{ form.riwayat_penyakit_sekarang }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col">
+                                    <label for="{{ form.riwayat_penyakit_dahulu.label_tag.id }}">
+                                        <h6>
+                                            {{ form.riwayat_penyakit_dahulu.label_tag }}
+                                            {% if form.riwayat_penyakit_dahulu.field.required %}
+                                                <span class="text-red" style="color: red;">*</span>
+                                            {% endif %}
+                                        </h6>
+                                    </label>
+                                    {{ form.riwayat_penyakit_dahulu.help_text }}
+                                    <span class="text-red">
+                                        {{ form.riwayat_penyakit_dahulu.errors }}
+                                    </span>
+                                    {{ form.riwayat_penyakit_dahulu }}
+                                </div>
+                            </div>
+                            
+                        </fieldset>
+
+                        <fieldset class="form-group border p-3">
+                            <legend>Pemeriksaan Fisik</legend>
+                            <h4 class="card-title">Tanda-tanda vital</h4>
+                            <div class="form-group row">
+                                <div class="col">
+                                    <label for="{{ form.td.label_tag.id }}">
+                                        <h6>
+                                            {{ form.td.label_tag }}
+                                            {% if form.td.field.required %}
+                                                <span class="text-red" style="color: red;">*</span>
+                                            {% endif %}
+                                        </h6>
+                                    </label>
+                                    {{ form.td.help_text }}
+                                    <span class="text-red">
+                                        {{ form.td.errors }}
+                                    </span>
+                                    {{ form.td }}
+                                </div>
+                                <div class="col">
+                                    <label for="{{ form.hr.label_tag.id }}">
+                                        <h6>
+                                            {{ form.hr.label_tag }}
+                                            {% if form.hr.field.required %}
+                                                <span class="text-red" style="color: red;">*</span>
+                                            {% endif %}
+                                        </h6>
+                                    </label>
+                                    {{ form.hr.help_text }}
+                                    <span class="text-red">
+                                        {{ form.hr.errors }}
+                                    </span>
+                                    {{ form.hr }}
+                                </div>
+                                <div class="col">
+                                    <label for="{{ form.suhu.label_tag.id }}">
+                                        <h6>
+                                            {{ form.suhu.label_tag }}
+                                            {% if form.suhu.field.required %}
+                                                <span class="text-red" style="color: red;">*</span>
+                                            {% endif %}
+                                        </h6>
+                                    </label>
+                                    {{ form.suhu.help_text }}
+                                    <span class="text-red">
+                                        {{ form.suhu.errors }}
+                                    </span>
+                                    {{ form.suhu }}
+                                </div>
+
+                                <div class="col">
+                                    <label for="{{ form.rr.label_tag.id }}">
+                                        <h6>
+                                            {{ form.rr.label_tag }}
+                                            {% if form.rr.field.required %}
+                                                <span class="text-red" style="color: red;">*</span>
+                                            {% endif %}
+                                        </h6>
+                                    </label>
+                                    {{ form.rr.help_text }}
+                                    <span class="text-red">
+                                        {{ form.rr.errors }}
+                                    </span>
+                                    {{ form.rr }}
+                                </div>
+                                <div class="col">
+                                    <label for="{{ form.pr.label_tag.id }}">
+                                        <h6>
+                                            {{ form.pr.label_tag }}
+                                            {% if form.pr.field.required %}
+                                                <span class="text-red" style="color: red;">*</span>
+                                            {% endif %}
+                                        </h6>
+                                    </label>
+                                    {{ form.pr.help_text }}
+                                    <span class="text-red">
+                                        {{ form.pr.errors }}
+                                    </span>
+                                    {{ form.pr }}
+                                </div>
+                            </div>
+
+                            <h4 class="card-title">Kemampuan Fungsional</h4>
+                            <div class="form-group">
+                                <div class="col">
+                                    <label for="{{ form.alat_bantu.label_tag.id }}">
+                                        <h6>
+                                            {{ form.alat_bantu.label_tag }}
+                                            {% if form.alat_bantu.field.required %}
+                                                <span class="text-red" style="color: red;">*</span>
+                                            {% endif %}
+                                        </h6>
+                                    </label>
+                                    {{ form.alat_bantu.help_text }}
+                                    <span class="text-red">
+                                        {{ form.alat_bantu.errors }}
+                                    </span>
+                                    {{ form.alat_bantu }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col">
+                                    <label for="{{ form.prothese.label_tag.id }}">
+                                        <h6>
+                                            {{ form.prothese.label_tag }}
+                                            {% if form.prothese.field.required %}
+                                                <span class="text-red" style="color: red;">*</span>
+                                            {% endif %}
+                                        </h6>
+                                    </label>
+                                    {{ form.prothese.help_text }}
+                                    <span class="text-red">
+                                        {{ form.prothese.errors }}
+                                    </span>
+                                    {{ form.prothese }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col">
+                                    <label for="{{ form.deformitas.label_tag.id }}">
+                                        <h6>
+                                            {{ form.deformitas.label_tag }}
+                                            {% if form.deformitas.field.required %}
+                                                <span class="text-red" style="color: red;">*</span>
+                                            {% endif %}
+                                        </h6>
+                                    </label>
+                                    {{ form.deformitas.help_text }}
+                                    <span class="text-red">
+                                        {{ form.deformitas.errors }}
+                                    </span>
+                                    {{ form.prothese }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col">
+                                    <label for="{{ form.resiko_jatuh.label_tag.id }}">
+                                        <h6>
+                                            {{ form.resiko_jatuh.label_tag }}
+                                            {% if form.resiko_jatuh.field.required %}
+                                                <span class="text-red" style="color: red;">*</span>
+                                            {% endif %}
+                                        </h6>
+                                    </label>
+                                    {{ form.resiko_jatuh.help_text }}
+                                    <span class="text-red">
+                                        {{ form.resiko_jatuh.errors }}
+                                    </span>
+                                    {{ form.resiko_jatuh }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col">
+                                    <label for="{{ form.lain_lain.label_tag.id }}">
+                                        <h6>
+                                            {{ form.lain_lain.label_tag }}
+                                            {% if form.lain_lain.field.required %}
+                                                <span class="text-red" style="color: red;">*</span>
+                                            {% endif %}
+                                        </h6>
+                                    </label>
+                                    {{ form.lain_lain.help_text }}
+                                    <span class="text-red">
+                                        {{ form.lain_lain.errors }}
+                                    </span>
+                                    {{ form.lain_lain }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4 class="card-title">Pemeriksaan sistemik Khusus :*)</h4>
+                                    <div class="form-group">
+                                        <div class="col">
+                                            <label for="{{ form.muscoloskeletal.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.muscoloskeletal.label_tag }}
+                                                    {% if form.muscoloskeletal.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                            {{ form.muscoloskeletal.help_text }}
+                                            <span class="text-red">
+                                                {{ form.muscoloskeletal.errors }}
+                                            </span>
+                                            {{ form.muscoloskeletal }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col">
+                                            <label for="{{ form.neoromuscular.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.neoromuscular.label_tag }}
+                                                    {% if form.neoromuscular.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                            {{ form.neoromuscular.help_text }}
+                                            <span class="text-red">
+                                                {{ form.neoromuscular.errors }}
+                                            </span>
+                                            {{ form.neoromuscular }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col">
+                                            <label for="{{ form.cardiopulmonal.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.cardiopulmonal.label_tag }}
+                                                    {% if form.cardiopulmonal.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                            {{ form.cardiopulmonal.help_text }}
+                                            <span class="text-red">
+                                                {{ form.cardiopulmonal.errors }}
+                                            </span>
+                                            {{ form.cardiopulmonal }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col">
+                                            <label for="{{ form.mes_integument.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.mes_integument.label_tag }}
+                                                    {% if form.mes_integument.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                            {{ form.mes_integument.help_text }}
+                                            <span class="text-red">
+                                                {{ form.mes_integument.errors }}
+                                            </span>
+                                            {{ form.mes_integument }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h4 class="card-title">Pengukuran Khusus :*)</h4>
+                                    <div class="form-group">
+                                        <div class="col">
+                                            <label for="{{ form.mes_muscoloskeletal.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.mes_muscoloskeletal.label_tag }}
+                                                    {% if form.mes_muscoloskeletal.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                            {{ form.mes_muscoloskeletal.help_text }}
+                                            <span class="text-red">
+                                                {{ form.mes_muscoloskeletal.errors }}
+                                            </span>
+                                            {{ form.mes_muscoloskeletal }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col">
+                                            <label for="{{ form.mes_neoromuscular.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.mes_neoromuscular.label_tag }}
+                                                    {% if form.mes_neoromuscular.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                            {{ form.mes_neoromuscular.help_text }}
+                                            <span class="text-red">
+                                                {{ form.mes_neoromuscular.errors }}
+                                            </span>
+                                            {{ form.mes_neoromuscular }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col">
+                                            <label for="{{ form.mes_cardiopulmonal.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.mes_cardiopulmonal.label_tag }}
+                                                    {% if form.mes_cardiopulmonal.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                            {{ form.mes_cardiopulmonal.help_text }}
+                                            <span class="text-red">
+                                                {{ form.mes_cardiopulmonal.errors }}
+                                            </span>
+                                            {{ form.mes_cardiopulmonal }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col">
+                                            <label for="{{ form.mes_integument.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.mes_integument.label_tag }}
+                                                    {% if form.mes_integument.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                            {{ form.mes_integument.help_text }}
+                                            <span class="text-red">
+                                                {{ form.mes_integument.errors }}
+                                            </span>
+                                            {{ form.mes_integument }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h4 class="card-title">Data Penunjang</h4>
+                            <div class="form-group">
+                                <label for="{{ form.radiologi.label_tag.id }}">
+                                    <h6>
+                                        {{ form.radiologi.label_tag }}
+                                        {% if form.radiologi.field.required %}
+                                            <span class="text-red" style="color: red;">*</span>
+                                        {% endif %}
+                                    </h6>
+                                </label>
+                                {{ form.radiologi.help_text }}
+                                <span class="text-red">
+                                    {{ form.radiologi.errors }}
+                                </span>
+                                {{ form.radiologi }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.emg.label_tag.id }}">
+                                    <h6>
+                                        {{ form.emg.label_tag }}
+                                        {% if form.emg.field.required %}
+                                            <span class="text-red" style="color: red;">*</span>
+                                        {% endif %}
+                                    </h6>
+                                </label>
+                                {{ form.emg.help_text }}
+                                <span class="text-red">
+                                    {{ form.emg.errors }}
+                                </span>
+                                {{ form.emg }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.laboratorium.label_tag.id }}">
+                                    <h6>
+                                        {{ form.laboratorium.label_tag }}
+                                        {% if form.laboratorium.field.required %}
+                                            <span class="text-red" style="color: red;">*</span>
+                                        {% endif %}
+                                    </h6>
+                                </label>
+                                {{ form.laboratorium.help_text }}
+                                <span class="text-red">
+                                    {{ form.laboratorium.errors }}
+                                </span>
+                                {{ form.laboratorium }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.lain_lain.label_tag.id }}">
+                                    <h6>
+                                        {{ form.lain_lain.label_tag }}
+                                        {% if form.lain_lain.field.required %}
+                                            <span class="text-red" style="color: red;">*</span>
+                                        {% endif %}
+                                    </h6>
+                                </label>
+                                {{ form.lain_lain.help_text }}
+                                <span class="text-red">
+                                    {{ form.lain_lain.errors }}
+                                </span>
+                                {{ form.lain_lain }}
+                            </div>
+                            
+                            
+                        </fieldset>
+
+                        <fieldset class="form-group border p-3">
+                            <legend>Diagnosis Fisioterapi</legend>
+                            <div class="form-group">
+                                <label for="{{ form.diagnosis_fisioterapi.label_tag.id }}">
+                                    <h6>
+                                        {{ form.diagnosis_fisioterapi.label_tag }}
+                                        {% if form.diagnosis_fisioterapi.field.required %}
+                                            <span class="text-red" style="color: red;">*</span>
+                                        {% endif %}
+                                    </h6>
+                                </label>
+                                {{ form.diagnosis_fisioterapi.help_text }}
+                                <span class="text-red">
+                                    {{ form.diagnosis_fisioterapi.errors }}
+                                </span>
+                                {{ form.diagnosis_fisioterapi }}
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="form-group border p-3">
+                            <legend>Program/Rencana Terapi</legend>
+                            <div class="form-group">
+                                <label for="{{ form.program_rencana_terapi.label_tag.id }}">
+                                    <h6>
+                                        {{ form.program_rencana_terapi.label_tag }}
+                                        {% if form.program_rencana_terapi.field.required %}
+                                            <span class="text-red" style="color: red;">*</span>
+                                        {% endif %}
+                                    </h6>
+                                </label>
+                                {{ form.program_rencana_terapi.help_text }}
+                                <span class="text-red">
+                                    {{ form.program_rencana_terapi.errors }}
+                                </span>
+                                {{ form.program_rencana_terapi }}
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="form-group border p-3">
+                            <legend>Intervensi</legend>
+                            <table class="table table-hover text-nowrap">
+                                {{ related_model_formset.management_form }}
+                                {% for form in related_model_formset.forms %}
+                                    {% if forloop.first %}
+                                        <thead>
+                                        <tr>
+                                            {% for field in form.visible_fields %}
+                                                <th>{{ field.label|capfirst }}</th>
+                                            {% endfor %}
+                                        </tr>
+                                        </thead>
+                                    {% endif %}
+                                    <tr class="{% cycle row1 row2 %} formset_row">
+                                        
+                                        {% for field in form.visible_fields %}
+                                            <td>
+                                                {# Include the hidden fields in the form #}
+                                                {% if forloop.first %}
+                                                    {% for hidden in form.hidden_fields %}
+                                                        {{ hidden }}
+                                                    {% endfor %}
+                                                {% endif %}
+                                                {{ field.errors.as_ul }}
+                                                {{ field }}
+                                            </td>
+                                        {% endfor %}
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </fieldset>
+
+                        <fieldset class="form-group border p-3">
+                            <legend>Evaluasi</legend>
+                            <div class="form-group">
+                                <label for="{{ form.evaluasi.label_tag.id }}">
+                                    <h6>
+                                        {{ form.evaluasi.label_tag }}
+                                        {% if form.evaluasi.field.required %}
+                                            <span class="text-red" style="color: red;">*</span>
+                                        {% endif %}
+                                    </h6>
+                                </label>
+                                {{ form.evaluasi.help_text }}
+                                <span class="text-red">
+                                    {{ form.evaluasi.errors }}
+                                </span>
+                                {{ form.evaluasi }}
+                            </div>
+                        </fieldset>
+
+                        <div class="form-group">
+                            <label for="{{ form.tenaga_medis.label_tag.id }}">
+                                <h6>
+                                    {{ form.tenaga_medis.label_tag }}
+                                    {% if form.tenaga_medis.field.required %}
+                                        <span class="text-red" style="color: red;">*</span>
+                                    {% endif %}
+                                </h6>
+                            </label>
+                            {{ form.tenaga_medis.help_text }}
+                            <span class="text-red">
+                                {{ form.tenaga_medis.errors }}
+                            </span>
+                            {{ form.tenaga_medis }}
+                        </div>
+                        
+                        <input type="submit" class="btn btn-primary mr-2" value="Save">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 grid-margin">
+            <div>
+                <div class="card">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Action</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="template-demo">
+                            {% if btn_delete %}
+                                <a href="{% url 'assesment-fisioterapi-download' assesment.id %}"  class="btn btn-primary btn-block">
+                                    <i class="fa fa-download"></i>                      
+                                    Assesment Awal 
+                                </a>
+                                <a  href="{% url 'assesment-fisioterapi-delete' assesment.id %}" class="btn btn-danger btn-block">
+                                    <i class="fa fa-trash"></i>                      
+                                    Assesment Awal
+                                </a>
+                            {% else %}
+                                <button type="button" disabled class="btn btn-primary desabled btn-block">
+                                    <i class="fa fa-download"></i>                      
+                                    Assesment Awal 
+                                </button>
+                            {% endif %}
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+{% endblock  %}
+{% block js %}
+
+{{ form.media.js }}
+
+<script src="{% static 'js/formset.js' %}"></script>
+<script type="text/javascript">
+    $('.formset_row').formset({
+        addText: 'Add Intervensi',
+        deleteText: 'remove',
+        prefix: 'intervensi_set'
+    });
+</script>
+{% endblock %}
+

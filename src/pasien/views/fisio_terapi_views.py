@@ -2,7 +2,7 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from config.permis import IsAuthenticated, IsAuthenticated
-from pasien.models import PasienFisioterapi, Pasien, PasienFisioterapi
+from pasien.models import AssesMentFisioTerapi, PasienFisioterapi, Pasien, PasienFisioterapi
 from pasien.form.fisioterapi_form import PasienFisioterapiForm
 
 class PasienFisioterapiListView(IsAuthenticated, ListView):
@@ -40,12 +40,18 @@ class PasienFisioterapiUpdateView(IsAuthenticated, UpdateView):
     template_name = 'fisio_terapi/detail.html'
     form_class = PasienFisioterapiForm
     success_url = reverse_lazy('fisio_terapi-list')
-    context_object_name = 'fisio_terapi'
+    context_object_name = 'fisioterapi'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Pasien Fisioterapi'
         context['pasien'] = Pasien.objects.get(pk=self.get_object().pasien.id)
+
+        if assesment_fisioterapi := AssesMentFisioTerapi.objects.filter(pasien_fisioterapi=self.get_object()).first():
+            context['btn_assesment_fisioterapi_update'] = True
+            context['btn_assesment_fisioterapi_update_url'] = reverse_lazy('assesment-fisioterapi-update', kwargs={'pk': assesment_fisioterapi.id})
+        
+
         context['header_title'] = 'Edit Pasien Fisioterapi'
         return context
 

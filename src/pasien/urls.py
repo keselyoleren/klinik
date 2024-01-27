@@ -1,6 +1,6 @@
 # myapp/urls.py
 from django.urls import path, include
-from pasien.models import RekamMedis
+from pasien.views.assesment_fisioterapi_views import *
 from pasien.views.assesment_rawat_jalan_views import *
 from pasien.views.catatan_terintegrasi_views import *
 from pasien.views.fisio_terapi_views import *
@@ -10,8 +10,8 @@ from pasien.views.rawat_inap_views import *
 from pasien.views.rawat_jalan_views import *
 from pasien.views.rekam_medis_views import *
 from pasien.views.rekam_medis_views import *
-from pasien.views.resume_views import DownloadResume, ResumeCreateView, ResumeDeleteView, ResumeListView, ResumeUpdateView
-from pasien.views.rincian_biaya_views import DownloadRincianBiaya, RincianBiayaCreateView, RincianBiayaDeleteView, RincianBiayaListView, RincianBiayaUpdateView
+from pasien.views.resume_views import *
+from pasien.views.rincian_biaya_views import *
 
 urlpatterns = [
     path("pasien/", include([
@@ -83,6 +83,10 @@ urlpatterns = [
         path('', PasienFisioterapiListView.as_view(), name='fisio_terapi-list'),
         path('create/', PasienFisioterapiCreateView.as_view(), name='fisio_terapi-create'),
         path('update/<uuid:pk>/', PasienFisioterapiUpdateView.as_view(), name='fisio_terapi-update'),
+        path('assesment/create/<uuid:pasien_id>/', AssesMentFisioTerapiCreateView.as_view(), name='assesment-awal-fisioterapi-create'),
+        path('assesment/update/<uuid:pk>/', AssesMentFisioTerapiUpdateView.as_view(), name='assesment-fisioterapi-update'),
+        path('assesment/delete/<uuid:pk>/', AssesMentFisioTerapiDeleteView.as_view(), name='assesment-fisioterapi-delete'),
+        path('assesment/download/<uuid:pk>/', DownloadAssesmentVisioterapiView.as_view(), name='assesment-fisioterapi-download'),
         path('delete/<uuid:pk>/', PasienFisioterapiDeleteView.as_view(), name='fisio_terapi-delete'),
     ])),
 

@@ -68,15 +68,14 @@
                     </div>
                     <div class="card-body">
                         <div class="template-demo">
-                            {% if btn_assesment_create %}
-                                <a  href="" class="btn btn-dark btn-block">
+                            {% if btn_assesment_fisioterapi_update %}
+                                <a  href="{{ btn_assesment_fisioterapi_update_url }}" class="btn btn-dark btn-block">
                                     <i class="fa fa-plus"></i>                      
                                     Assesment Awal
                                 </a>
-                            {% endif %}
-                            {% if btn_assesment_update %}
-                                <a  href="{{ btn_assesment_url }}" class="btn btn-dark btn-block">
-                                    <i class="fa fa-edit"></i>                      
+                            {% else %}
+                                <a  href="{% url 'assesment-awal-fisioterapi-create' fisioterapi.id  %}" class="btn btn-dark btn-block">
+                                    <i class="fa fa-plus"></i>                      
                                     Assesment Awal
                                 </a>
                             {% endif %}

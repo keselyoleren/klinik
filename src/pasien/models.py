@@ -187,3 +187,64 @@ class PasienFisioterapi(BaseModel):
 
     def __str__(self) -> str:
         return super().__str__()
+
+class AssesMentFisioTerapi(BaseModel):
+    pasien_fisioterapi = models.ForeignKey(PasienFisioterapi, verbose_name=_("Pasien Fisioterapi"), on_delete=models.CASCADE, blank=True, null=True)
+
+    # Annamanse
+    keluhan_utama = models.CharField(_("Keluhan Utama"), max_length=255, blank=True, null=True)
+    riwayat_penyakit_sekarang = models.TextField(_("Riwayat Penyakit Sekarang"), blank=True, null=True)
+    riwayat_penyakit_dahulu = models.TextField(_("Riwayat Penyakit Dahulu"), blank=True, null=True)
+
+    # Pemeriksaan Fisik
+    # tanda vital
+    td = models.CharField(_("TD"), max_length=255, blank=True, null=True)
+    hr = models.CharField(_("HR"), max_length=255, blank=True, null=True)
+    suhu = models.CharField(_("Suhu"), max_length=255, blank=True, null=True)
+    rr = models.CharField(_("RR"), max_length=255, blank=True, null=True)
+    pr = models.CharField(_("PR"), max_length=255, blank=True, null=True)
+    sekor_nyeri = models.CharField(_("Sekor Nyeri"), max_length=255, blank=True, null=True)
+
+    # kemampuan fungsi
+    alat_bantu = models.CharField(_("Alat Bantu"), max_length=255, blank=True, null=True)
+    prothese = models.CharField(_("Prothese"), max_length=255, blank=True, null=True)
+    deformitas = models.CharField(_("Deformitas"), max_length=255, blank=True, null=True)
+    resiko_jatuh = models.CharField(_("Resiko Jatuh"), max_length=255, blank=True, null=True)
+    lain_lain = models.CharField(_("Lain Lain"), max_length=255, blank=True, null=True)
+
+    # pemeriksaan sistemik khusus
+    muscoloskeletal = models.CharField(_("Muscoloskeletal"), max_length=255, blank=True, null=True)
+    neoromuscular = models.CharField(_("Neoromuscular"), max_length=255, blank=True, null=True)
+    cardiopulmonal  = models.CharField(_("Cardiopulmonal"), max_length=255, blank=True, null=True)
+    integument = models.CharField(_("Integument"), max_length=255, blank=True, null=True)
+
+    # pengukuran khususu 
+    mes_muscoloskeletal = models.CharField(_("Muscoloskeletal"), max_length=255, blank=True, null=True)
+    mes_neoromuscular = models.CharField(_("Neoromuscular"), max_length=255, blank=True, null=True)
+    mes_cardiopulmonal  = models.CharField(_("Cardiopulmonal"), max_length=255, blank=True, null=True)
+    mes_integument = models.CharField(_("Integument"), max_length=255, blank=True, null=True)
+
+    # data penunjang
+    radiologi = models.CharField(_("Radiologi"), max_length=255, blank=True, null=True)
+    emg = models.CharField(_("EMG"), max_length=255, blank=True, null=True)
+    laboratorium = models.CharField(_("Laboratorium"), max_length=255, blank=True, null=True)
+    lain_lain = models.CharField(_("Lain Lain"), max_length=255, blank=True, null=True)
+
+    # diagnosis fisioterapi
+    diagnosis_fisioterapi = models.CharField(_("Diagnosis Fisioterapi"), max_length=255, blank=True, null=True)
+
+    # program rencana terapi
+    program_rencana_terapi = models.CharField(_("Program Rencana Terapi"), max_length=255, blank=True, null=True)
+
+    # evaluasi
+    evaluasi = models.CharField(_("Evaluasi"), max_length=255, blank=True, null=True)
+
+    # fisioterapis
+    tenaga_medis = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Fisioterapis"), on_delete=models.CASCADE, blank=True, null=True)
+
+class Intervensi(BaseModel):
+    asses_fisioterapi = models.ForeignKey(AssesMentFisioTerapi, verbose_name=_("Asses Fisioterapi"), on_delete=models.CASCADE, blank=True, null=True)
+    intervensi = models.CharField(_("Intervensi"), max_length=255, blank=True, null=True)
+    tempat_yang_diterapi = models.CharField(_("Tempat / area Yang Diterapi"), max_length=255, blank=True, null=True)
+
+    

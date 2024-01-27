@@ -69,6 +69,9 @@ class AbstractForm(forms.ModelForm):
 
             if field == 'pasien_rawat_jalan':
                 self.fields['pasien_rawat_jalan'].widget = forms.HiddenInput()
+
+            if field == 'pasien_fisioterapi':
+                self.fields['pasien_fisioterapi'].widget = forms.HiddenInput()
             
             if field == 'pasien_rawat_inap':
                 self.fields['pasien_rawat_inap'].widget = forms.HiddenInput()
