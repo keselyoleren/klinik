@@ -2,7 +2,7 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from config.permis import IsAuthenticated, IsAuthenticated
-from pasien.models import AssesMentFisioTerapi, PasienFisioterapi, Pasien, PasienFisioterapi
+from pasien.models import AssesMentFisioTerapi, InformedConsent, PasienFisioterapi, Pasien, PasienFisioterapi, ResumeFisioterapi, RujukanKeluar
 from pasien.form.fisioterapi_form import PasienFisioterapiForm
 
 class PasienFisioterapiListView(IsAuthenticated, ListView):
@@ -52,6 +52,18 @@ class PasienFisioterapiUpdateView(IsAuthenticated, UpdateView):
             context['btn_assesment_fisioterapi_update_url'] = reverse_lazy('assesment-fisioterapi-update', kwargs={'pk': assesment_fisioterapi.id})
         
 
+        if rujukan_keluar := RujukanKeluar.objects.filter(pasien_fisioterapi=self.get_object()).first():
+            context['btn_rujukan_keluar_update'] = True
+            context['btn_rukukan_keluar_update_url'] = reverse_lazy('rujukan_keluar-update', kwargs={'pk': rujukan_keluar.id})
+
+        if resume_fisioterapi := ResumeFisioterapi.objects.filter(pasien_fisioterapi=self.get_object()).first():
+            context['btn_resume_fisioterapi_update'] = True
+            context['btn_resume_fisioterapi_update_url'] = reverse_lazy('resume_fisioterapi-update', kwargs={'pk': resume_fisioterapi.id})
+
+        if informed_concent := InformedConsent.objects.filter(pasien_fisioterapi=self.get_object()).first():
+            context['btn_informed_concent_update'] = True
+            context['btn_informed_concent_update_url'] = reverse_lazy('informed-update', kwargs={'pk': informed_concent.id})
+        
         context['header_title'] = 'Edit Pasien Fisioterapi'
         return context
 

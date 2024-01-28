@@ -85,6 +85,10 @@ class HasilRapidAntigen(TextChoices):
     NEGATIF = 'Negatif'
     POSITIF = 'Positif'
 
+class StatusPersetujuan(TextChoices):
+    PERSETUJUAN = 'Persetujuan'
+    PENOLAKAN = 'Penolakan'
+
 DAY_CODE = {
     Hari.MINGGU: 0,
     Hari.SENIN: 1,

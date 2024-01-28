@@ -1,5 +1,5 @@
 from django.utils.translation import gettext as _
-from config.choice import CaraMasuk, JenisKasus, JenisKelamin, StatusAlergi, StatusImunisasi, StatusPasien, StatusPerokok, StatusPeserta, StatusRawatPasien, KeadaanWaktuKeluar, UnitLayanan
+from config.choice import CaraMasuk, JenisKasus, JenisKelamin, StatusAlergi, StatusImunisasi, StatusPasien, StatusPerokok, StatusPersetujuan, StatusPeserta, StatusRawatPasien, KeadaanWaktuKeluar, UnitLayanan
 from config.models import BaseModel
 from django.db import models
 
@@ -186,7 +186,7 @@ class PasienFisioterapi(BaseModel):
 
 
     def __str__(self) -> str:
-        return super().__str__()
+        return self.pasien.full_name
 
 class AssesMentFisioTerapi(BaseModel):
     pasien_fisioterapi = models.ForeignKey(PasienFisioterapi, verbose_name=_("Pasien Fisioterapi"), on_delete=models.CASCADE, blank=True, null=True)
@@ -242,9 +242,77 @@ class AssesMentFisioTerapi(BaseModel):
     # fisioterapis
     tenaga_medis = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Fisioterapis"), on_delete=models.CASCADE, blank=True, null=True)
 
+    
+    def __str__(self) -> str:
+        return self.pasien_fisioterapi.pasien.full_name
+
 class Intervensi(BaseModel):
     asses_fisioterapi = models.ForeignKey(AssesMentFisioTerapi, verbose_name=_("Asses Fisioterapi"), on_delete=models.CASCADE, blank=True, null=True)
     intervensi = models.CharField(_("Intervensi"), max_length=255, blank=True, null=True)
     tempat_yang_diterapi = models.CharField(_("Tempat / area Yang Diterapi"), max_length=255, blank=True, null=True)
 
+    def __str__(self) -> str:
+        return self.intervensi
+
+
+class RujukanKeluar(BaseModel):
+    pasien_fisioterapi = models.ForeignKey(PasienFisioterapi, verbose_name=_("Pasien Fisioterapi"), on_delete=models.CASCADE, blank=True, null=True)
+    hasil_pemeriksaan_awal = models.TextField(_("Hasil Pemeriksaan Awal"), blank=True, null=True)
+    diagnosis_medis = models.TextField(_("Diagnosis Medis"), blank=True, null=True)
+    diagnosis_fisioterapi = models.TextField(_("Diagnosis Fisioterapi"), blank=True, null=True) 
+    tindakan = models.TextField(_("Tindakan/terapi yg telah dilakukan"), blank=True, null=True)
+    evaluasi = models.TextField(_("Evaluasi"), blank=True, null=True)   
+    rekomendasi = models.TextField(_("Rekomendasi / Ulasan"), blank=True, null=True)
+    tenaga_medis = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Fisioterapis perujuk"), on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self) -> str:
+        return self.pasien_fisioterapi.pasien.full_name
+
+class ResumeFisioterapi(BaseModel):
+    pasien_fisioterapi = models.ForeignKey(PasienFisioterapi, verbose_name=_("Pasien Fisioterapi"), on_delete=models.CASCADE, blank=True, null=True)
+    diagnosis_medis = models.TextField(_("Diagnosis Medis"), blank=True, null=True)
+    tujuan_rujukan = models.TextField(_("Tujuan Rujukan"), blank=True, null=True)
+
+    # kondisi awal
+    gejala = models.CharField(_("Gejala / sindroma"), max_length=255, blank=True, null=True)
+    gerak_fungsional = models.CharField(_("Status gangguan gerak fungsional/ Parameter"), max_length=255, blank=True, null=True)
+    diagnosis_fisioterapi = models.TextField(_("Diagnosis Fisioterapi"), blank=True, null=True) 
     
+    # kondisi akhir
+    gejala_end = models.CharField(_("Gejala / sindroma"), max_length=255, blank=True, null=True)
+    gerak_fungsional_end = models.CharField(_("Status gangguan gerak fungsional/ Parameter"), max_length=255, blank=True, null=True)
+    diagnosis_fisioterapi_end = models.TextField(_("Diagnosis Fisioterapi"), blank=True, null=True) 
+    
+    hambatan = models.CharField(_("Hambatan keberhasilan"), max_length=255, blank=True, null=True)
+    tindak_lanjut = models.CharField(_("Rekomendasi tindak lanjut"), max_length=255, blank=True, null=True)
+    
+    tenaga_medis = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Fisioterapis"), on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self) -> str:
+        return self.pasien_fisioterapi.pasien.full_name
+
+
+class MonitoringFisoterapi(BaseModel):
+    pasien_fisioterapi = models.ForeignKey(PasienFisioterapi, verbose_name=_("Pasien Fisioterapi"), on_delete=models.CASCADE, blank=True, null=True)
+    tindakan = models.CharField(_("Tindakan"), max_length=255, blank=True, null=True)
+    perkembangan =  models.TextField(_("Perkembangan (S=Subyektif; O=Obyektif; A=Asesmen; R=Rencana.)"), blank=True, null=True)
+    tenaga_medis = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Fisioterapis"), on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self) -> str:
+        return self.pasien_fisioterapi.pasien.full_name
+
+
+class InformedConsent(BaseModel):
+    pasien_fisioterapi = models.ForeignKey(PasienFisioterapi, verbose_name=_("Pasien Fisioterapi"), on_delete=models.CASCADE, blank=True, null=True)
+    ruang = models.CharField(_("Ruang / Kamar"), max_length=255, blank=True, null=True)
+    # yang bertanggung jawab
+    nama = models.CharField(_("Nama"), max_length=255, blank=True, null=True)
+    umur = models.CharField(_("Umur"), max_length=255, blank=True, null=True)
+    jenis_kelamin = models.CharField(_("Jenis Kelamin"), choices=JenisKelamin.choices, max_length=255, blank=True, null=True)
+
+    status_persetujuan = models.CharField(_("Status Persetujuan"), choices=StatusPersetujuan.choices, max_length=255, blank=True, null=True)
+
+    tenaga_medis = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Fisioterapis"), on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self) -> str:
+        return self.pasien_fisioterapi.pasien.full_name

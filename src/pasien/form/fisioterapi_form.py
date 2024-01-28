@@ -1,6 +1,6 @@
 
 from config.form import AbstractForm, Select2Widget
-from pasien.models import Pasien, PasienFisioterapi
+from pasien.models import InformedConsent, MonitoringFisoterapi, Pasien, PasienFisioterapi, ResumeFisioterapi, RujukanKeluar
 from django import forms
 from master_data.models import TenagaMedis
 
@@ -28,3 +28,56 @@ class RegisterPasienFisioterapiForm(AbstractForm):
         self.fields['pasien'].widget = forms.HiddenInput()
 
 
+class RujukanKeluarForm(AbstractForm):    
+    tenaga_medis = forms.ModelChoiceField(widget=Select2Widget(), queryset=TenagaMedis.objects.all())
+    
+    class Meta:
+        model = RujukanKeluar
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(RujukanKeluarForm, self).__init__(*args, **kwargs)
+        dokter_queryset = TenagaMedis.objects.all()
+        tenaga_medis = [(d.id, d.nama) for d in dokter_queryset]
+        self.fields['tenaga_medis'].choices = tenaga_medis
+        
+
+class ResumeFisioterapiForm(AbstractForm):    
+    tenaga_medis = forms.ModelChoiceField(widget=Select2Widget(), queryset=TenagaMedis.objects.all())
+    
+    class Meta:
+        model = ResumeFisioterapi
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(ResumeFisioterapiForm, self).__init__(*args, **kwargs)
+        dokter_queryset = TenagaMedis.objects.all()
+        tenaga_medis = [(d.id, d.nama) for d in dokter_queryset]
+        self.fields['tenaga_medis'].choices = tenaga_medis
+        
+
+class MonitoringFisoterapiForm(AbstractForm):    
+    tenaga_medis = forms.ModelChoiceField(widget=Select2Widget(), queryset=TenagaMedis.objects.all())
+    
+    class Meta:
+        model = MonitoringFisoterapi
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(MonitoringFisoterapiForm, self).__init__(*args, **kwargs)
+        dokter_queryset = TenagaMedis.objects.all()
+        tenaga_medis = [(d.id, d.nama) for d in dokter_queryset]
+        self.fields['tenaga_medis'].choices = tenaga_medis
+
+class InformedConsentForm(AbstractForm):    
+    tenaga_medis = forms.ModelChoiceField(widget=Select2Widget(), queryset=TenagaMedis.objects.all())
+    
+    class Meta:
+        model = InformedConsent
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(InformedConsentForm, self).__init__(*args, **kwargs)
+        dokter_queryset = TenagaMedis.objects.all()
+        tenaga_medis = [(d.id, d.nama) for d in dokter_queryset]
+        self.fields['tenaga_medis'].choices = tenaga_medis

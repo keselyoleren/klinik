@@ -4,14 +4,18 @@ from pasien.views.assesment_fisioterapi_views import *
 from pasien.views.assesment_rawat_jalan_views import *
 from pasien.views.catatan_terintegrasi_views import *
 from pasien.views.fisio_terapi_views import *
+from pasien.views.informed_consent_views import *
+from pasien.views.monitoring_views import *
 from pasien.views.obat_views import * 
 from pasien.views.pasien_views import *
 from pasien.views.rawat_inap_views import * 
 from pasien.views.rawat_jalan_views import *
 from pasien.views.rekam_medis_views import *
 from pasien.views.rekam_medis_views import *
+from pasien.views.resume_fisioterapi_views import *
 from pasien.views.resume_views import *
 from pasien.views.rincian_biaya_views import *
+from pasien.views.rujukan_keluar_fisoterapi_views import *
 
 urlpatterns = [
     path("pasien/", include([
@@ -83,10 +87,44 @@ urlpatterns = [
         path('', PasienFisioterapiListView.as_view(), name='fisio_terapi-list'),
         path('create/', PasienFisioterapiCreateView.as_view(), name='fisio_terapi-create'),
         path('update/<uuid:pk>/', PasienFisioterapiUpdateView.as_view(), name='fisio_terapi-update'),
-        path('assesment/create/<uuid:pasien_id>/', AssesMentFisioTerapiCreateView.as_view(), name='assesment-awal-fisioterapi-create'),
-        path('assesment/update/<uuid:pk>/', AssesMentFisioTerapiUpdateView.as_view(), name='assesment-fisioterapi-update'),
-        path('assesment/delete/<uuid:pk>/', AssesMentFisioTerapiDeleteView.as_view(), name='assesment-fisioterapi-delete'),
-        path('assesment/download/<uuid:pk>/', DownloadAssesmentVisioterapiView.as_view(), name='assesment-fisioterapi-download'),
+
+        path("assesment/", include([
+            path('create/<uuid:pasien_id>/', AssesMentFisioTerapiCreateView.as_view(), name='assesment-awal-fisioterapi-create'),
+            path('update/<uuid:pk>/', AssesMentFisioTerapiUpdateView.as_view(), name='assesment-fisioterapi-update'),
+            path('delete/<uuid:pk>/', AssesMentFisioTerapiDeleteView.as_view(), name='assesment-fisioterapi-delete'),
+            path('download/<uuid:pk>/', DownloadAssesmentVisioterapiView.as_view(), name='assesment-fisioterapi-download'),
+        ])),
+
+        path("informed/", include([
+            path('create/<uuid:pasien_id>/', InformedConsentCreateView.as_view(), name='informed-create'),
+            path('update/<uuid:pk>/', InformedConsentUpdateView.as_view(), name='informed-update'),
+            path('delete/<uuid:pk>/', InformedConsentDeleteView.as_view(), name='informed-delete'),
+            path('download/<uuid:pk>/', DownloadInvormedApiView.as_view(), name='informed-download'),
+        ])),
+
+        path("rujukan-keluar/", include([
+            path('create/<uuid:pasien_id>/', RujukanKeluarCreateView.as_view(), name='rujukan_keluar-create'),
+            path('update/<uuid:pk>/', RujukanKeluarUpdateView.as_view(), name='rujukan_keluar-update'),
+            path('delete/<uuid:pk>/', RujukanKeluarDeleteView.as_view(), name='rujukan_keluar-delete'),
+            path('download/<uuid:pk>/', DownloadAssesmentVisioterapiView.as_view(), name='rujukan_keluar-download'),
+        ])),
+
+        path("resume/", include([
+            path('create/<uuid:pasien_id>/', ResumeFisioterapiCreateView.as_view(), name='resume_fisioterapi-create'),
+            path('update/<uuid:pk>/', ResumeFisioterapiUpdateView.as_view(), name='resume_fisioterapi-update'),
+            path('delete/<uuid:pk>/', ResumeFisioterapiDeleteView.as_view(), name='resume_fisioterapi-delete'),
+            path('download/<uuid:pk>/', DownloadAssesmentVisioterapiView.as_view(), name='resume_fisioterapi-download'),
+        ])),
+
+        path("monitoring/", include([
+            path('<uuid:pasien_id>/', MonitoringFisoterapiListView.as_view(), name='monitor-fisioterapi-list'),
+            path('create/<uuid:pasien_id>/', MonitoringFisoterapiCreateView.as_view(), name='monitor-fisioterapi-create'),
+            path('update/<uuid:pk>/', MonitoringFisoterapiUpdateView.as_view(), name='monitor-fisioterapi-update'),
+            path('delete/<uuid:pk>/', MonitoringFisoterapiDeleteView.as_view(), name='monitor-fisioterapi-delete'),
+            path('export/<uuid:pasien_id>/', DownloadMonitoringFisoterapi.as_view(), name='monitor-fisioterapi-download'),
+        ])),
+
+        
         path('delete/<uuid:pk>/', PasienFisioterapiDeleteView.as_view(), name='fisio_terapi-delete'),
     ])),
 

@@ -1,0 +1,99 @@
+{% extends 'layouts/main.html' %}
+
+{% load static %}
+
+{% block css %}
+{{ form.media.css }}
+{% endblock %}
+
+{% block content %}
+    <!-- Page Heading -->
+
+<div class="content-wrapper">
+    {% include 'component/content_header.html' %}
+    <div class="row">
+        <div class="col-lg-9 grid-margin stretch-card">
+            <div class="card mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Data Pasien {{ pasien.full_name }}</h6>
+                </div>
+                <div class="card-body">
+                    {% include 'component/pasien.html' %}
+                </div>
+        
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">{{ header_title }}</h6>
+                </div>
+                <div class="card-body">
+                    <form class="forms-sample" enctype="multipart/form-data" method="POST" action=".">
+                        {% csrf_token %}
+
+                        {% for fields in form.visible_fields %}
+                            <div class="row clearfix">
+                                <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                    <label for="{{ fields.label_tag.id }}">
+                                        <h6>
+                                            {{ fields.label_tag }}
+                                            {% if fields.field.required %}
+                                                <span class="text-red" style="color: red;">*</span>
+                                            {% endif %}
+                                        </h6>
+                                    </label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-8">
+                                    <div class="form-group">
+                                        {{ fields.help_text }}
+                                            <span class="text-red">
+                                                {{ fields.errors }}
+                                            </span>
+                                            {{ fields }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        
+                        <input type="submit" class="btn btn-primary mr-2" value="Save">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 grid-margin">
+            <div>
+                <div class="card">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Action</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="template-demo">
+                            {% if btn_delete %}
+                                <a href="{% url 'rujukan_keluar-download' rujukan_keluar.id %}"  class="btn btn-primary btn-block">
+                                    <i class="fa fa-download"></i>                      
+                                    Rujukan Keluar
+                                </a>
+                                <a  href="{% url 'rujukan_keluar-delete' rujukan_keluar.id %}" class="btn btn-danger btn-block">
+                                    <i class="fa fa-trash"></i>                      
+                                    Rujukan Keluar
+                                </a>
+                            {% else %}
+                                <button type="button" disabled class="btn btn-primary desabled btn-block">
+                                    <i class="fa fa-download"></i>                      
+                                    Rujukan Keluar
+                                </button>
+                            {% endif %}
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+{% endblock  %}
+{% block js %}
+
+{{ form.media.js }}
+
+{% endblock %}
+

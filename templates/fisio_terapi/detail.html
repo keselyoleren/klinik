@@ -70,7 +70,7 @@
                         <div class="template-demo">
                             {% if btn_assesment_fisioterapi_update %}
                                 <a  href="{{ btn_assesment_fisioterapi_update_url }}" class="btn btn-dark btn-block">
-                                    <i class="fa fa-plus"></i>                      
+                                    <i class="fa fa-history"></i>                      
                                     Assesment Awal
                                 </a>
                             {% else %}
@@ -80,25 +80,51 @@
                                 </a>
                             {% endif %}
 
-                            <a href="" class="btn btn-primary btn-block">
-                                <i class="fa fa-book"></i>                      
-                                Catatan Terintegrasi 
-                            </a>
+                            {% if btn_rujukan_keluar_update %}
+                                <a href="{{ btn_rukukan_keluar_update_url  }}" class="btn btn-success btn-block">
+                                    <i class="fa fa-history"></i>                      
+                                    Rujukan Keluar
+                                </a>
+                            {% else %}
+                                <a href="{% url 'rujukan_keluar-create' fisioterapi.id %}" class="btn btn-success btn-block">
+                                    <i class="fa fa-book"></i>                      
+                                    Rujukan Keluar
+                                </a>
+                            {% endif %}
                             
-                            <a href="" class="btn btn-primary btn-block">
-                                <i class="fa fa-book"></i>                      
-                                Rincian Obat
-                            </a>
+                            
+                            {% if  btn_resume_fisioterapi_update  %}
+                                <a href="{{ btn_resume_fisioterapi_update_url }}" class="btn btn-warning btn-block">
+                                    <i class="fa fa-history"></i>                      
+                                    Resume
+                                </a>
+                            
+                            {% else %}
+                                <a href="{% url 'resume_fisioterapi-create' fisioterapi.id %}" class="btn btn-warning btn-block">
+                                    <i class="fa fa-book"></i>                      
+                                    Resume
+                                </a>
+                            {% endif %}
 
-                            <a href="" class="btn btn-primary btn-block">
+                            
+                            <a href="{% url 'monitor-fisioterapi-list' fisioterapi.id %}" class="btn btn-primary btn-block">
                                 <i class="fa fa-book"></i>                      
-                                Rincian Biaya
+                                Monitoring 
                             </a>
                             
-                            <a href="" class="btn btn-info btn-block">
-                                <i class="fa fa-book"></i>                      
-                                Resume Rawat Inap
-                            </a>
+                            {% if btn_informed_concent_update %}
+                                <a href="{{ btn_informed_concent_update_url }}" class="btn btn-info btn-block">
+                                    <i class="fa fa-history"></i>                      
+                                    Informed Consent
+                                </a>
+                            {% else %}
+                                <a href="{% url 'informed-create' fisioterapi.id %}" class="btn btn-info btn-block">
+                                    <i class="fa fa-book"></i>                      
+                                    Informed Consent
+                                </a>
+                            {% endif %}
+                            
+                            
                         </div>
                         
                     </div>

@@ -24,4 +24,5 @@ class AssesmentFisioterapiForm(AbstractForm):
 class InterfensiForm(AbstractForm):
     class Meta:
         model = Intervensi
-        fields = ('intervensi', 'tempat_yang_diterapi')
+        # fields = ('intervensi', 'tempat_yang_diterapi')
+        fields = "__all__"

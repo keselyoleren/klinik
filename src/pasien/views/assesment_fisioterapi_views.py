@@ -39,18 +39,30 @@ class AssesMentFisioTerapiCreateView(IsAuthenticated, CreateView):
         return context
 
 
+    # def form_valid(self, form):
+    #     form.instance.pasien_fisioterapi = self.get_pasien_fisioterapi()
+    #     form.save()
+    #     response = super().form_valid(form)
+
+    #     # Process the inline formset
+    #     RelatedModelFormSet = inlineformset_factory(AssesMentFisioTerapi, Intervensi, form=InterfensiForm, extra=1, can_delete=True)
+    #     formset = RelatedModelFormSet(self.request.POST)
+    #     print(formset)
+
+    #     if formset.is_valid():
+    #         formset.save()
+    #     messages.success(self.request, 'Data Berhasil Disimpan')
+    #     return response
+
     def form_valid(self, form):
         form.instance.pasien_fisioterapi = self.get_pasien_fisioterapi()
+        response =  super().form_valid(form)
         RelatedModelFormSet = inlineformset_factory(AssesMentFisioTerapi, Intervensi, form=InterfensiForm, extra=1, can_delete=True)
-        formset = RelatedModelFormSet(self.request.POST, instance=self.get_object())
+        formset = RelatedModelFormSet(self.request.POST, instance=self.object)
         if formset.is_valid():
             formset.save()
-        messages.success(self.request, 'Create success')
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        messages.error(self.request, 'Data Gagal Disimpan')
-        return super().form_invalid(form)
+        messages.success(self.request, 'Data Berhasil Disimpan')
+        return response
 
 class AssesMentFisioTerapiUpdateView(IsAuthenticated, UpdateView):
     model = AssesMentFisioTerapi
@@ -82,7 +94,7 @@ class AssesMentFisioTerapiUpdateView(IsAuthenticated, UpdateView):
         return super().form_valid(form)
 
 class AssesMentFisioTerapiDeleteView(IsAuthenticated, DeleteView):
-    model = AssesMentFisioTerapi        
+    model = AssesMentFisioTerapi
     template_name = 'component/delete.html'
 
     def get_success_url(self) -> str:
@@ -95,14 +107,10 @@ class AssesMentFisioTerapiDeleteView(IsAuthenticated, DeleteView):
         context['header_title'] = 'Delete Assesmen Awal Pasien Fisioterapi'
         return context
 
-    def form_valid(self, form):
-        messages.error(self.request, 'Delete success')
-        return super().form_valid(form)
-
 
 class DownloadAssesmentVisioterapiView(IsAuthenticated, GeneratePDF,  UpdateView):
     model = AssesMentFisioTerapi
-    template_name = 'rawat_jalan/export/assesment.html'
+    template_name = 'fisio_terapi/export/assesment.html'
     context_object_name = 'assesment'
     form_class = AssesmentFisioterapiForm
 
