@@ -90,3 +90,42 @@ class SuratPerintahTugasForm(AbstractForm):
         self.fields['tenaga_medis'].choices = tenaga_medis
 
     
+class SuratBebasNarkobaForm(AbstractForm):
+    pasien = forms.ModelChoiceField(widget=Select2Widget(), queryset=Pasien.objects.all())
+    tenaga_medis = forms.ModelChoiceField(widget=Select2Widget(), queryset=TenagaMedis.objects.all())
+    class Meta:
+        model = SuratBebasNarkoba
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(SuratBebasNarkobaForm, self).__init__(*args, **kwargs)
+        choices_pasien = [(p.id, p.full_name) for p in Pasien.objects.all()]
+        choices_tenaga_medis = [(p.id, p.nama) for p in TenagaMedis.objects.all()]
+        self.fields['tenaga_medis'].choices = choices_tenaga_medis
+        self.fields['pasien'].choices = choices_pasien
+
+class SuratPersetujuanForm(AbstractForm):
+    pasien = forms.ModelChoiceField(widget=Select2Widget(), queryset=Pasien.objects.all())
+    tenaga_medis = forms.ModelChoiceField(widget=Select2Widget(), queryset=TenagaMedis.objects.all())
+    class Meta:
+        model = SuratPersetujuan
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(SuratPersetujuanForm, self).__init__(*args, **kwargs)
+        choices_pasien = [(p.id, p.full_name) for p in Pasien.objects.all()]
+        choices_tenaga_medis = [(p.id, p.nama) for p in TenagaMedis.objects.all()]
+        self.fields['tenaga_medis'].choices = choices_tenaga_medis
+        self.fields['pasien'].choices = choices_pasien
+
+
+class SuratPenolakanForm(AbstractForm):
+    pasien = forms.ModelChoiceField(widget=Select2Widget(), queryset=Pasien.objects.all())
+    class Meta:
+        model = SuratPenolakan
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(SuratPenolakanForm, self).__init__(*args, **kwargs)
+        choices_pasien = [(p.id, p.full_name) for p in Pasien.objects.all()]
+        self.fields['pasien'].choices = choices_pasien

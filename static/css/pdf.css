@@ -136,6 +136,15 @@ footer .ttd-l .ttd-l-name {
   font-weight: bold;
 }
 
+.content-data .label {
+  display: inline-block;
+  text-align: left;
+  width: 316px; /* Adjust width as needed */
+  margin-right: 10px;
+  font-weight: bold;
+  
+}
+
 .patient-data .contents {
   display: inline-block;
   text-align: left;

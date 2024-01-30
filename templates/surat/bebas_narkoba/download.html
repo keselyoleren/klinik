@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="{% static '/css/pdf.css'%}" />
+        <title>{{ title }}</title>
+    </head>
+    <body>
+        {% include 'component/head_pdf.html' %}
+        <section class="content">
+            <div class="kop col-md-12">
+                <center>
+                <div class="date-and-no">
+                    <u><h3>{{ title }}</h3></u>
+                    <p style="font-size:medium; line-height: 1px;">No. {{ item.request_service.srv_code }}/xx/xx/XII/xxx</p>
+                </div>
+                </center>
+            </div>
+            <br>
+            <br>
+            <div class="patient-data">
+                <p style="font-size: medium;">Yang bertanda tangan di bawah ini :</p>
+            </div>
+            <br />
+            <div class="content close">
+                <div class="content-header">
+                    <div class="patient-data">
+                        <p style="font-size: medium;"><span class="label">Nama</span>: <span class="contents">{{ item.tenaga_medis.nama }}</span></p>
+                        <p style="font-size: medium;"><span class="label">STR</span>: <span class="contents">{{ item.tanggal_lahir.no_str }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Jabatan</span>: <span class="contents">{{ item.tanggal_lahir.jabatan }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Alamat</span>: <span class="contents">{{ item.tanggal_lahir.alamat }}</span></p>    
+                    </div>
+                </div>
+            </div>
+            <div class="patient-data">
+                <p style="font-size: medium;"> Menerangkan Bahwa </b> <br>
+            </div>
+            <div class="content close">
+                <div class="content-header">
+                    <div class="patient-data">
+                        <p style="font-size: medium;"><span class="label">Nama</span>: <span class="contents">{{ item.pasien.full_name }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Tempat / Tanggal Lahir</span>: <span class="contents">{{ item.pasien.tanggal_lahir }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Jenis Kelamin</span>: <span class="contents">{{ item.pasien.jenis_kelamin }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Pekerjaan</span>: <span class="contents">{{ item.pasien.pekerjaan }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Alamat</span>: <span class="contents">{{ item.pasien.alamat }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Keperluan</span>: <span class="contents">{{ item.keperluan }}</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="patient-data">
+                <p style="font-size: medium;"> Telah dilaksanakan pemeriksaan Narkoba/ Napza terhadap yang bersangkutan meliputi pemeriksaan Laboratorium terhadap Urin dengan metode Rapid Immuno Assay (RIA) pada  {{ item.created_at }}  dengan hasil TIDAK TERDAPAT/ TERDAPAT tanda-tanda gejala ketergantungan Narkoba/ Napza sebagai berikut :</b> <br>
+            </div>
+            
+            <div class="content close">
+                <div class="content-header">
+                    <div class="content-data">
+                        <center>
+                            <p style="font-size: medium;"><span class="label">BENZOYLEGONINE (COC)</span>: <span class="contents">{{ item.aphetamin }}</span></p>
+                            <p style="font-size: medium;"><span class="label">METHAMPHETAMINE (MET)</span>: <span class="contents">{{ item.methamphetamine }}</span></p>
+                            <p style="font-size: medium;"><span class="label">CARBOXYLIC ACID (THC)</span>: <span class="contents">{{ item.thc }}</span></p>
+                            <p style="font-size: medium;"><span class="label">MORPHINE (MOR)</span>: <span class="contents">{{ item.mor }}</span></p>    
+                        </center>
+                    </div>
+                </div>
+            </div>
+        
+        </section>
+        <br><br><br><br><br><br>
+       {% include 'component/footer_pdf.html' %} 
+    </body>
+</html>

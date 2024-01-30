@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="{% static '/css/pdf.css'%}" />
+        <title>{{ title }}</title>
+    </head>
+    <body>
+        {% include 'component/head_pdf.html' %}
+        <section class="content">
+            <div class="kop col-md-12">
+                <center>
+                <div class="date-and-no">
+                    <u><h3>{{ title }}</h3></u>
+                    <p style="font-size:medium; line-height: 1px;">No. {{ item.request_service.srv_code }}/xx/xx/XII/xxx</p>
+                </div>
+                </center>
+            </div>
+            <br>
+            <br>
+            <div class="patient-data">
+                <p style="font-size: medium;">Yang bertanda tangan di bawah ini </p>
+            </div>
+            <br />
+            <div class="content close">
+                <div class="content-header">
+                    <div class="patient-data">
+                        <p style="font-size: medium;"><span class="label">Nama</span>: <span class="contents">{{ item.nama }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Umur</span>: <span class="contents">{{ item.umur }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Jenis Kelamin</span>: <span class="contents">{{ item.jenis_kelamin }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Alamat</span>: <span class="contents">{{ item.alamat }}</span></p>    
+                    </div>
+                </div>
+            </div>
+            <div class="patient-data">
+                <p style="font-size: medium;"> Menyatakan dengan sesungguhnya telah memberikan  </b> <br>
+            </div>
+            <center>
+                <p style="font-size: medium;"> <b>PERSETUJUAN</b>   </p> <br>
+            </center>
+            <div class="content close">
+                <div class="content-header">
+                    <div class="content-data">
+                        <p style="font-size: medium;"><span class="label">Untuk dilakukan tindakan medik berupa</span>: <span class="contents">{{ item.tindakan_medik }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Terhadap</span>: <span class="contents">{{ item.terhadap }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Nama</span>: <span class="contents">{{ item.pasien.nama }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Umur</span>: <span class="contents">{{ item.pasien.umur }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Alamat</span>: <span class="contents">{{ item.pasien.alamat }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Direwat di</span>: <span class="contents">{{ item.dirawat_di }}</span></p>
+                        <p style="font-size: medium;"><span class="label">No Rekam Medik</span>: <span class="contents">{{ item.pasien.no_mr }}</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="patient-data">
+                <p style="font-size: medium;"> Yang tujuan, sifat dan perlunya tindakan medik tersebut di atas, serta risiko yang dapat ditimbulkannya dan upaya mengatasinya telah cukup dijelaskan oleh dokter dan telah saya mengerti sepenuhnya.</b> <br>
+            </div>
+            <div class="patient-data">
+                <p style="font-size: medium;"> Demikian persetujuan ini saya buat dengan penuh kesadaran dan tanpa paksaan.</b> <br>
+            </div>
+        
+        </section>
+        <br>
+        <footer>
+            <div class="ttd-l">
+                <center>
+                <p>&nbsp;</p><br>
+                <p class="ttd-l-name"></p>
+                </center>
+            </div>
+            <div class="ttd">
+                <center>
+                    <p style="font-size: medium;">Kulim Jaya, {{ item.created_at|date:'d M Y' }}</p><br><br>
+                </center>
+            </div>
+        </footer>
+        <table style="border: none;">
+            <tr style="border: none;">
+                <td>
+                    <div class="ttd-l">
+                        <center>
+                            <p style="font-size: medium;">Perawat</p><br><br><br>
+                            <p style="font-size: medium;" class="ttd-name"><u>..............</u><br></p>
+                        </center>
+                    </div>
+                </td>
+                <td>
+                    <div class="ttd-l">
+                        <center>
+                            
+                            <p style="font-size: medium;">Yang Membuat Pernyataan</p><br><br><br>
+                            <p style="font-size: medium;" class="ttd-name"><u>..............</u><br></p>
+                        </center>
+                    </div>
+                </td>
+            </tr>
+            <tr style="border: none;">
+                <td>
+                    <div class="ttd-l">
+                        <center>
+                            
+                            <p style="font-size: medium;">Saksi Dari Klinik</p><br><br><br>
+                            <p style="font-size: medium;" class="ttd-name"><u>..............</u><br></p>
+                        </center>
+                    </div>
+                </td>
+                <td>
+                    <div class="ttd-l">
+                        <center>
+                            
+                            <p style="font-size: medium;">Saksi Dari Keluarga Pasien</p><br><br><br>
+                            <p style="font-size: medium;" class="ttd-name"><u>..............</u><br></p>
+                        </center>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+    </body>
+</html>

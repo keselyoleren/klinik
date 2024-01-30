@@ -1,6 +1,7 @@
 from pyexpat import model
+from statistics import mode
 from django.db import models
-from config.choice import HasilRapidAntigen, JenisKelamin
+from config.choice import DitujukanChoice, HasilRapidAntigen, JenisKelamin, StatusNarkoba
 from config.models import BaseModel
 from django.utils.translation import gettext as _
 # Create your models here.
@@ -86,3 +87,51 @@ class SuratPerintahTugas(BaseModel):
 
     def __str__(self) -> str:
         return self.tenaga_medis.nama
+
+
+class SuratBebasNarkoba(BaseModel):
+    tenaga_medis = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Yang Bertandatangan"), on_delete=models.CASCADE)
+    pasien = models.ForeignKey('pasien.Pasien', verbose_name=_("Pasien"), on_delete=models.CASCADE)
+    aphetamin = models.CharField(_('Aphetamin'), max_length=101, choices=StatusNarkoba.choices,  blank=True, null=True)
+    methamphetamine = models.CharField(_('Methamphetamine'), max_length=101, choices=StatusNarkoba.choices, blank=True, null=True)
+    thc = models.CharField(_('thc'), max_length=101, choices=StatusNarkoba.choices, blank=True, null=True)
+    mor = models.CharField(_('Morphine'), max_length=101, choices=StatusNarkoba.choices, blank=True, null=True)
+    keperluan = models.CharField(_('Keperluan'), max_length=101, blank=True, null=True)
+    
+    
+    def __str__(self) -> str:
+        return self.tenaga_medis.name
+
+
+class SuratPersetujuan(BaseModel):
+    # yang bertandatangan
+    nama = models.CharField(_('Nama'), max_length=101, blank=True, null=True)
+    umur = models.CharField(_('Umur'), max_length=101, blank=True, null=True)
+    jenis_kelamin = models.CharField(_('Jenis Kelamin'), choices=JenisKelamin.choices, max_length=101, blank=True, null=True)
+    
+    tindakan_medik = models.CharField(_('Tindakan Medik'), max_length=101, blank=True, null=True)
+    terhadap = models.CharField(_('Terhadap'), max_length=101, choices=DitujukanChoice.choices, blank=True, null=True)
+    
+    pasien = models.ForeignKey('pasien.Pasien', verbose_name=_("Pasien"), on_delete=models.CASCADE)
+    tenaga_medis = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Tenaga Medis"), on_delete=models.CASCADE)
+    tindakan_medik = models.CharField(_('Tindakan Medik'), max_length=101, blank=True, null=True)
+    
+    
+    def __str__(self) -> str:
+        return self.pasien.full_name
+
+class SuratPenolakan(BaseModel):
+    nama = models.CharField(_('Nama'), max_length=101, blank=True, null=True)
+    umur = models.CharField(_('Umur'), max_length=101, blank=True, null=True)
+    alamat = models.CharField(_('Alamat'), max_length=101, blank=True, null=True)
+    phone = models.CharField(_('Telepon'), max_length=101, blank=True, null=True)
+    jenis_kelamin = models.CharField(_('Jenis Kelamin'), choices=JenisKelamin.choices, max_length=101, blank=True, null=True)
+
+    terhadap = models.CharField(_('Terhadap'), max_length=101, choices=DitujukanChoice.choices, blank=True, null=True)
+    pasien = models.ForeignKey('pasien.Pasien', verbose_name=_("Pasien"), on_delete=models.CASCADE)
+    diagnosa = models.CharField(_('Diagnosa'), max_length=101, blank=True, null=True)
+    dirujuk = models.CharField(_('Menolak Dirujuk ke '), max_length=101, blank=True, null=True)
+
+
+    def __str__(self) -> str:
+        return self.pasien.full_name

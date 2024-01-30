@@ -38,11 +38,14 @@ class PoliKlinik(BaseModel):
 
 
 class TenagaMedis(BaseModel):
+    photo = models.ImageField(_("Photo"), upload_to='tenaga_medis/', blank=True, null=True)
     nama = models.CharField(_("Nama"), max_length=255)
     alamat = models.TextField(_("Alamat"), blank=True, null=True)
     email = models.EmailField(_("Email"), blank=True, null=True)
     no_hp = models.CharField(_("No HP"), max_length=255, blank=True, null=True)
-    photo = models.ImageField(_("Photo"), upload_to='tenaga_medis/', blank=True, null=True)
+
+    jabatan = models.CharField(_("Jabatan"), max_length=255, blank=True, null=True)
+    no_str = models.CharField(_("No STR"), max_length=255, blank=True, null=True)
 
     tahun_pengalaman = models.IntegerField(_("Tahun Pengalaman"), blank=True, null=True, default=0)
     tingakat_pendidikan = models.CharField(_("Tingkat Pendidikan"), max_length=255, blank=True, null=True)

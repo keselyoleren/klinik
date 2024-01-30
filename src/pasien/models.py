@@ -13,6 +13,7 @@ class Pasien(BaseModel):
     tanggal_lahir = models.DateField(_("Tanggal Lahir"), blank=True, null=True)
     jenis_kelamin = models.CharField(_("Jenis Kelamin"), max_length=255, choices=JenisKelamin.choices, blank=True, null=True)
     nama_ibu = models.CharField(_("Nama Ibu Kandung"), max_length=255, blank=True, null=True)
+    no_rm = models.CharField(_("No Rekam Medis"), max_length=255, blank=True, null=True)
     
     agama = models.CharField(_("Agama"), max_length=255, blank=True, null=True)
     pekerjaan = models.CharField(_("Pekerjaan"), max_length=255, blank=True, null=True)

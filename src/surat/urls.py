@@ -1,7 +1,10 @@
 from django.urls import path, include
+from surat.views.bebas_narkoba import *
 from surat.views.keterangan_sakit_views import *
 from surat.views.keterangan_sehat_views import *
-from surat.views.perintah_tugas import DownloadSuratPerintahTugas, SuratPerintahTugasCreateView, SuratPerintahTugasDeleteView, SuratPerintahTugasListView, SuratPerintahTugasUpdateView
+from surat.views.penolakan_views import *
+from surat.views.perintah_tugas import *
+from surat.views.persetujuan_views import *
 from surat.views.rapid_views import *
 from surat.views.rujukan_views import *
 from surat.views.kelahiran_views import *
@@ -63,6 +66,31 @@ urlpatterns = [
             path('update/<uuid:pk>/', SuratPerintahTugasUpdateView.as_view(), name='tugas-update'),
             path('delete/<uuid:pk>/', SuratPerintahTugasDeleteView.as_view(), name='tugas-delete'),
             path('download/<uuid:pk>/', DownloadSuratPerintahTugas.as_view(), name='tugas-download'),
+        ])),
+
+        path("surat-narkoba/", include([
+            path('', SuratBebasNarkobaListView.as_view(), name='narkoba-list'),
+            path('create/', SuratBebasNarkobaCreateView.as_view(), name='narkoba-create'),
+            path('update/<uuid:pk>/', SuratBebasNarkobaUpdateView.as_view(), name='narkoba-update'),
+            path('delete/<uuid:pk>/', SuratBebasNarkobaDeleteView.as_view(), name='narkoba-delete'),
+            path('download/<uuid:pk>/', DownloadSuratBebasNarkoba.as_view(), name='markoba-download'),
+        ])),
+
+
+        path("persetujuan/", include([
+            path('', SuratPersetujuanListView.as_view(), name='persetujuan-list'),
+            path('create/', SuratPersetujuanCreateView.as_view(), name='persetujuan-create'),
+            path('update/<uuid:pk>/', SuratPersetujuanUpdateView.as_view(), name='persetujuan-update'),
+            path('delete/<uuid:pk>/', SuratPersetujuanDeleteView.as_view(), name='persetujuan-delete'),
+            path('download/<uuid:pk>/', DownloadSuratPersetujuan.as_view(), name='persetujuan-download'),
+        ])),
+
+        path("penolakan/", include([
+            path('', SuratPenolakanListView.as_view(), name='penolakan-list'),
+            path('create/', SuratPenolakanCreateView.as_view(), name='penolakan-create'),
+            path('update/<uuid:pk>/', SuratPenolakanUpdateView.as_view(), name='penolakan-update'),
+            path('delete/<uuid:pk>/', SuratPenolakanDeleteView.as_view(), name='penolakan-delete'),
+            path('download/<uuid:pk>/', DownloadSuratPenolakan.as_view(), name='penolakan-download'),
         ])),
     ]))
 ]

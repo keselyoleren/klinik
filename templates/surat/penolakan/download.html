@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="{% static '/css/pdf.css'%}" />
+        <title>{{ title }}</title>
+    </head>
+    <body>
+        {% include 'component/head_pdf.html' %}
+        <section class="content">
+            <div class="kop col-md-12">
+                <center>
+                <div class="date-and-no">
+                    <u><h3>{{ title }}</h3></u>
+                    <p style="font-size:medium; line-height: 1px;">No. {{ item.request_service.srv_code }}/xx/xx/XII/xxx</p>
+                </div>
+                </center>
+            </div>
+            <br>
+            <br>
+            <div class="patient-data">
+                <p style="font-size: medium;">Yang bertanda tangan di bawah ini </p>
+            </div>
+            <br />
+            <div class="content close">
+                <div class="content-header">
+                    <div class="patient-data">
+                        <p style="font-size: medium;"><span class="label">Nama</span>: <span class="contents">{{ item.nama }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Umur</span>: <span class="contents">{{ item.umur }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Jenis Kelamin</span>: <span class="contents">{{ item.jenis_kelamin }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Alamat</span>: <span class="contents">{{ item.alamat }}</span></p>    
+                        <p style="font-size: medium;"><span class="label">Telepon</span>: <span class="contents">{{ item.alamat }}</span></p>    
+                    </div>
+                </div>
+            </div>
+            <div class="patient-data">
+                <p style="font-size: medium;"> Menyatakan dengan sesungguhnya dari saya sendiri sebagai <b>{{ item.terhadap }}</b>  </p> <br>
+            </div>
+            
+            <div class="content close">
+                <div class="content-header">
+                    <div class="content-data">
+                        <p style="font-size: medium;"><span class="label">Nama</span>: <span class="contents">{{ item.tindakan_medik }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Jenis Kelamin</span>: <span class="contents">{{ item.terhadap }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Umur</span>: <span class="contents">{{ item.pasien.umur }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Alamat</span>: <span class="contents">{{ item.pasien.alamat }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Diagnosa</span>: <span class="contents">{{ item.pasien.no_mr }}</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="patient-data">
+                <p style="font-size: medium;"> Dari penjelasan yang diberikan, telah saya mengerti segala hal yang berhubungan dengan penyakit tersebut, maka kami menolak untuk dirujuk Ke <b>{{ item.dirujuk }}</b> </p>
+            </div>
+            <div class="patient-data">
+                <p style="font-size: medium;"> Segala akibat dan resiko yang akan terjadi menjadi tanggung jawab kami (saya sendiri/keluarga) dan kami tidak akan memberikan tuntutan sesuai hukum yang berlaku.
+                    Pernyataan ini kami buat dengan penuh kesadaran Tidak ada paksaan dari pihak manapun.
+                </p> 
+            </div>
+        
+        </section>
+        
+        <footer>
+            <div class="ttd-l">
+                <center>
+                <p>&nbsp;</p><br>
+                <p class="ttd-l-name"></p>
+                </center>
+            </div>
+            <div class="ttd">
+                <center>
+                    <b><p style="font-size: medium;"> <b> Kulim Jaya, {{ item.created_at|date:'d M Y' }} </b> </p><br><br>
+                </center>
+            </div>
+        </footer>
+        <table style="border: none;">
+            <tr style="border: none;">
+                <td>
+                    <div class="ttd-l">
+                        <center>
+                            <p style="font-size: medium;">Yang memberi penjelasan</p><br><br><br>
+                            <p style="font-size: medium;" class="ttd-name"><u>..............</u><br></p>
+                        </center>
+                    </div>
+                </td>
+                <td>
+                    <div class="ttd-l">
+                        <center>
+                            
+                            <p style="font-size: medium;">Penderita</p><br><br><br>
+                            <p style="font-size: medium;" class="ttd-name"><u>..............</u><br></p>
+                        </center>
+                    </div>
+                </td>
+            </tr>
+            <tr style="border: none; " >
+                <td colspan="2">
+                    <div class="ttd-l">
+                        <center>    
+                            <p style="font-size: medium;">Keluarga saksi</p><br><br><br>
+                            <p style="font-size: medium;" class="ttd-name"><u>..............</u><br></p>
+                        </center>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+    </body>
+</html>

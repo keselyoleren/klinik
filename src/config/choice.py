@@ -89,6 +89,19 @@ class StatusPersetujuan(TextChoices):
     PERSETUJUAN = 'Persetujuan'
     PENOLAKAN = 'Penolakan'
 
+class StatusNarkoba(TextChoices):
+    POSITIF = 'Positif'
+    NEGATIF = 'Negatif'
+
+class DitujukanChoice(TextChoices):
+    DIRI_SENDIRI = 'Diri Sendiri'
+    SUAMI = 'Suami'
+    ISTRI = 'Istri'
+    AYAH = 'Ayah'
+    ANAK = 'Anak'
+    IBU = 'Ibu'
+    ORANG_LAIN = 'Orang Lain'
+
 DAY_CODE = {
     Hari.MINGGU: 0,
     Hari.SENIN: 1,
