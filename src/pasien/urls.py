@@ -76,6 +76,7 @@ urlpatterns = [
 
     path("rincian-biaya/", include([
         path('<uuid:pasien_rawat_inap_id>/', RincianBiayaListView.as_view(), name='rincian-biaya-list'),
+        path('list/', BiayaListView.as_view(), name='biaya-list'),
         path('create/<uuid:pasien_rawat_inap_id>/', RincianBiayaCreateView.as_view(), name='rincian-biaya-create'),
         path('update/<uuid:pk>/', RincianBiayaUpdateView.as_view(), name='rincian-biaya-update'),
         path('delete/<uuid:pk>/', RincianBiayaDeleteView.as_view(), name='rincian-biaya-delete'),

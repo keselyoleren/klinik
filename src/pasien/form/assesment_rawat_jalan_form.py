@@ -1,5 +1,5 @@
 
-from config.choice import StatusRawatPasien
+from config.choice import StatusAlergi, StatusRawatPasien
 from config.form import AbstractForm, Select2Widget
 from pasien.models import AssesmentRawatJalan, Pasien, RawatJalan
 from django import forms
@@ -7,7 +7,6 @@ from master_data.models import TenagaMedis
 
 
 class AssesmentRawatJalanForm(AbstractForm):
-    
     tenaga_medis = forms.ModelChoiceField(widget=Select2Widget(), queryset=TenagaMedis.objects.all())
     
 

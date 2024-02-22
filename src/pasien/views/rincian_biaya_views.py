@@ -1,5 +1,6 @@
 # myapp/views.py
 
+from urllib import request
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from config.permis import IsAuthenticated, IsAuthenticated
@@ -8,6 +9,19 @@ from pasien.form.biaya_form import RincianBiayaForm
 from pasien.models import  RawatInap, RawatJalan, RincianBiaya
 
 from django.db.models import Sum
+
+
+class BiayaListView(IsAuthenticated, ListView):
+    model = RincianBiaya
+    template_name = 'biaya/list_all.html'
+    context_object_name = 'list_biaya'
+
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Biaya'
+        context['header_title'] = 'List Biaya'
+        return context
 
 
 class RincianBiayaListView(IsAuthenticated, ListView):
@@ -20,6 +34,8 @@ class RincianBiayaListView(IsAuthenticated, ListView):
     
     def get_queryset(self):
         try:
+            if self.request.user.is_superuser:
+                return super().get_queryset()
             return super().get_queryset().filter(pasien_rawat_inap=self.get_pasien())
         except Exception:
             return super().get_queryset()

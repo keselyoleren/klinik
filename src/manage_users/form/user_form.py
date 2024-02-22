@@ -6,7 +6,7 @@ from manage_users.models import AccountUser
 class AccountUserForm(UserCreationForm):
     class Meta:
         model = AccountUser
-        fields = ['role', 'username', 'email', 'first_name', 'last_name', 'password1', 'password2']
+        fields = ['role', 'username', 'email', 'first_name', 'last_name', 'photo', 'password1', 'password2']
 
     def __init__(self, *args, **kwargs):
         super(AccountUserForm, self).__init__(*args, **kwargs)
@@ -19,6 +19,6 @@ class AccountUserForm(UserCreationForm):
 class UserForm(AbstractForm):
     class Meta:
         model = AccountUser
-        fields = ['role',  'username', 'email', 'first_name', 'last_name']
+        fields = ['role',  'username', 'email', 'first_name', 'last_name' , 'photo']
 
     

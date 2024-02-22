@@ -1,6 +1,6 @@
 from django.contrib import admin
 from pasien.form.assesment_fisioterapi_form import InterfensiForm
-from pasien.models import AssesMentFisioTerapi, Intervensi, Pasien, RekamMedis
+from pasien.models import AssesMentFisioTerapi, AssesmentRawatJalan, Intervensi, Pasien, RekamMedis
 from django.utils.translation import gettext as _
 
 # Register your models here.
@@ -27,3 +27,8 @@ class IntervensiInline(admin.TabularInline):
 @admin.register(AssesMentFisioTerapi)
 class AssesmentFisioTerapiAdminView(admin.ModelAdmin):
     inlines = (IntervensiInline,)
+
+
+@admin.register(AssesmentRawatJalan)
+class AssesmentRawatJalanAdminView(admin.ModelAdmin):
+    pass

@@ -3,11 +3,17 @@
       <li class="nav-item nav-profile">
         <div class="nav-link">
           <div class="profile-image">
+
+            {% if request.user.photo %}
+              <img src="{{ request.user.photo.url }}" alt="image"/>
+            {% else %}
             <img src="https://i.pravatar.cc/300" alt="image"/>
+            {% endif %}
+            
           </div>
           <div class="profile-name">
             <p class="name">
-              Welcome Jane
+              Welcome {{ request.user.username }}
             </p>
             <p class="designation">
               Super Admin
@@ -27,6 +33,7 @@
           <span class="menu-title">Master Data</span>
           <i class="menu-arrow"></i>
         </a>
+
         <div class="collapse" id="page-layouts">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item d-none d-lg-block"> <a class="nav-link" href="{% url 'user-list' %}">Akun User</a></li>
@@ -53,6 +60,13 @@
         <a class="nav-link" href="{% url 'pasien-list' %}">
           <i class="fa fa-user menu-icon"></i>
           <span class="menu-title">Pasien</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'biaya-list' %}">
+          <i class="fa fa-shopping-cart menu-icon"></i>
+          <span class="menu-title">Pembayaran</span>
         </a>
       </li>
 
