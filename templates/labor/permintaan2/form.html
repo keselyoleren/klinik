@@ -1,0 +1,419 @@
+{% extends 'layouts/main.html' %}
+
+{% load static %}
+
+{% block css %}
+{{ form.media.css }}
+{% endblock %}
+
+{% block content %}
+    <!-- Page Heading -->
+
+<div class="content-wrapper">
+    {% include 'component/content_header.html' %}
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card  mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">{{ header_title }}</h6>
+            </div>
+            <div class="card-body">
+                {% include 'component/pasien.html' %}
+                <br>
+                <form action="." method="POST" id="myForm" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row clearfix">
+                        <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                            <label for="{{ form.permintaan.label_tag.id }}">
+                                <h6>
+                                    {{ form.permintaan.label_tag }}
+                                    {% if form.permintaan.field.required %}
+                                    <span class="text-red" style="color: red;">*</span>
+                                {% endif %}
+                                </h6>
+                            </label>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-8">
+                            <div class="form-group">
+                                {{ form.permintaan.help_text }}
+                                    <span class="text-red">
+                                        {{ form.permintaan.errors }}
+                                    </span>
+                                    {{ form.permintaan }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                            <label for="{{ form.pemeriksa.label_tag.id }}">
+                                <h6>
+                                    {{ form.pemeriksa.label_tag }}
+                                    {% if form.pemeriksa.field.required %}
+                                    <span class="text-red" style="color: red;">*</span>
+                                {% endif %}
+                                </h6>
+                            </label>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-8">
+                            <div class="form-group">
+                                {{ form.pemeriksa.help_text }}
+                                    <span class="text-red">
+                                        {{ form.pemeriksa.errors }}
+                                    </span>
+                                    {{ form.pemeriksa }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 table-responsive" >
+                            <table class="table table-striped">
+                                <thead class="bg-success">
+                                    <tr>
+                                        <th>A</th>
+                                        <th>HEMATOLOGI</th>
+                                        <th>HASIL</th>
+                                        <th>NILAI RUJUKAN</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for fields in form.visible_fields|slice:"0:3" %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.help_text }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Diff</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    {% for fields in form.visible_fields|slice:"5:9" %}
+                                        <tr>
+                                            <td>-</td>
+                                            <td>&nbsp;&nbsp;-{{ fields.label_tag }}</td>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.help_text }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"9:18" %}
+                                        <tr>
+                                            <td>{{ forloop.counter0|add:5 }}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.help_text }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <br>
+                            <br>
+
+                            <table class="table table-striped">
+                                <thead class="bg-success">
+                                    <tr>
+                                        <th>B</th>
+                                        <th>BIOKIMIA</th>
+                                        <th>HASIL</th>
+                                        <th>NILAI RUJUKAN</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Profile Diabetik</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    {% for fields in form.visible_fields|slice:"18:22" %}
+                                        <tr>
+                                            <td></td>
+                                            <td>&nbsp;&nbsp;&nbsp; - &nbsp;{{ fields.label_tag }}</td>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.help_text }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"22:40" %}
+                                        <tr>
+                                            <td>{{ forloop.counter0|add:2 }}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.help_text }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <br><br>
+                            <table class="table table-striped">
+                                <thead class="bg-success">
+                                    <tr>
+                                        <th>C</th>
+                                        <th>NAPZA</th>
+                                        <th>HASIL</th>
+                                        <th>NILAI RUJUKAN</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for fields in form.visible_fields|slice:"40:44" %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.help_text }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <br><br>
+                            <table class="table table-striped">
+                                <thead class="bg-success">
+                                    <tr>
+                                        <th>D</th>
+                                        <th>ELEKTROLIT</th>
+                                        <th>HASIL</th>
+                                        <th>NILAI RUJUKAN</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for fields in form.visible_fields|slice:"44:49" %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.help_text }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <br><br>
+                            <table class="table table-striped">
+                                <thead class="bg-success">
+                                    <tr>
+                                        <th>E</th>
+                                        <th>WDAL</th>
+                                        <th>HASIL</th>
+                                        <th>NILAI RUJUKAN</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for fields in form.visible_fields|slice:"49:53" %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.help_text }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <br><br>
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table table-striped">
+                                <thead class="bg-success">
+                                    <tr>
+                                        <th>F</th>
+                                        <th>URIN RUTIN</th>
+                                        <th>HASIL</th>
+                                        <th>NILAI RUJUKAN</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Makroskopis</td>
+                                        <td>{{ fields }}</td>
+                                        <td>{{ fields.help_text }}</td>
+                                    </tr>
+                                    {% for fields in form.visible_fields|slice:"53:60" %}
+                                        <tr>
+                                            <td>&nbsp;&nbsp; - &nbsp;</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.help_text }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Kimiawi</td>
+                                        <td></td>
+                                        <td>{{ fields.help_text }}</td>
+                                    </tr>
+                                    {% for fields in form.visible_fields|slice:"60:64" %}
+                                        <tr>
+                                            <td>&nbsp;&nbsp; - &nbsp;</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.help_text }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Mikroskopis</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    {% for fields in form.visible_fields|slice:"64:70" %}
+                                        <tr>
+                                            <td>&nbsp;&nbsp; - &nbsp;</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.help_text }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <br><br>
+                            <table class="table table-striped">
+                                <thead class="bg-success">
+                                    <tr>
+                                        <th>G</th>
+                                        <th>Faces</th>
+                                        <th>HASIL</th>
+                                        <th>NILAI RUJUKAN</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Mikroskopis</td>
+                                        <td>{{ fields }}</td>
+                                        <td>{{ fields.help_text }}</td>
+                                    </tr>
+                                    {% for fields in form.visible_fields|slice:"70:75" %}
+                                        <tr>
+                                            <td>&nbsp;&nbsp; - &nbsp;</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.help_text }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Kimiawi</td>
+                                        <td>{{ fields }}</td>
+                                        <td>{{ fields.help_text }}</td>
+                                    </tr>
+                                    {% for fields in form.visible_fields|slice:"75:76" %}
+                                        <tr>
+                                            <td>&nbsp;&nbsp; - &nbsp;</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.help_text }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Mikroskopis</td>
+                                        <td>{{ fields }}</td>
+                                        <td>{{ fields.help_text }}</td>
+                                    </tr>
+                                    {% for fields in form.visible_fields|slice:"76:80" %}
+                                        <tr>
+                                            <td>&nbsp;&nbsp; - &nbsp;</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.help_text }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <br><br>
+                            <table class="table table-striped">
+                                <thead class="bg-success">
+                                    <tr>
+                                        <th>H</th>
+                                        <th>SPUTUM</th>
+                                        <th>HASIL</th>
+                                        <th>NILAI RUJUKAN</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for fields in form.visible_fields|slice:"80:81" %}
+                                        <tr>
+                                            <td>1</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.help_text }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <br><br>
+                            <table class="table table-striped">
+                                <thead class="bg-success">
+                                    <tr>
+                                        <th>I</th>
+                                        <th>MIKROBIOLOGI / PARASITOLOGI</th>
+                                        <th>HASIL</th>
+                                        <th>NILAI RUJUKAN</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for fields in form.visible_fields|slice:"81:82" %}
+                                        <tr>
+                                            <td>1</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.help_text }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <br><br>
+                            <table class="table table-striped">
+                                <thead class="bg-success">
+                                    <tr>
+                                        <th>J</th>
+                                        <th>SEROLOGI</th>
+                                        <th>HASIL</th>
+                                        <th>NILAI RUJUKAN</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for fields in form.visible_fields|slice:"82:97" %}
+                                        <tr>
+                                            <td>{{forloop.counter}}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.help_text }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <br><br>
+                        </div>
+                        
+                    </div>
+                    <div class="col">
+                        <label for="{{ form.catatan.label_tag.id }}">
+                            <h6>
+                                {{ form.catatan.label_tag }}
+                                {% if form.catatan.field.required %}
+                                    <span class="text-red" style="color: red;">*</span>
+                                {% endif %}
+                            </h6>
+                        </label>
+                        {{ form.catatan.help_text }}
+                        <span class="text-red">
+                            {{ form.catatan.errors }}
+                        </span>
+                        {{ form.catatan }}
+                    </div>
+                    <br>
+                    <br>
+
+                    <input type="submit" value="Save" class="form-control btn btn-primary mr-2"></button>                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock  %}
+{% block js %}
+{{ form.media.js }}
+{% endblock %}
+

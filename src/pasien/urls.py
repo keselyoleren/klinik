@@ -8,6 +8,8 @@ from pasien.views.informed_consent_views import *
 from pasien.views.monitoring_views import *
 from pasien.views.obat_views import * 
 from pasien.views.pasien_views import *
+from pasien.views.permintaan_labor2_view import *
+from pasien.views.permintaan_labor_view import *
 from pasien.views.rawat_inap_views import * 
 from pasien.views.rawat_jalan_views import *
 from pasien.views.rekam_medis_views import *
@@ -139,4 +141,22 @@ urlpatterns = [
         path('download/<uuid:pk>/', DownloadRekamMedisView.as_view(), name='rekam_medis-download'),
         path('list-pasien', ListRawatJalanView.as_view(), name='rekam_medis-list-pasien'),
     ])),
+
+    path("laboratorium/", include([
+        path("permintaan/", include([
+            path('<uuid:pasien_id>/', PermintaanLaborListView.as_view(), name='permintaan-labor-list'),
+            path('create/<uuid:pasien_id>/', PermintaanLaborCreateView.as_view(), name='permintaan-labor-create'),
+            path('update/<uuid:pk>/', PermintaanLaborUpdateView.as_view(), name='permintaan-labor-update'),
+            path('delete/<uuid:pk>/', PermintaanLaborDeleteView.as_view(), name='permintaan-labor-delete'),
+            path('export/<uuid:pk>/', DownloadPermintaanLabor.as_view(), name='permintaan-labor-download'),
+        ])),
+        path("permintaan2/", include([
+            path('<uuid:pasien_id>/', PermintaanLabor2ListView.as_view(), name='permintaan-labor2-list'),
+            path('create/<uuid:pasien_id>/', PermintaanLabor2CreateView.as_view(), name='permintaan-labor2-create'),
+            path('update/<uuid:pk>/', PermintaanLabor2UpdateView.as_view(), name='permintaan-labor2-update'),
+            path('delete/<uuid:pk>/', PermintaanLabor2DeleteView.as_view(), name='permintaan-labor2-delete'),
+            path('export/<uuid:pk>/', DownloadPermintaanLabor2.as_view(), name='permintaan-labor2-download'),
+        ]))
+    ])),
 ]
+

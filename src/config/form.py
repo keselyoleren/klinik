@@ -1,7 +1,6 @@
 from webbrowser import get
 from django import forms
 from config.choice import RoleUser
-from django import forms
 from django.forms.widgets import Select
 from django.contrib.admin.widgets import (
     FilteredSelectMultiple,
@@ -46,6 +45,12 @@ class AbstractForm(forms.ModelForm):
                     'class': 'form-control',
                 })
 
+            if field == 'tgl_kirim':
+                self.fields['tgl_kirim'].widget = forms.DateTimeInput(attrs={
+                    'type':'datetime-local',
+                    'class': 'form-control',
+                })
+
             if field == 'jam_mulai':
                 self.fields['jam_mulai'].widget = forms.TimeInput(attrs={
                     'type':'time',
@@ -81,6 +86,19 @@ class AbstractForm(forms.ModelForm):
                     'type':'date',
                     'class': 'form-control',
                 })
+
+            if field == 'spes_lab_diterima':
+                self.fields['spes_lab_diterima'].widget = forms.DateInput(attrs={
+                    'type':'date',
+                    'class': 'form-control',
+                })
+
+            if field == 'kirim_tanggal':
+                self.fields['kirim_tanggal'].widget = forms.DateInput(attrs={
+                    'type':'date',
+                    'class': 'form-control',
+                })
+        
 
             if field == 'start':
                 self.fields['start'].widget = forms.DateInput(attrs={

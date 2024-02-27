@@ -1,0 +1,897 @@
+{% extends 'layouts/main.html' %}
+
+{% load static %}
+
+{% block css %}
+{{ form.media.css }}
+{% endblock %}
+
+{% block content %}
+    <!-- Page Heading -->
+
+<div class="content-wrapper">
+    {% include 'component/content_header.html' %}
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card  mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">{{ header_title }}</h6>
+            </div>
+            <div class="card-body">
+                {% include 'component/pasien.html' %}
+                <br>
+                <form action="." method="POST" id="myForm" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row clearfix">
+                        <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                            <label for="{{ form.dokter_pengirim.label_tag.id }}">
+                                <h6>
+                                    {{ form.dokter_pengirim.label_tag }}
+                                    {% if form.dokter_pengirim.field.required %}
+                                    <span class="text-red" style="color: red;">*</span>
+                                {% endif %}
+                                </h6>
+                            </label>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-8">
+                            <div class="form-group">
+                                {{ form.dokter_pengirim.help_text }}
+                                    <span class="text-red">
+                                        {{ form.dokter_pengirim.errors }}
+                                    </span>
+                                    {{ form.dokter_pengirim }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                            <label for="{{ form.kirim_tanggal.label_tag.id }}">
+                                <h6>
+                                    {{ form.kirim_tanggal.label_tag }}
+                                    {% if form.kirim_tanggal.field.required %}
+                                    <span class="text-red" style="color: red;">*</span>
+                                {% endif %}
+                                </h6>
+                            </label>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-8">
+                            <div class="form-group">
+                                {{ form.kirim_tanggal.help_text }}
+                                    <span class="text-red">
+                                        {{ form.kirim_tanggal.errors }}
+                                    </span>
+                                    {{ form.kirim_tanggal }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                            <label for="{{ form.ruangan.label_tag.id }}">
+                                <h6>
+                                    {{ form.ruangan.label_tag }}
+                                    {% if form.ruangan.field.required %}
+                                    <span class="text-red" style="color: red;">*</span>
+                                {% endif %}
+                                </h6>
+                            </label>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-8">
+                            <div class="form-group">
+                                {{ form.ruangan.help_text }}
+                                    <span class="text-red">
+                                        {{ form.ruangan.errors }}
+                                    </span>
+                                    {{ form.ruangan }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                            <label for="{{ form.phone.label_tag.id }}">
+                                <h6>
+                                    {{ form.phone.label_tag }}
+                                    {% if form.phone.field.required %}
+                                    <span class="text-red" style="color: red;">*</span>
+                                {% endif %}
+                                </h6>
+                            </label>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-8">
+                            <div class="form-group">
+                                {{ form.phone.help_text }}
+                                    <span class="text-red">
+                                        {{ form.phone.errors }}
+                                    </span>
+                                    {{ form.phone }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                            <label for="{{ form.ket_klinis.label_tag.id }}">
+                                <h6>
+                                    {{ form.ket_klinis.label_tag }}
+                                    {% if form.ket_klinis.field.required %}
+                                        <span class="text-red" style="color: red;">*</span>
+                                    {% endif %}
+                                </h6>
+                            </label>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-8">
+                            <div class="form-group">
+                                {{ form.ket_klinis.help_text }}
+                                    <span class="text-red">
+                                        {{ form.ket_klinis.errors }}
+                                    </span>
+                                    {{ form.ket_klinis }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                            <label for="{{ form.spes_lab_diterima.label_tag.id }}">
+                                <h6>
+                                    {{ form.spes_lab_diterima.label_tag }}
+                                    {% if form.spes_lab_diterima.field.required %}
+                                        <span class="text-red" style="color: red;">*</span>
+                                    {% endif %}
+                                </h6>
+                            </label>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-8">
+                            <div class="form-group">
+                                {{ form.spes_lab_diterima.help_text }}
+                                    <span class="text-red">
+                                        {{ form.spes_lab_diterima.errors }}
+                                    </span>
+                                    {{ form.spes_lab_diterima }}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card-header bg-success py-3">
+                                <h6 class="m-0 font-weight-bold text-black">HEMATOLOGI</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <div class="row clearfix">
+                                        <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                            <div class="form-group">
+                                                {{ form.leukosit_hematologi.help_text }}
+                                                    <span class="text-red">
+                                                        {{ fields.leukosit_hematologi.errors }}
+                                                    </span>
+                                                    {{ form.leukosit_hematologi }}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-8">
+                                            <label for="{{ form.leukosit_hematologi.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.leukosit_hematologi.label_tag }}
+                                                    {% if form.leukosit_hematologi.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    {% for fields in form.visible_fields|slice:"0:3" %}
+                                    <div class="row clearfix">
+                                        <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                            <div class="form-group">
+                                                {{ fields.help_text }}
+                                                    <span class="text-red">
+                                                        {{ fields.errors }}
+                                                    </span>
+                                                    {{ fields }}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-8">
+                                            <label for="{{ fields.label_tag.id }}">
+                                                <h6>
+                                                    {{ fields.label_tag }}
+                                                    {% if fields.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"4:9" %}
+                                    <div class="row clearfix">
+                                        <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                            <div class="form-group">
+                                                {{ fields.help_text }}
+                                                    <span class="text-red">
+                                                        {{ fields.errors }}
+                                                    </span>
+                                                    {{ fields }}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-8">
+                                            <label for="{{ fields.label_tag.id }}">
+                                                <h6>
+                                                    &nbsp;&nbsp;&nbsp; - &nbsp; {{ fields.label_tag }}
+                                                    {% if fields.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"10:17" %}
+                                    <div class="row clearfix">
+                                        <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                            <div class="form-group">
+                                                {{ fields.help_text }}
+                                                    <span class="text-red">
+                                                        {{ fields.errors }}
+                                                    </span>
+                                                    {{ fields }}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-8">
+                                            <label for="{{ fields.label_tag.id }}">
+                                                <h6>
+                                                    {{ fields.label_tag }}
+                                                    {% if fields.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="card-header bg-success py-3">
+                                <h6 class="m-0 font-weight-bold text-black">BIOKIMIA</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    {% for fields in form.visible_fields|slice:"17:18" %}
+                                    <div class="row clearfix">
+                                        <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                            <div class="form-group">
+                                                {{ fields.help_text }}
+                                                    <span class="text-red">
+                                                        {{ fields.errors }}
+                                                    </span>
+                                                    {{ fields }}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-8">
+                                            <label for="{{ fields.label_tag.id }}">
+                                                <h6>
+                                                    {{ fields.label_tag }}
+                                                    {% if fields.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"19:22" %}
+                                    <div class="row clearfix">
+                                        <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                            <div class="form-group">
+                                                {{ fields.help_text }}
+                                                    <span class="text-red">
+                                                        {{ fields.errors }}
+                                                    </span>
+                                                    {{ fields }}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-8">
+                                            <label for="{{ fields.label_tag.id }}">
+                                                <h6>
+                                                    &nbsp;&nbsp;&nbsp; - &nbsp; {{ fields.label_tag }}
+                                                    {% if fields.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"23:40" %}
+                                    <div class="row clearfix">
+                                        <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                            <div class="form-group">
+                                                {{ fields.help_text }}
+                                                    <span class="text-red">
+                                                        {{ fields.errors }}
+                                                    </span>
+                                                    {{ fields }}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-8">
+                                            <label for="{{ fields.label_tag.id }}">
+                                                <h6>
+                                                    {{ fields.label_tag }}
+                                                    {% if fields.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-header bg-success py-3">
+                                <h6 class="m-0 font-weight-bold text-black">NAPAZA</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    {% for fields in form.visible_fields|slice:"40:44" %}
+                                    <div class="row clearfix">
+                                        <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                            <div class="form-group">
+                                                {{ fields.help_text }}
+                                                    <span class="text-red">
+                                                        {{ fields.errors }}
+                                                    </span>
+                                                    {{ fields }}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-8">
+                                            <label for="{{ fields.label_tag.id }}">
+                                                <h6>
+                                                    {{ fields.label_tag }}
+                                                    {% if fields.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="card-header bg-success py-3">
+                                <h6 class="m-0 font-weight-bold text-black">ELEKTROLIT</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    {% for fields in form.visible_fields|slice:"44:48" %}
+                                    <div class="row clearfix">
+                                        <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                            <div class="form-group">
+                                                {{ fields.help_text }}
+                                                    <span class="text-red">
+                                                        {{ fields.errors }}
+                                                    </span>
+                                                    {{ fields }}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-8">
+                                            <label for="{{ fields.label_tag.id }}">
+                                                <h6>
+                                                    {{ fields.label_tag }}
+                                                    {% if fields.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="card-header bg-success py-3">
+                                <h6 class="m-0 font-weight-bold text-black">WDAL</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    {% for fields in form.visible_fields|slice:"48:52" %}
+                                    <div class="row clearfix">
+                                        <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                            <div class="form-group">
+                                                {{ fields.help_text }}
+                                                    <span class="text-red">
+                                                        {{ fields.errors }}
+                                                    </span>
+                                                    {{ fields }}
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-8">
+                                            <label for="{{ fields.label_tag.id }}">
+                                                <h6>
+                                                    {{ fields.label_tag }}
+                                                    {% if fields.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="card-header bg-success py-3">
+                                <h6 class="m-0 font-weight-bold text-black">URIT RUTIN</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    {% for fields in form.visible_fields|slice:"52:53" %}
+                                        <div class="row clearfix">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                                <div class="form-group">
+                                                    {{ fields.help_text }}
+                                                        <span class="text-red">
+                                                            {{ fields.errors }}
+                                                        </span>
+                                                        {{ fields }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8">
+                                                <label for="{{ fields.label_tag.id }}">
+                                                    <h6>
+                                                        {{ fields.label_tag }}
+                                                        {% if fields.field.required %}
+                                                            <span class="text-red" style="color: red;">*</span>
+                                                        {% endif %}
+                                                    </h6>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"54:60" %}
+                                        <div class="row clearfix">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                                <div class="form-group">
+                                                    {{ fields.help_text }}
+                                                        <span class="text-red">
+                                                            {{ fields.errors }}
+                                                        </span>
+                                                        {{ fields }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8">
+                                                <label for="{{ fields.label_tag.id }}">
+                                                    <h6>
+                                                        &nbsp;&nbsp;&nbsp; - &nbsp; {{ fields.label_tag }}
+                                                        {% if fields.field.required %}
+                                                            <span class="text-red" style="color: red;">*</span>
+                                                        {% endif %}
+                                                    </h6>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"60:61" %}
+                                        <div class="row clearfix">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                                <div class="form-group">
+                                                    {{ fields.help_text }}
+                                                        <span class="text-red">
+                                                            {{ fields.errors }}
+                                                        </span>
+                                                        {{ fields }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8">
+                                                <label for="{{ fields.label_tag.id }}">
+                                                    <h6>
+                                                        {{ fields.label_tag }}
+                                                        {% if fields.field.required %}
+                                                            <span class="text-red" style="color: red;">*</span>
+                                                        {% endif %}
+                                                    </h6>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"62:65" %}
+                                        <div class="row clearfix">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                                <div class="form-group">
+                                                    {{ fields.help_text }}
+                                                        <span class="text-red">
+                                                            {{ fields.errors }}
+                                                        </span>
+                                                        {{ fields }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8">
+                                                <label for="{{ fields.label_tag.id }}">
+                                                    <h6>
+                                                        &nbsp;&nbsp;&nbsp; - &nbsp; {{ fields.label_tag }}
+                                                        {% if fields.field.required %}
+                                                            <span class="text-red" style="color: red;">*</span>
+                                                        {% endif %}
+                                                    </h6>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"65:66" %}
+                                        <div class="row clearfix">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                                <div class="form-group">
+                                                    {{ fields.help_text }}
+                                                        <span class="text-red">
+                                                            {{ fields.errors }}
+                                                        </span>
+                                                        {{ fields }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8">
+                                                <label for="{{ fields.label_tag.id }}">
+                                                    <h6>
+                                                        {{ fields.label_tag }}
+                                                        {% if fields.field.required %}
+                                                            <span class="text-red" style="color: red;">*</span>
+                                                        {% endif %}
+                                                    </h6>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"67:71" %}
+                                        <div class="row clearfix">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                                <div class="form-group">
+                                                    {{ fields.help_text }}
+                                                        <span class="text-red">
+                                                            {{ fields.errors }}
+                                                        </span>
+                                                        {{ fields }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8">
+                                                <label for="{{ fields.label_tag.id }}">
+                                                    <h6>
+                                                        &nbsp;&nbsp;&nbsp; - &nbsp; {{ fields.label_tag }}
+                                                        {% if fields.field.required %}
+                                                            <span class="text-red" style="color: red;">*</span>
+                                                        {% endif %}
+                                                    </h6>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"71:72" %}
+                                        <div class="row clearfix">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                                <div class="form-group">
+                                                    {{ fields.help_text }}
+                                                    <span class="text-red">
+                                                        {{ fields.errors }}
+                                                    </span>
+                                                    {{ fields }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8">
+                                                <label for="{{ fields.label_tag.id }}">
+                                                    <h6>
+                                                        {{ fields.label_tag }}
+                                                        {% if fields.field.required %}
+                                                            <span class="text-red" style="color: red;">*</span>
+                                                        {% endif %}
+                                                    </h6>
+                                                </label>    
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    <div class="col">
+                                        {{ form.ket_lain_lain_faces.help_text }}
+                                        <span class="text-red">
+                                            {{ form.ket_lain_lain_faces.errors }}
+                                        </span>
+                                        {{ form.ket_lain_lain_faces }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-header bg-success py-3">
+                                <h6 class="m-0 font-weight-bold text-black">FACES</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    {% for fields in form.visible_fields|slice:"72:73" %}
+                                        <div class="row clearfix">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                                <div class="form-group">
+                                                    {{ fields.help_text }}
+                                                        <span class="text-red">
+                                                            {{ fields.errors }}
+                                                        </span>
+                                                        {{ fields }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8">
+                                                <label for="{{ fields.label_tag.id }}">
+                                                    <h6>
+                                                        {{ fields.label_tag }}
+                                                        {% if fields.field.required %}
+                                                            <span class="text-red" style="color: red;">*</span>
+                                                        {% endif %}
+                                                    </h6>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"74:78" %}
+                                        <div class="row clearfix">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                                <div class="form-group">
+                                                    {{ fields.help_text }}
+                                                        <span class="text-red">
+                                                            {{ fields.errors }}
+                                                        </span>
+                                                        {{ fields }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8">
+                                                <label for="{{ fields.label_tag.id }}">
+                                                    <h6>
+                                                        &nbsp;&nbsp;&nbsp; - &nbsp; {{ fields.label_tag }}
+                                                        {% if fields.field.required %}
+                                                            <span class="text-red" style="color: red;">*</span>
+                                                        {% endif %}
+                                                    </h6>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"78:79" %}
+                                        <div class="row clearfix">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                                <div class="form-group">
+                                                    {{ fields.help_text }}
+                                                        <span class="text-red">
+                                                            {{ fields.errors }}
+                                                        </span>
+                                                        {{ fields }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8">
+                                                <label for="{{ fields.label_tag.id }}">
+                                                    <h6>
+                                                        {{ fields.label_tag }}
+                                                        {% if fields.field.required %}
+                                                            <span class="text-red" style="color: red;">*</span>
+                                                        {% endif %}
+                                                    </h6>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"79:80" %}
+                                        <div class="row clearfix">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                                <div class="form-group">
+                                                    {{ fields.help_text }}
+                                                        <span class="text-red">
+                                                            {{ fields.errors }}
+                                                        </span>
+                                                        {{ fields }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8">
+                                                <label for="{{ fields.label_tag.id }}">
+                                                    <h6>
+                                                        &nbsp;&nbsp;&nbsp; - &nbsp; {{ fields.label_tag }}
+                                                        {% if fields.field.required %}
+                                                            <span class="text-red" style="color: red;">*</span>
+                                                        {% endif %}
+                                                    </h6>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"80:81" %}
+                                        <div class="row clearfix">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                                <div class="form-group">
+                                                    {{ fields.help_text }}
+                                                        <span class="text-red">
+                                                            {{ fields.errors }}
+                                                        </span>
+                                                        {{ fields }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8">
+                                                <label for="{{ fields.label_tag.id }}">
+                                                    <h6>
+                                                        {{ fields.label_tag }}
+                                                        {% if fields.field.required %}
+                                                            <span class="text-red" style="color: red;">*</span>
+                                                        {% endif %}
+                                                    </h6>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"81:84" %}
+                                        <div class="row clearfix">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                                <div class="form-group">
+                                                    {{ fields.help_text }}
+                                                        <span class="text-red">
+                                                            {{ fields.errors }}
+                                                        </span>
+                                                        {{ fields }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8">
+                                                <label for="{{ fields.label_tag.id }}">
+                                                    <h6>
+                                                        &nbsp;&nbsp;&nbsp; - &nbsp; {{ fields.label_tag }}
+                                                        {% if fields.field.required %}
+                                                            <span class="text-red" style="color: red;">*</span>
+                                                        {% endif %}
+                                                    </h6>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"84:85" %}
+                                        <div class="row clearfix">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                                <div class="form-group">
+                                                    {{ fields.help_text }}
+                                                        <span class="text-red">
+                                                            {{ fields.errors }}
+                                                        </span>
+                                                    {{ fields }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8">
+                                                <label for="{{ fields.label_tag.id }}">
+                                                    <h6>
+                                                        {{ fields.label_tag }}
+                                                        {% if fields.field.required %}
+                                                            <span class="text-red" style="color: red;">*</span>
+                                                        {% endif %}
+                                                    </h6>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    <div class="col">
+                                        {{ form.ket_lain_lain_faces.help_text }}
+                                        <span class="text-red">
+                                            {{ form.ket_lain_lain_faces.errors }}
+                                        </span>
+                                        {{ form.ket_lain_lain_faces }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-header bg-success py-3">
+                                <h6 class="m-0 font-weight-bold text-black">SPUTUM</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    {% for fields in form.visible_fields|slice:"85:86" %}
+                                        <div class="row clearfix">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                                <div class="form-group">
+                                                    {{ fields.help_text }}
+                                                        <span class="text-red">
+                                                            {{ fields.errors }}
+                                                        </span>
+                                                        {{ fields }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8">
+                                                <label for="{{ fields.label_tag.id }}">
+                                                    <h6>
+                                                        {{ fields.label_tag }}
+                                                        {% if fields.field.required %}
+                                                            <span class="text-red" style="color: red;">*</span>
+                                                        {% endif %}
+                                                    </h6>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="card-header bg-success py-3">
+                                <h6 class="m-0 font-weight-bold text-black">MIKROBIOLOGI / PARASITOLOGI</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    {% for fields in form.visible_fields|slice:"86:87" %}
+                                        <div class="row clearfix">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                                <div class="form-group">
+                                                    {{ fields.help_text }}
+                                                        <span class="text-red">
+                                                            {{ fields.errors }}
+                                                        </span>
+                                                        {{ fields }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8">
+                                                <label for="{{ fields.label_tag.id }}">
+                                                    <h6>
+                                                        {{ fields.label_tag }}
+                                                        {% if fields.field.required %}
+                                                            <span class="text-red" style="color: red;">*</span>
+                                                        {% endif %}
+                                                    </h6>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="card-header bg-success py-3">
+                                <h6 class="m-0 font-weight-bold text-black">SEROLOGI</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    {% for fields in form.visible_fields|slice:"87:101" %}
+                                        <div class="row clearfix">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 form-control-label">
+                                                <div class="form-group">
+                                                    {{ fields.help_text }}
+                                                        <span class="text-red">
+                                                            {{ fields.errors }}
+                                                        </span>
+                                                        {{ fields }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8">
+                                                <label for="{{ fields.label_tag.id }}">
+                                                    <h6>
+                                                        {{ fields.label_tag }}
+                                                        {% if fields.field.required %}
+                                                            <span class="text-red" style="color: red;">*</span>
+                                                        {% endif %}
+                                                    </h6>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label for="{{ form.catatan.label_tag.id }}">
+                            <h6>
+                                {{ form.catatan.label_tag }}
+                                {% if form.catatan.field.required %}
+                                    <span class="text-red" style="color: red;">*</span>
+                                {% endif %}
+                            </h6>
+                        </label>
+                        {{ form.catatan.help_text }}
+                        <span class="text-red">
+                            {{ form.catatan.errors }}
+                        </span>
+                        {{ form.catatan }}
+                    </div>
+                    <br>
+                    <br>
+
+                    <input type="submit" value="Save" class="form-control btn btn-primary mr-2"></button>                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock  %}
+{% block js %}
+{{ form.media.js }}
+{% endblock %}
+

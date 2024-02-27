@@ -1,0 +1,489 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="{% static '/css/pdf.css'%}" />
+        <title>{{ title }}</title>
+    </head>
+    <body>
+        {% include 'component/head_pdf.html' %}
+        <section class="content">
+        <div class="kop col-md-12">
+            <center>
+            <div class="date-and-no">
+                <u><h1>{{ title }}</h1></u>
+                <p style="line-height: 1px;">No. {{ item.request_service.srv_code }}/xx/xx/XII/xxx</p>
+            </div>
+            </center>
+        </div>
+        <br />
+        <div class="content close">
+            <div class="content-header">
+                <div class="patient-data">
+                    <p style="font-size: medium;"><span class="label">No. Reg/RM</span>: <span class="contents">{{ pasien.full_name }}</span></p>
+                    <p style="font-size: medium;"><span class="label">Nama Pasien</span>: <span class="contents">{{ pasien.full_name }}</span></p>
+                    <p style="font-size: medium;"><span class="label">Tgl Lahir</span>: <span class="contents">{{ pasien.tanggal_lahir }}</span></p>
+                    <p style="font-size: medium;"><span class="label">Jenis Kelamin</span>: <span class="contents">{{ pasien.jenis_kelamin }}</span></p>
+                    <p style="font-size: medium;"><span class="label">Alamat</span>: <span class="contents">{{ pasien.alamat }}</span></p>
+                    <br>
+                    <p style="font-size: medium;"><span class="label">Permintaan</span>: <span class="contents">{{ form.permintaan.value }}</span></p>
+                </div>
+            </div>
+            <br>
+            
+            <div >
+                <div class="content-table">
+                    <div class="">
+                        <div class="">
+                            <table>
+                                <td>
+                                    <table class="table table-striped">
+                                        <thead class="bg-success">
+                                            <tr>
+                                                <th>A</th>
+                                                <th>HEMATOLOGI</th>
+                                                <th>HASIL</th>
+                                                <th>NILAI RUJUKAN</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for fields in form.visible_fields|slice:"0:3" %}
+                                                <tr>
+                                                    <td>{{ forloop.counter }}</td>
+                                                    <td>{{ fields.label_tag }}</td>
+                                                    {% if fields.value %}
+                                                        <td>{{ fields.value }}</td>
+                                                    {% else %}
+                                                        <td></td>
+                                                    {% endif %}
+                                                    
+                                                    <td>{{ fields.help_text }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            <tr>
+                                                <td>4</td>
+                                                <td>Diff</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            {% for fields in form.visible_fields|slice:"5:9" %}
+                                                <tr>
+                                                    <td>-</td>
+                                                    <td>&nbsp;&nbsp;-{{ fields.label_tag }}</td>
+                                                    {% if fields.value %}
+                                                        <td>{{ fields.value }}</td>
+                                                    {% else %}
+                                                        <td></td>
+                                                    {% endif %}
+                                                    
+                                                    <td>{{ fields.help_text }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            {% for fields in form.visible_fields|slice:"9:18" %}
+                                                <tr>
+                                                    <td>{{ forloop.counter0|add:5 }}</td>
+                                                    <td>{{ fields.label_tag }}</td>
+                                                    {% if fields.value %}
+                                                        <td>{{ fields.value }}</td>
+                                                    {% else %}
+                                                        <td></td>
+                                                    {% endif %}
+                                                    
+                                                    <td>{{ fields.help_text }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    <table class="table table-striped">
+                                        <thead class="bg-success">
+                                            <tr>
+                                                <th>B</th>
+                                                <th>BIOKIMIA</th>
+                                                <th>HASIL</th>
+                                                <th>NILAI RUJUKAN</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Profile Diabetik</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            {% for fields in form.visible_fields|slice:"18:22" %}
+                                                <tr>
+                                                    <td></td>
+                                                    <td>&nbsp;&nbsp;&nbsp; - &nbsp;{{ fields.label_tag }}</td>
+                                                    {% if fields.value %}
+                                                        <td>{{ fields.value }}</td>
+                                                    {% else %}
+                                                        <td></td>
+                                                    {% endif %}
+                                                    
+                                                    <td>{{ fields.help_text }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            {% for fields in form.visible_fields|slice:"22:40" %}
+                                                <tr>
+                                                    <td>{{ forloop.counter0|add:2 }}</td>
+                                                    <td>{{ fields.label_tag }}</td>
+                                                    {% if fields.value %}
+                                                        <td>{{ fields.value }}</td>
+                                                    {% else %}
+                                                        <td></td>
+                                                    {% endif %}
+                                                    
+                                                    <td>{{ fields.help_text }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    <br><br>
+                                    <table class="table table-striped">
+                                        <thead class="bg-success">
+                                            <tr>
+                                                <th>C</th>
+                                                <th>NAPZA</th>
+                                                <th>HASIL</th>
+                                                <th>NILAI RUJUKAN</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for fields in form.visible_fields|slice:"40:44" %}
+                                                <tr>
+                                                    <td>{{ forloop.counter }}</td>
+                                                    <td>{{ fields.label_tag }}</td>
+                                                    {% if fields.value %}
+                                                        <td>{{ fields.value }}</td>
+                                                    {% else %}
+                                                        <td></td>
+                                                    {% endif %}
+                                                    
+                                                    <td>{{ fields.help_text }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    <br><br>
+                                    <table class="table table-striped">
+                                        <thead class="bg-success">
+                                            <tr>
+                                                <th>D</th>
+                                                <th>ELEKTROLIT</th>
+                                                <th>HASIL</th>
+                                                <th>NILAI RUJUKAN</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for fields in form.visible_fields|slice:"44:49" %}
+                                                <tr>
+                                                    <td>{{ forloop.counter }}</td>
+                                                    <td>{{ fields.label_tag }}</td>
+                                                    {% if fields.value %}
+                                                        <td>{{ fields.value }}</td>
+                                                    {% else %}
+                                                        <td></td>
+                                                    {% endif %}
+                                                    
+                                                    <td>{{ fields.help_text }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    <br><br>
+                                    <table class="table table-striped">
+                                        <thead class="bg-success">
+                                            <tr>
+                                                <th>E</th>
+                                                <th>WDAL</th>
+                                                <th>HASIL</th>
+                                                <th>NILAI RUJUKAN</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for fields in form.visible_fields|slice:"49:53" %}
+                                                <tr>
+                                                    <td>{{ forloop.counter }}</td>
+                                                    <td>{{ fields.label_tag }}</td>
+                                                    {% if fields.value %}
+                                                        <td>{{ fields.value }}</td>
+                                                    {% else %}
+                                                        <td></td>
+                                                    {% endif %}
+                                                    
+                                                    <td>{{ fields.help_text }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    <br><br>            
+                                </td>
+                                <td>
+                                    <table class="table table-striped">
+                                        <thead class="bg-success">
+                                            <tr>
+                                                <th>F</th>
+                                                <th>URIN RUTIN</th>
+                                                <th>HASIL</th>
+                                                <th>NILAI RUJUKAN</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Makroskopis</td>
+                                                {% if fields.value %}
+                                                    <td>{{ fields.value }}</td>
+                                                {% else %}
+                                                    <td></td>
+                                                {% endif %}
+                                                
+                                                <td>{{ fields.help_text }}</td>
+                                            </tr>
+                                            {% for fields in form.visible_fields|slice:"53:60" %}
+                                                <tr>
+                                                    <td>&nbsp;&nbsp; - &nbsp;</td>
+                                                    <td>{{ fields.label_tag }}</td>
+                                                    {% if fields.value %}
+                                                        <td>{{ fields.value }}</td>
+                                                    {% else %}
+                                                        <td></td>
+                                                    {% endif %}
+                                                    
+                                                    <td>{{ fields.help_text }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Kimiawi</td>
+                                                <td></td>
+                                                <td>{{ fields.help_text }}</td>
+                                            </tr>
+                                            {% for fields in form.visible_fields|slice:"60:64" %}
+                                                <tr>
+                                                    <td>&nbsp;&nbsp; - &nbsp;</td>
+                                                    <td>{{ fields.label_tag }}</td>
+                                                    {% if fields.value %}
+                                                        <td>{{ fields.value }}</td>
+                                                    {% else %}
+                                                        <td></td>
+                                                    {% endif %}
+                                                    
+                                                    <td>{{ fields.help_text }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Mikroskopis</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            {% for fields in form.visible_fields|slice:"64:70" %}
+                                                <tr>
+                                                    <td>&nbsp;&nbsp; - &nbsp;</td>
+                                                    <td>{{ fields.label_tag }}</td>
+                                                    {% if fields.value %}
+                                                        <td>{{ fields.value }}</td>
+                                                    {% else %}
+                                                        <td></td>
+                                                    {% endif %}
+                                                    
+                                                    <td>{{ fields.help_text }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    <br><br>
+                                    <table class="table table-striped">
+                                        <thead class="bg-success">
+                                            <tr>
+                                                <th>G</th>
+                                                <th>Faces</th>
+                                                <th>HASIL</th>
+                                                <th>NILAI RUJUKAN</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Mikroskopis</td>
+                                                {% if fields.value %}
+                                                    <td>{{ fields.value }}</td>
+                                                {% else %}
+                                                    <td></td>
+                                                {% endif %}
+                                                
+                                                <td>{{ fields.help_text }}</td>
+                                            </tr>
+                                            {% for fields in form.visible_fields|slice:"70:75" %}
+                                                <tr>
+                                                    <td>&nbsp;&nbsp; - &nbsp;</td>
+                                                    <td>{{ fields.label_tag }}</td>
+                                                    {% if fields.value %}
+                                                        <td>{{ fields.value }}</td>
+                                                    {% else %}
+                                                        <td></td>
+                                                    {% endif %}
+                                                    
+                                                    <td>{{ fields.help_text }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Kimiawi</td>
+                                                {% if fields.value %}
+                                                    <td>{{ fields.value }}</td>
+                                                {% else %}
+                                                    <td></td>
+                                                {% endif %}
+                                                
+                                                <td>{{ fields.help_text }}</td>
+                                            </tr>
+                                            {% for fields in form.visible_fields|slice:"75:76" %}
+                                                <tr>
+                                                    <td>&nbsp;&nbsp; - &nbsp;</td>
+                                                    <td>{{ fields.label_tag }}</td>
+                                                    {% if fields.value %}
+                                                        <td>{{ fields.value }}</td>
+                                                    {% else %}
+                                                        <td></td>
+                                                    {% endif %}
+                                                    
+                                                    <td>{{ fields.help_text }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Mikroskopis</td>
+                                                {% if fields.value %}
+                                                    <td>{{ fields.value }}</td>
+                                                {% else %}
+                                                    <td></td>
+                                                {% endif %}
+                                                
+                                                <td>{{ fields.help_text }}</td>
+                                            </tr>
+                                            {% for fields in form.visible_fields|slice:"76:80" %}
+                                                <tr>
+                                                    <td>&nbsp;&nbsp; - &nbsp;</td>
+                                                    <td>{{ fields.label_tag }}</td>
+                                                    {% if fields.value %}
+                                                        <td>{{ fields.value }}</td>
+                                                    {% else %}
+                                                        <td></td>
+                                                    {% endif %}
+                                                    
+                                                    <td>{{ fields.help_text }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    <br><br>
+                                    <table class="table table-striped">
+                                        <thead class="bg-success">
+                                            <tr>
+                                                <th>H</th>
+                                                <th>SPUTUM</th>
+                                                <th>HASIL</th>
+                                                <th>NILAI RUJUKAN</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for fields in form.visible_fields|slice:"80:81" %}
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>{{ fields.label_tag }}</td>
+                                                    {% if fields.value %}
+                                                        <td>{{ fields.value }}</td>
+                                                    {% else %}
+                                                        <td></td>
+                                                    {% endif %}
+                                                    
+                                                    <td>{{ fields.help_text }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    <br><br>
+                                    <table class="table table-striped">
+                                        <thead class="bg-success">
+                                            <tr>
+                                                <th>I</th>
+                                                <th>MIKROBIOLOGI / PARASITOLOGI</th>
+                                                <th>HASIL</th>
+                                                <th>NILAI RUJUKAN</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for fields in form.visible_fields|slice:"81:82" %}
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>{{ fields.label_tag }}</td>
+                                                    {% if fields.value %}
+                                                        <td>{{ fields.value }}</td>
+                                                    {% else %}
+                                                        <td></td>
+                                                    {% endif %}
+                                                    
+                                                    <td>{{ fields.help_text }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    <br><br>
+                                    <table class="table table-striped">
+                                        <thead class="bg-success">
+                                            <tr>
+                                                <th>J</th>
+                                                <th>SEROLOGI</th>
+                                                <th>HASIL</th>
+                                                <th>NILAI RUJUKAN</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for fields in form.visible_fields|slice:"82:97" %}
+                                                <tr>
+                                                    <td>{{forloop.counter}}</td>
+                                                    <td>{{ fields.label_tag }}</td>
+                                                    {% if fields.value %}
+                                                        <td>{{ fields.value }}</td>
+                                                    {% else %}
+                                                        <td></td>
+                                                    {% endif %}
+                                                    
+                                                    <td>{{ fields.help_text }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </table>
+                            <br><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
+        <br /><br />
+
+        <footer>
+            <div class="ttd-l">
+                <center>
+                <p>&nbsp;</p><br>
+                <p class="ttd-l-name"></p>
+                </center>
+            </div>
+            <div class="ttd">
+                <center>
+                <p style="font-size: medium;">Kulim Jaya, {{ created_at|date:'d M Y' }}</p><br><br>
+                <p style="font-size: medium;">Pemeriksa: {{ ttd_keterangan }}</p>
+                <p style="font-size: medium;" class="ttd-name"><u>{{ pemeriksa }}</u></p>
+                </center>
+            </div>
+        </footer>
+    </body>
+</html>
