@@ -1,0 +1,379 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="{% static '/css/pdf.css'%}" />
+        <title>{{ title }}</title>
+    </head>
+    <body>
+        {% include 'component/head_pdf.html' %}
+        <section class="content">
+        <div class="kop col-md-12">
+            <center>
+            <div class="date-and-no">
+                <u><h1>{{ title }}</h1></u>
+                <p style="line-height: 1px;">No. {{ request_service.srv_code }}/xx/xx/XII/xxx</p>
+            </div>
+            </center>
+        </div>
+        <br />
+        <div class="content close">
+            <div class="content close">
+                <div class="content-header">
+                    <div class="patient-data">
+                        <p style="font-size: medium;"><span class="label">No. Reg/RM</span>: <span class="contents">{{ pasien.full_name }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Nama Pasien</span>: <span class="contents">{{ pasien.full_name }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Tgl Lahir</span>: <span class="contents">{{ pasien.tanggal_lahir }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Jenis Kelamin</span>: <span class="contents">{{ pasien.jenis_kelamin }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Alamat</span>: <span class="contents">{{ pasien.alamat }}</span></p>
+                    </div>
+                    <div class="patient-data">
+                        <p style="font-size: medium;"><span class="label">Dokter Pengirim</span>: <span class="contents">{{ form.dokter_pengirim.value }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Telp / Hp</span>: <span class="contents">{{ form.phone.value }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Tanggal / Jam </span>: <span class="contents">{{ form.kirim_tanggal.value }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Ruang Poli</span>: <span class="contents">{{ form.ruangan.value }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Keterangan Klinis</span>: <span class="contents">{{ form.ket_klinis.value }}</span></p>
+                        <br>
+                        <p style="font-size: medium;"><span class="label">Spesimen diterima lab</span>: <span class="contents">{{ form.spes_lab_diterima.value }}</span></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div >
+                <div class="content-table">
+                    <table>
+                        <th>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>A</th>
+                                        <th>Hematologi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ form.leukosit_hematologi }}</td>
+                                        <td>{{ form.leukosit_hematologi.label_tag }}</td>
+                                    </tr>
+                                    {% for fields in form.visible_fields|slice:"0:3" %}
+                                        <tr>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"4:9" %}
+                                    <tr>
+                                        <td>{{ fields }}</td>
+                                        <td>&nbsp; - &nbsp;{{ fields.label_tag }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"10:17" %}
+                                        <tr>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <br>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>B</th>
+                                        <th>BIOKIMIA</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for fields in form.visible_fields|slice:"17:18" %}
+                                        <tr>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"19:22" %}
+                                        <tr>
+                                            <td> &nbsp;&nbsp;&nbsp; - &nbsp; {{ fields }}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"23:40" %}
+                                        <tr>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </th>
+                        <th>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>C</th>
+                                        <th>NAPAZA</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for fields in form.visible_fields|slice:"40:44" %}
+                                        <tr>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <br>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>D</th>
+                                        <th>ELEKTROLIT</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for fields in form.visible_fields|slice:"44:48" %}
+                                        <tr>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <br>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>E</th>
+                                        <th>WDAL</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for fields in form.visible_fields|slice:"48:52" %}
+                                        <tr>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <br>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>F</th>
+                                        <th>URIT RUTIN</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for fields in form.visible_fields|slice:"52:53" %}
+                                        <tr>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"54:60" %}
+                                        <tr>
+                                            <td>{{ fields }}</td>
+                                            <td>&nbsp; - &nbsp;{{ fields.label_tag }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"60:61" %}
+                                        <tr>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"62:65" %}
+                                        <tr>
+                                            <td>{{ fields }}</td>
+                                            <td>&nbsp; - &nbsp;{{ fields.label_tag }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"65:66" %}
+                                        <tr>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"67:71" %}
+                                        <tr>
+                                            <td>{{ fields }}</td>
+                                            <td>&nbsp; - &nbsp;{{ fields.label_tag }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"71:72" %}
+                                        <tr>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    
+                                </tbody>
+                            </table>
+                            <table>
+                                <tr>
+                                    <th>{{ form.ket_lain_lain_urinte.value }}</th>
+                                </tr>
+                            </table>
+                            <br>
+                        </th>
+                        <th>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>G</th>
+                                        <th>FACES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for fields in form.visible_fields|slice:"72:73" %}
+                                        <tr>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"74:78" %}
+                                        <tr>
+                                            <td>{{ fields }}</td>
+                                            <td>&nbsp;-&nbsp;{{ fields.label_tag }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"78:79" %}
+                                        <tr>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"79:80" %}
+                                        <tr>
+                                            <td>{{ fields }}</td>
+                                            <td>&nbsp;-&nbsp;{{ fields.label_tag }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"80:81" %}
+                                        <tr>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"81:84" %}
+                                        <tr>
+                                            <td>{{ fields }}</td>
+                                            <td>&nbsp;-&nbsp;{{ fields.label_tag }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% for fields in form.visible_fields|slice:"84:85" %}
+                                        <tr>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <table>
+                                <tr>
+                                    <th>{{ form.ket_lain_lain_faces.value }}</th>
+                                </tr>
+                            </table>
+                            <br>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>H</th>
+                                        <th>SPUTUM</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for fields in form.visible_fields|slice:"85:86" %}
+                                        <tr>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <br><table>
+                                <thead>
+                                    <tr>
+                                        <th>I</th>
+                                        <th>MIKROBIOLOGI / PARASITOLOGI</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for fields in form.visible_fields|slice:"86:87" %}
+                                        <tr>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <br>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>J</th>
+                                        <th>SPUTUM</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for fields in form.visible_fields|slice:"85:86" %}
+                                        <tr>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <br><table>
+                                <thead>
+                                    <tr>
+                                        <th>K</th>
+                                        <th>SEROLOGI</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for fields in form.visible_fields|slice:"87:101" %}
+                                        <tr>
+                                            <td>{{ fields }}</td>
+                                            <td>{{ fields.label_tag }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </th>
+                    </table>
+                </div>
+            </div>
+        </div>
+        </section>
+        <br /><br />
+        <div class="patient-data">
+            <p style="font-size: medium;"><span class="label">Catatan</span>: <span class="contents">{{ form.catatan.value }}</span></p>
+        </div>
+
+        <footer>
+            <table>
+                <tr>
+                    <td>
+                        <center>
+                            <p style="font-size: medium;">Pasien / Keluarga</p><br><br><br><br>
+                            <p style="font-size: medium;" class="ttd-l-name">{{ rekam_medis.pasien.full_name }}</p>
+                            <p style="font-size: medium;" class="ttd-l-name">(--------------------------)</p>
+                        </center>
+                    </td>
+                    <td>
+                        <center>
+                            <p style="font-size: medium;">Tanda Tangan Pengirim</p><br><br><br><br>
+                            <p style="font-size: medium;" class="ttd-name">{{ rekam_medis.tenaga_medis }}</p>
+                            <p style="font-size: medium;" class="ttd-l-name">(--------------------------)</p>
+                        </center>            
+                    </td>
+                </tr>
+            </table>
+        </footer>
+    </body>
+</html>
