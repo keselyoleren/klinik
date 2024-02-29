@@ -1,6 +1,6 @@
 from django.contrib import admin
 from pasien.form.assesment_fisioterapi_form import InterfensiForm
-from pasien.models import AssesMentFisioTerapi, AssesmentRawatJalan, Intervensi, Pasien, PermintaanLabor, PermintaanLabor2, RekamMedis
+from pasien.models import AssesMentFisioTerapi, AssesmentRawatJalan, Intervensi, Pasien, PermintaanLabor, PermintaanLabor2, RekamMedis, Vas, WongBaker
 from django.utils.translation import gettext as _
 
 # Register your models here.
@@ -39,4 +39,12 @@ class PermintaanLaborAdminView(admin.ModelAdmin):
 
 @admin.register(PermintaanLabor2)
 class PermintaanLabor2AdminView(admin.ModelAdmin):
+    pass
+
+@admin.register(WongBaker)
+class WongBrakerAdminView(admin.ModelAdmin):
+    pass
+
+@admin.register(Vas)
+class VasAdminPanel(admin.ModelAdmin):
     pass

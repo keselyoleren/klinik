@@ -39,6 +39,7 @@ class RawatJalan(BaseModel):
 class AssesmentRawatJalan(BaseModel):
     pasien_rawat_jalan = models.ForeignKey(RawatJalan, verbose_name=_("Pasien"), on_delete=models.CASCADE, blank=True, null=True)
     alergi = models.CharField(_("Alergi"), max_length=255, blank=True, null=True, choices=StatusAlergi.choices)
+    jenis_alergi = models.CharField(_("Jenis Alergi"), max_length=255, blank=True, null=True)
 
     # skrining
     tinggi_badan = models.CharField(_("Tinggi Badan"), max_length=20, blank=True, null=True)
@@ -84,8 +85,38 @@ class AssesmentRawatJalan(BaseModel):
         return self.pasien_rawat_jalan.pasien.full_name
 
 
+class WongBaker(BaseModel):
+    asses_rawat_jalan = models.ForeignKey(AssesmentRawatJalan, verbose_name=_("Asses Rawat Jalan"), on_delete=models.CASCADE, blank=True, null=True)
+    interpretasi = models.CharField(_("Interpretasi Wong Baker"), max_length=255, blank=True, null=True)
+    skor = models.CharField(_("Skor"), max_length=255, blank=True, null=True)
 
-    
+    def __str__(self) -> str:
+        return self.interpretasi
+
+class Vas(BaseModel):
+    asses_rawat_jalan = models.ForeignKey(AssesmentRawatJalan, verbose_name=_("Asses Rawat Jalan"), on_delete=models.CASCADE, blank=True, null=True)
+    interpretasi = models.CharField(_("Interpretasi Vas"), max_length=255, blank=True, null=True)
+    skor = models.CharField(_("Skor"), max_length=255, blank=True, null=True)
+
+    def __str__(self) -> str:
+        return self.interpretasi
+
+class Cpot(BaseModel):
+    asses_rawat_jalan = models.ForeignKey(AssesmentRawatJalan, verbose_name=_("Asses Rawat Jalan"), on_delete=models.CASCADE, blank=True, null=True)
+    interpretasi = models.CharField(_("Interpretasi Cpot"), max_length=255, blank=True, null=True)
+    skor = models.CharField(_("Skor"), max_length=255, blank=True, null=True)
+
+    def __str__(self) -> str:
+        return self.interpretasi
+
+class Gcs(BaseModel):
+    asses_rawat_jalan = models.ForeignKey(AssesmentRawatJalan, verbose_name=_("Asses Rawat Jalan"), on_delete=models.CASCADE, blank=True, null=True)
+    interpretasi = models.CharField(_("Interpretasi Gcs"), max_length=255, blank=True, null=True)
+    skor = models.CharField(_("Skor"), max_length=255, blank=True, null=True)
+
+    def __str__(self) -> str:
+        return self.interpretasi
+
 
 class RekamMedis(BaseModel):
     pasien = models.ForeignKey(Pasien, verbose_name=_("Nama Pasien"), on_delete=models.CASCADE, blank=True, null=True)

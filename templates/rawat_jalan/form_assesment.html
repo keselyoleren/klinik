@@ -29,25 +29,257 @@
                         {% csrf_token %}
                         <fieldset class="form-group border p-3">
                             <legend>Perawat</legend>
-                            <div class="form-group">
+                            <div class="form-group row">
                                 <div class="col">
-                                    <label for="{{ form.alergi.label_tag.id }}">
-                                        <h6>
-                                            {{ form.alergi.label_tag }}
-                                            {% if form.alergi.field.required %}
-                                                <span class="text-red" style="color: red;">*</span>
-                                            {% endif %}
-                                        </h6>
-                                    </label>
-                                    {{ form.alergi.help_text }}
-                                    <span class="text-red">
-                                        {{ form.alergi.errors }}
-                                    </span>
+                                    <h4 class="card-title"><b>Alergi</b></h4>
                                     {{ form.alergi }}
+                                </div>
+                                <div class="col">
+                                    <label for="{{ form.jenis_alergi.label_tag.id }}">
+                                        <h6>Sebutkan</h6>
+                                    </label>
+                                    {{ form.jenis_alergi }}
                                 </div>
                             </div>
                             
-                            <h4 class="card-title">Skrining</h4>
+                            <h4 class="card-title"><b>Skrining</b></h4>
+                            <label for="">Nyeri</label>
+                            <img src="{% static 'images/poin_scale.png'%}" alt="" class="img-fluid">
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <div class="card-header bg-success py-3">
+                                        <h6 class="m-0 font-weight-bold text-black">Wong Baker FACES</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="background-color: yellow;">INTERPRETASI Wong-Baker FACES</th>
+                                                        <th style="background-color: green;">SKOR</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Tidak Nyeri s/d Nyeri Ringan</td>
+                                                        <td>0 - 4</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Nyeri Sedang</td>
+                                                        <td>5 - 6</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Nyeri Berat</td>
+                                                        <td>7 - 10</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <table class="table table-hover text-nowrap">
+                                        {{ wongbraker_formset.management_form }}
+                                        {% for form in wongbraker_formset.forms %}
+                                            {% if forloop.first %}
+                                                <thead>
+                                                <tr>
+                                                    {% for field in form.visible_fields %}
+                                                        <th>{{ field.label|capfirst }}</th>
+                                                    {% endfor %}
+                                                </tr>
+                                                </thead>
+                                            {% endif %}
+                                            <tr class="{% cycle row1 row2 %} formset_wong_braker_row">
+                                                
+                                                {% for field in form.visible_fields %}
+                                                    <td>
+                                                        {# Include the hidden fields in the form #}
+                                                        {% if forloop.first %}
+                                                            {% for hidden in form.hidden_fields %}
+                                                                {{ hidden }}
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                        {{ field.errors.as_ul }}
+                                                        {{ field }}
+                                                    </td>
+                                                {% endfor %}
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card-header bg-success py-3">
+                                        <h6 class="m-0 font-weight-bold text-black">VAS</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="background-color: yellow;">INTERPRETASI VAS</th>
+                                                        <th style="background-color: green;">SKOR</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Tidak Nyeri</td>
+                                                        <td>0 - 1</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Sedikit Nyeri</td>
+                                                        <td>2 - 3</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Sedikit Lebih Nyeri</td>
+                                                        <td>4 - 5</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Lebih Nyeri</td>
+                                                        <td>6 - 7</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Sangat Nyeri</td>
+                                                        <td>8 - 9</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Nyeri Hebat</td>
+                                                        <td>10</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <table class="table table-hover text-nowrap">
+                                        {{ vas_formset.management_form }}
+                                        {% for form in vas_formset.forms %}
+                                            {% if forloop.first %}
+                                                <thead>
+                                                <tr>
+                                                    {% for field in form.visible_fields %}
+                                                        <th>{{ field.label|capfirst }}</th>
+                                                    {% endfor %}
+                                                </tr>
+                                                </thead>
+                                            {% endif %}
+                                            <tr class="{% cycle row1 row2 %} formset_vas_row">
+                                                
+                                                {% for field in form.visible_fields %}
+                                                    <td>
+                                                        {# Include the hidden fields in the form #}
+                                                        {% if forloop.first %}
+                                                            {% for hidden in form.hidden_fields %}
+                                                                {{ hidden }}
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                        {{ field.errors.as_ul }}
+                                                        {{ field }}
+                                                    </td>
+                                                {% endfor %}
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <div class="card-header bg-success py-3">
+                                        <h6 class="m-0 font-weight-bold text-black">INSTRUMEN NYERI PASIEN PENURUNAN KESADARAN / KRITIS/ TIDAK BISA KOMUNIKASI SECARA VERBAL</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <img src="{% static 'images/penurunan_kesadaran.png'%}" alt="" class="img-fluid">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <img src="{% static 'images/instrument_cpot.png'%}" alt="" class="img-fluid">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <table class="table table-hover text-nowrap">
+                                                {{ cpot_formset.management_form }}
+                                                {% for form in cpot_formset.forms %}
+                                                    {% if forloop.first %}
+                                                        <thead>
+                                                        <tr>
+                                                            {% for field in form.visible_fields %}
+                                                                <th>{{ field.label|capfirst }}</th>
+                                                            {% endfor %}
+                                                        </tr>
+                                                        </thead>
+                                                    {% endif %}
+                                                    <tr class="{% cycle row1 row2 %} cpot_formset_row">
+                                                        
+                                                        {% for field in form.visible_fields %}
+                                                            <td>
+                                                                {# Include the hidden fields in the form #}
+                                                                {% if forloop.first %}
+                                                                    {% for hidden in form.hidden_fields %}
+                                                                        {{ hidden }}
+                                                                    {% endfor %}
+                                                                {% endif %}
+                                                                {{ field.errors.as_ul }}
+                                                                {{ field }}
+                                                            </td>
+                                                        {% endfor %}
+                                                    </tr>
+                                                {% endfor %}
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <div class="card-header bg-success py-3">
+                                        <h6 class="m-0 font-weight-bold text-black">INSTRUMEN PENILAIAN KESADARAN Glasgow Coma Scale (GCS)PASIEN ANAK & DEWASA</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <img src="{% static 'images/instrument_anak.png'%}" alt="" class="img-fluid">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <img src="{% static 'images/instrument_dewasa.png'%}" alt="" class="img-fluid">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <img src="{% static 'images/interpretasi_gcs.png'%}" alt="" class="img-fluid">
+                                            </div>
+                                            <div class="col-md-7">
+                                                <table class="table table-hover text-nowrap">
+                                                    {{ gcs_formset.management_form }}
+                                                    {% for form in gcs_formset.forms %}
+                                                        {% if forloop.first %}
+                                                            <thead>
+                                                            <tr>
+                                                                {% for field in form.visible_fields %}
+                                                                    <th>{{ field.label|capfirst }}</th>
+                                                                {% endfor %}
+                                                            </tr>
+                                                            </thead>
+                                                        {% endif %}
+                                                        <tr class="{% cycle row1 row2 %} gcs_row">
+                                                            
+                                                            {% for field in form.visible_fields %}
+                                                                <td>
+                                                                    {# Include the hidden fields in the form #}
+                                                                    {% if forloop.first %}
+                                                                        {% for hidden in form.hidden_fields %}
+                                                                            {{ hidden }}
+                                                                        {% endfor %}
+                                                                    {% endif %}
+                                                                    {{ field.errors.as_ul }}
+                                                                    {{ field }}
+                                                                </td>
+                                                            {% endfor %}
+                                                        </tr>
+                                                    {% endfor %}
+                                                </table>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            
                             <div class="form-group row">
                                 <div class="col">
                                     <label for="{{ form.tinggi_badan.label_tag.id }}">
@@ -96,7 +328,7 @@
                                 </div>
                             </div>
 
-                            <h4 class="card-title">Tanda-tanda vital</h4>
+                            <h4 class="card-title"><b>Tanda-tanda vital</b></h4>
                             <div class="form-group row">
                                 <div class="col">
                                     <label for="{{ form.suhu_tubuh.label_tag.id }}">
@@ -491,5 +723,32 @@
 {% endblock  %}
 {% block js %}
 {{ form.media.js }}
+<script src="{% static 'js/formset.js' %}"></script>
+<script type="text/javascript">
+    $('.formset_wong_braker_row').formset({
+        addText: 'Add INTERPRETASI',
+        deleteText: '<i class="fas fa-trash-alt"></i>',
+        prefix: 'INTERPRETASI_set'
+    });
+    $('.formset_vas_row').formset({
+        addText: 'Add INTERPRETASI',
+        deleteText: '<i class="fas fa-trash-alt"></i>',
+        prefix: 'INTERPRETASI_set'
+    });
+    $('.cpot_formset_row').formset({
+        addText: 'Add INTERPRETASI',
+        deleteText: '<i class="fas fa-trash-alt"></i>',
+        prefix: 'INTERPRETASI_set'
+    });
+    $('.gcs_row').formset({
+        addText: 'Add INTERPRETASI',
+        deleteText: '<i class="fas fa-trash-alt"></i>',
+        prefix: 'INTERPRETASI_set'
+    });
+</script>
+<script type="text/javascript">
+    
+</script>
+
 {% endblock %}
 
