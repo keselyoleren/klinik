@@ -318,7 +318,7 @@ class ResumeFisioterapi(BaseModel):
     
     hambatan = models.CharField(_("Hambatan keberhasilan"), max_length=255, blank=True, null=True)
     tindak_lanjut = models.CharField(_("Rekomendasi tindak lanjut"), max_length=255, blank=True, null=True)
-    
+    kondisi_akhir = models.CharField(_("Kondisi Akhir"), max_length=255, blank=True, null=True)
     tenaga_medis = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Fisioterapis"), on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self) -> str:
@@ -344,7 +344,7 @@ class InformedConsent(BaseModel):
     jenis_kelamin = models.CharField(_("Jenis Kelamin"), choices=JenisKelamin.choices, max_length=255, blank=True, null=True)
 
     status_persetujuan = models.CharField(_("Status Persetujuan"), choices=StatusPersetujuan.choices, max_length=255, blank=True, null=True)
-
+    yng_menujui = models.CharField(_("Yang menyetujui / menolak"), blank=True, null=True, max_length=255)
     tenaga_medis = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Fisioterapis"), on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self) -> str:
