@@ -3,7 +3,8 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, D
 from django.urls import reverse_lazy
 from config.permis import IsAuthenticated, IsAuthenticated
 from config.report import GeneratePDF
-from surat.form.surat_form import KetarangaSehatForm
+from pasien.models import Pasien
+from surat.form.surat_form import GenerateKetarangaSehatForm, KetarangaSehatForm
 from surat.models import KeteranganSehat
 
 
@@ -76,5 +77,42 @@ class DownloadKeteranganSehat(IsAuthenticated, DetailView, GeneratePDF):
             self.template_name,
             '/css/pdf.css',
             f'Surat Keterangan Sehat - {self.get_object().pasien.full_name}'
+        )
+
+
+class KeteranganSehatGenerateView(IsAuthenticated, CreateView, GeneratePDF):
+    model = KeteranganSehat
+    template_name = 'component/form.html'
+    generate_template_name = 'surat/keterangan_sehat/download.html'
+    form_class = GenerateKetarangaSehatForm
+    success_url = reverse_lazy('keterangan-sehat-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Keterangan Sehat'
+        context['header_title'] = 'Tambah Keterangan Sehat'
+        return context
+
+    def get_pasien(self):
+        return Pasien.objects.get(id=self.kwargs['pasien_id'])
+
+
+    def form_valid(self, form):
+        form.instance.pasien = self.get_pasien()
+        form.save()
+        super().form_valid(form)
+        return self.render_pdf()
+
+    def render_pdf(self):
+        return self.render_to_pdf(
+            {
+                'item': self.object,
+                'ttd_keterangan':'Yang Memeriksa',
+                'title': 'Surat Keterangan Sehat',
+                'host' : f"{self.request.scheme}://{self.request.META['HTTP_HOST']}"
+            },
+            self.generate_template_name,
+            '/css/pdf.css',
+            f'Surat Keterangan Sehat - {self.object.pasien.full_name}'
         )
 

@@ -16,6 +16,15 @@ class KetarangaSakitForm(AbstractForm):
         choices_pasien = [(p.id, p.full_name) for p in Pasien.objects.all()]
         self.fields['pasien'].choices = choices_pasien
 
+class GenerateKetarangaSakitForm(AbstractForm):
+    class Meta:
+        model = KeteraganSakit
+        fields = '__all__'
+        
+    def __init__(self, *args, **kwargs):
+        super(GenerateKetarangaSakitForm, self).__init__(*args, **kwargs)
+        self.fields['pasien'].widget = forms.HiddenInput()
+
 
 class KetarangaSehatForm(AbstractForm):
     pasien = forms.ModelChoiceField(widget=Select2Widget(), queryset=Pasien.objects.all())
@@ -27,6 +36,15 @@ class KetarangaSehatForm(AbstractForm):
         super(KetarangaSehatForm, self).__init__(*args, **kwargs)
         choices_pasien = [(p.id, p.full_name) for p in Pasien.objects.all()]
         self.fields['pasien'].choices = choices_pasien
+
+class GenerateKetarangaSehatForm(AbstractForm):
+    class Meta:
+        model = KeteranganSehat
+        fields = '__all__'
+    
+    def __init__(self, *args, **kwargs):
+        super(GenerateKetarangaSehatForm, self).__init__(*args, **kwargs)
+        self.fields['pasien'].widget = forms.HiddenInput()
 
 
 class SuratRujukanForm(AbstractForm):
@@ -42,6 +60,18 @@ class SuratRujukanForm(AbstractForm):
         choices_tenaga_medis = [(p.id, p.nama) for p in TenagaMedis.objects.all()]
         self.fields['tenaga_medis'].choices = choices_tenaga_medis
         self.fields['pasien'].choices = choices_pasien
+
+class GenerateSuratRujukanForm(AbstractForm):
+    tenaga_medis = forms.ModelChoiceField(widget=Select2Widget(), queryset=TenagaMedis.objects.all())
+    class Meta:
+        model = SuratRujukan
+        fields = '__all__'
+    
+    def __init__(self, *args, **kwargs):
+        super(GenerateSuratRujukanForm, self).__init__(*args, **kwargs)
+        choices_tenaga_medis = [(p.id, p.nama) for p in TenagaMedis.objects.all()]
+        self.fields['tenaga_medis'].choices = choices_tenaga_medis
+        self.fields['pasien'].widget = forms.HiddenInput()
 
 class SuratKelahiranForm(AbstractForm):
     pasien = forms.ModelChoiceField(widget=Select2Widget(), queryset=Pasien.objects.all())
@@ -104,6 +134,19 @@ class SuratBebasNarkobaForm(AbstractForm):
         self.fields['tenaga_medis'].choices = choices_tenaga_medis
         self.fields['pasien'].choices = choices_pasien
 
+class GenerateSuratBebasNarkobaForm(AbstractForm):
+    
+    tenaga_medis = forms.ModelChoiceField(widget=Select2Widget(), queryset=TenagaMedis.objects.all())
+    class Meta:
+        model = SuratBebasNarkoba
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(GenerateSuratBebasNarkobaForm, self).__init__(*args, **kwargs)
+        choices_tenaga_medis = [(p.id, p.nama) for p in TenagaMedis.objects.all()]
+        self.fields['tenaga_medis'].choices = choices_tenaga_medis
+        self.fields['pasien'].widget = forms.HiddenInput()
+
 class SuratPersetujuanForm(AbstractForm):
     pasien = forms.ModelChoiceField(widget=Select2Widget(), queryset=Pasien.objects.all())
     tenaga_medis = forms.ModelChoiceField(widget=Select2Widget(), queryset=TenagaMedis.objects.all())
@@ -118,6 +161,16 @@ class SuratPersetujuanForm(AbstractForm):
         self.fields['tenaga_medis'].choices = choices_tenaga_medis
         self.fields['pasien'].choices = choices_pasien
 
+class GenerateSuratPersetujuanForm(AbstractForm):
+    tenaga_medis = forms.ModelChoiceField(widget=Select2Widget(), queryset=TenagaMedis.objects.all())
+    class Meta:
+        model = SuratPersetujuan
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(GenerateSuratPersetujuanForm, self).__init__(*args, **kwargs)
+        self.fields['pasien'].widget = forms.HiddenInput()
+
 
 class SuratPenolakanForm(AbstractForm):
     pasien = forms.ModelChoiceField(widget=Select2Widget(), queryset=Pasien.objects.all())
@@ -129,3 +182,12 @@ class SuratPenolakanForm(AbstractForm):
         super(SuratPenolakanForm, self).__init__(*args, **kwargs)
         choices_pasien = [(p.id, p.full_name) for p in Pasien.objects.all()]
         self.fields['pasien'].choices = choices_pasien
+
+class GenerateSuratPenolakanForm(AbstractForm):
+    class Meta:
+        model = SuratPenolakan
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(GenerateSuratPenolakanForm, self).__init__(*args, **kwargs)
+        self.fields['pasien'].widget = forms.HiddenInput()

@@ -15,7 +15,7 @@
                 <center>
                 <div class="date-and-no">
                     <u><h3>{{ title }}</h3></u>
-                    <p style="font-size:medium; line-height: 1px;">No. {{ item.request_service.srv_code }}/xx/xx/XII/xxx</p>
+                    {% include 'component/cop_pdf.html' %}
                 </div>
                 </center>
             </div>
@@ -42,9 +42,9 @@
             
             <div class="content close">
                 <div class="content-header">
-                    <div class="content-data">
-                        <p style="font-size: medium;"><span class="label">Nama</span>: <span class="contents">{{ item.tindakan_medik }}</span></p>
-                        <p style="font-size: medium;"><span class="label">Jenis Kelamin</span>: <span class="contents">{{ item.terhadap }}</span></p>
+                    <div class="patient-data">
+                        <p style="font-size: medium;"><span class="label">Nama</span>: <span class="contents">{{ item.pasien.full_name }}</span></p>
+                        <p style="font-size: medium;"><span class="label">Jenis Kelamin</span>: <span class="contents">{{ item.pasien.jenis_kelamin }}</span></p>
                         <p style="font-size: medium;"><span class="label">Umur</span>: <span class="contents">{{ item.pasien.umur }}</span></p>
                         <p style="font-size: medium;"><span class="label">Alamat</span>: <span class="contents">{{ item.pasien.alamat }}</span></p>
                         <p style="font-size: medium;"><span class="label">Diagnosa</span>: <span class="contents">{{ item.pasien.no_mr }}</span></p>
@@ -75,7 +75,7 @@
                 </center>
             </div>
         </footer>
-        <table style="border: none;">
+        <table style="border: none;" border="0">
             <tr style="border: none;">
                 <td>
                     <div class="ttd-l">

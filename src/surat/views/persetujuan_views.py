@@ -3,7 +3,8 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, D
 from django.urls import reverse_lazy
 from config.permis import IsAuthenticated, IsAuthenticated
 from config.report import GeneratePDF
-from surat.form.surat_form import SuratPersetujuan, SuratPersetujuanForm
+from pasien.models import Pasien
+from surat.form.surat_form import GenerateSuratPersetujuanForm, SuratPersetujuan, SuratPersetujuanForm
 from surat.models import SuratPersetujuan
 
 
@@ -78,3 +79,36 @@ class DownloadSuratPersetujuan(IsAuthenticated, DetailView, GeneratePDF):
             f'Surat Persetujuan Tindakan Medik - {self.get_object().pasien}'
         )
 
+class SuratPersetujuanGenerateView(IsAuthenticated, CreateView, GeneratePDF):
+    model = SuratPersetujuan
+    template_name = 'component/form.html'
+    form_class = GenerateSuratPersetujuanForm
+    gemerate_template_name = 'surat/persetujuan/download.html'
+    success_url = reverse_lazy('persetujuan-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Keterangan Sehat'
+        context['header_title'] = 'Tambah Keterangan Sehat'
+        return context
+    
+    def get_pasien(self):
+        return Pasien.objects.get(id=self.kwargs['pasien_id'])
+
+    def form_valid(self, form):
+        form.instance.pasien = self.get_pasien()
+        form.save()
+        return self.x()
+
+    def generate_pdf(self):
+        return self.render_to_pdf(
+            {
+                'item': self.object,
+                'ttd_keterangan':'Mengetahui',
+                'title': 'Surat Persetujuan Tindakan Medik',
+                'host' : f"{self.request.scheme}://{self.request.META['HTTP_HOST']}"
+            },
+            self.gemerate_template_name,
+            '/css/pdf.css',
+            f'Surat Persetujuan Tindakan Medik - {self.object.pasien}'
+        )

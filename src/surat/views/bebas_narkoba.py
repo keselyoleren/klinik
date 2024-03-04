@@ -3,7 +3,8 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, D
 from django.urls import reverse_lazy
 from config.permis import IsAuthenticated, IsAuthenticated
 from config.report import GeneratePDF
-from surat.form.surat_form import SuratBebasNarkoba, SuratBebasNarkobaForm
+from pasien.models import Pasien
+from surat.form.surat_form import GenerateSuratBebasNarkobaForm, SuratBebasNarkoba, SuratBebasNarkobaForm
 from surat.models import SuratBebasNarkoba
 
 
@@ -78,3 +79,37 @@ class DownloadSuratBebasNarkoba(IsAuthenticated, DetailView, GeneratePDF):
             f'Surat Bebeas Narkoba - {self.get_object().pasien}'
         )
 
+class SuratBebasNarkobaGenerateView(IsAuthenticated, CreateView, GeneratePDF):
+    model = SuratBebasNarkoba
+    template_name = 'component/form.html'
+    generate_template_name = 'surat/bebas_narkoba/download.html'
+    form_class = GenerateSuratBebasNarkobaForm
+    success_url = reverse_lazy('narkoba-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Keterangan Sehat'
+        context['header_title'] = 'Tambah Keterangan Sehat'
+        return context
+
+    def get_pasien(self):
+        return Pasien.objects.get(id=self.kwargs['pasien_id'])
+    
+    def form_valid(self, form):
+        form.instance.pasien = self.get_pasien()
+        form.save()
+        super().form_valid(form)
+        return self.generate_pdf()
+    
+    def generate_pdf(self):
+        return self.render_to_pdf(
+            {
+                'item': self.object,
+                'ttd_keterangan':'Mengetahui',
+                'title': 'Surat Bebeas Narkoba',
+                'host' : f"{self.request.scheme}://{self.request.META['HTTP_HOST']}"
+            },
+            self.generate_template_name,
+            '/css/pdf.css',
+            f'Surat Bebeas Narkoba - {self.object.pasien}'
+        )

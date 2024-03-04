@@ -68,6 +68,7 @@ class PasienUpdateView(IsAuthenticated, UpdateView):
             context['btn_update_pasien_fisio_terapi'] = reverse_lazy('fisio_terapi-update', kwargs={'pk': pasien_fisio_terapi.id})
 
         context['pasien'] = self.get_object()
+        context['pasien_id'] = self.get_object().id
         context['header_title'] = 'Edit Pasien'
         return context
 

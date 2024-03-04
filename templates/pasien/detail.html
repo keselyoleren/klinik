@@ -100,6 +100,65 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="card">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Surat Menyurat</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="template-demo">
+                            
+                            <a href="{% url 'generate-surat-sehat' pasien_id %}" class="btn btn-primary btn-block">
+                                <i class="fa fa-book"></i>                      
+                                Surat Sehat
+                            </a>
+
+                            <a href="{% url 'generate-surat-sakit' pasien_id %}" class="btn btn-primary btn-block">
+                                <i class="fa fa-book"></i>                      
+                                Surat Sakit
+                            </a>
+
+                            <a href="{% url 'generate-rujukan' pasien_id %}" class="btn btn-primary btn-block">
+                                <i class="fa fa-book"></i>                      
+                                Surat rujukan
+                            </a>
+
+                            <a href="{% url 'generate-surat-narkoba' pasien_id %}" class="btn btn-primary btn-block">
+                                <i class="fa fa-book"></i>                      
+                                Bebas Narkoba
+                            </a>
+
+                            <a href="{% url 'persetujuan-generate' pasien_id %}" class="btn btn-primary btn-block">
+                                <i class="fa fa-book"></i>                      
+                                Surat Persetujuan
+                            </a>
+
+                            <a href="{% url 'penolakan-generate' pasien_id %}" class="btn btn-primary btn-block">
+                                <i class="fa fa-book"></i>                      
+                                Surat Penolakan
+                            </a>
+      
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Pemeriksaan Laboratorium</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="template-demo">
+                            <a href="{% url 'permintaan-labor-list' pasien_id %}" class="btn btn-success btn-block">
+                                <i class="fa fa-book"></i>                      
+                                Pemeriksaan Labor 1
+                            </a>
+                            <a href="{% url 'permintaan-labor2-list' pasien_id %}" class="btn btn-success btn-block">
+                                <i class="fa fa-book"></i>                      
+                                Pemeriksaan Labor 2
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
             
         </div>

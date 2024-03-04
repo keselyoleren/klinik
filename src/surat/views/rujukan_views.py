@@ -3,7 +3,8 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, D
 from django.urls import reverse_lazy
 from config.permis import IsAuthenticated, IsAuthenticated
 from config.report import GeneratePDF
-from surat.form.surat_form import SuratRujukanForm
+from pasien.models import Pasien
+from surat.form.surat_form import GenerateSuratRujukanForm, SuratRujukanForm
 from surat.models import SuratRujukan
 
 
@@ -78,3 +79,36 @@ class DownloadSuratRujukan(IsAuthenticated, DetailView, GeneratePDF):
             f'Surat Rujukan - {self.get_object().pasien.full_name}'
         )
 
+class GenerateSuratRujukan(IsAuthenticated, CreateView, GeneratePDF):
+    model = SuratRujukan
+    generate_template_name = 'surat/rujukan/download.html'
+    template_name = 'component/form.html'
+    form_class = GenerateSuratRujukanForm
+    success_url = reverse_lazy('rujukan-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['header'] = 'Surat Rujukan'
+        context['header_title'] = 'Tambah Surat Rujukan'
+        return context
+
+    def get_pasien(self):
+        return Pasien.objects.get(id=self.kwargs['pasien_id'])
+    
+    def form_valid(self, form):
+        form.instance.pasien = self.get_pasien()
+        super().form_valid(form)
+        return self.generate_pdf()
+
+    def generate_pdf(self):
+        return self.render_to_pdf(
+            {
+                'item': self.object,
+                'ttd_keterangan':'Mengetahui,',
+                'title': 'Surat Rujukan',
+                'host' : f"{self.request.scheme}://{self.request.META['HTTP_HOST']}"
+            },
+            self.generate_template_name,
+            '/css/pdf.css',
+            f'Surat Rujukan - {self.object.pasien.full_name}'
+        )

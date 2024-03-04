@@ -18,6 +18,7 @@ urlpatterns = [
             path('update/<uuid:pk>/', KeteraganSakitUpdateView.as_view(), name='keterangan-sakit-update'),
             path('delete/<uuid:pk>/', KeteraganSakitDeleteView.as_view(), name='keterangan-sakit-delete'),
             path('download/<uuid:pk>/', DownloadKeteranganSakit.as_view(), name='keterangan-sakit-download'),
+            path('generate/<uuid:pasien_id>/', KeteraganSakitGenerateView.as_view(), name='generate-surat-sakit'),
         ])),
 
         path("keterangan-sehat/", include([
@@ -26,6 +27,7 @@ urlpatterns = [
             path('update/<uuid:pk>/', KeteranganSehatUpdateView.as_view(), name='keterangan-sehat-update'),
             path('delete/<uuid:pk>/', KeteranganSehatUpdateView.as_view(), name='keterangan-sehat-delete'),
             path('download/<uuid:pk>/', DownloadKeteranganSehat.as_view(), name='keterangan-sehat-download'),
+            path('generate/<uuid:pasien_id>/', KeteraganSakitGenerateView.as_view(), name='generate-surat-sehat'),
         ])),
 
         path("surat-rujukan/", include([
@@ -34,6 +36,7 @@ urlpatterns = [
             path('update/<uuid:pk>/', SuratRujukanUpdateView.as_view(), name='rujukan-update'),
             path('delete/<uuid:pk>/', SuratRujukanDeleteView.as_view(), name='rujukan-delete'),
             path('download/<uuid:pk>/', DownloadSuratRujukan.as_view(), name='rujukan-download'),
+            path('generate/<uuid:pasien_id>/', GenerateSuratRujukan.as_view(), name='generate-rujukan'),
         ])),
 
         path("surat-kelahiran/", include([
@@ -74,6 +77,7 @@ urlpatterns = [
             path('update/<uuid:pk>/', SuratBebasNarkobaUpdateView.as_view(), name='narkoba-update'),
             path('delete/<uuid:pk>/', SuratBebasNarkobaDeleteView.as_view(), name='narkoba-delete'),
             path('download/<uuid:pk>/', DownloadSuratBebasNarkoba.as_view(), name='markoba-download'),
+            path('generate/<uuid:pasien_id>/', SuratBebasNarkobaGenerateView.as_view(), name='generate-surat-narkoba'),
         ])),
 
 
@@ -83,6 +87,7 @@ urlpatterns = [
             path('update/<uuid:pk>/', SuratPersetujuanUpdateView.as_view(), name='persetujuan-update'),
             path('delete/<uuid:pk>/', SuratPersetujuanDeleteView.as_view(), name='persetujuan-delete'),
             path('download/<uuid:pk>/', DownloadSuratPersetujuan.as_view(), name='persetujuan-download'),
+            path('generate/<uuid:pasien_id>/', SuratPersetujuanGenerateView.as_view(), name='persetujuan-generate'),
         ])),
 
         path("penolakan/", include([
@@ -91,6 +96,7 @@ urlpatterns = [
             path('update/<uuid:pk>/', SuratPenolakanUpdateView.as_view(), name='penolakan-update'),
             path('delete/<uuid:pk>/', SuratPenolakanDeleteView.as_view(), name='penolakan-delete'),
             path('download/<uuid:pk>/', DownloadSuratPenolakan.as_view(), name='penolakan-download'),
+            path('generate/<uuid:pasien_id>/', SuratPenolakanGenerateView.as_view(), name='penolakan-generate'),
         ])),
     ]))
 ]
