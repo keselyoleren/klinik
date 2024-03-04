@@ -67,6 +67,7 @@ class StatusImunisasi(TextChoices):
 class StatusPeserta(TextChoices):
     BPJS = 'BPJS'
     UMUM = 'UMUM'
+    JAMSOSTEK = 'JAMSOSTEK / PERUSAHAAN'
     
 class UnitLayanan(TextChoices):
     RAWAT_JALAN = 'Rawat Jalan'

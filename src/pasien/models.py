@@ -46,6 +46,8 @@ class AssesmentRawatJalan(BaseModel):
     berat_badan = models.CharField(_("Berat Badan"), max_length=20, blank=True, null=True)
     imt = models.CharField(_("IMT"), max_length=20, blank=True, null=True)
 
+    #
+
     # vital sign
     suhu_tubuh = models.CharField(_("Suhu Tubuh"), max_length=20, blank=True, null=True)
     nadi = models.CharField(_("Nadi"), max_length=20, blank=True, null=True)
@@ -55,7 +57,7 @@ class AssesmentRawatJalan(BaseModel):
     # assesment
     riwayat_penhakit = models.CharField(_("Riwayat Penyakit"), max_length=255, blank=True, null=True)
     keluhan_utama = models.TextField(_("Keluhan Utama"), blank=True, null=True)
-    obat = models.TextField(_("Obat-obatan"),  help_text="Obat-obatan yang sedang dikonsumsi dan/atau dibawa pasien saat ini", blank=True, null=True)
+    obat_obatan = models.CharField(_("Obat-obatan"), max_length=255, help_text="Obat-obatan yang sedang dikonsumsi dan/atau dibawa pasien saat ini", blank=True, null=True)
     pemerkiksaan = models.TextField(_("Pemeriksaan"), blank=True, null=True, help_text="Pemeriksaan Penunjang dan hasil yang sudah ada")
 
     # status general
@@ -143,9 +145,8 @@ class RekamMedis(BaseModel):
 
 class RawatInap(BaseModel):
     pasien = models.ForeignKey(Pasien, verbose_name=_("Nama Pasien"), on_delete=models.CASCADE, blank=True, null=True)
-    no_rm = models.CharField(_("No RM"), max_length=255)
-    kelas = models.CharField(_("Kelas"), max_length=255)
-    kelas = models.CharField(_("Kelas"), max_length=255)
+    kelas = models.CharField(_("Kelas"), max_length=255, blank=True, null=True)
+    kelas = models.CharField(_("Kelas"), max_length=255, blank=True, null=True)
     peserta = models.CharField(_("Peserta"), max_length=255, choices=StatusPeserta.choices, blank=True, null=True, help_text="Peserta BPJS / Umum")
     cara_masuk = models.CharField(_("Cara Masuk"), max_length=255, choices=CaraMasuk.choices)
     jenis_kasus = models.CharField(_("Jenis Kasus"), max_length=255, choices=JenisKasus.choices)
