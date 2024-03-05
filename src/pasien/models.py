@@ -1,5 +1,5 @@
 from django.utils.translation import gettext as _
-from config.choice import CaraMasuk, JenisKasus, JenisKelamin, StatusAlergi, StatusImunisasi, StatusPasien, StatusPerokok, StatusPersetujuan, StatusPeserta, StatusRawatPasien, KeadaanWaktuKeluar, UnitLayanan
+from config.choice import CaraMasuk, JenisKasus, JenisKelamin, StatusAlergi, StatusImunisasi, StatusPasien, StatusPerokok, StatusPersetujuan, StatusPeserta, StatusRawatPasien, KeadaanWaktuKeluar, UnitLayanan, YesOrNo
 from config.models import BaseModel
 from django.db import models
 
@@ -168,6 +168,74 @@ class RawatInap(BaseModel):
             return self.pasien.full_name
         except Exception:
             return ""
+
+class AssessmentRawatInap(BaseModel):
+    pasien_rawat_inap = models.ForeignKey(RawatInap, on_delete=models.CASCADE, blank=True, null=True)
+    
+    # riwayat penyakit
+    autoanamnesis = models.BooleanField(_('Autoanamnesis'), default=False)
+    alloanamnesis = models.BooleanField(_('Alloanamnesis'), default=False)
+    dengan = models.CharField(_("dengan"), max_length=255, blank=True, null=True)
+    hubungan_dengan = models.CharField(_("Hubungan dengan Pasien"), max_length=255, blank=True, null=True)
+    keluhan_utama = models.CharField(_("Keluhan Utama"), max_length=255, blank=True, null=True)
+   
+    # riwayat penyakit lain
+    pernah_dirawat =  models.CharField(_("Rawat Inap di KRP sebelumnya:"), choices=YesOrNo.choices, blank=True, null=True, max_length=20)
+    karena = models.CharField(_("Karena"), max_length=255, blank=True, null=True)
+
+    riwayat_operasi = models.CharField(_("Riwayat Operasi"), choices=YesOrNo.choices, max_length=20, blank=True, null=True)
+    penyakit_diderita = models.TextField(_("Penyakit yang pernah Diderita"),   blank=True, null=True)
+    riwayat_penyakit_keluarga = models.TextField(_("Riwayat Penyakit Keluarga"),   blank=True, null=True)
+
+    obat_obatan = models.CharField(_("Obat-obatan yang sedang dikonsumsi dan/atau dibawa pasien saat ini"), max_length=255, blank=True, null=True)
+
+    # status general
+    # kondisi umum
+    baik = models.BooleanField(_("Baik"), default=False)
+    tampak_baik = models.BooleanField(_("Tambapak Baik"), default=False)
+    sesak = models.BooleanField(_("Sesak"), default=False)
+    pucat = models.BooleanField(_("Pucat"), default=False)
+    lemah = models.BooleanField(_("lemah"), default=False)
+    kejang = models.BooleanField(_("Kejang"), default=False)
+    lainnya = models.BooleanField(_("Lainnya"), default=False)
+    val_lainnya = models.CharField(max_length=255, blank=True, null=True)
+
+    # jantung
+    inspeksi = models.CharField(_("Inspeksi"), max_length=255, blank=True, null=True)
+    palpasi = models.CharField(_("Palpasi"), max_length=255, blank=True, null=True)
+    perkusi = models.CharField(_("Perkusi"), max_length=255, blank=True, null=True)
+    auskultasi = models.CharField(_("Auskultasi"), max_length=255, blank=True, null=True)
+
+    # paru
+    inspeksi_paru = models.CharField(_("Inspeksi"), max_length=255, blank=True, null=True)
+    palpasi_paru = models.CharField(_("Palpasi"), max_length=255, blank=True, null=True)
+    perkusi_paru = models.CharField(_("Perkusi"), max_length=255, blank=True, null=True)
+    auskultasi_paru = models.CharField(_("Auskultasi"), max_length=255, blank=True, null=True)
+
+    # status 
+    status_lokalis = models.CharField(_("Status Lokalis"), max_length=255, blank=True, null=True, help_text="(Pemeriksaan terkait keluhan saat ini)")
+
+    informasi_tambahan = models.TextField(_("Informasi Tambahan"), blank=True, null=True)
+    diagnosis = models.TextField(_("Diagnosis Kerja / Diagnosis Banding"), blank=True, null=True)
+    instruksi_awal_dokter = models.TextField(_("Instruksi Awal Dokter"), blank=True, null=True)
+    diagnosa_kerja = models.TextField(_("Diagnosis Kerja / Diagnosis Banding"), blank=True, null=True)
+    daftar_masalah_medis = models.TextField(_("Daftar Maslah Medis"), blank=True, null=True)
+    daftar_masalah_keperawatan = models.TextField(_("Daftar Maslah Keperawatan"), blank=True, null=True)
+    tenaga_medis = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Tenaga Medis"), on_delete=models.CASCADE)
+
+class RiwayatOperasi(BaseModel):
+    ass_rawat_inap = models.ForeignKey(AssessmentRawatInap, on_delete=models.CASCADE, blank=True, null=True)
+    waktu = models.DateTimeField(null=True)
+    nama_operasi = models.CharField(_("Nama Operasi"), max_length=255, blank=True, null=True)
+    tempat = models.CharField(_("Tempat"), max_length=255, blank=True, null=True)
+
+
+class PemerikasanPenunjang(BaseModel):
+    ass_rawat_inap = models.ForeignKey(AssessmentRawatInap, on_delete=models.CASCADE, blank=True, null=True)
+    tanggal = models.DateTimeField(null=True)
+    pemeriksaan = models.CharField(_("Pemeriksaan"), max_length=255, blank=True, null=True)
+    kesan = models.CharField(_("Kesan / Hasil"), max_length=255, blank=True, null=True)
+
 
 class CatatanTerIntegrasi(BaseModel):
     pasien_rawat_jalan = models.ForeignKey(RawatJalan, verbose_name=_("Pasien Rawat Jalan"), on_delete=models.CASCADE, blank=True, null=True)

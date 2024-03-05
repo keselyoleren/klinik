@@ -1,3 +1,4 @@
+from typing import Text
 from django.db.models import TextChoices
 
 class RoleUser(TextChoices):
@@ -102,6 +103,10 @@ class DitujukanChoice(TextChoices):
     ANAK = 'Anak'
     IBU = 'Ibu'
     ORANG_LAIN = 'Orang Lain'
+
+class YesOrNo(TextChoices):
+    YA = 'YA'
+    TIADK = 'TIDAK'
 
 DAY_CODE = {
     Hari.MINGGU: 0,
