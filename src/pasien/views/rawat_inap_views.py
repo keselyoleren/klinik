@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect
 from config.choice import RoleUser, StatusPasien
 from config.permis import IsAuthenticated, IsAuthenticated
 from pasien.form.rawat_inap import RawatInapForm
-from pasien.models import RawatInap, Pasien, RawatInap
+from pasien.models import AssessmentRawatInap, RawatInap, Pasien, RawatInap
 
 
 class RawatInapListView(IsAuthenticated, ListView):
@@ -53,6 +53,13 @@ class RawatInapUpdateView(IsAuthenticated, UpdateView):
         context['header'] = 'Rawat Inap'
         context['pasien'] = Pasien.objects.get(pk=self.get_object().pasien.id)
         context['header_title'] = 'Edit Rawat Inap'
+        assesment_awal = AssessmentRawatInap.objects.filter(pasien_rawat_inap=self.get_object()).first()
+        if assesment_awal:
+            context['btn_assesment_update'] = True
+            context['btn_assesment_url'] = reverse_lazy('assesment-rawat-inap-update', kwargs={'pk': assesment_awal.id})
+        else:
+            context['btn_assesment_create'] = True
+        context['pasien'] = Pasien.objects.get(pk=self.get_object().pasien.id)
         return context
 
     def form_valid(self, form):

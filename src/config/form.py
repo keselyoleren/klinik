@@ -22,7 +22,7 @@ class Select2Widget(Select):
         return attrs
 
 class AbstractForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):  # sourcery skip: low-code-quality
         super(AbstractForm, self).__init__(*args, **kwargs)
         for field in self.fields:
             self.fields[field].widget.attrs['class'] = 'form-control'
@@ -36,6 +36,12 @@ class AbstractForm(forms.ModelForm):
             if field == 'tanggal_kematian':
                 self.fields['tanggal_kematian'].widget = forms.DateInput(attrs={
                     'type':'date',
+                    'class': 'form-control',
+                })
+            
+            if field == 'waktu':
+                self.fields['waktu'].widget = forms.DateTimeInput(attrs={
+                    'type':'datetime-local',
                     'class': 'form-control',
                 })
 

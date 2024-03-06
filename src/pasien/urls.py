@@ -2,6 +2,7 @@
 from django.urls import path, include
 from pasien.views.assesment_fisioterapi_views import *
 from pasien.views.assesment_rawat_jalan_views import *
+from pasien.views.assesment_rawatinap import *
 from pasien.views.catatan_terintegrasi_views import *
 from pasien.views.fisio_terapi_views import *
 from pasien.views.informed_consent_views import *
@@ -57,6 +58,14 @@ urlpatterns = [
         path('create/', RawatInapCreateView.as_view(), name='rawat_inap-create'),
         path('update/<uuid:pk>/', RawatInapUpdateView.as_view(), name='rawat_inap-update'),
         path('delete/<uuid:pk>/', RawatInapDeleteView.as_view(), name='rawat_inap-delete'),
+
+        path("assesment/", include([
+            path('create/<uuid:pasien_id>/', AssessmentRawatInapCreateView.as_view(), name='assesment-rawat-inap-create'),
+            path('update/<uuid:pk>/', AssessmentRawatInapUpdateView.as_view(), name='assesment-rawat-inap-update'),
+            path('delete/<uuid:pk>/', AssessmentRawatInapDeleteView.as_view(), name='assesment-rawat-inap-delete'),
+            path('download/<uuid:pk>/', DownloadAssesmentVisioterapiView.as_view(), name='assesment-rawat-inap-download'),
+        ])),
+
     ])),
 
     path("obat/", include([
