@@ -28,8 +28,8 @@ class AssessmentRawatInapCreateView(IsAuthenticated, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['header'] = 'Assesmen Awal Pasien Fisioterapi'
-        context['header_title'] = 'Assesmen Awal Pasien Fisioterapi'
+        context['header'] = 'Assesmen Pasien Rawat Jalan'
+        context['header_title'] = 'Assesmen Pasien Rawat Jalan'
         context['pasien'] = RawatInap.objects.get(pk=self.kwargs['pasien_id']).pasien
         riwayat_operasi_formset = inlineformset_factory(AssessmentRawatInap, RiwayatOperasi, form=RiwayatOperasiForm, extra=1, can_delete=True)
         pemeriksaan_penunjang_formset = inlineformset_factory(AssessmentRawatInap, PemerikasanPenunjang, form=PemerikasanPenunjangForm, extra=1, can_delete=True)
@@ -67,8 +67,8 @@ class AssessmentRawatInapUpdateView(IsAuthenticated, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['header'] = 'Assesmen Awal Pasien Fisioterapi'
-        context['header_title'] = 'Edit Assesmen Awal Pasien Fisioterapi'
+        context['header'] = 'Assesmen Pasien Rawat Jalan'
+        context['header_title'] = 'Edit Assesmen Pasien Rawat Jalan'
         context['pasien'] = self.get_object().pasien_fisioterapi.pasien
         context['btn_delete'] = True
         riwayat_operasi_formset = inlineformset_factory(AssessmentRawatInap, RiwayatOperasi, form=RiwayatOperasiForm, extra=1, can_delete=True)
@@ -102,8 +102,8 @@ class AssessmentRawatInapDeleteView(IsAuthenticated, DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['header'] = 'Assesmen Awal Pasien Fisioterapi'
-        context['header_title'] = 'Delete Assesmen Awal Pasien Fisioterapi'
+        context['header'] = 'Assesmen Pasien Rawat Jalan'
+        context['header_title'] = 'Delete Assesmen Pasien Rawat Jalan'
         return context
 
 
