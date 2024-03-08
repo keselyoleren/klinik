@@ -175,151 +175,158 @@
                                     {% endfor %}
                                 </table>
                             </div>
-
-                            <h4 class="card-title">Pemeriksaan Fisik</h4>
-                            <div class="form-group">
-                                <label for="{{ form.kondisi_umum.label_tag.id }}">
-                                    <h6>
-                                        {{ form.kondisi_umum.label_tag }}
-                                        {% if form.kondisi_umum.field.required %}
-                                            <span class="text-red" style="color: red;">*</span>
-                                        {% endif %}
-                                    </h6>
-                                </label>
-                                {{ form.kondisi_umum.help_text }}
-                                <span class="text-red">
-                                    {{ form.kondisi_umum.errors }}
-                                </span>
-                                {{ form.kondisi_umum }}
+                            <hr>
+                            <h6 class=""><b>Pemeriksaan Fisik </b></h6>    
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3 class="card-title">Jantung</h3><br>
+                                    <div class="form-group row">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="col">
+                                                    <label for="{{ form.inspeksi.label_tag.id }}">
+                                                        <h6>
+                                                            {{ form.inspeksi.label_tag }}
+                                                            {% if form.inspeksi.field.required %}
+                                                                <span class="text-red" style="color: red;">*</span>
+                                                            {% endif %}
+                                                        </h6>
+                                                    </label>
+                                                    <span class="text-red">
+                                                        {{ form.inspeksi.errors }}
+                                                    </span>
+                                                    {{ form.inspeksi }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">                                  
+                                                <div class="col">
+                                                    <label for="{{ form.palpasi.label_tag.id }}">
+                                                        <h6>
+                                                            {{ form.palpasi.label_tag }}
+                                                            {% if form.palpasi.field.required %}
+                                                                <span class="text-red" style="color: red;">*</span>
+                                                            {% endif %}
+                                                        </h6>
+                                                    </label>
+                                                    <span class="text-red">
+                                                        {{ form.palpasi.errors }}
+                                                    </span>
+                                                    {{ form.palpasi }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="col">
+                                                    <label for="{{ form.perkusi.label_tag.id }}">
+                                                        <h6>
+                                                            {{ form.perkusi.label_tag }}
+                                                            {% if form.perkusi.field.required %}
+                                                                <span class="text-red" style="color: red;">*</span>
+                                                            {% endif %}
+                                                        </h6>
+                                                    </label>
+                                                    <span class="text-red">
+                                                        {{ form.perkusi.errors }}
+                                                    </span>
+                                                    {{ form.perkusi }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="col">
+                                                    <label for="{{ form.auskultasi.label_tag.id }}">
+                                                        <h6>
+                                                            {{ form.auskultasi.label_tag }}
+                                                            {% if form.auskultasi.field.required %}
+                                                                <span class="text-red" style="color: red;">*</span>
+                                                            {% endif %}
+                                                        </h6>
+                                                    </label>
+                                                    <span class="text-red">
+                                                        {{ form.auskultasi.errors }}
+                                                    </span>
+                                                    {{ form.auskultasi }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h3 class="card-title">Paru</h3><br>
+                                    <div class="form-group row">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="col">
+                                                    <label for="{{ form.inspeksi_paru.label_tag.id }}">
+                                                        <h6>
+                                                            {{ form.inspeksi_paru.label_tag }}
+                                                            {% if form.inspeksi_paru.field.required %}
+                                                                <span class="text-red" style="color: red;">*</span>
+                                                            {% endif %}
+                                                        </h6>
+                                                    </label>
+                                                    <span class="text-red">
+                                                        {{ form.inspeksi_paru.errors }}
+                                                    </span>
+                                                    {{ form.inspeksi_paru }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="col">
+                                                    <label for="{{ form.palpasi_paru.label_tag.id }}">
+                                                        <h6>
+                                                            {{ form.palpasi_paru.label_tag }}
+                                                            {% if form.palpasi_paru.field.required %}
+                                                                <span class="text-red" style="color: red;">*</span>
+                                                            {% endif %}
+                                                        </h6>
+                                                    </label>
+                                                    <span class="text-red">
+                                                        {{ form.palpasi_paru.errors }}
+                                                    </span>
+                                                    {{ form.palpasi_paru }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="col">
+                                                    <label for="{{ form.perkusi_paru.label_tag.id }}">
+                                                        <h6>
+                                                            {{ form.perkusi_paru.label_tag }}
+                                                            {% if form.perkusi_paru.field.required %}
+                                                                <span class="text-red" style="color: red;">*</span>
+                                                            {% endif %}
+                                                        </h6>
+                                                    </label>
+                                                    <span class="text-red">
+                                                        {{ form.perkusi_paru.errors }}
+                                                    </span>
+                                                    {{ form.perkusi_paru }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="col">
+                                                    <label for="{{ form.auskultasi_paru.label_tag.id }}">
+                                                        <h6>
+                                                            {{ form.auskultasi_paru.label_tag }}
+                                                            {% if form.auskultasi_paru.field.required %}
+                                                                <span class="text-red" style="color: red;">*</span>
+                                                            {% endif %}
+                                                        </h6>
+                                                    </label>
+                                                    <span class="text-red">
+                                                        {{ form.auskultasi_paru.errors }}
+                                                    </span>
+                                                    {{ form.auskultasi_paru }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
                             </div>
-
-                            <h3 class="card-title">Jantung</h3><br>
-                            <div class="form-group row">
-                                <div class="col">
-                                    <label for="{{ form.pernah_dirawat.label_tag.id }}">
-                                        <h6>
-                                            {{ form.pernah_dirawat.label_tag }}
-                                            {% if form.pernah_dirawat.field.required %}
-                                                <span class="text-red" style="color: red;">*</span>
-                                            {% endif %}
-                                        </h6>
-                                    </label>
-                                    {{ form.pernah_dirawat.help_text }}
-                                    <span class="text-red">
-                                        {{ form.pernah_dirawat.errors }}
-                                    </span>
-                                    {{ form.pernah_dirawat }}
-                                </div>
-                                <div class="col">
-                                    <label for="{{ form.palpasi.label_tag.id }}">
-                                        <h6>
-                                            {{ form.palpasi.label_tag }}
-                                            {% if form.palpasi.field.required %}
-                                                <span class="text-red" style="color: red;">*</span>
-                                            {% endif %}
-                                        </h6>
-                                    </label>
-                                    {{ form.palpasi.help_text }}
-                                    <span class="text-red">
-                                        {{ form.palpasi.errors }}
-                                    </span>
-                                    {{ form.palpasi }}
-                                </div>
-                                <div class="col">
-                                    <label for="{{ form.perkusi.label_tag.id }}">
-                                        <h6>
-                                            {{ form.perkusi.label_tag }}
-                                            {% if form.perkusi.field.required %}
-                                                <span class="text-red" style="color: red;">*</span>
-                                            {% endif %}
-                                        </h6>
-                                    </label>
-                                    {{ form.perkusi.help_text }}
-                                    <span class="text-red">
-                                        {{ form.perkusi.errors }}
-                                    </span>
-                                    {{ form.perkusi }}
-                                </div>
-                                <div class="col">
-                                    <label for="{{ form.auskultasi.label_tag.id }}">
-                                        <h6>
-                                            {{ form.auskultasi.label_tag }}
-                                            {% if form.auskultasi.field.required %}
-                                                <span class="text-red" style="color: red;">*</span>
-                                            {% endif %}
-                                        </h6>
-                                    </label>
-                                    {{ form.auskultasi.help_text }}
-                                    <span class="text-red">
-                                        {{ form.auskultasi.errors }}
-                                    </span>
-                                    {{ form.auskultasi }}
-                                </div>
-                            </div>
-
-                            <h3 class="card-title">Paru</h3><br>
-                            <div class="form-group row">
-                                <div class="col">
-                                    <label for="{{ form.pernah_dirawat_paru.label_tag.id }}">
-                                        <h6>
-                                            {{ form.pernah_dirawat_paru.label_tag }}
-                                            {% if form.pernah_dirawat_paru.field.required %}
-                                                <span class="text-red" style="color: red;">*</span>
-                                            {% endif %}
-                                        </h6>
-                                    </label>
-                                    {{ form.pernah_dirawat_paru.help_text }}
-                                    <span class="text-red">
-                                        {{ form.pernah_dirawat_paru.errors }}
-                                    </span>
-                                    {{ form.pernah_dirawat_paru }}
-                                </div>
-                                <div class="col">
-                                    <label for="{{ form.palpasi_paru.label_tag.id }}">
-                                        <h6>
-                                            {{ form.palpasi_paru.label_tag }}
-                                            {% if form.palpasi_paru.field.required %}
-                                                <span class="text-red" style="color: red;">*</span>
-                                            {% endif %}
-                                        </h6>
-                                    </label>
-                                    {{ form.palpasi_paru.help_text }}
-                                    <span class="text-red">
-                                        {{ form.palpasi_paru.errors }}
-                                    </span>
-                                    {{ form.palpasi_paru }}
-                                </div>
-                                <div class="col">
-                                    <label for="{{ form.perkusi_paru.label_tag.id }}">
-                                        <h6>
-                                            {{ form.perkusi_paru.label_tag }}
-                                            {% if form.perkusi_paru.field.required %}
-                                                <span class="text-red" style="color: red;">*</span>
-                                            {% endif %}
-                                        </h6>
-                                    </label>
-                                    {{ form.perkusi_paru.help_text }}
-                                    <span class="text-red">
-                                        {{ form.perkusi_paru.errors }}
-                                    </span>
-                                    {{ form.perkusi_paru }}
-                                </div>
-                                <div class="col">
-                                    <label for="{{ form.auskultasi_paru.label_tag.id }}">
-                                        <h6>
-                                            {{ form.auskultasi_paru.label_tag }}
-                                            {% if form.auskultasi_paru.field.required %}
-                                                <span class="text-red" style="color: red;">*</span>
-                                            {% endif %}
-                                        </h6>
-                                    </label>
-                                    {{ form.auskultasi_paru.help_text }}
-                                    <span class="text-red">
-                                        {{ form.auskultasi_paru.errors }}
-                                    </span>
-                                    {{ form.auskultasi_paru }}
-                                </div>
-                            </div>
+                            <hr>
 
                             <div class="form-group">
                                 <label for="{{ form.status_lokalis.label_tag.id }}">
@@ -352,6 +359,43 @@
                                 </span>
                                 {{ form.informasi_tambahan }}
                             </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="{{ form.daftar_masalah_medis.label_tag.id }}">
+                                            <h6>
+                                                {{ form.daftar_masalah_medis.label_tag }}
+                                                {% if form.daftar_masalah_medis.field.required %}
+                                                    <span class="text-red" style="color: red;">*</span>
+                                                {% endif %}
+                                            </h6>
+                                        </label><br>
+                                        {{ form.daftar_masalah_medis.help_text }}
+                                        <span class="text-red">
+                                            {{ form.daftar_masalah_medis.errors }}
+                                        </span>
+                                        {{ form.daftar_masalah_medis }}
+                                    </div>        
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="{{ form.daftar_masalah_keperawatan.label_tag.id }}">
+                                            <h6>
+                                                {{ form.daftar_masalah_keperawatan.label_tag }}
+                                                {% if form.daftar_masalah_keperawatan.field.required %}
+                                                    <span class="text-red" style="color: red;">*</span>
+                                                {% endif %}
+                                            </h6>
+                                        </label><br>
+                                        {{ form.daftar_masalah_keperawatan.help_text }}
+                                        <span class="text-red">
+                                            {{ form.daftar_masalah_keperawatan.errors }}
+                                        </span>
+                                        {{ form.daftar_masalah_keperawatan }}
+                                    </div>        
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <label for="{{ form.diagnosis.label_tag.id }}">
@@ -368,6 +412,7 @@
                                 </span>
                                 {{ form.diagnosis }}
                             </div>
+
                             <div class="form-group">
                                 <label for="{{ form.instruksi_awal_dokter.label_tag.id }}">
                                     <h6>
@@ -383,6 +428,7 @@
                                 </span>
                                 {{ form.instruksi_awal_dokter }}
                             </div>
+
                             <div class="form-group">
                                 <label for="{{ form.tenaga_medis.label_tag.id }}">
                                     <h6>
