@@ -1,5 +1,6 @@
+from secrets import choice
 from django.utils.translation import gettext as _
-from config.choice import CaraMasuk, JenisKasus, JenisKelamin, StatusAlergi, StatusImunisasi, StatusPasien, StatusPerokok, StatusPersetujuan, StatusPeserta, StatusRawatPasien, KeadaanWaktuKeluar, UnitLayanan, YesOrNo
+from config.choice import BaikTidak, CaraMasuk, CategoryNorton, JenisKasus, JenisKelamin, Kesadaran, KondisiUmum, KonsistensiBAB, LancarTidak, MukosaMulut, Pembicaraan, StatusAlergi, StatusImunisasi, StatusPasien, StatusPerokok, StatusPersetujuan, StatusPeserta, StatusRawatPasien, KeadaanWaktuKeluar, UnitLayanan, YesOrNo
 from config.models import BaseModel
 from django.db import models
 
@@ -171,7 +172,68 @@ class RawatInap(BaseModel):
 
 class AssessmentRawatInap(BaseModel):
     pasien_rawat_inap = models.ForeignKey(RawatInap, on_delete=models.CASCADE, blank=True, null=True)
+    # perawat
+    # Kebuhan  cairan
+    minum = models.CharField(_("Minum"), max_length=100, blank=True, null=True)
+    mukosa_mulut = models.CharField(_("Mukosa Mulut"), max_length=100, choices=MukosaMulut.choices, blank=True, null=True)
+    edema = models.CharField(_("Edema"), max_length=100, choices=YesOrNo.choices, blank=True, null=True)
+    haus_berlebihan = models.CharField(_("Perasaan haus berlebihan"), max_length=100, choices=YesOrNo.choices, blank=True, null=True)
+    turgor_kulit = models.CharField(_("Turgor Kulit"), max_length=100, choices=YesOrNo.choices, blank=True, null=True)
     
+    # Kebutuhan Eliminasi
+    fekuensi_bak = models.CharField(_("Frekuensi BAK"), max_length=100, blank=True, null=True)
+    jumblah_bak = models.CharField(_("Jumblah"), max_length=100, blank=True, null=True)
+    
+    fekuensi_bab = models.CharField(_("Frekuensi BAK"), max_length=100, blank=True, null=True)
+    warna = models.CharField(_("Warna"), max_length=100, blank=True, null=True)
+    bau = models.CharField(_("Bau"), max_length=100, blank=True, null=True)
+    konsistensi = models.CharField(_("Konsistensi"), max_length=100, blank=True, null=True, choices=KonsistensiBAB.choices)
+    tgl_terakhir = models.DateTimeField(_("Tanggal Terakhir BAB"), blank=True, null=True)
+
+    # kebutuhan persepso / sensori
+    pengelihatan = models.CharField(_("Konsistensi"), max_length=100, blank=True, null=True, choices=BaikTidak.choices)
+    pengecapan = models.CharField(_("Pengecapan"), max_length=100, blank=True, null=True, choices=BaikTidak.choices)
+    pendengaran = models.CharField(_("Pendengaran"), max_length=100, blank=True, null=True, choices=BaikTidak.choices)
+    perabaan = models.CharField(_("Perabaan"), max_length=100, blank=True, null=True, choices=BaikTidak.choices)
+    penciuman = models.CharField(_("Penciuman"), max_length=100, blank=True, null=True, choices=BaikTidak.choices)
+
+    # kebutuhan komunikasi
+    berbicara = models.CharField(_("Berbicara"), max_length=100, blank=True, null=True, choices=LancarTidak.choices)
+    penyebab_tdk_berbicara = models.CharField(_("Jika tidak apa penyebabnya"), max_length=100, blank=True, null=True)
+    disorentasi = models.CharField(_("Disorentasi"), max_length=100, blank=True, null=True, choices=YesOrNo.choices)
+    penyebaba_disorentasi = models.CharField(_("Penyebab"), max_length=100, blank=True, null=True)
+    pembicaraan = models.CharField(_("Pembicaraan"), max_length=100, blank=True, null=True, choices=Pembicaraan.choices)
+    menarik_diri = models.CharField(_("Menarik Diri"), max_length=100, blank=True, null=True, choices=YesOrNo.choices)
+    apatis = models.CharField(_("Apatis"), max_length=100, blank=True, null=True, choices=YesOrNo.choices)
+
+    # kesadaran
+    kesadaran = models.CharField(_("Kesadaran"), max_length=100, blank=True, null=True, choices=Kesadaran.choices)
+    val_kesadaran_lainya = models.CharField(_("Laiinya"), max_length=100, blank=True, null=True)
+    kondisi_umum_perawat = models.CharField(_("Kondisi Umum"), max_length=200, blank=True, null=True, choices=KondisiUmum.choices)
+    val_kon_laiinya = models.CharField(max_length=255, blank=True, null=True)
+    # kodisi_umum
+
+    # tanda_vital
+    tekanan_darah = models.CharField(_("Tekanan Darah"), max_length=100, blank=True, null=True)
+    nadi = models.CharField(_("Nadi"), max_length=100, blank=True, null=True)
+    pernapasan = models.CharField(_("Pernapasan"), max_length=100, blank=True, null=True)
+    suhu = models.CharField(_("Suhu"), max_length=100, blank=True, null=True)
+
+    # kondisi fisik dan mental
+    dekubitus = models.CharField(_("Dekubitus"), max_length=100, blank=True, null=True, choices=YesOrNo.choices)
+    keterangan_dekubitus = models.CharField(_("Keterangan Dekubirus"), max_length=100, blank=True, null=True)
+
+    # konisi_fisik umum
+    skor_kondisi_fisik_umum = models.CharField(max_length=50, blank=True, null=True)
+    skor_kesadaran = models.CharField(max_length=50, blank=True, null=True)
+    skor_aktifitas = models.CharField(max_length=50, blank=True, null=True)
+    skor_inkentinensia = models.CharField(max_length=50, blank=True, null=True)
+
+    kategori_norton = models.CharField(_("Kategory Norton"), max_length=50, blank=True, null=True, choices=CategoryNorton.choices)
+    kontraktur_nyeri = models.CharField(_("Kontraktur / Nyeri Gerak"), max_length=50, blank=True, null=True, choices=YesOrNo.choices)
+    keterangan_nyeri = models.CharField(max_length=255, blank=True,null=True)
+    
+    # dokter
     # riwayat penyakit
     autoanamnesis = models.BooleanField(_('Autoanamnesis'), default=False)
     alloanamnesis = models.BooleanField(_('Alloanamnesis'), default=False)
@@ -190,14 +252,7 @@ class AssessmentRawatInap(BaseModel):
     obat_obatan = models.CharField(_("Obat-obatan yang sedang dikonsumsi dan/atau dibawa pasien saat ini"), max_length=255, blank=True, null=True)
 
     # status general
-    # kondisi umum
-    baik = models.BooleanField(_("Baik"), default=False)
-    tampak_baik = models.BooleanField(_("Tambapak Baik"), default=False)
-    sesak = models.BooleanField(_("Sesak"), default=False)
-    pucat = models.BooleanField(_("Pucat"), default=False)
-    lemah = models.BooleanField(_("lemah"), default=False)
-    kejang = models.BooleanField(_("Kejang"), default=False)
-    lainnya = models.BooleanField(_("Lainnya"), default=False)
+    kondisi_umum = models.CharField(_("Kondisi Umum"), max_length=200, blank=True, null=True, choices=KondisiUmum.choices)
     val_lainnya = models.CharField(max_length=255, blank=True, null=True)
 
     # jantung

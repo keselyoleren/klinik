@@ -108,6 +108,50 @@ class YesOrNo(TextChoices):
     YA = 'YA'
     TIADK = 'TIDAK'
 
+class MukosaMulut(TextChoices):
+    KERING = 'Kering'
+    NORMAL = 'Normal'
+
+class KonsistensiBAB(TextChoices):
+    LUNAK = 'Lunak'
+    KERAS = 'Keras'
+    Cair = 'Cair'
+
+class BaikTidak(TextChoices):
+    BAIK = 'Baik'
+    TIDAK = 'Tidak'
+
+class LancarTidak(TextChoices):
+    LANCAR = 'Lancar'
+    TIDAK = 'Tidak'
+
+class Pembicaraan(TextChoices):
+    KOHEREN = 'Koheren'
+    INKOHEREN = 'Inkoheren'
+
+class KondisiUmum(TextChoices):
+    BAIK = 'Baik'
+    TAMPAK_SAKIT = 'Tampak Sakit'
+    SESAK = 'Sesak'
+    PUCAT = 'Pucat'
+    LEMAH = 'Lemah'
+    KEJANG = 'Kejang'
+    LAINNYA = 'Lainnya'
+
+
+class Kesadaran(TextChoices):
+    COMPOSMENTIS = 'Composmentis'
+    APATIS = 'Apatis'
+    SOMMOLEN = 'Sommolen'
+    SOPOROCOMA = 'Soporocoma'
+    LAINNYA = 'Lainnya'
+
+
+class CategoryNorton(TextChoices):
+    RESIKO_BESAR = '< 12 (Risiko Besar)'
+    RESIKO_KECIL = '12 – 15 (Risiko Kecil)'
+
+
 DAY_CODE = {
     Hari.MINGGU: 0,
     Hari.SENIN: 1,
