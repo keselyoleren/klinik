@@ -39,7 +39,7 @@
                                     </div>
                                     <div id="collapse-2" class="collapse" role="tabpanel" aria-labelledby="heading-2" data-parent="#accordion" style="">
                                         <fieldset class="form-group border p-3">
-                                            <legend>Perawat</legend>
+                                            <legend>Assesment Kebutuhan Pasien</legend>
                                             <div class="form-group">
                                                 <h6 class=""><b>Kebutuhan Cairan</b></h6>    
                                             </div>
@@ -271,7 +271,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <hr>
+                                        </fieldset>
+                                        <fieldset class="form-group border p-3">
+                                            <legend>Pemeriksaan Fisik Umum</legend>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
@@ -279,14 +281,15 @@
                                                         {{ form.kesadaran }}
                                                     </div>
                                                     <div class="form-group">
-                                                        <h5 class="">Lainnya</h5>    
-                                                        {{ form.val_kesadaran_lainya }}
+                                                        <h5 class="">Kondisi Umum</h5>    
+                                                        {{ form.kondisi_umum_perawat }}
                                                     </div>
+                                                    
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <h5 class="">Kondisi Umum</h5>    
-                                                        {{ form.kondisi_umum_perawat }}
+                                                        <h5 class="">Lainnya</h5>    
+                                                        {{ form.val_kesadaran_lainya }}
                                                     </div>
                                                     <div class="form-group">
                                                         <h5 class="">Lainnya</h5>    
@@ -295,7 +298,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <h6 class=""><b>Kebutuhan Komunikasi</b></h6>    
+                                                <h6 class=""><b>Tanda Vital</b></h6>    
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-3">
@@ -323,9 +326,145 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <hr>
+                                        </fieldset>
+                                        <fieldset class="form-group border p-3">
+                                            <legend>Assesmen Khusus untuk Pasien Lanjut Usia ( > 6o Tahun )</legend>
+                                            <div class="form-group">
+                                                <h6 class=""><b>Kodisi Fisik dan Mental</b></h6>    
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <h6 class="">Dekubitus</h6>    
+                                                        {{ form.dekubitus }}
+                                                    </div>
+                                                </div>    
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <h6 class="">Keterangan Dekubitus</h6>    
+                                                        {{ form.keterangan_dekubitus }}
+                                                    </div>
+                                                </div>    
+                                            </div>
+                                            <div class="form-group">
+                                                <h6 class="">Resiko Dekubitus - Skor Norton</h6>    
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr>
+                                                                <th>Penilaian</th>
+                                                                <th>Skor</th>
+                                                                <th>Skor Pasien</th>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th>
+                                                                    <b>Kondisi Fisik Umum</b>
+                                                                    <ul>
+                                                                        <li>Baik</li>
+                                                                        <li>Lumayan</li>
+                                                                        <li>Buruk</li>
+                                                                        <li>Sangat Buruk</li>
+                                                                    </ul>
+                                                                </th>
+                                                                <th>
+                                                                    &nbsp;
+                                                                    <ul>
+                                                                        <li>4</li>
+                                                                        <li>3</li>
+                                                                        <li>2</li>
+                                                                        <li>1</li>
+                                                                    </ul>
+                                                                </th>
+                                                                <th>{{ form.skor_kondisi_fisik_umum }}</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>
+                                                                    <b>Kesadaran</b>
+                                                                    <ul>
+                                                                        <li>Kompos mentis</li>
+                                                                        <li>Apatis</li>
+                                                                        <li>Konfusi / sopor</li>
+                                                                        <li>Stupor / koma</li>
+                                                                    </ul>
+                                                                </th>
+                                                                <th>
+                                                                    &nbsp;
+                                                                    <ul>
+                                                                        <li>4</li>
+                                                                        <li>3</li>
+                                                                        <li>2</li>
+                                                                        <li>1</li>
+                                                                    </ul>
+                                                                </th>
+                                                                <th>{{ form.skor_kesadaran }}</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>
+                                                                    <b>Aktifitas</b>
+                                                                    <ul>
+                                                                        <li>Bergerak bebas</li>
+                                                                        <li>Sedikit terbatas</li>
+                                                                        <li>Sangat terbatas</li>
+                                                                        <li>Tidak bisa bergerak</li>
+                                                                    </ul>
+                                                                </th>
+                                                                <th>
+                                                                    &nbsp;
+                                                                    <ul>
+                                                                        <li>4</li>
+                                                                        <li>3</li>
+                                                                        <li>2</li>
+                                                                        <li>1</li>
+                                                                    </ul>
+                                                                </th>
+                                                                <th>{{ form.skor_aktifitas }}</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>
+                                                                    <b>Inkontinensia</b>
+                                                                    <ul>
+                                                                        <li>Tidak Ada</li>
+                                                                        <li>Kadang-kadang</li>
+                                                                        <li>Sering inkontenensia urin</li>
+                                                                        <li>Inkentinensia alvi dan urin</li>
+                                                                    </ul>
+                                                                </th>
+                                                                <th>
+                                                                    &nbsp;
+                                                                    <ul>
+                                                                        <li>4</li>
+                                                                        <li>3</li>
+                                                                        <li>2</li>
+                                                                        <li>1</li>
+                                                                    </ul>
+                                                                </th>
+                                                                <th>{{ form.skor_inkentinensia }}</th>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <h6 class="">Keterangan Norton</h6>    
+                                                {{ form.kategori_norton }}
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <h6 class="">Keterangan / Nyeri Gerak</h6>    
+                                                        {{ form.dekubitus }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <h6 class="">di</h6>    
+                                                        {{ form.keterangan_nyeri }}
+                                                    </div>
+                                                </div>
+                                            </div>
                                             
-
                                         </fieldset>
                                     </div>
                                 </div>
@@ -339,7 +478,7 @@
                                     </div>
                                     <div id="collapse-3" class="collapse" role="tabpanel" aria-labelledby="heading-3" data-parent="#accordion" style="">
                                         <fieldset class="form-group border p-3">
-                                            <legend>Dokter</legend>
+                                            <legend>Anamnesis</legend>
                                             <div class="form-group">
                                                 <h6 class=""><b>Riwayat Penyakit</b></h6>
                                                 <label for="{{ form.autoanamnesis.label_tag.id }}">
@@ -486,8 +625,9 @@
                                                     {% endfor %}
                                                 </table>
                                             </div>
-                                            <hr>
-                                            <h6 class=""><b>Pemeriksaan Fisik </b></h6>    
+                                        </fieldset>
+                                        <fieldset class="form-group border p-3">
+                                            <legend>Pemeriksaan Fisik</legend>                                        
                                             <div class="form-group">
                                                 <h6 class=""><b>Status General</b></h6>    
                                                 <h6 class="">Kondisi Umum</h6>    
@@ -663,108 +803,109 @@
                                                 </span>
                                                 {{ form.status_lokalis }}
                                             </div>
+                                        </fieldset>
                 
-                                            <div class="form-group">
-                                                <label for="{{ form.informasi_tambahan.label_tag.id }}">
-                                                    <h6>
-                                                        {{ form.informasi_tambahan.label_tag }}
-                                                        {% if form.informasi_tambahan.field.required %}
-                                                            <span class="text-red" style="color: red;">*</span>
-                                                        {% endif %}
-                                                    </h6>
-                                                </label><br>
-                                                {{ form.informasi_tambahan.help_text }}
-                                                <span class="text-red">
-                                                    {{ form.informasi_tambahan.errors }}
-                                                </span>
-                                                {{ form.informasi_tambahan }}
+                                        <div class="form-group">
+                                            <label for="{{ form.informasi_tambahan.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.informasi_tambahan.label_tag }}
+                                                    {% if form.informasi_tambahan.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label><br>
+                                            {{ form.informasi_tambahan.help_text }}
+                                            <span class="text-red">
+                                                {{ form.informasi_tambahan.errors }}
+                                            </span>
+                                            {{ form.informasi_tambahan }}
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="{{ form.daftar_masalah_medis.label_tag.id }}">
+                                                        <h6>
+                                                            {{ form.daftar_masalah_medis.label_tag }}
+                                                            {% if form.daftar_masalah_medis.field.required %}
+                                                                <span class="text-red" style="color: red;">*</span>
+                                                            {% endif %}
+                                                        </h6>
+                                                    </label><br>
+                                                    {{ form.daftar_masalah_medis.help_text }}
+                                                    <span class="text-red">
+                                                        {{ form.daftar_masalah_medis.errors }}
+                                                    </span>
+                                                    {{ form.daftar_masalah_medis }}
+                                                </div>        
                                             </div>
-                                            
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="{{ form.daftar_masalah_medis.label_tag.id }}">
-                                                            <h6>
-                                                                {{ form.daftar_masalah_medis.label_tag }}
-                                                                {% if form.daftar_masalah_medis.field.required %}
-                                                                    <span class="text-red" style="color: red;">*</span>
-                                                                {% endif %}
-                                                            </h6>
-                                                        </label><br>
-                                                        {{ form.daftar_masalah_medis.help_text }}
-                                                        <span class="text-red">
-                                                            {{ form.daftar_masalah_medis.errors }}
-                                                        </span>
-                                                        {{ form.daftar_masalah_medis }}
-                                                    </div>        
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="{{ form.daftar_masalah_keperawatan.label_tag.id }}">
-                                                            <h6>
-                                                                {{ form.daftar_masalah_keperawatan.label_tag }}
-                                                                {% if form.daftar_masalah_keperawatan.field.required %}
-                                                                    <span class="text-red" style="color: red;">*</span>
-                                                                {% endif %}
-                                                            </h6>
-                                                        </label><br>
-                                                        {{ form.daftar_masalah_keperawatan.help_text }}
-                                                        <span class="text-red">
-                                                            {{ form.daftar_masalah_keperawatan.errors }}
-                                                        </span>
-                                                        {{ form.daftar_masalah_keperawatan }}
-                                                    </div>        
-                                                </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="{{ form.daftar_masalah_keperawatan.label_tag.id }}">
+                                                        <h6>
+                                                            {{ form.daftar_masalah_keperawatan.label_tag }}
+                                                            {% if form.daftar_masalah_keperawatan.field.required %}
+                                                                <span class="text-red" style="color: red;">*</span>
+                                                            {% endif %}
+                                                        </h6>
+                                                    </label><br>
+                                                    {{ form.daftar_masalah_keperawatan.help_text }}
+                                                    <span class="text-red">
+                                                        {{ form.daftar_masalah_keperawatan.errors }}
+                                                    </span>
+                                                    {{ form.daftar_masalah_keperawatan }}
+                                                </div>        
                                             </div>
-                
-                                            <div class="form-group">
-                                                <label for="{{ form.diagnosis.label_tag.id }}">
-                                                    <h6>
-                                                        {{ form.diagnosis.label_tag }}
-                                                        {% if form.diagnosis.field.required %}
-                                                            <span class="text-red" style="color: red;">*</span>
-                                                        {% endif %}
-                                                    </h6>
-                                                </label><br>
-                                                {{ form.diagnosis.help_text }}
-                                                <span class="text-red">
-                                                    {{ form.diagnosis.errors }}
-                                                </span>
-                                                {{ form.diagnosis }}
-                                            </div>
-                
-                                            <div class="form-group">
-                                                <label for="{{ form.instruksi_awal_dokter.label_tag.id }}">
-                                                    <h6>
-                                                        {{ form.instruksi_awal_dokter.label_tag }}
-                                                        {% if form.instruksi_awal_dokter.field.required %}
-                                                            <span class="text-red" style="color: red;">*</span>
-                                                        {% endif %}
-                                                    </h6>
-                                                </label><br>
-                                                {{ form.instruksi_awal_dokter.help_text }}
-                                                <span class="text-red">
-                                                    {{ form.instruksi_awal_dokter.errors }}
-                                                </span>
-                                                {{ form.instruksi_awal_dokter }}
-                                            </div>
-                
-                                            <div class="form-group">
-                                                <label for="{{ form.tenaga_medis.label_tag.id }}">
-                                                    <h6>
-                                                        {{ form.tenaga_medis.label_tag }}
-                                                        {% if form.tenaga_medis.field.required %}
-                                                            <span class="text-red" style="color: red;">*</span>
-                                                        {% endif %}
-                                                    </h6>
-                                                </label><br>
-                                                {{ form.tenaga_medis.help_text }}
-                                                <span class="text-red">
-                                                    {{ form.tenaga_medis.errors }}
-                                                </span>
-                                                {{ form.tenaga_medis }}
-                                            </div>
-                                        </fieldset>        
+                                        </div>
+            
+                                        <div class="form-group">
+                                            <label for="{{ form.diagnosis.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.diagnosis.label_tag }}
+                                                    {% if form.diagnosis.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label><br>
+                                            {{ form.diagnosis.help_text }}
+                                            <span class="text-red">
+                                                {{ form.diagnosis.errors }}
+                                            </span>
+                                            {{ form.diagnosis }}
+                                        </div>
+            
+                                        <div class="form-group">
+                                            <label for="{{ form.instruksi_awal_dokter.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.instruksi_awal_dokter.label_tag }}
+                                                    {% if form.instruksi_awal_dokter.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label><br>
+                                            {{ form.instruksi_awal_dokter.help_text }}
+                                            <span class="text-red">
+                                                {{ form.instruksi_awal_dokter.errors }}
+                                            </span>
+                                            {{ form.instruksi_awal_dokter }}
+                                        </div>
+            
+                                        <div class="form-group">
+                                            <label for="{{ form.tenaga_medis.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.tenaga_medis.label_tag }}
+                                                    {% if form.tenaga_medis.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label><br>
+                                            {{ form.tenaga_medis.help_text }}
+                                            <span class="text-red">
+                                                {{ form.tenaga_medis.errors }}
+                                            </span>
+                                            {{ form.tenaga_medis }}
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
