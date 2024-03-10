@@ -39,7 +39,7 @@
                                     </div>
                                     <div id="collapse-2" class="collapse" role="tabpanel" aria-labelledby="heading-2" data-parent="#accordion" style="">
                                         <fieldset class="form-group border p-3">
-                                            <legend>Perawat</legend>
+                                            <legend>Alergi</legend>
                                             <div class="form-group row">
                                                 <div class="col">
                                                     <h4 class="card-title"><b>Alergi</b></h4>
@@ -52,8 +52,11 @@
                                                     {{ form.jenis_alergi }}
                                                 </div>
                                             </div>
+                                        </fieldset>
+                                        
+                                        <fieldset class="form-group border p-3">
+                                            <legend>Skrining</legend>
                                             
-                                            <h4 class="card-title"><b>Skrining</b></h4>
                                             <label for="">Nyeri</label>
                                             <img src="{% static 'images/poin_scale.png'%}" alt="" class="img-fluid">
                                             <div class="form-group row">
@@ -367,8 +370,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                
-                                            <h4 class="card-title"><b>Tanda-tanda vital</b></h4>
+                                        </fieldset>
+                                        <fieldset class="form-group border p-3">
+                                            <legend>Tanda Vital</legend>
                                             <div class="form-group row">
                                                 <div class="col">
                                                     <label for="{{ form.suhu_tubuh.label_tag.id }}">
@@ -446,7 +450,7 @@
                                     </div>
                                     <div id="collapse-3" class="collapse" role="tabpanel" aria-labelledby="heading-3" data-parent="#accordion" style="">
                                         <fieldset class="form-group border p-3">
-                                            <legend>Dokter</legend>
+                                            <legend>Aanamnesis</legend>
                                             <div class="form-group">
                                                 <label for="{{ form.riwayat_penhakit.label_tag.id }}">
                                                     <h6>
@@ -507,8 +511,9 @@
                                                 </span>
                                                 {{ form.pemeriksaan }}
                                             </div>
-
-                                            <h4 class="card-title">Pemeriksaan Fisik</h4>
+                                        </fieldset>
+                                        <fieldset class="form-group border p-3">
+                                            <legend>Pemeriksaan Fisik</legend>
                                             <div class="form-group">
                                                 <label for="{{ form.kondisi_umum.label_tag.id }}">
                                                     <h6>
@@ -668,69 +673,70 @@
                                                 </span>
                                                 {{ form.status_lokalis }}
                                             </div>
+                                        </fieldset>
 
-                                            <div class="form-group">
-                                                <label for="{{ form.informasi_tambahan.label_tag.id }}">
-                                                    <h6>
-                                                        {{ form.informasi_tambahan.label_tag }}
-                                                        {% if form.informasi_tambahan.field.required %}
-                                                            <span class="text-red" style="color: red;">*</span>
-                                                        {% endif %}
-                                                    </h6>
-                                                </label><br>
-                                                {{ form.informasi_tambahan.help_text }}
-                                                <span class="text-red">
-                                                    {{ form.informasi_tambahan.errors }}
-                                                </span>
-                                                {{ form.informasi_tambahan }}
-                                            </div>
+                                        <div class="form-group">
+                                            <label for="{{ form.informasi_tambahan.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.informasi_tambahan.label_tag }}
+                                                    {% if form.informasi_tambahan.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label><br>
+                                            {{ form.informasi_tambahan.help_text }}
+                                            <span class="text-red">
+                                                {{ form.informasi_tambahan.errors }}
+                                            </span>
+                                            {{ form.informasi_tambahan }}
+                                        </div>
 
-                                            <div class="form-group">
-                                                <label for="{{ form.diagnosis.label_tag.id }}">
-                                                    <h6>
-                                                        {{ form.diagnosis.label_tag }}
-                                                        {% if form.diagnosis.field.required %}
-                                                            <span class="text-red" style="color: red;">*</span>
-                                                        {% endif %}
-                                                    </h6>
-                                                </label><br>
-                                                {{ form.diagnosis.help_text }}
-                                                <span class="text-red">
-                                                    {{ form.diagnosis.errors }}
-                                                </span>
-                                                {{ form.diagnosis }}
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="{{ form.instruksi_awal_dokter.label_tag.id }}">
-                                                    <h6>
-                                                        {{ form.instruksi_awal_dokter.label_tag }}
-                                                        {% if form.instruksi_awal_dokter.field.required %}
-                                                            <span class="text-red" style="color: red;">*</span>
-                                                        {% endif %}
-                                                    </h6>
-                                                </label><br>
-                                                {{ form.instruksi_awal_dokter.help_text }}
-                                                <span class="text-red">
-                                                    {{ form.instruksi_awal_dokter.errors }}
-                                                </span>
-                                                {{ form.instruksi_awal_dokter }}
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="{{ form.tenaga_medis.label_tag.id }}">
-                                                    <h6>
-                                                        {{ form.tenaga_medis.label_tag }}
-                                                        {% if form.tenaga_medis.field.required %}
-                                                            <span class="text-red" style="color: red;">*</span>
-                                                        {% endif %}
-                                                    </h6>
-                                                </label><br>
-                                                {{ form.tenaga_medis.help_text }}
-                                                <span class="text-red">
-                                                    {{ form.tenaga_medis.errors }}
-                                                </span>
-                                                {{ form.tenaga_medis }}
-                                            </div>
-                                        </fieldset>                                        
+                                        <div class="form-group">
+                                            <label for="{{ form.diagnosis.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.diagnosis.label_tag }}
+                                                    {% if form.diagnosis.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label><br>
+                                            {{ form.diagnosis.help_text }}
+                                            <span class="text-red">
+                                                {{ form.diagnosis.errors }}
+                                            </span>
+                                            {{ form.diagnosis }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="{{ form.instruksi_awal_dokter.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.instruksi_awal_dokter.label_tag }}
+                                                    {% if form.instruksi_awal_dokter.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label><br>
+                                            {{ form.instruksi_awal_dokter.help_text }}
+                                            <span class="text-red">
+                                                {{ form.instruksi_awal_dokter.errors }}
+                                            </span>
+                                            {{ form.instruksi_awal_dokter }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="{{ form.tenaga_medis.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.tenaga_medis.label_tag }}
+                                                    {% if form.tenaga_medis.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label><br>
+                                            {{ form.tenaga_medis.help_text }}
+                                            <span class="text-red">
+                                                {{ form.tenaga_medis.errors }}
+                                            </span>
+                                            {{ form.tenaga_medis }}
+                                        </div>
+                                    
                                     </div>
                                 </div>
                             </div>
