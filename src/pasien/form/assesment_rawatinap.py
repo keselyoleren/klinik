@@ -1,5 +1,5 @@
-
-from re import I
+from django.utils.translation import gettext as _
+from config.choice import PerubahanBeratBadan
 from config.form import AbstractForm, Select2Widget
 from pasien.models import AssessmentRawatInap, PemerikasanPenunjang, RiwayatOperasi
 from django import forms
@@ -8,8 +8,6 @@ from master_data.models import TenagaMedis
 
 class AssesmentRawatInapForm(AbstractForm):    
     tenaga_medis = forms.ModelChoiceField(widget=Select2Widget(), queryset=TenagaMedis.objects.all())
-    
-
     class Meta:
         model = AssessmentRawatInap
         fields = '__all__'

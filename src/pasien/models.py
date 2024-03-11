@@ -1,6 +1,5 @@
-from secrets import choice
 from django.utils.translation import gettext as _
-from config.choice import BaikTidak, CaraMasuk, CategoryNorton, JenisKasus, JenisKelamin, Kesadaran, KondisiUmum, KonsistensiBAB, LancarTidak, MukosaMulut, Pembicaraan, StatusAlergi, StatusImunisasi, StatusPasien, StatusPerokok, StatusPersetujuan, StatusPeserta, StatusRawatPasien, KeadaanWaktuKeluar, UnitLayanan, YesOrNo
+from config.choice import AsupanMakanTerakhir, BaikTidak, CaraMasuk, CategoryNorton, GejalaChoice, JenisKasus, JenisKelamin, Kesadaran, KondisiUmum, KonsistensiBAB, LancarTidak, MukosaMulut, Pembicaraan, PerubahanBeratBadan, StatusAlergi, StatusImunisasi, StatusPasien, StatusPerokok, StatusPersetujuan, StatusPeserta, StatusRawatPasien, KeadaanWaktuKeluar, UnitLayanan, YesOrNo
 from config.models import BaseModel
 from django.db import models
 
@@ -173,6 +172,19 @@ class RawatInap(BaseModel):
 class AssessmentRawatInap(BaseModel):
     pasien_rawat_inap = models.ForeignKey(RawatInap, on_delete=models.CASCADE, blank=True, null=True)
     # perawat
+    # alergi
+    alergi = models.CharField(_("Alergi"), max_length=255, blank=True, null=True, choices=StatusAlergi.choices)
+    jenis_alergi = models.CharField(_("Jenis Alergi"), max_length=255, blank=True, null=True)
+    # skrining  gizi
+    # # perubahan berat badan
+    perubahan_berat_badan = models.CharField(_("Perubahan Berat Badan"), max_length=100, blank=True, null=True, choices=PerubahanBeratBadan.choices)
+    asupan_makanan = models.CharField(_("Asupan makan dan perubahan dalam 2 minggu terakhir"), max_length=100, blank=True, null=True, choices=AsupanMakanTerakhir.choices)
+    gejala_gastrointestinal = models.CharField(_("Gejala gastrointestinal minimal 1 gejala : mual/muntah/diare/anoreksia "), max_length=100, blank=True, null=True, choices=GejalaChoice.choices)
+    faktor_pemberat = models.CharField(_("Faktor Pemberat (misal skor B : infeksi, DM, Penyakit Jantung Kongestif;  tidak ada  ada ringan  ada berat skor C : colitis ulseratif, peritohitis, kanker, multiple trauma)"), max_length=100, blank=True, null=True, choices=GejalaChoice.choices)
+    penurun_kapasitas = models.CharField(_("Penurunan kapasitas fungsional (gangguan, menelan, mengunyah, dll) "), max_length=100, blank=True, null=True, choices=GejalaChoice.choices)
+    kategori = models.CharField(_("Kategori"), max_length=255, blank=True, null=True)
+    catatan_skrining_gizi = models.CharField(_("Catatan"), max_length=255, blank=True, null=True)
+    
     # Kebuhan  cairan
     minum = models.CharField(_("Minum"), max_length=100, blank=True, null=True)
     mukosa_mulut = models.CharField(_("Mukosa Mulut"), max_length=100, choices=MukosaMulut.choices, blank=True, null=True)

@@ -39,6 +39,112 @@
                                     </div>
                                     <div id="collapse-2" class="collapse" role="tabpanel" aria-labelledby="heading-2" data-parent="#accordion" style="">
                                         <fieldset class="form-group border p-3">
+                                            <legend>Alergi</legend>
+                                            <div class="form-group row">
+                                                <div class="col">
+                                                    <h4 class="card-title"><b>Alergi</b></h4>
+                                                    {{ form.alergi }}
+                                                </div>
+                                                <div class="col">
+                                                    <label for="{{ form.jenis_alergi.label_tag.id }}">
+                                                        <h6>Sebutkan</h6>
+                                                    </label>
+                                                    {{ form.jenis_alergi }}
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <fieldset class="form-group border p-3">
+                                            <legend>Skrining</legend>
+                                            <div class="form-group row">
+                                                <div class="form-group">
+                                                    <h6 class=""><b>Skrining Gizi (Untuk usia > 14 tahun)</b></h6>    
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Deskripsi</th>
+                                                                <th>Skor A</th>
+                                                                <th>Skor B</th>
+                                                                <th>Skor C</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Perubahan berat badan Bila pasien/keluarga tidak tahun, tanyakan
+                                                                    <ul>
+                                                                        <li>Perubahan ukuran pasien</li>
+                                                                        <li>Apakah "Terlihat lebih Kurus"</li>
+                                                                    </ul>
+                                                                </td>
+                                                                <td>
+                                                                    <input type="radio" name="perubahan_berat_badan" value="Tidak Ada" id="id_perubahan_berat_badan_0"> Tidak Ada
+                                                                </td>
+                                                                <td>
+                                                                    <input type="radio" name="perubahan_berat_badan" value="Ada, Lambat" id="id_perubahan_berat_badan_1"> ada, lambat
+                                                                </td>
+                                                                <td>
+                                                                    <input type="radio" name="perubahan_berat_badan" value="Ada, Cepat" id="id_perubahan_berat_badan_3"> ada, cepat
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Asupan makan dan perubahan dalam 2 minggu terakhir</td>
+                                                                <td>
+                                                                    <input type="radio" name="asupan_makanan" value="Cukup" id="asupan_makanan_0"> Cukup
+                                                                </td>
+                                                                <td>
+                                                                    <input type="radio" name="asupan_makanan" value="Menurun" id="asupan_makanan_1"> Menurun
+                                                                </td>
+                                                                <td>
+                                                                    <input type="radio" name="asupan_makanan" value="NGT" id="asupan_makanan_2"> NGT
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Gejala gastrointestinal minimal 1 gejala : mual/muntah/diare/anoreksia</td>
+                                                                <td>
+                                                                    <input type="radio" name="gejala_gastrointestinal" value="Tidak Ada" id="gejala_gastrointestinal_0"> Tidak Ada
+                                                                </td>
+                                                                <td>
+                                                                    <input type="radio" name="gejala_gastrointestinal" value="Ada Ringan" id="gejala_gastrointestinal_1"> Ada Ringan
+                                                                </td>
+                                                                <td>
+                                                                    <input type="radio" name="gejala_gastrointestinal" value="Ada BERAT" id="gejala_gastrointestinal_2"> Ada BERAT
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    Faktor Pemberat (misal skor B : infeksi, DM, Penyakit Jantung Kongestif;skor C : colitis ulseratif, peritohitis, kanker, multiple trauma)
+                                                                </td>
+                                                                <td>
+                                                                    <input type="radio" name="faktor_pemberat" value="Tidak Ada" id="faktor_pemberat_0"> Tidak Ada
+                                                                </td>
+                                                                <td>
+                                                                    <input type="radio" name="faktor_pemberat" value="Ada Ringan" id="faktor_pemberat_1"> Ada Ringan
+                                                                </td>
+                                                                <td>
+                                                                    <input type="radio" name="faktor_pemberat" value="Ada BERAT" id="faktor_pemberat_2"> Ada BERAT
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    Penurunan kapasitas fungsional (gangguan, menelan, mengunyah, dll)
+                                                                </td>
+                                                                <td>
+                                                                    <input type="radio" name="penurun_kapasitas" value="Tidak Ada" id="penurun_kapasitas_0"> Tidak Ada
+                                                                </td>
+                                                                <td>
+                                                                    <input type="radio" name="penurun_kapasitas" value="Ada Ringan" id="penurun_kapasitas_1"> Ada Ringan
+                                                                </td>
+                                                                <td>
+                                                                    <input type="radio" name="penurun_kapasitas" value="Ada BERAT" id="penurun_kapasitas_2"> Ada BERAT
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <fieldset class="form-group border p-3">
                                             <legend>Assesment Kebutuhan Pasien</legend>
                                             <div class="form-group">
                                                 <h6 class=""><b>Kebutuhan Cairan</b></h6>    

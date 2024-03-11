@@ -151,6 +151,20 @@ class CategoryNorton(TextChoices):
     RESIKO_BESAR = '< 12 (Risiko Besar)'
     RESIKO_KECIL = '12 – 15 (Risiko Kecil)'
 
+class PerubahanBeratBadan(TextChoices):
+    TIDAK_ADA = 'Tidak Ada'
+    ADA_LAMBAT = 'Ada, Lambat'
+    ADA_CEPAT = 'Ada, Cepat'
+
+class AsupanMakanTerakhir(TextChoices):
+    CUKUP = 'Cukup'
+    MENURUN = 'Menurun'
+    NGT = 'NGT'
+
+class GejalaChoice(TextChoices):
+    TIDAK_ADA = 'Tidak Ada'
+    ADA_RINGAN = 'Ada Ringan'
+    ADA_BERAT = 'Ada BERAT'
 
 DAY_CODE = {
     Hari.MINGGU: 0,
