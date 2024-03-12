@@ -55,7 +55,7 @@
                                         </fieldset>
                                         <fieldset class="form-group border p-3">
                                             <legend>Skrining</legend>
-                                            <div class="form-group row">
+                                            <div class="form-group">
                                                 <div class="form-group">
                                                     <h6 class=""><b>Skrining Gizi (Untuk usia > 14 tahun)</b></h6>    
                                                 </div>
@@ -78,37 +78,37 @@
                                                                     </ul>
                                                                 </td>
                                                                 <td>
-                                                                    <input type="radio" name="perubahan_berat_badan" value="Tidak Ada" id="id_perubahan_berat_badan_0"> Tidak Ada
+                                                                    <input type="radio" name="perubahan_berat_badan" {% if form.perubahan_berat_badan.value == 'Tidak Ada' %}checked{% endif %} value="Tidak Ada" id="id_perubahan_berat_badan_0"> Tidak Ada
                                                                 </td>
                                                                 <td>
-                                                                    <input type="radio" name="perubahan_berat_badan" value="Ada, Lambat" id="id_perubahan_berat_badan_1"> ada, lambat
+                                                                    <input type="radio" name="perubahan_berat_badan" {% if form.perubahan_berat_badan.value == 'Ada, Lambat' %}checked{% endif %} value="Ada, Lambat" id="id_perubahan_berat_badan_1"> ada, lambat
                                                                 </td>
                                                                 <td>
-                                                                    <input type="radio" name="perubahan_berat_badan" value="Ada, Cepat" id="id_perubahan_berat_badan_3"> ada, cepat
+                                                                    <input type="radio" name="perubahan_berat_badan" {% if form.perubahan_berat_badan.value == 'Ada, Cepat' %}checked{% endif %} value="Ada, Cepat" id="id_perubahan_berat_badan_3"> ada, cepat
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Asupan makan dan perubahan dalam 2 minggu terakhir</td>
                                                                 <td>
-                                                                    <input type="radio" name="asupan_makanan" value="Cukup" id="asupan_makanan_0"> Cukup
+                                                                    <input type="radio" name="asupan_makanan" {% if form.asupan_makanan.value == 'Cukup' %}checked{% endif %} value="Cukup" id="asupan_makanan_0"> Cukup
                                                                 </td>
                                                                 <td>
-                                                                    <input type="radio" name="asupan_makanan" value="Menurun" id="asupan_makanan_1"> Menurun
+                                                                    <input type="radio" name="asupan_makanan" {% if form.asupan_makanan.value == 'Menurun' %}checked{% endif %} value="Menurun" id="asupan_makanan_1"> Menurun
                                                                 </td>
                                                                 <td>
-                                                                    <input type="radio" name="asupan_makanan" value="NGT" id="asupan_makanan_2"> NGT
+                                                                    <input type="radio" name="asupan_makanan" {% if form.asupan_makanan.value == 'NGT' %}checked{% endif %} value="NGT" id="asupan_makanan_2"> NGT
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Gejala gastrointestinal minimal 1 gejala : mual/muntah/diare/anoreksia</td>
                                                                 <td>
-                                                                    <input type="radio" name="gejala_gastrointestinal" value="Tidak Ada" id="gejala_gastrointestinal_0"> Tidak Ada
+                                                                    <input type="radio" name="gejala_gastrointestinal" {% if form.gejala_gastrointestinal.value == 'Tidak Ada' %}checked{% endif %} value="Tidak Ada" id="gejala_gastrointestinal_0"> Tidak Ada
                                                                 </td>
                                                                 <td>
-                                                                    <input type="radio" name="gejala_gastrointestinal" value="Ada Ringan" id="gejala_gastrointestinal_1"> Ada Ringan
+                                                                    <input type="radio" name="gejala_gastrointestinal" {% if form.gejala_gastrointestinal.value == 'Ada Ringan' %}checked{% endif %} value="Ada Ringan" id="gejala_gastrointestinal_1"> Ada Ringan
                                                                 </td>
                                                                 <td>
-                                                                    <input type="radio" name="gejala_gastrointestinal" value="Ada BERAT" id="gejala_gastrointestinal_2"> Ada BERAT
+                                                                    <input type="radio" name="gejala_gastrointestinal" {% if form.gejala_gastrointestinal.value == 'Ada Berat' %}checked{% endif %} value="Ada Berat" id="gejala_gastrointestinal_2"> Ada BERAT
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -116,13 +116,13 @@
                                                                     Faktor Pemberat (misal skor B : infeksi, DM, Penyakit Jantung Kongestif;skor C : colitis ulseratif, peritohitis, kanker, multiple trauma)
                                                                 </td>
                                                                 <td>
-                                                                    <input type="radio" name="faktor_pemberat" value="Tidak Ada" id="faktor_pemberat_0"> Tidak Ada
+                                                                    <input type="radio" name="faktor_pemberat" {% if form.faktor_pemberat.value == 'Tidak Ada' %}checked{% endif %} value="Tidak Ada" id="faktor_pemberat_0"> Tidak Ada
                                                                 </td>
                                                                 <td>
-                                                                    <input type="radio" name="faktor_pemberat" value="Ada Ringan" id="faktor_pemberat_1"> Ada Ringan
+                                                                    <input type="radio" name="faktor_pemberat" {% if form.faktor_pemberat.value == 'Ada Ringan' %}checked{% endif %} value="Ada Ringan" id="faktor_pemberat_1"> Ada Ringan
                                                                 </td>
                                                                 <td>
-                                                                    <input type="radio" name="faktor_pemberat" value="Ada BERAT" id="faktor_pemberat_2"> Ada BERAT
+                                                                    <input type="radio" name="faktor_pemberat" {% if form.faktor_pemberat.value == 'Ada Berat' %}checked{% endif %} value="Ada Berat" id="faktor_pemberat_2"> Ada BERAT
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -142,7 +142,274 @@
                                                         </tbody>
                                                     </table>
                                                 </div>
+                                                <br>
+                                                <div class="form-group">
+                                                    <h6 class=""><b>Kategori Status Gizi</b></h6>    
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <div class="col">
+                                                                    A = Status Gizi Baik
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="col">
+                                                                    B = Berisiko malnutrisi
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="col">
+                                                                    C = Malnutrisi berat
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <h6 class="">Kategori</h6>    
+                                                            {{ form.kategori }}
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
+                                            <div class="form-group">
+                                                <h6 class="">Catatan</h6>    
+                                                {{ form.kategori }}
+                                            </div>
+                                            <h6 class="">Kategori status gisi berdasarkan kondisi terberat yang ada</h6> 
+                                            <hr>   
+                                            <div class="form-group">
+                                                <h6 class=""><b>Skrining Nyeri</b></h6>    
+                                            </div>
+                                            <div class="row clearfix">
+                                                <div class="col-md-2">
+                                                    <label for="{{ form.merasakan_nyeri.label_tag.id }}">
+                                                        <h6>{{ form.merasakan_nyeri.label_tag }} </h6>
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <div class="form-group">
+                                                        {{ form.merasakan_nyeri }} 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row clearfix">
+                                                <div class="col-md-2">
+                                                    <label for="{{ form.lokasi.label_tag.id }}">
+                                                        <h6>{{ form.lokasi.label_tag }} </h6>
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <div class="form-group">
+                                                        {{ form.lokasi }} 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row clearfix">
+                                                <div class="col-md-2">
+                                                    <label for="{{ form.onset.label_tag.id }}">
+                                                        <h6>{{ form.onset.label_tag }} </h6>
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <div class="form-group">
+                                                        {{ form.onset }} 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row clearfix">
+                                                <div class="col-md-2">
+                                                    <label for="{{ form.waktu_nyeri.label_tag.id }}">
+                                                        <h6>{{ form.waktu_nyeri.label_tag }} </h6>
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <div class="form-group">
+                                                        {{ form.waktu_nyeri }} 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row clearfix">
+                                                <div class="col-md-2">
+                                                    <label for="{{ form.pencetus_nyeri.label_tag.id }}">
+                                                        <h6>{{ form.pencetus_nyeri.label_tag }} </h6>
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <div class="form-group">
+                                                        {{ form.pencetus_nyeri }} 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row clearfix">
+                                                <div class="col-md-2">
+                                                    <label for="{{ form.type_nyeri.label_tag.id }}">
+                                                        <h6>{{ form.type_nyeri.label_tag }} </h6>
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <div class="form-group">
+                                                        {{ form.type_nyeri }} 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row clearfix">
+                                                <div class="col-md-2">
+                                                    <label for="{{ form.nyeri_lainnya.label_tag.id }}">
+                                                        <h6>{{ form.nyeri_lainnya.label_tag }} </h6>
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <div class="form-group">
+                                                        {{ form.nyeri_lainnya }} 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row clearfix">
+                                                <div class="col-md-2">
+                                                    <label for="{{ form.skor_nyeri.label_tag.id }}">
+                                                        <h6>{{ form.skor_nyeri.label_tag }} </h6>
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <div class="form-group">
+                                                        {{ form.skor_nyeri }} 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th>
+                                                                Asesmen ulang nyeri
+                                                                <ul>
+                                                                    <li>Nyeri Ringan setiap 8 jam</li>
+                                                                    <li>Nyeri Sedang setiap 4 jam</li>
+                                                                    <li>Nyeri Berat setiap 1 jam </li>
+                                                                </ul>
+                                                             </th>
+                                                            <th>
+                                                                Penatalaksanaan nyeri 
+                                                                <ul>
+                                                                    <li>Skala nyeri Nyeri ringan dilakukan oleh perawat, bila tidak teratasi lapor DPJP</li>
+                                                                    <li>Skala nyeri Nyeri sedang sampai berat dilakukan oleh DPJP, jika tidak teratasi dalam kurun waktu 3x24</li>
+                                                                </ul>
+                                                            </th>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <h6 class=""><b>Skrining Fungsional – Indeks Barthel</b></h6>    
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="table-responsive">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Faktor Ketergantungan</th>
+                                                                        <th>Sekor</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>1. Personal Hygiene</td>
+                                                                        <td>{{form.personal_hygiene}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>2. Mandi</td>
+                                                                        <td>{{form.mandi}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>3. Makan</td>
+                                                                        <td>{{form.makan}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>4. Toileting</td>
+                                                                        <td>{{form.toileting}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>5. Menaiki Tangga</td>
+                                                                        <td>{{form.menaiki_tangga}}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Faktor Ketergantungan</th>
+                                                                        <th>Sekor</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>6. Memakai Pakaian</td>
+                                                                        <td>{{ form.memekai_pakaian }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>7. Kontrol BAB</td>
+                                                                        <td>{{ form.kontrol_bab }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>8. Kontrol BAK</td>
+                                                                        <td>{{ form.kontrol_bak }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>9. {{ form.ambulasi.label_tag }}</td>
+                                                                        <td>{{ form.ambulasi }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>10. {{ form.transfer_kursi.label_tag }}</td>
+                                                                        <td>{{ form.transfer_kursi }}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <h6 class=""><b>{{ form.total_skor_skrining.label_tag }}</b></h6>    
+                                                {{ form.total_skor_skrining }}
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <h6 class=""><b>{{ form.kategori_skrining.label_tag }}</b></h6>    
+                                                {{ form.kategori_skrining }}
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <h6>Skor Ketergantungan Sedang s.d Total : Laporkan ke DPJP untuk konsulttasi dengan Dokter Rehabilitasi Medis
+                                                    Skor Ketergantungan s.d Ringan : Evaluasi setiap 2 hari atau bila ada perubahan faktor ketergantungan </h6>
+                                            </div>
+                                        </fieldset>
+                                        <fieldset class="form-group border p-3">
+                                            <legend>Psikologis dan Sosial Ekonomi</legend>
+                                            <div class="form-group">
+                                                <h6 class=""><b>{{ form.kodisi_pasien.label_tag }}</b></h6>    
+                                                {{ form.kodisi_pasien }}
+                                            </div>
+                                            <div class="form-group">
+                                                <h6 class=""><b>{{ form.hubungan_pasien.label_tag }}</b></h6>    
+                                                {{ form.hubungan_pasien }}
+                                            </div>
+                                            <div class="form-group">
+                                                <h6 class=""><b>{{ form.keinginan_kusus_pasien.label_tag }}</b></h6>    
+                                                {{ form.keinginan_kusus_pasien }}
+                                            </div>
+                                            <div class="form-group">
+                                                <h6 class=""><b>{{ form.hambatan_sosial.label_tag }}</b></h6>    
+                                                {{ form.hambatan_sosial }}
+                                            </div>
+                                            
                                         </fieldset>
                                         <fieldset class="form-group border p-3">
                                             <legend>Assesment Kebutuhan Pasien</legend>
@@ -1057,17 +1324,18 @@
 {% endblock  %}
 {% block js %}
 {{ form.media.js }}
+
 <script src="{% static 'js/formset.js' %}"></script>
 <script type="text/javascript">
     $('.riwayat_operasi_row').formset({
         addText: '<i class="fas fa-plus"></i>',
         deleteText: '<i class="fas fa-trash-alt"></i>',
-        prefix: 'Riwayat Operasi'
+        prefix: 'riwayat_operasi_set'
     });   
     $('.pemeriksaan_penunjang_row').formset({
         addText: '<i class="fas fa-plus"></i>',
         deleteText: '<i class="fas fa-trash-alt"></i>',
-        prefix: 'Riwayat Operasi'
+        prefix: 'pemeriksaan_penunjang_set'
     });   
 </script>
 {% endblock %}

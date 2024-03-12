@@ -62,14 +62,14 @@ class AssessmentRawatInapUpdateView(IsAuthenticated, UpdateView):
     context_object_name = 'assesment'
 
     def get_success_url(self) -> str:
-        return reverse_lazy('rawat_inap-update', kwargs={'pk': self.get_object().pasien_fisioterapi.id})
+        return reverse_lazy('rawat_inap-update', kwargs={'pk': self.get_object().pasien_rawat_inap.id})
     
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['header'] = 'Assesmen Pasien Rawat Inap'
         context['header_title'] = 'Edit Assesmen Pasien Rawat Inap'
-        context['pasien'] = self.get_object().pasien_fisioterapi.pasien
+        context['pasien'] = self.get_object().pasien_rawat_inap.pasien
         context['btn_delete'] = True
         riwayat_operasi_formset = inlineformset_factory(AssessmentRawatInap, RiwayatOperasi, form=RiwayatOperasiForm, extra=1, can_delete=True)
         pemeriksaan_penunjang_formset = inlineformset_factory(AssessmentRawatInap, PemerikasanPenunjang, form=PemerikasanPenunjangForm, extra=1, can_delete=True)

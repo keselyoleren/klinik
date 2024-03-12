@@ -1,3 +1,4 @@
+from curses.textpad import Textbox
 from typing import Text
 from django.db.models import TextChoices
 
@@ -164,7 +165,43 @@ class AsupanMakanTerakhir(TextChoices):
 class GejalaChoice(TextChoices):
     TIDAK_ADA = 'Tidak Ada'
     ADA_RINGAN = 'Ada Ringan'
-    ADA_BERAT = 'Ada BERAT'
+    ADA_BERAT = 'Ada Berat'
+
+class OnsetChoice(TextChoices):
+    AKUN = 'Akun'
+    KRONIK = 'Kornik'
+
+class WaktuChoice(TextChoices):
+    INTERMITEN = 'Intermiten'
+    TERUS_MENERUS = 'Terus Menerus'
+
+class TypeNyeri(TextChoices):
+    TEKANAN = 'Tekanan'
+    TERBAKAR = 'Terbakar'
+    TAJAM_TUSUKAN = 'Tajam Tusukan'
+    TAJAM_DIRIS = 'Tajam Diris'
+    MENCENGKRAM = 'Mencengkram'
+    MELILIT = 'Melilit'
+
+KATEGORI_SKRINING = [
+    ('Ketergantungan Total (0-24)', 'Ketergantungan Total (0-24)'),
+    ('Ketergantungan Berat (25-49)', 'Ketergantungan Berat (25-49)'),
+    ('Ketergantungan Sedang (50-74)', 'Ketergantungan Sedang (50-74)'),
+    ('Ketergantungan Ringan (75-90)', 'Ketergantungan Ringan (75-90)'),
+    ('Ketergantungan Minimal (91-99)', 'Ketergantungan Minimal (91-99)'),
+]
+
+KONDISI_PASIEN = [
+    ('Depresi', 'Depresi'),
+    ('Khawatir', 'Khawatir'),
+    ('Sulit/Suka Melawan Perintah', 'Sulit/Suka Melawan Perintah'),
+    ('Baik', 'Baik')
+]
+
+HUBUNGAN_ANGGOTA_KELUARGA = [
+    ('Baik', 'Baik'),
+    ('Tidak', 'Tidak')
+]
 
 DAY_CODE = {
     Hari.MINGGU: 0,

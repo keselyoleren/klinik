@@ -1,5 +1,5 @@
 from django.utils.translation import gettext as _
-from config.choice import AsupanMakanTerakhir, BaikTidak, CaraMasuk, CategoryNorton, GejalaChoice, JenisKasus, JenisKelamin, Kesadaran, KondisiUmum, KonsistensiBAB, LancarTidak, MukosaMulut, Pembicaraan, PerubahanBeratBadan, StatusAlergi, StatusImunisasi, StatusPasien, StatusPerokok, StatusPersetujuan, StatusPeserta, StatusRawatPasien, KeadaanWaktuKeluar, UnitLayanan, YesOrNo
+from config.choice import HUBUNGAN_ANGGOTA_KELUARGA, KATEGORI_SKRINING, KONDISI_PASIEN, AsupanMakanTerakhir, BaikTidak, CaraMasuk, CategoryNorton, GejalaChoice, JenisKasus, JenisKelamin, Kesadaran, KondisiUmum, KonsistensiBAB, LancarTidak, MukosaMulut, OnsetChoice, Pembicaraan, PerubahanBeratBadan, StatusAlergi, StatusImunisasi, StatusPasien, StatusPerokok, StatusPersetujuan, StatusPeserta, StatusRawatPasien, KeadaanWaktuKeluar, TypeNyeri, UnitLayanan, WaktuChoice, YesOrNo
 from config.models import BaseModel
 from django.db import models
 
@@ -184,7 +184,36 @@ class AssessmentRawatInap(BaseModel):
     penurun_kapasitas = models.CharField(_("Penurunan kapasitas fungsional (gangguan, menelan, mengunyah, dll) "), max_length=100, blank=True, null=True, choices=GejalaChoice.choices)
     kategori = models.CharField(_("Kategori"), max_length=255, blank=True, null=True)
     catatan_skrining_gizi = models.CharField(_("Catatan"), max_length=255, blank=True, null=True)
+
+    # skringing nyeri
+    merasakan_nyeri = models.CharField(_("Apakah pasien merasakan nyeri ? "), max_length=255, blank=True, null=True, choices=YesOrNo.choices)
+    lokasi = models.CharField(_("Lokasi"), max_length=255, blank=True, null=True)
+    onset = models.CharField(_("Onset"), max_length=255, blank=True, null=True, choices=OnsetChoice.choices)
+    waktu_nyeri = models.CharField(_("Waktu"), max_length=255, blank=True, null=True, choices=WaktuChoice.choices)
+    pencetus_nyeri = models.CharField(_("Pencetus / saat atau kapan terjadinya nyeri"), max_length=255, blank=True, null=True)
+    type_nyeri = models.CharField(_("Tipe"), max_length=255, blank=True, null=True, choices=TypeNyeri.choices)
+    nyeri_lainnya = models.CharField(_("Lainnya"), max_length=255, blank=True, null=True)
+    skor_nyeri = models.CharField(_("Skor Nyeri dengan VAS / Wong Baker/ CPOT*"), max_length=255, blank=True, null=True)
     
+    #skrining functional
+    personal_hygiene = models.CharField(_("Personal Hygiene"), max_length=255, blank=True, null=True)
+    mandi = models.CharField(_("Mandi"), max_length=255, blank=True, null=True)
+    makan = models.CharField(_("Makan"), max_length=255, blank=True, null=True)
+    toileting = models.CharField(_("Toileting"), max_length=255, blank=True, null=True)
+    menaiki_tangga = models.CharField(_("Menaiki Tangga"), max_length=255, blank=True, null=True)
+    memekai_pakaian = models.CharField(_("Memekai Pakaian"), max_length=255, blank=True, null=True)
+    kontrol_bab = models.CharField(_("Kontrol BAB"), max_length=255, blank=True, null=True)
+    kontrol_bak = models.CharField(_("Kontrol BAK"), max_length=255, blank=True, null=True)
+    ambulasi = models.CharField(_("Ambulasi atau menggunakan Kursi Roda"), max_length=255, blank=True, null=True)
+    transfer_kursi = models.CharField(_("Transfer Kursi – Tempat Tidur"), max_length=255, blank=True, null=True)
+    total_skor_skrining = models.CharField(_("Skor Total"), max_length=255, blank=True, null=True)
+    kategori_skrining = models.CharField(_("Kategori"), max_length=255, blank=True, null=True, choices=KATEGORI_SKRINING)
+
+    # Psikologis dan Sosial Ekonomi
+    kodisi_pasien = models.CharField(_("Pasien dalam kondisi"), max_length=255, blank=True, null=True, choices=KONDISI_PASIEN)
+    hubungan_pasien = models.CharField(_("Hubungan dengan anggota keluarga"), max_length=255, blank=True, null=True, choices=HUBUNGAN_ANGGOTA_KELUARGA)
+    keinginan_kusus_pasien = models.TextField(_("Keinginan khusus pasien (misalnya : tidak ingin dijenguk, ingin dirawat dengan perawat dengan jenis kelamin sama, dll)"), blank=True, null=True)
+    hambatan_sosial = models.TextField(_("Hambatan sosial, budaya dan ekonomi dalam penyembuhan penyakit (misalnya : larangan dari keyakinan yang dianut mitos budaya setempat,pembiayaan pengobatan dari bantuan yang terbatas, dll)"), blank=True, null=True)
     # Kebuhan  cairan
     minum = models.CharField(_("Minum"), max_length=100, blank=True, null=True)
     mukosa_mulut = models.CharField(_("Mukosa Mulut"), max_length=100, choices=MukosaMulut.choices, blank=True, null=True)
