@@ -107,7 +107,7 @@ class AssessmentRawatInapDeleteView(IsAuthenticated, DeleteView):
         return context
 
 
-class DownloadAssesmentVisioterapiView(IsAuthenticated, GeneratePDF,  UpdateView):
+class DownloadAssesmentRawatInapView(IsAuthenticated, GeneratePDF,  UpdateView):
     model = AssessmentRawatInap
     template_name = 'rawat_inap/export/assesment.html'
     context_object_name = 'assesment'

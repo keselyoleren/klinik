@@ -16,6 +16,7 @@
                     <table id="datatable" class="table table-striped">
                         <thead>
                             <tr>
+                            <th>No Rekam Medis</th>
                             <th>Nama Pasien</th>
                             <th>Tgl Lahir</th>
                             <th>Email</th>
@@ -27,6 +28,7 @@
                         <tbody>
                         {% for item in list_pasien %}
                             <tr role="row" class="even">
+                                <td>{{item.no_rm}}</td>
                                 <td>{{item.full_name}}</td>
                                 <td>{{item.tanggal_lahir}}</td>
                                 <td>{{item.email}}</td>

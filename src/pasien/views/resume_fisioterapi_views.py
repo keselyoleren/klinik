@@ -78,7 +78,7 @@ class ResumeFisioterapiDeleteView(IsAuthenticated, DeleteView):
         return context
 
 
-class DownloadAssesmentVisioterapiView(IsAuthenticated, GeneratePDF,  UpdateView):
+class DownloadResumetVisioterapiView(IsAuthenticated, GeneratePDF,  UpdateView):
     model = ResumeFisioterapi
     template_name = 'fisio_terapi/export/assesment.html'
     context_object_name = 'assesment'

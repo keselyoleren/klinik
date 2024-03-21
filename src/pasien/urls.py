@@ -63,7 +63,7 @@ urlpatterns = [
             path('create/<uuid:pasien_id>/', AssessmentRawatInapCreateView.as_view(), name='assesment-rawat-inap-create'),
             path('update/<uuid:pk>/', AssessmentRawatInapUpdateView.as_view(), name='assesment-rawat-inap-update'),
             path('delete/<uuid:pk>/', AssessmentRawatInapDeleteView.as_view(), name='assesment-rawat-inap-delete'),
-            path('download/<uuid:pk>/', DownloadAssesmentVisioterapiView.as_view(), name='assesment-rawat-inap-download'),
+            path('download/<uuid:pk>/', DownloadAssesmentRawatInapView.as_view(), name='assesment-rawat-inap-download'),
         ])),
 
     ])),
@@ -104,7 +104,7 @@ urlpatterns = [
             path('create/<uuid:pasien_id>/', AssesMentFisioTerapiCreateView.as_view(), name='assesment-awal-fisioterapi-create'),
             path('update/<uuid:pk>/', AssesMentFisioTerapiUpdateView.as_view(), name='assesment-fisioterapi-update'),
             path('delete/<uuid:pk>/', AssesMentFisioTerapiDeleteView.as_view(), name='assesment-fisioterapi-delete'),
-            path('download/<uuid:pk>/', DownloadAssesmentVisioterapiView.as_view(), name='assesment-fisioterapi-download'),
+            path('download/<uuid:pk>/', DownloadAssesmentAwalVisioterapiView.as_view(), name='assesment-fisioterapi-download'),
         ])),
 
         path("informed/", include([
@@ -118,14 +118,14 @@ urlpatterns = [
             path('create/<uuid:pasien_id>/', RujukanKeluarCreateView.as_view(), name='rujukan_keluar-create'),
             path('update/<uuid:pk>/', RujukanKeluarUpdateView.as_view(), name='rujukan_keluar-update'),
             path('delete/<uuid:pk>/', RujukanKeluarDeleteView.as_view(), name='rujukan_keluar-delete'),
-            path('download/<uuid:pk>/', DownloadAssesmentVisioterapiView.as_view(), name='rujukan_keluar-download'),
+            path('download/<uuid:pk>/', DownloadRujukanKeluarVisioterapiView.as_view(), name='rujukan_keluar-download'),
         ])),
 
         path("resume/", include([
             path('create/<uuid:pasien_id>/', ResumeFisioterapiCreateView.as_view(), name='resume_fisioterapi-create'),
             path('update/<uuid:pk>/', ResumeFisioterapiUpdateView.as_view(), name='resume_fisioterapi-update'),
             path('delete/<uuid:pk>/', ResumeFisioterapiDeleteView.as_view(), name='resume_fisioterapi-delete'),
-            path('download/<uuid:pk>/', DownloadAssesmentVisioterapiView.as_view(), name='resume_fisioterapi-download'),
+            path('download/<uuid:pk>/', DownloadResumetVisioterapiView.as_view(), name='resume_fisioterapi-download'),
         ])),
 
         path("monitoring/", include([

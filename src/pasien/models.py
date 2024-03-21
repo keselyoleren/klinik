@@ -5,6 +5,7 @@ from django.db import models
 
 # Create your models here.
 class Pasien(BaseModel):
+    no_rm = models.CharField(_("No Rekam Medis"), max_length=255)
     nik = models.CharField(_("Nomor Kartu Identitas"), max_length=255)
     full_name = models.CharField(_("Nama Lengkap"), max_length=255)
     phone = models.CharField(_("No.Telepon"), max_length=255, blank=True, null=True)
@@ -13,7 +14,6 @@ class Pasien(BaseModel):
     tanggal_lahir = models.DateField(_("Tanggal Lahir"), blank=True, null=True)
     jenis_kelamin = models.CharField(_("Jenis Kelamin"), max_length=255, choices=JenisKelamin.choices, blank=True, null=True)
     nama_ibu = models.CharField(_("Nama Ibu Kandung"), max_length=255, blank=True, null=True)
-    no_rm = models.CharField(_("No Rekam Medis"), max_length=255, blank=True, null=True)
     
     agama = models.CharField(_("Agama"), max_length=255, blank=True, null=True)
     pekerjaan = models.CharField(_("Pekerjaan"), max_length=255, blank=True, null=True)
@@ -160,6 +160,7 @@ class RawatInap(BaseModel):
     status_imunisasi = models.CharField(_("Status Imunisasi"), choices=StatusImunisasi.choices, blank=True, null=True, max_length=100)
     cara_keluar = models.CharField(_("Cara Keluar"), max_length=255, blank=True, null=True)
     keaddan_waktu_keluar = models.CharField(_("Keadaan Waktu Keluar"), choices=KeadaanWaktuKeluar.choices, max_length=100, blank=True, null=True)
+    status = models.CharField(_("Status"), max_length=255, choices=StatusRawatPasien.choices, default=StatusRawatPasien.REGISTRASI)
     dokter = models.ForeignKey('master_data.TenagaMedis', verbose_name=_("Dokter yang Merawat"), on_delete=models.CASCADE)
     
     

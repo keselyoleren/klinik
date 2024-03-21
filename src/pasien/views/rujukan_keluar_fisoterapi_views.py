@@ -78,7 +78,7 @@ class RujukanKeluarDeleteView(IsAuthenticated, DeleteView):
         return context
 
 
-class DownloadAssesmentVisioterapiView(IsAuthenticated, GeneratePDF,  UpdateView):
+class DownloadRujukanKeluarVisioterapiView(IsAuthenticated, GeneratePDF,  UpdateView):
     model = RujukanKeluar
     template_name = 'fisio_terapi/export/assesment.html'
     context_object_name = 'assesment'
