@@ -89,7 +89,10 @@ class CatanTerintegrasiUpdateView(IsAuthenticated, UpdateView):
         return context
 
     def form_valid(self, form):
-        form.instance.pasien_rawat_jalan = self.get_object().pasien_rawat_jalan
+        try:
+            form.instance.pasien_rawat_jalan = self.get_object().pasien_rawat_jalan
+        except Exception:
+            form.instance.pasien_rawat_inap = self.get_object().pasien_rawat_inap
         form.save()
         return super().form_valid(form)
 
@@ -123,7 +126,7 @@ class DownloadCatatanTerIntegrasi(IsAuthenticated, GeneratePDF, ListView):
         try:
             return super().get_queryset().filter(pasien_rawat_jalan=self.get_pasien())
         except Exception:
-            return super().get_queryset()
+            return super().get_queryset().filter(pasien_rawat_inap=self.get_pasien())
     
     def get(self, request, *args, **kwargs):
         return self.render_to_pdf(
