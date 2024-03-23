@@ -133,7 +133,15 @@ footer .ttd-l .ttd-l-name {
   text-align: left;
   width: 100px; /* Adjust width as needed */
   margin-right: 10px;
-  font-weight: bold;
+  /* font-weight: bold; */
+}
+
+.patient-data .labels {
+  text-align: left;
+  width: 100px; /* Adjust width as needed */
+  margin-right: 10px;
+  /* font-weight: bold; */
+  
 }
 
 .content-data .label {

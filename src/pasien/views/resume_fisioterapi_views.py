@@ -80,19 +80,19 @@ class ResumeFisioterapiDeleteView(IsAuthenticated, DeleteView):
 
 class DownloadResumetVisioterapiView(IsAuthenticated, GeneratePDF,  UpdateView):
     model = ResumeFisioterapi
-    template_name = 'fisio_terapi/export/assesment.html'
-    context_object_name = 'assesment'
+    template_name = 'fisio_terapi/export/resume.html'
+    context_object_name = 'resume'
     form_class = ResumeFisioterapiForm
 
     def get(self, request, *args, **kwargs):
         return self.render_to_pdf(
             {
-                'assesment': self.get_object(),
+                'resume': self.get_object(),
                 'pasien':self.get_object().pasien_fisioterapi,
                 'host' : f"{self.request.scheme}://{self.request.META['HTTP_HOST']}"
             },
             self.template_name,
             '/css/pdf.css',
-            f'Assesment Pasien Fisioterapi {self.get_object().pasien_fisioterapi.pasien.full_name}'
+            f'Resume Fisioterapi {self.get_object().pasien_fisioterapi.pasien.full_name}'
         )
 

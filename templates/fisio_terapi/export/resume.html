@@ -1,0 +1,97 @@
+
+{% load static %}
+<!DOCTYPE html PUBLIC ">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="{% static '/css/pdf.css'%}" />
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>ASESMEN AWAL PASIEN FISIOTERAPI</title><meta name="author" content="Windows 8 Elite" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    {% include 'component/head_pdf.html' %}
+    <div class="kop col-md-12">
+        <center>
+        <div class="date-and-no">
+            <u><h1>Resume Fisioterapi</h1></u>
+            <p style="line-height: 1px;">No. {{ rekam_medis.request_service.srv_code }}/xx/xx/XII/xxx</p>
+        </div>
+        </center>
+    </div>
+    <section class="content">
+
+        <div class="content close">
+            <div class="content-header">
+                <div class="patient-data">
+                <p style="font-size: medium;"><span class="label">Nama Pasien</span>: <span class="contents">{{ pasien.full_name }}</span></p>
+                <p style="font-size: medium;"><span class="label">Tgl Lahir</span>: <span class="contents">{{ pasien.tanggal_lahir }}</span></p>
+                <p style="font-size: medium;"><span class="label">Alamat</span>: <span class="contents">{{ pasien.alamat }}</span></p>
+                <p style="font-size: medium;"><span class="label">Jenis Kelamin</span>: <span class="contents">{{ pasien.jenis_kelamin }}</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content close">
+            <h3>1. Dokter Yang merujuk</h3>
+            <div class="content-header">
+                <div class="patient-data">
+                    <p style="font-size: medium;"><span class="labels">Dokter yang merujuk</span>: <span class="contents">{{ item.jenis_kelamin }}</span></p>
+                    <p style="font-size: medium;"><span class="labels">Diagnosa medis</span>: <span class="contents">{{ item.berat_badan }}</span></p>
+                    <p style="font-size: medium;"><span class="labels">Tujuan rujukan ke fisioterapi</span>: <span class="contents">{{ item.panjang_badan }}</span></p>
+                </div>
+            </div>
+
+            <h3>2. Kondisi Awal</h3>
+            <div class="content-header">
+                <div class="patient-data">
+                    <p style="font-size: medium;"><span class="labels">Gejala/sindroma</span>: <span class="contents">{{ item.jenis_kelamin }}</span></p>
+                    <p style="font-size: medium;"><span class="labels">Status gangguan gerak fungsional/ Parameter</span>: <span class="contents">{{ item.berat_badan }}</span></p>
+                    <p style="font-size: medium;"><span class="labels">Diagnosis fisioterapi</span>: <span class="contents">{{ item.panjang_badan }}</span></p>
+                </div>
+            </div>
+
+            <h3>3. Kondisi Akhir</h3>
+            <div class="content-header">
+                <div class="patient-data">
+                    <p style="font-size: medium;"><span class="labels">Gejala/sindroma</span>: <span class="contents">{{ item.jenis_kelamin }}</span></p>
+                    <p style="font-size: medium;"><span class="labels">Status gangguan gerak fungsional/ Parameter</span>: <span class="contents">{{ item.berat_badan }}</span></p>
+                    <p style="font-size: medium;"><span class="labels">Diagnosis fisioterapi</span>: <span class="contents">{{ item.panjang_badan }}</span></p>
+                </div>
+            </div>
+
+            <h3>4. Hambatan keberhasilan </h3>
+            <div class="content-header">
+                <div class="patient-data">
+                    <p style="font-size: medium;"><span class="labels"></span><span class="contents">{{ item.jenis_kelamin }}</span></p>
+                </div>
+            </div>
+
+            <h3>5. Rekomendasi tindak lanjut :</h3>
+            <div class="content-header">
+                <div class="patient-data">
+                    <p style="font-size: medium;"><span class="labels"></span><span class="contents">{{ item.jenis_kelamin }}</span></p>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+    
+    <br><br><br><br><br><br>
+    <footer>
+        <div class="ttd-l">
+            <center>
+            <p>&nbsp;</p><br>
+            <p class="ttd-l-name"></p>
+            </center>
+        </div>
+        <div class="ttd">
+            <center>
+            <p style="font-size: medium;">Fisioterapis, {{ resume.created_at|date:'d M Y' }}</p><br><br>
+            <p style="font-size: medium;">{{ ttd_keterangan }}</p>
+            <p style="font-size: medium;" class="ttd-name"><u>(.........................)</u></p>
+            </center>
+        </div>
+    </footer>
+  </body>
+</html>

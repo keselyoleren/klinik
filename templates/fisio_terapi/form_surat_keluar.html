@@ -66,19 +66,19 @@
                     <div class="card-body">
                         <div class="template-demo">
                             {% if btn_delete %}
-                                <a href="{% url 'rujukan_keluar-download' rujukan_keluar.id %}"  class="btn btn-primary btn-block">
+                                {% comment %} <a href="{% url 'rujukan_keluar-download' rujukan_keluar.id %}"  class="btn btn-primary btn-block">
                                     <i class="fa fa-download"></i>                      
                                     Rujukan Keluar
-                                </a>
+                                </a> {% endcomment %}
                                 <a  href="{% url 'rujukan_keluar-delete' rujukan_keluar.id %}" class="btn btn-danger btn-block">
                                     <i class="fa fa-trash"></i>                      
                                     Rujukan Keluar
                                 </a>
                             {% else %}
-                                <button type="button" disabled class="btn btn-primary desabled btn-block">
+                                {% comment %} <button type="button" disabled class="btn btn-primary desabled btn-block">
                                     <i class="fa fa-download"></i>                      
                                     Rujukan Keluar
-                                </button>
+                                </button> {% endcomment %}
                             {% endif %}
                         </div>
                         
