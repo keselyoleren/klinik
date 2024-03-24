@@ -6,12 +6,10 @@ from django.conf import settings
 from django.views.generic import TemplateView
 from django.views.i18n import JavaScriptCatalog
 from manage_users.views.login_views import LogoutView, UserLoginView
-
-class IndexPage(TemplateView):
-    template_name = 'dashboard.html'
+from master_data.views.dashboard_views import InventoryObatListView
 
 urlpatterns = [
-    path('', IndexPage.as_view(), name='index'),
+    path('', InventoryObatListView.as_view(), name='index'),
     path('jsi18n', JavaScriptCatalog.as_view(), name='javascript-catalog'),    
     path("", include('manage_users.urls'), name="manage_users"),
     path("", include('pasien.urls'), name="manage_pasien"),
