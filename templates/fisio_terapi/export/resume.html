@@ -24,10 +24,10 @@
         <div class="content close">
             <div class="content-header">
                 <div class="patient-data">
-                <p style="font-size: medium;"><span class="label">Nama Pasien</span>: <span class="contents">{{ pasien.full_name }}</span></p>
-                <p style="font-size: medium;"><span class="label">Tgl Lahir</span>: <span class="contents">{{ pasien.tanggal_lahir }}</span></p>
-                <p style="font-size: medium;"><span class="label">Alamat</span>: <span class="contents">{{ pasien.alamat }}</span></p>
-                <p style="font-size: medium;"><span class="label">Jenis Kelamin</span>: <span class="contents">{{ pasien.jenis_kelamin }}</span></p>
+                <p style="font-size: medium;"><span class="label">Nama Pasien</span>: <span class="contents">{{ resume.pasien_fisioterapi.pasien.full_name }}</span></p>
+                <p style="font-size: medium;"><span class="label">Tgl Lahir</span>: <span class="contents">{{ resume.pasien_fisioterapi.pasien.tanggal_lahir }}</span></p>
+                <p style="font-size: medium;"><span class="label">Alamat</span>: <span class="contents">{{ resume.pasien_fisioterapi.pasien.alamat }}</span></p>
+                <p style="font-size: medium;"><span class="label">Jenis Kelamin</span>: <span class="contents">{{ resume.pasien_fisioterapi.pasien.jenis_kelamin }}</span></p>
                 </div>
             </div>
         </div>
@@ -36,48 +36,48 @@
             <h3>1. Dokter Yang merujuk</h3>
             <div class="content-header">
                 <div class="patient-data">
-                    <p style="font-size: medium;"><span class="labels">Dokter yang merujuk</span>: <span class="contents">{{ item.jenis_kelamin }}</span></p>
-                    <p style="font-size: medium;"><span class="labels">Diagnosa medis</span>: <span class="contents">{{ item.berat_badan }}</span></p>
-                    <p style="font-size: medium;"><span class="labels">Tujuan rujukan ke fisioterapi</span>: <span class="contents">{{ item.panjang_badan }}</span></p>
+                    <p style="font-size: medium;"><span class="labels">Dokter yang merujuk</span>: <span class="contents">{{ resume.tenaga_medis }}</span></p>
+                    <p style="font-size: medium;"><span class="labels">Diagnosa medis</span>: <span class="contents">{{ resume.diagnosis_medis }}</span></p>
+                    <p style="font-size: medium;"><span class="labels">Tujuan rujukan ke fisioterapi</span>: <span class="contents">{{ resume.tujuan_rujukan }}</span></p>
                 </div>
             </div>
 
             <h3>2. Kondisi Awal</h3>
             <div class="content-header">
                 <div class="patient-data">
-                    <p style="font-size: medium;"><span class="labels">Gejala/sindroma</span>: <span class="contents">{{ item.jenis_kelamin }}</span></p>
-                    <p style="font-size: medium;"><span class="labels">Status gangguan gerak fungsional/ Parameter</span>: <span class="contents">{{ item.berat_badan }}</span></p>
-                    <p style="font-size: medium;"><span class="labels">Diagnosis fisioterapi</span>: <span class="contents">{{ item.panjang_badan }}</span></p>
+                    <p style="font-size: medium;"><span class="labels">Gejala/sindroma</span>: <span class="contents">{{ resume.gejala }}</span></p>
+                    <p style="font-size: medium;"><span class="labels">Status gangguan gerak fungsional/ Parameter</span>: <span class="contents">{{ resume.gerak_funtional }}</span></p>
+                    <p style="font-size: medium;"><span class="labels">Diagnosis fisioterapi</span>: <span class="contents">{{ resume.diagnosis_fisioterapi }}</span></p>
                 </div>
             </div>
 
             <h3>3. Kondisi Akhir</h3>
             <div class="content-header">
                 <div class="patient-data">
-                    <p style="font-size: medium;"><span class="labels">Gejala/sindroma</span>: <span class="contents">{{ item.jenis_kelamin }}</span></p>
-                    <p style="font-size: medium;"><span class="labels">Status gangguan gerak fungsional/ Parameter</span>: <span class="contents">{{ item.berat_badan }}</span></p>
-                    <p style="font-size: medium;"><span class="labels">Diagnosis fisioterapi</span>: <span class="contents">{{ item.panjang_badan }}</span></p>
+                    <p style="font-size: medium;"><span class="labels">Gejala/sindroma</span>: <span class="contents">{{ resume.gejala_end }}</span></p>
+                    <p style="font-size: medium;"><span class="labels">Status gangguan gerak fungsional/ Parameter</span>: <span class="contents">{{ resume.gerak_fungsional_end }}</span></p>
+                    <p style="font-size: medium;"><span class="labels">Diagnosis fisioterapi</span>: <span class="contents">{{ resume.diagnosis_fisioterapi_end }}</span></p>
                 </div>
             </div>
 
             <h3>4. Hambatan keberhasilan </h3>
             <div class="content-header">
                 <div class="patient-data">
-                    <p style="font-size: medium;"><span class="labels"></span><span class="contents">{{ item.jenis_kelamin }}</span></p>
+                    <p style="font-size: medium;"><span class="labels"></span><span class="contents">{{ resume.hambatan }}</span></p>
                 </div>
             </div>
 
             <h3>5. Rekomendasi tindak lanjut :</h3>
             <div class="content-header">
                 <div class="patient-data">
-                    <p style="font-size: medium;"><span class="labels"></span><span class="contents">{{ item.jenis_kelamin }}</span></p>
+                    <p style="font-size: medium;"><span class="labels"></span><span class="contents">{{ resume.tindak_lanjut }}</span></p>
                 </div>
             </div>
         </div>
         
     </section>
     
-    <br><br><br><br><br><br>
+    <br><br>
     <footer>
         <div class="ttd-l">
             <center>

@@ -87,175 +87,183 @@
 
                         <fieldset class="form-group border p-3">
                             <legend>Pemeriksaan Fisik</legend>
-                            <h4 class="card-title">Tanda-tanda vital</h4>
-                            <div class="form-group row">
-                                <div class="col">
-                                    <label for="{{ form.td.label_tag.id }}">
-                                        <h6>
-                                            {{ form.td.label_tag }}
-                                            {% if form.td.field.required %}
-                                                <span class="text-red" style="color: red;">*</span>
-                                            {% endif %}
-                                        </h6>
-                                    </label>
-                                    {{ form.td.help_text }}
-                                    <span class="text-red">
-                                        {{ form.td.errors }}
-                                    </span>
-                                    {{ form.td }}
-                                </div>
-                                <div class="col">
-                                    <label for="{{ form.hr.label_tag.id }}">
-                                        <h6>
-                                            {{ form.hr.label_tag }}
-                                            {% if form.hr.field.required %}
-                                                <span class="text-red" style="color: red;">*</span>
-                                            {% endif %}
-                                        </h6>
-                                    </label>
-                                    {{ form.hr.help_text }}
-                                    <span class="text-red">
-                                        {{ form.hr.errors }}
-                                    </span>
-                                    {{ form.hr }}
-                                </div>
-                                <div class="col">
-                                    <label for="{{ form.suhu.label_tag.id }}">
-                                        <h6>
-                                            {{ form.suhu.label_tag }}
-                                            {% if form.suhu.field.required %}
-                                                <span class="text-red" style="color: red;">*</span>
-                                            {% endif %}
-                                        </h6>
-                                    </label>
-                                    {{ form.suhu.help_text }}
-                                    <span class="text-red">
-                                        {{ form.suhu.errors }}
-                                    </span>
-                                    {{ form.suhu }}
-                                </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h4 class="card-title">Tanda-tanda vital</h4>
+                                    <div class="form-group row">
+                                        <div class="col">
+                                            <label for="{{ form.td.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.td.label_tag }}
+                                                    {% if form.td.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                            {{ form.td.help_text }}
+                                            <span class="text-red">
+                                                {{ form.td.errors }}
+                                            </span>
+                                            {{ form.td }}
+                                        </div>
+                                        <div class="col">
+                                            <label for="{{ form.hr.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.hr.label_tag }}
+                                                    {% if form.hr.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                            {{ form.hr.help_text }}
+                                            <span class="text-red">
+                                                {{ form.hr.errors }}
+                                            </span>
+                                            {{ form.hr }}
+                                        </div>
+                                        <div class="col">
+                                            <label for="{{ form.suhu.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.suhu.label_tag }}
+                                                    {% if form.suhu.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                            {{ form.suhu.help_text }}
+                                            <span class="text-red">
+                                                {{ form.suhu.errors }}
+                                            </span>
+                                            {{ form.suhu }}
+                                        </div>
 
-                                <div class="col">
-                                    <label for="{{ form.rr.label_tag.id }}">
-                                        <h6>
-                                            {{ form.rr.label_tag }}
-                                            {% if form.rr.field.required %}
-                                                <span class="text-red" style="color: red;">*</span>
-                                            {% endif %}
-                                        </h6>
-                                    </label>
-                                    {{ form.rr.help_text }}
-                                    <span class="text-red">
-                                        {{ form.rr.errors }}
-                                    </span>
-                                    {{ form.rr }}
+                                        <div class="col">
+                                            <label for="{{ form.rr.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.rr.label_tag }}
+                                                    {% if form.rr.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                            {{ form.rr.help_text }}
+                                            <span class="text-red">
+                                                {{ form.rr.errors }}
+                                            </span>
+                                            {{ form.rr }}
+                                        </div>
+                                        <div class="col">
+                                            <label for="{{ form.pr.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.pr.label_tag }}
+                                                    {% if form.pr.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                            {{ form.pr.help_text }}
+                                            <span class="text-red">
+                                                {{ form.pr.errors }}
+                                            </span>
+                                            {{ form.pr }}
+                                        </div>
+                                    </div>
+                                    <img src="{% static 'images/fisio_1.png'%}" alt="" class="img-fluid">
                                 </div>
-                                <div class="col">
-                                    <label for="{{ form.pr.label_tag.id }}">
-                                        <h6>
-                                            {{ form.pr.label_tag }}
-                                            {% if form.pr.field.required %}
-                                                <span class="text-red" style="color: red;">*</span>
-                                            {% endif %}
-                                        </h6>
-                                    </label>
-                                    {{ form.pr.help_text }}
-                                    <span class="text-red">
-                                        {{ form.pr.errors }}
-                                    </span>
-                                    {{ form.pr }}
+                                <div class="col-md-4">
+                                    <h4 class="card-title">Kemampuan Fungsional</h4>
+                                    <div class="form-group">
+                                        <div class="col">
+                                            <label for="{{ form.alat_bantu.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.alat_bantu.label_tag }}
+                                                    {% if form.alat_bantu.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                            {{ form.alat_bantu.help_text }}
+                                            <span class="text-red">
+                                                {{ form.alat_bantu.errors }}
+                                            </span>
+                                            {{ form.alat_bantu }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col">
+                                            <label for="{{ form.prothese.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.prothese.label_tag }}
+                                                    {% if form.prothese.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                            {{ form.prothese.help_text }}
+                                            <span class="text-red">
+                                                {{ form.prothese.errors }}
+                                            </span>
+                                            {{ form.prothese }}
+                                        </div>
+                                    </div>
+        
+                                    <div class="form-group">
+                                        <div class="col">
+                                            <label for="{{ form.deformitas.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.deformitas.label_tag }}
+                                                    {% if form.deformitas.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                            {{ form.deformitas.help_text }}
+                                            <span class="text-red">
+                                                {{ form.deformitas.errors }}
+                                            </span>
+                                            {{ form.prothese }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col">
+                                            <label for="{{ form.resiko_jatuh.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.resiko_jatuh.label_tag }}
+                                                    {% if form.resiko_jatuh.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                            {{ form.resiko_jatuh.help_text }}
+                                            <span class="text-red">
+                                                {{ form.resiko_jatuh.errors }}
+                                            </span>
+                                            {{ form.resiko_jatuh }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col">
+                                            <label for="{{ form.lain_lain.label_tag.id }}">
+                                                <h6>
+                                                    {{ form.lain_lain.label_tag }}
+                                                    {% if form.lain_lain.field.required %}
+                                                        <span class="text-red" style="color: red;">*</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </label>
+                                            {{ form.lain_lain.help_text }}
+                                            <span class="text-red">
+                                                {{ form.lain_lain.errors }}
+                                            </span>
+                                            {{ form.lain_lain }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <img src="{% static 'images/fisio_2.png'%}" alt="" class="img-fluid">
                                 </div>
                             </div>
-
-                            <h4 class="card-title">Kemampuan Fungsional</h4>
-                            <div class="form-group">
-                                <div class="col">
-                                    <label for="{{ form.alat_bantu.label_tag.id }}">
-                                        <h6>
-                                            {{ form.alat_bantu.label_tag }}
-                                            {% if form.alat_bantu.field.required %}
-                                                <span class="text-red" style="color: red;">*</span>
-                                            {% endif %}
-                                        </h6>
-                                    </label>
-                                    {{ form.alat_bantu.help_text }}
-                                    <span class="text-red">
-                                        {{ form.alat_bantu.errors }}
-                                    </span>
-                                    {{ form.alat_bantu }}
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col">
-                                    <label for="{{ form.prothese.label_tag.id }}">
-                                        <h6>
-                                            {{ form.prothese.label_tag }}
-                                            {% if form.prothese.field.required %}
-                                                <span class="text-red" style="color: red;">*</span>
-                                            {% endif %}
-                                        </h6>
-                                    </label>
-                                    {{ form.prothese.help_text }}
-                                    <span class="text-red">
-                                        {{ form.prothese.errors }}
-                                    </span>
-                                    {{ form.prothese }}
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col">
-                                    <label for="{{ form.deformitas.label_tag.id }}">
-                                        <h6>
-                                            {{ form.deformitas.label_tag }}
-                                            {% if form.deformitas.field.required %}
-                                                <span class="text-red" style="color: red;">*</span>
-                                            {% endif %}
-                                        </h6>
-                                    </label>
-                                    {{ form.deformitas.help_text }}
-                                    <span class="text-red">
-                                        {{ form.deformitas.errors }}
-                                    </span>
-                                    {{ form.prothese }}
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col">
-                                    <label for="{{ form.resiko_jatuh.label_tag.id }}">
-                                        <h6>
-                                            {{ form.resiko_jatuh.label_tag }}
-                                            {% if form.resiko_jatuh.field.required %}
-                                                <span class="text-red" style="color: red;">*</span>
-                                            {% endif %}
-                                        </h6>
-                                    </label>
-                                    {{ form.resiko_jatuh.help_text }}
-                                    <span class="text-red">
-                                        {{ form.resiko_jatuh.errors }}
-                                    </span>
-                                    {{ form.resiko_jatuh }}
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col">
-                                    <label for="{{ form.lain_lain.label_tag.id }}">
-                                        <h6>
-                                            {{ form.lain_lain.label_tag }}
-                                            {% if form.lain_lain.field.required %}
-                                                <span class="text-red" style="color: red;">*</span>
-                                            {% endif %}
-                                        </h6>
-                                    </label>
-                                    {{ form.lain_lain.help_text }}
-                                    <span class="text-red">
-                                        {{ form.lain_lain.errors }}
-                                    </span>
-                                    {{ form.lain_lain }}
-                                </div>
-                            </div>
-
+                            
                             <div class="row">
                                 <div class="col-md-6">
                                     <h4 class="card-title">Pemeriksaan sistemik Khusus :*)</h4>

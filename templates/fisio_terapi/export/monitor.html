@@ -14,8 +14,8 @@
     <div class="kop col-md-12">
         <center>
         <div class="date-and-no">
-            <u><h1>Rekam Medis</h1></u>
-            <p style="line-height: 1px;">No. {{ rekam_medis.request_service.srv_code }}/xx/xx/XII/xxx</p>
+            <u><h1>INTERVENSI DAN MONITORING FISIOTERAPI</h1></u>
+            {% include 'component/cop_pdf.html' %}
         </div>
         </center>
     </div>
@@ -24,228 +24,36 @@
         <div class="content close">
             <div class="content-header">
                 <div class="patient-data">
-                <p style="font-size: medium;"><span class="label">Nama Pasien</span>: <span class="contents">{{ item.pasien.full_name }}</span></p>
-                <p style="font-size: medium;"><span class="label">Tgl Lahir</span>: <span class="contents">{{ item.pasien.tanggal_lahir }}</span></p>
-                <p style="font-size: medium;"><span class="label">Alamat</span>: <span class="contents">{{ item.pasien.alamat }}</span></p>
-                <p style="font-size: medium;"><span class="label">Pekerjaan</span>: <span class="contents">{{ item.pasien }}</span></p>
-                <p style="font-size: medium;"><span class="label">Agama</span>: <span class="contents">{{ item.pasien.agama }}</span></p>
-                <p style="font-size: medium;"><span class="label">Jenis Kelamin</span>: <span class="contents">{{ item.pasien.jenis_kelamin }}</span></p>
+                <p style="font-size: medium;"><span class="label">Nama Pasien</span>: <span class="contents">{{ pasien.full_name }}</span></p>
+                <p style="font-size: medium;"><span class="label">Tgl Lahir</span>: <span class="contents">{{ pasien.tanggal_lahir }}</span></p>
+                <p style="font-size: medium;"><span class="label">Alamat</span>: <span class="contents">{{ pasien.alamat }}</span></p>
+                <p style="font-size: medium;"><span class="label">Jenis Kelamin</span>: <span class="contents">{{ pasien.jenis_kelamin }}</span></p>
                 </div>
             </div>
         </div>
-        
-        <div style="">
-        <div class="content-table">
-                <table>
-                    <tr>
-                        <td width='100px'><p class="s1" style="text-align: center;">ASESMEN AWAL PASIEN FISIOTERAPI</p></td>
-                        <td>
-                            <div class="content-header">
-                                <div class="patient-data">
-                                    <div class="patient-data">
-                                        <p style="font-size: medium;"><span class="label">Nama Pasien</span>: <span class="contents">{{ item.pasien.full_name }}</span></p>
-                                        <p style="font-size: medium;"><span class="label">Tgl Lahir</span>: <span class="contents">{{ item.pasien.tanggal_lahir }}</span></p>
-                                        <p style="font-size: medium;"><span class="label">Alamat</span>: <span class="contents">{{ item.pasien.alamat }}</span></p>
-                                        <p style="font-size: medium;"><span class="label">Pekerjaan</span>: <span class="contents">{{ item.pasien }}</span></p>
-                                        <p style="font-size: medium;"><span class="label">Agama</span>: <span class="contents">{{ item.pasien.agama }}</span></p>
-                                        <p style="font-size: medium;"><span class="label">Jenis Kelamin</span>: <span class="contents">{{ item.pasien.jenis_kelamin }}</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr style="height:14pt">
-                        <td width="100px" style="width: 10%;">
-                            <p class="s5" style="padding-top: 2pt;padding-left: 14pt;text-indent: 0pt;text-align: left;">Alergi</p>
-                            </td>
-                            <td style="" >
-                            <p class="s6" style="padding-top: 1pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">
-                                <span class="s4"> {{ assesment.alergi }} </span> {% if assesment.alergi == 'Ya' %} Sebutkan : {% endif %}</span>
-                            </p>
-                        </td>
-                    </tr>
-                    <tr style="height:14pt">
-                        <td width="100px" style="width: 10%;" rowspan="3">
-                        <p style="text-indent: 0pt;text-align: left;">
-                            <br />
-                        </p>
-                        <p class="s5" style="padding-left: 9pt;text-indent: 0pt;text-align: left;">Skrining</p>
-                        </td>
-                        <td style="">
-                        <p class="s5" style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">
-                            Nyeri <span class="s4"> Skor Nyeri metode VAS / Wong Baker / CPOT* = {{ assesment.nyeri }}</span>
-                        </p>
-                        </td>
-                    </tr>
-                    <tr style="height:22pt">
-                        <td style="">
-                            <p class="s4" style="padding-top: 1pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">
-                                <b>Gizi &nbsp;</b>TB : <span class="s7">&nbsp;&nbsp;&nbsp; {{ assesment.tinggi_badan }} &nbsp;&nbsp;</span>cm BB : <span class="s7">&nbsp;&nbsp;&nbsp; {{ assesment.berat_badan }}&nbsp;&nbsp;</span>gr / Kg*
-                            </p>
-                            <p class="s4" style="padding-left: 33pt;text-indent: 0pt;text-align: left;">
-                                Indeks Massa Tubuh (IMT)<span class="s8">&nbsp; {{ assesment.imt }} </span>kg / m<span class="s9">2</span>
-                            </p>
-                        </td>
-                    </tr>
-                    <tr style="height:22pt">
-                        <td style="">
-                            <p class="s6" style="padding-top: 1pt;padding-left: 5pt;text-indent: 0pt;line-height: 10pt;text-align: left;">
-                                <span class="s4">Underweight ( &lt; 18.5 )</span>  <span class="s4">Overweight ( 25.5 – 29.99 )</span>
-                            </p>
-                            <p class="s4" style="padding-left: 5pt;text-indent: 0pt;line-height: 10pt;text-align: left;">
-                                <span class="s6"> </span>Normal ( 18.5 – 24.99 ) <span class="s6"> </span>Obese ( <u>&gt;</u> 30 )
-                            </p>
-                        </td>
-                    </tr>
-                    <tr style="height:14pt">
-                        <td width="100px" style="width: 10%;">
-                            <p class="s5" style="padding-top: 2pt;padding-left: 4pt;text-indent: 0pt;text-align: left;">Tanda Vital</p>
-                        </td>
-                        <td style="" colspan="2">
-                            <p class="s4" style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">
-                                <b>TD </b>: <span class="s7">&nbsp;&nbsp;&nbsp; {{ assesment.td }}&nbsp;&nbsp;</span>/ <span class="s7">&nbsp;&nbsp;&nbsp;</span>mmHg <b>Nadi</b>: <span class="s7">&nbsp;&nbsp;&nbsp;{{ assesment.nadi }}</span>x/menit <b>RR</b>: <span class="s7">&nbsp;&nbsp;&nbsp;{{ assesment.rr }}}</span>x/menit <b>Suhu</b>: <span class="s7">&nbsp;&nbsp;&nbsp;{{ assesment.suhu }}</span><span class="s9">O</span>C
-                            </p>
-                        </td>
-                    </tr>
-                    <tr style="height:22pt">
-                        <td width="100px" style="width: 10%;" rowspan="4">
-                            <p style="text-indent: 0pt;text-align: left;">
-                                <br />
-                            </p>
-                            <p class="s5" style="padding-left: 54pt;padding-right: 54pt;text-indent: 0pt;line-height: 5pt;text-align: center;">Anamnesis</p>
-                        </td>
-                        <td style="" >
-                            <p class="s5" style="padding-top: 3pt;padding-left: 5pt;text-indent: 0pt;line-height: 9pt;text-align: left;">Riwayat Penyakit</p>
-                            <p class="s4" style="padding-left: 5pt;text-indent: 0pt;line-height: 9pt;text-align: left;">
-                                {{ assesment.riwayat_penyakit }}
-                            </p>
-                        </td>
-                    </tr>
-                    <tr style="height:68pt">
-                        <td style="" >
-                            <p class="s5" style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">Keluhan Utama :</p>
-                            <p class="s4" style="padding-left: 5pt;text-indent: 0pt;text-align: left;">
-                                Riwayat Penyakit <i>(Lokasi, Onset dan Kronologis, Kualitas, Kuantitas, Faktor Memperberat, Faktor Memperingan, Gejala Penyerta)</i>
-                                {{ assesment.keluhan_utama }}
-                            </p>
-                        </td>
-                    </tr>
-                    <tr style="height:31pt">
-                        <td style="" >
-                            <p class="s5" style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">
-                                Obat-obatan <span class="s4">yang sedang dikonsumsi dan/atau dibawa pasien saat ini</span>
-                                {{ assesment.obat }}
-                            </p>
-                        </td>
-                    </tr>
-                    <tr style="height:31pt">
-                        <td style="" >
-                            <p class="s5" style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">
-                                Pemeriksaan Penunjang <span class="s4">dan</span>hasil <span class="s4">yang sudah ada</span>
-                                {{ assesment.pemeriksaan }}
-                            </p>
-                        </td>
-                    </tr>
-                
-                </table>
-                <table>
-                    
-                    <tr style="height:27pt">
-                        <td width="100px" style="width: 10%;" rowspan="3">
-                            <p style="text-indent: 0pt;text-align: left;">
-                                <br />
-                            </p>
-                        <p class="s5" style="padding-left: 123pt;padding-right: 123pt;text-indent: 0pt;line-height: 5pt;text-align: center;">Pemeriksaan <br> Fisik</p>
-                        </td>
-                            <td style="" >
-                            <p class="s12" style="padding-left: 5pt;text-indent: 0pt;line-height: 9pt;text-align: left;">Status General</p>
-                            <p class="s6" style="padding-left: 5pt;text-indent: 0pt;line-height: 10pt;text-align: left;">
-                                <span class="s5">Kondisi Umum</span>  <span class="s4">{{ assesment.kondisi_umum }}</span>
-                            </p>
-                        </td>
-                    </tr>
-                    <tr style="height:28pt">
-                        <td style="">
-                            <p class="s5" style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">Jantung</p>
-                            <p class="s4" style="padding-top: 4pt;padding-left: 5pt;text-indent: 0pt;text-align: justify;">
-                                Inspeksi : <span class="s7">&nbsp;&nbsp;&nbsp;&nbsp;{{ assesment.inspeksi }}&nbsp;&nbsp;</span>
-                            </p>
-                            <p class="s4" style="padding-top: 4pt;padding-left: 5pt;text-indent: 0pt;text-align: justify;">
-                                Palpasi : <span class="s7">&nbsp;&nbsp;&nbsp;&nbsp;{{ assesment.palpasi }}&nbsp;&nbsp;</span>
-                            </p>
-                            <p class="s4" style="padding-top: 4pt;padding-left: 5pt;text-indent: 0pt;text-align: justify;">
-                                Perkusi : <span class="s7">&nbsp;&nbsp;&nbsp;&nbsp;{{ assesment.palpasi }}&nbsp;&nbsp;</span>
-                            </p>
-                            <p class="s4" style="padding-top: 4pt;padding-left: 5pt;text-indent: 0pt;text-align: justify;">
-                                Auskultasi : <span class="s7">&nbsp;&nbsp;&nbsp;&nbsp;{{ assesment.auskultasi }}&nbsp;&nbsp;</span>
-                            </p>
-                            <br><hr>
-                            <p class="s5" style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">Paru</p>
-                            <p class="s4" style="padding-top: 4pt;padding-left: 5pt;text-indent: 0pt;text-align: justify;">
-                                Inspeksi : <span class="s7">&nbsp;&nbsp;&nbsp;&nbsp;{{ assesment.inspeksi_paru }}&nbsp;&nbsp;</span>
-                            </p>
-                            <p class="s4" style="padding-top: 4pt;padding-left: 5pt;text-indent: 0pt;text-align: justify;">
-                                Palpasi : <span class="s7">&nbsp;&nbsp;&nbsp;&nbsp;{{ assesment.palpasi_paru }}&nbsp;&nbsp;</span>
-                            </p>
-                            <p class="s4" style="padding-top: 4pt;padding-left: 5pt;text-indent: 0pt;text-align: justify;">
-                                Perkusi : <span class="s7">&nbsp;&nbsp;&nbsp;&nbsp;{{ assesment.palpasi_paru }}&nbsp;&nbsp;</span>
-                            </p>
-                            <p class="s4" style="padding-top: 4pt;padding-left: 5pt;text-indent: 0pt;text-align: justify;">
-                                Auskultasi : <span class="s7">&nbsp;&nbsp;&nbsp;&nbsp;{{ assesment.auskultasi_paru }}&nbsp;&nbsp;</span>
-                            </p>
-                        </td>
-                    </tr>
-                    <tr style="height:14pt">
-                        <td >
-                            <p class="s12" style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">Status Lokalis</p>
-                            <p class="s4" style="padding-top: 1pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">(Pemeriksaan terkait keluhan saat ini)</p>
-                            {{ assesment.status_lokalis }}
-                        </td>
-                    </tr>
-                </table>
-                <table>
-                    <tr style="height:25pt">
-                        <td colspan="3" style="width: 10%;">
-                          <p class="s5" style="paddinxg-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">Informasi Tambahan</p>
-                          {{ assesment.informasi_tambahan }}
-                        </td>
-                    </tr>
-                    <tr style="height:25pt">
-                        <td colspan="3" style="width: 10%;">
-                          <p class="s5" style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">Diagnosis Kerja / Diagnosis Banding</p>
-                          {{ assesment.diagnosis }}
-                        </td>
-                    </tr>
-                    <tr style="height:25pt">
-                        <td colspan="3" width="100px" style="width: 10%;">
-                          <p class="s5" style="padding-top: 2pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">Instruksi Awal Dokterg</p>
-                          {{ assesment.instruksi_awal_dokter }}
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Tgl</th>
+                    <th>Tindakan</th>
+                    <th>Perkembangan (S=Subyektif; O=Obyektif; A=Asesmen; R=Rencana.)</th>
+                    <th>Paraf</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in list_fisioterapi  %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ item.created_at }}</td>
+                    <td>{{ item.tindakan }}</td>
+                    <td>{{ item.perkembangan }}</td>
+                    <td>{{ item.tenaga_medis }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </section>
     
-    
-    <footer>
-        <table>
-            <tr>
-                <td>
-                    <center>
-                        <p>Nama Pasien</p>
-                        <p class="ttd-l-name">{{ rekam_medis.pasien.full_name }}</p>
-                    </center>
-                </td>
-                <td>
-                    <center>
-                        <p>Yogyakarta, {{ rekam_medis.created_at|date:'d M Y' }}</p>
-                        <p>Tenaga Medis</p>
-                        <p class="ttd-name">{{ rekam_medis.tenaga_medis }}</p>
-                        </center>            
-                </td>
-            </tr>
-        </table>
-    </footer>
   </body>
 </html>
