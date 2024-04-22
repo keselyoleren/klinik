@@ -108,7 +108,7 @@ class SuratBebasNarkoba(BaseModel):
     
     
     def __str__(self) -> str:
-        return self.tenaga_medis.name
+        return self.tenaga_medis.nama
 
 
 class SuratPersetujuan(BaseModel):

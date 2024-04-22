@@ -147,3 +147,5 @@ JAZZMIN_SETTINGS = {
     "navigation_expanded": False,
 }
 
+
+GOOGLE_CREDENTIALS = config("GOOGLE_CREDENTIALS", "./credentials.json")
