@@ -83,6 +83,11 @@ exports/
 exports/
 src/exports/
 
+./token.json
+./credentials.json
+
+credentials.json
+token.json
 
 # servers (new items)
 server/
