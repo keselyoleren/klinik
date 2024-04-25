@@ -3,8 +3,6 @@ import io, re
 from django.http import HttpResponse
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
-from google.oauth2 import service_account
-from django.conf import settings
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaIoBaseDownload
@@ -17,28 +15,6 @@ import datetime
 
 class GoogleDocumentProvider:
     def __init__(self, template_id=None, params=None, file_name=None):
-        # self.SCOPES = [
-        #     "https://www.googleapis.com/auth/documents",
-        #     "https://www.googleapis.com/auth/documents.readonly",
-        #     "https://www.googleapis.com/auth/drive",
-        #     "https://www.googleapis.com/auth/drive.file",
-        #     "https://www.googleapis.com/auth/drive.readonly",
-        # ]
-        # self.creds = None
-        # if os.path.exists('token.json'):
-        #     self.creds = Credentials.from_authorized_user_file('token.json', self.SCOPES)
-
-        # if not self.creds or not self.creds.valid:
-        #     flow = InstalledAppFlow.from_client_secrets_file(
-        #         'credentials.json', self.SCOPES)
-        #     self.creds = flow.run_local_server(port=0)
-        #     # Save the credentials for the next run
-        #     with open('token.json', 'w') as token:
-        #         token.write(self.creds.to_json())
-        
-        # self.DRIVE = build("drive", "v3", credentials=self.creds)
-        # self.DOCS = build("docs", "v1", credentials=self.creds)
-
         self.SCOPES = [
             "https://www.googleapis.com/auth/documents",
             "https://www.googleapis.com/auth/documents.readonly",
@@ -46,14 +22,35 @@ class GoogleDocumentProvider:
             "https://www.googleapis.com/auth/drive.file",
             "https://www.googleapis.com/auth/drive.readonly",
         ]
-        self.creds = service_account.Credentials.from_service_account_file(settings.GOOGLE_CREDENTIALS,
-                                                                           scopes=self.SCOPES)
+        self.creds = None
+        if os.path.exists('token.json'):
+            self.creds = Credentials.from_authorized_user_file('token.json', self.SCOPES)
+
+        if not self.creds or not self.creds.valid:
+            flow = InstalledAppFlow.from_client_secrets_file(
+                'credentials.json', self.SCOPES)
+            self.creds = flow.run_local_server(port=0)
+            # Save the credentials for the next run
+            with open('token.json', 'w') as token:
+                token.write(self.creds.to_json())
+        
+        # self.DRIVE = build("drive", "v3", credentials=self.creds)
+        # self.DOCS = build("docs", "v1", credentials=self.creds)
+
+        # self.SCOPES = [
+        #     "https://www.googleapis.com/auth/documents",
+        #     "https://www.googleapis.com/auth/documents.readonly",
+        #     "https://www.googleapis.com/auth/drive",
+        #     "https://www.googleapis.com/auth/drive.file",
+        #     "https://www.googleapis.com/auth/drive.readonly",
+        # ]
+        # self.creds = service_account.Credentials.from_service_account_file(settings.GOOGLE_CREDENTIALS,
+        #                                                                    scopes=self.SCOPES)
         self.DRIVE = build("drive", "v3", credentials=self.creds)
         self.DOCS = build("docs", "v1", credentials=self.creds)
         self.template_id = template_id
         self.params = params
         self.file_name = file_name
-        print(self.DRIVE)
 
     def copy_template(self):
         time = datetime.datetime.now()
@@ -72,7 +69,6 @@ class GoogleDocumentProvider:
         document_id = self.copy_template()
         file_info = self.DRIVE.files().get(fileId=self.template_id, supportsAllDrives=True,
                                             supportsTeamDrives=True).execute()
-        print('file info', file_info)
         if file_info['mimeType'] in ['application/vnd.google-apps.document', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document']:
             context = self.params.iteritems() if hasattr({}, 'iteritems') else self.params.items()
             reqs = [{'replaceAllText': {
@@ -90,7 +86,6 @@ class GoogleDocumentProvider:
                 self._replace_text_in_document(document_id, text_replace)
             except Exception as e:
                 print(e)
-            print(document_id)
             return document_id
 
     def _extract_text_from_document(self, document):
@@ -144,22 +139,7 @@ class GoogleDocumentProvider:
         ]
         self.DOCS.documents().batchUpdate(documentId=document_id, body={'requests':requests}).execute()
 
-    def create_blank_document(self):
-        try: 
-            body = {
-                'title': 'testing name'
-            }
-            response = self.DOCS.documents().create(body=body).execute()
-            document_id = response.get('documentId', None)
-            file = self.DRIVE.files().get(fileId=document_id, fields='parents').execute()
-            previous_parents = ",".join(file.get('parents'))
-            self.DRIVE.files().update(fileId=document_id, addParents=settings.DOCUMENT_ROOT_DRIVE,
-                                      removeParents=previous_parents, supportsAllDrives=True, supportsTeamDrives=True,
-                                      fields='id, parents').execute()
-            print(document_id)
-            return document_id
-        except HttpError as error:
-            print(error)
+
     
     def download_google_docs_as_pdf(self, document_id):
         request = self.DRIVE.files().export_media(fileId=document_id, mimeType='application/pdf')
