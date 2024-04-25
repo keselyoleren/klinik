@@ -1,14 +1,12 @@
 # myapp/views.py
-
-from urllib import request
+from datetime import datetime
+from django.utils.timezone import localtime
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
 from django.forms import inlineformset_factory
 from django.contrib import messages
+from config.documents import GoogleDocumentProvider
 
-from django.contrib.auth import login, authenticate
-from django.http import HttpResponseRedirect
-from config.choice import RoleUser, StatusPasien
 from config.permis import IsAuthenticated, IsAuthenticated
 from config.report import GeneratePDF
 from pasien.form.assesment_rawat_jalan_form import AssesmentRawatJalanForm, CpotForm, GcsForm, VasForm, WongBakerForm
@@ -127,21 +125,35 @@ class AssesmentRawatJalanDeleteView(IsAuthenticated, DeleteView):
         return context
 
 
-class DownloadAssesmentView(IsAuthenticated, GeneratePDF,  UpdateView):
+class DownloadAssesmentView(IsAuthenticated, UpdateView):
     model = AssesmentRawatJalan
     template_name = 'rawat_jalan/export/assesment.html'
     context_object_name = 'assesment'
     form_class = AssesmentRawatJalanForm
 
-    def get(self, request, *args, **kwargs):
-        return self.render_to_pdf(
-            {
-                'assesment': self.get_object(),
-                'pasien':self.get_object().pasien_rawat_jalan,
-                'host' : f"{self.request.scheme}://{self.request.META['HTTP_HOST']}"
-            },
-            self.template_name,
-            '/css/pdf.css',
-            f'Assesment Awal Rawat Jalan {self.get_object().pasien_rawat_jalan.pasien.full_name}'
-        )
+    # def get(self, request, *args, **kwargs):
+    #     return self.render_to_pdf(
+    #         {
+    #             'assesment': self.get_object(),
+    #             'pasien':self.get_object().pasien_rawat_jalan,
+    #             'host' : f"{self.request.scheme}://{self.request.META['HTTP_HOST']}"
+    #         },
+    #         self.template_name,
+    #         '/css/pdf.css',
+    #         f'Assesment Awal Rawat Jalan {self.get_object().pasien_rawat_jalan.pasien.full_name}'
+    #     )
 
+    def get(self, request, *args, **kwargs):
+        document_id = '1c2_9URuApDF9rkJtoFuxmFsz_3j7EXrnYanIOPH_ick'
+        created_at_local = localtime(self.get_object().created_at)
+        params = {            
+            'created_at': created_at_local, #created_at_local.strftime('%d %B %Y')
+            'nama-pasien': self.get_object().pasien_rawat_jalan.pasien.full_name,
+            'no-rm': self.get_object().pasien_rawat_jalan.pasien.no_rm,
+            'jenis-kelamin': self.get_object().pasien_rawat_jalan.pasien.jenis_kelamin,
+            'tanggal-lahir': self.get_object().pasien_rawat_jalan.pasien.tanggal_lahir,
+        }
+        file_name = f'Assesment Awal Rawat Jalan - {self.get_object()} ({datetime.now()})'
+        document = GoogleDocumentProvider(document_id, params, file_name)
+        proses_document = document.process_document()
+        return document.download_google_docs_as_pdf(proses_document)
