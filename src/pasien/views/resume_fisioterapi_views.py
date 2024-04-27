@@ -5,9 +5,13 @@ from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate
 from django.forms import inlineformset_factory
 from django.shortcuts import get_object_or_404
+from django.utils.timezone import localtime
+from datetime import datetime
+from config.documents import GoogleDocumentProvider
 
 
 from django.contrib import messages
+from config.documents import GoogleDocumentProvider
 from config.permis import IsAuthenticated, IsAuthenticated
 from config.report import GeneratePDF
 from pasien.form.assesment_fisioterapi_form import InterfensiForm
@@ -78,21 +82,47 @@ class ResumeFisioterapiDeleteView(IsAuthenticated, DeleteView):
         return context
 
 
-class DownloadResumetVisioterapiView(IsAuthenticated, GeneratePDF,  UpdateView):
+class DownloadResumetVisioterapiView(IsAuthenticated, UpdateView):
     model = ResumeFisioterapi
     template_name = 'fisio_terapi/export/resume.html'
     context_object_name = 'resume'
     form_class = ResumeFisioterapiForm
 
     def get(self, request, *args, **kwargs):
-        return self.render_to_pdf(
-            {
-                'resume': self.get_object(),
-                'pasien':self.get_object().pasien_fisioterapi,
-                'host' : f"{self.request.scheme}://{self.request.META['HTTP_HOST']}"
-            },
-            self.template_name,
-            '/css/pdf.css',
-            f'Resume Fisioterapi {self.get_object().pasien_fisioterapi.pasien.full_name}'
-        )
+        document_id = '1vbCocIHCI7A2QfNLNkOFgN6BaPjngexTdPOFPTeyHno'
+        created_at_local = localtime(self.get_object().created_at)
+        file_name = f'RESUME FISIOTERAPI - {self.get_object().pasien_fisioterapi.pasien} ({datetime.now()})'
+        params = {
+            'created_at':created_at_local,
+            'nama':self.get_object().pasien_fisioterapi.pasien.full_name,
+            'alamat':self.get_object().pasien_fisioterapi.pasien.alamat,                
+            'jenis_kelamin':self.get_object().pasien_fisioterapi.pasien.jenis_kelamin,             
+            'phone':self.get_object().pasien_fisioterapi.pasien.phone,             
+
+            'diagnosis_medis':self.get_object().diagnosis_medis,            
+            'tujuan_rujukan':self.get_object().tujuan_rujukan,            
+            'gejala':self.get_object().gejala,            
+            'gerak_fungsional':self.get_object().gerak_fungsional,
+            'diagnosis_fisioterapi':self.get_object().diagnosis_fisioterapi,
+            'gejala_end':self.get_object().gejala_end,
+            'gerak_fungsional_end':self.get_object().gerak_fungsional_end,
+            'diagnosis_fisioterapi_end':self.get_object().diagnosis_fisioterapi_end,
+            'hambatan':self.get_object().hambatan,
+         
+        }
+        document = GoogleDocumentProvider(document_id, params, file_name)
+        proses_document = document.process_document()
+        return document.download_google_docs_as_pdf(proses_document)
+        
+    # def get(self, request, *args, **kwargs):
+    #     return self.render_to_pdf(
+    #         {
+    #             'resume': self.get_object(),
+    #             'pasien':self.get_object().pasien_fisioterapi,
+    #             'host' : f"{self.request.scheme}://{self.request.META['HTTP_HOST']}"
+    #         },
+    #         self.template_name,
+    #         '/css/pdf.css',
+    #         f'Resume Fisioterapi {self.get_object().pasien_fisioterapi.pasien.full_name}'
+    #     )
 
