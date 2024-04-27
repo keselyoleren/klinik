@@ -48,7 +48,7 @@ class AssesmentRawatJalan(BaseModel):
 
     #
 
-    # vital sign
+    # tanda vital
     suhu_tubuh = models.CharField(_("Suhu Tubuh"), max_length=20, blank=True, null=True)
     nadi = models.CharField(_("Nadi"), max_length=20, blank=True, null=True)
     td = models.CharField(_("TD"), max_length=20, blank=True, null=True)

@@ -145,13 +145,53 @@ class DownloadAssesmentView(IsAuthenticated, UpdateView):
 
     def get(self, request, *args, **kwargs):
         document_id = '1c2_9URuApDF9rkJtoFuxmFsz_3j7EXrnYanIOPH_ick'
+        # document_id = '1SEqN3iLVLyVf_5TiaT8JZhTLb6LFqHwq'
         created_at_local = localtime(self.get_object().created_at)
         params = {            
             'created_at': created_at_local, #created_at_local.strftime('%d %B %Y')
             'nama-pasien': self.get_object().pasien_rawat_jalan.pasien.full_name,
             'no-rm': self.get_object().pasien_rawat_jalan.pasien.no_rm,
-            'jenis-kelamin': self.get_object().pasien_rawat_jalan.pasien.jenis_kelamin,
-            'tanggal-lahir': self.get_object().pasien_rawat_jalan.pasien.tanggal_lahir,
+            'jnis-kelamin': self.get_object().pasien_rawat_jalan.pasien.jenis_kelamin,
+            'tgl-lahir': self.get_object().pasien_rawat_jalan.pasien.tanggal_lahir,
+            'tgl-lahir': self.get_object().pasien_rawat_jalan.pasien.tanggal_lahir,
+            'alergi':self.get_object().alergi,
+            'jenis-alergi':self.get_object().jenis_alergi,
+            'tb':self.get_object().tinggi_badan,
+            'bb':self.get_object().berat_badan,
+            'imt':self.get_object().imt,
+
+            # tanda vital
+            'td':self.get_object().td,
+            'nadi':self.get_object().nadi,
+            'rr':self.get_object().rr,
+            'suhu':self.get_object().suhu_tubuh,
+
+            # assesment
+            'riwayat_penyakit':self.get_object().riwayat_penhakit,
+            'keluhan_utama':self.get_object().keluhan_utama,
+            'obat':self.get_object().obat_obatan,
+            'pemeriksaan':self.get_object().pemerkiksaan,
+
+            # kondisi umum
+            'kondisi_umum':self.get_object().kondisi_umum,
+
+            # jantung
+            'inspeksi':self.get_object().inspeksi,
+            'palpasi':self.get_object().palpasi,
+            'perkusi':self.get_object().perkusi,
+            'auskultasi':self.get_object().auskultasi,
+
+            # paru
+            'inspeksi_paru':self.get_object().inspeksi_paru,
+            'palpasi_paru':self.get_object().palpasi_paru,
+            'perkusi_paru':self.get_object().perkusi_paru,
+            'auskultasi_paru':self.get_object().auskultasi_paru,
+            
+            'status_lokalis':self.get_object().status_lokalis,
+            'inf-tambahan':self.get_object().informasi_tambahan,
+            'diagnosis':self.get_object().diagnosis,
+            'instruksi_awal_dokter':self.get_object().instruksi_awal_dokter,
+            
         }
         file_name = f'Assesment Awal Rawat Jalan - {self.get_object()} ({datetime.now()})'
         document = GoogleDocumentProvider(document_id, params, file_name)
