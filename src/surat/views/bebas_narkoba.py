@@ -119,17 +119,24 @@ class SuratBebasNarkobaGenerateView(IsAuthenticated, CreateView):
     
     def generate_document(self):
         document_id = '1q7V1wYTGRjr6PnCLFssaQaIH2h9baIwDguXgj9q5Wv8'
-        params = self.object
-        file_name = 'document format'
-        return GoogleDocumentProvider(document_id, params, file_name).process_document()
-        # return self.render_to_pdf(
-        #     {
-        #         'item': self.object,
-        #         'ttd_keterangan':'Mengetahui',
-        #         'title': 'Surat Bebeas Narkoba',
-        #         'host' : f"{self.request.scheme}://{self.request.META['HTTP_HOST']}"
-        #     },
-        #     self.generate_template_name,
-        #     '/css/pdf.css',
-        #     f'Surat Bebeas Narkoba - {self.object.pasien}'
-        # )
+        created_at_local = localtime(self.object.created_at)
+        params = {
+            'item.tenaga_medis.nama': self.object.tenaga_medis.nama,
+            'item.tenaga_medis.no_str': self.object.tenaga_medis.no_str,
+            'item.tenaga_medis.jabatan': self.object.tenaga_medis.jabatan,
+            'item.tenaga_medis.alamat': self.object.tenaga_medis.alamat,
+            'item.pasien.full_name': self.object.pasien.full_name,
+            'item.pasien.tanggal_lahir': self.object.pasien.tanggal_lahir,
+            'item.pasien.jenis_kelamin': self.object.pasien.jenis_kelamin,
+            'item.pasien.pekerjaan': self.object.pasien.pekerjaan,
+            'item.pasien.alamat': self.object.pasien.alamat,
+            'item.aphetamin': self.object.aphetamin,
+            'item.methamphetamine': self.object.methamphetamine,
+            'item.thc': self.object.thc,
+            'item.mor': self.object.mor,
+            'created_at': created_at_local.strftime('%d %B %Y')
+        }
+        file_name = f'Surat Bebeas Narkoba - {self.object.pasien} ({datetime.now()})'
+        document = GoogleDocumentProvider(document_id, params, file_name)
+        proses_document =  document.process_document()
+        return document.download_google_docs_as_pdf(proses_document)
