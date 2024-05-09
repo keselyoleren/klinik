@@ -13,4 +13,10 @@ def month_to_roman(value):
     except ValueError:
         return value
 
+def conv_month_to_roman(value):
+    try:
+        return toRoman(int(value))
+    except ValueError:
+        return value
+
     

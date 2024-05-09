@@ -144,11 +144,10 @@ class DownloadAssesmentView(IsAuthenticated, UpdateView):
     #     )
 
     def get(self, request, *args, **kwargs):
-        document_id = '1c2_9URuApDF9rkJtoFuxmFsz_3j7EXrnYanIOPH_ick'
-        # document_id = '1SEqN3iLVLyVf_5TiaT8JZhTLb6LFqHwq'
         created_at_local = localtime(self.get_object().created_at)
+        document_id = '1c2_9URuApDF9rkJtoFuxmFsz_3j7EXrnYanIOPH_ick'
         params = {            
-            'created_at': created_at_local, #created_at_local.strftime('%d %B %Y')
+            'created_at': created_at_local.strftime('%Y-%m-%d'), #created_at_local.strftime('%d %B %Y')
             'nama-pasien': self.get_object().pasien_rawat_jalan.pasien.full_name,
             'no-rm': self.get_object().pasien_rawat_jalan.pasien.no_rm,
             'jnis-kelamin': self.get_object().pasien_rawat_jalan.pasien.jenis_kelamin,
@@ -193,6 +192,7 @@ class DownloadAssesmentView(IsAuthenticated, UpdateView):
             'instruksi_awal_dokter':self.get_object().instruksi_awal_dokter,
             
         }
+        print(params)
         file_name = f'Assesment Awal Rawat Jalan - {self.get_object()} ({datetime.now()})'
         document = GoogleDocumentProvider(document_id, params, file_name)
         proses_document = document.process_document()

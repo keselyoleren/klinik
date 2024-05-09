@@ -1,4 +1,7 @@
 # myapp/views.py
+from config.documents import GoogleDocumentProvider
+from datetime import datetime
+from django.utils.timezone import localtime
 
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
@@ -113,15 +116,26 @@ class DownloadAssesmentRawatInapView(IsAuthenticated, GeneratePDF,  UpdateView):
     context_object_name = 'assesment'
     form_class = AssesmentRawatInapForm
 
-    def get(self, request, *args, **kwargs):
-        return self.render_to_pdf(
-            {
-                'assesment': self.get_object(),
-                'pasien':self.get_object().pasien_fisioterapi,
-                'host' : f"{self.request.scheme}://{self.request.META['HTTP_HOST']}"
-            },
-            self.template_name,
-            '/css/pdf.css',
-            f'Assesment Pasien Fisioterapi {self.get_object().pasien_fisioterapi.pasien.full_name}'
-        )
+    # def get(self, request, *args, **kwargs):
+    #     return self.render_to_pdf(
+    #         {
+    #             'assesment': self.get_object(),
+    #             'pasien':self.get_object().pasien_rawat_inap.pasien,
+    #             'host' : f"{self.request.scheme}://{self.request.META['HTTP_HOST']}"
+    #         },
+    #         self.template_name,
+    #         '/css/pdf.css',
+    #         f'Assesment Pasien Fisioterapi {self.get_object().pasien_rawat_inap.pasien.full_name}'
+    #     )
 
+    def get(self, request, *args, **kwargs):
+        document_id = '13LCzN7HNZOOb_X4u2RJwHDnu_fJ5WyHPGG7IetPU-aY'
+        created_at_local = localtime(self.get_object().created_at)
+        params = {            
+            'created_at': created_at_local.strftime('%Y-%m-%d'), #created_at_local.strftime('%d %B %Y')
+            
+        }
+        file_name = f'Assesment Awal Rawat Inap - {self.get_object()} ({datetime.now()})'
+        document = GoogleDocumentProvider(document_id, params, file_name)
+        proses_document = document.process_document()
+        return document.download_google_docs_as_pdf(proses_document)
