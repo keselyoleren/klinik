@@ -1,5 +1,3 @@
-from pyexpat import model
-from statistics import mode
 from django.db import models
 from config.choice import DitujukanChoice, HasilRapidAntigen, JenisKelamin, StatusNarkoba
 from config.models import BaseModel
@@ -63,7 +61,7 @@ class SuratKelahiran(BaseModel):
     alamat = models.CharField(_('Alamat'), max_length=101, blank=True, null=True)
 
     def __str__(self) -> str:
-        return self.pasien.full_name
+        return self.nama_bayi
 
 class SuratKematian(BaseModel):
     no = models.CharField(_('No'), max_length=101, blank=True, null=True)

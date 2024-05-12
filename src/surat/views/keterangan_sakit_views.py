@@ -1,4 +1,9 @@
 # myapp/views.py
+from django.utils.timezone import localtime
+from config.documents import GoogleDocumentProvider
+from config.templatetags.tags import conv_month_to_roman
+from datetime import datetime
+
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
 from config.permis import IsAuthenticated, IsAuthenticated
@@ -78,8 +83,43 @@ class DownloadKeteranganSakit(IsAuthenticated, DetailView, GeneratePDF):
             '/css/pdf.css',
             f'Surat Keterangan Sakit - {self.get_object().pasien.full_name}'
         )
+    def get(self, request, *args, **kwargs):
+        document_id = '1AhB0VzI70oUs0P1wUbc3lapQMHJjwTociYtoGIVfgz8'
+        created_at_local = localtime(self.get_object().created_at)
+        month_only = created_at_local.strftime('%m')
+        year_only = created_at_local.strftime('%Y')
 
-class KeteraganSakitGenerateView(IsAuthenticated, CreateView, GeneratePDF):
+
+        # tgl_lahir = localtime(self.get_object().pasien.tanggal_lahir)
+        params = {            
+            'created_at': created_at_local.strftime('%Y-%m-%d'), #created_at_local.strftime('%d %B %Y')
+            'nama-pasien': self.get_object().pasien.full_name,
+            'tgl-lahir': self.get_object().pasien.tanggal_lahir,
+            'jenis-kelamin': self.get_object().pasien.jenis_kelamin,
+            'pekerjaan': self.get_object().pasien.pekerjaan,
+            'alamat': self.get_object().pasien.alamat,
+            'alamat': self.get_object().pasien.alamat,
+            'nik': self.get_object().pasien.nik,
+            'tempat_lahir': self.get_object().pasien.tempat_lahir,
+            'agama': self.get_object().pasien.agama,
+
+            'diagnosa': self.get_object().diangnosa,
+            'start': self.get_object().start,
+            'end': self.get_object().end,
+
+            'no': self.get_object().no,
+            'romawi':conv_month_to_roman(month_only),
+            'year':year_only
+
+            
+        }
+        file_name = f'Surat Keterangan Sakit - {self.get_object()} ({datetime.now()})'
+        document = GoogleDocumentProvider(document_id, params, file_name)
+        proses_document = document.process_document()
+        return document.download_google_docs_as_pdf(proses_document)
+
+
+class KeteraganSakitGenerateView(IsAuthenticated, CreateView):
     model = KeteraganSakit
     template_name = 'component/form.html'
     pdf_template_name = 'surat/keterangan_sakit/download.html'
@@ -101,14 +141,36 @@ class KeteraganSakitGenerateView(IsAuthenticated, CreateView, GeneratePDF):
         return self.generate_pdf()
     
     def generate_pdf(self):
-        return self.render_to_pdf(
-            {
-                'item': self.object,
-                'ttd_keterangan':'Yang Memeriksa',
-                'title': 'Surat Keterangan Sakit',
-                'host' : f"{self.request.scheme}://{self.request.META['HTTP_HOST']}"
-            },
-            self.pdf_template_name,
-            '/css/pdf.css',
-            f'Surat Keterangan Sakit - {self.object.pasien.full_name}'
-        )
+        document_id = '1AhB0VzI70oUs0P1wUbc3lapQMHJjwTociYtoGIVfgz8'
+        created_at_local = localtime(self.object.created_at)
+        month_only = created_at_local.strftime('%m')
+        year_only = created_at_local.strftime('%Y')
+
+
+        # tgl_lahir = localtime(self.get_object().pasien.tanggal_lahir)
+        params = {            
+            'created_at': created_at_local.strftime('%Y-%m-%d'), #created_at_local.strftime('%d %B %Y')
+            'nama-pasien': self.object.pasien.full_name,
+            'tgl-lahir': self.object.pasien.tanggal_lahir,
+            'jenis-kelamin': self.object.pasien.jenis_kelamin,
+            'pekerjaan': self.object.pasien.pekerjaan,
+            'alamat': self.object.pasien.alamat,
+            'alamat': self.object.pasien.alamat,
+            'nik': self.object.pasien.nik,
+            'tempat_lahir': self.object.pasien.tempat_lahir,
+            'agama': self.object.pasien.agama,
+
+            'diagnosa': self.object.diangnosa,
+            'start': self.object.start,
+            'end': self.object.end,
+
+            'no': self.object.no,
+            'romawi':conv_month_to_roman(month_only),
+            'year':year_only
+
+            
+        }
+        file_name = f'Surat Keterangan Sakit - {self.object} ({datetime.now()})'
+        document = GoogleDocumentProvider(document_id, params, file_name)
+        proses_document = document.process_document()
+        return document.download_google_docs_as_pdf(proses_document)

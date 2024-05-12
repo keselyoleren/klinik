@@ -1,4 +1,9 @@
 # myapp/views.py
+from django.utils.timezone import localtime
+from config.documents import GoogleDocumentProvider
+from config.templatetags.tags import conv_month_to_roman
+from datetime import datetime
+
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
 from config.permis import IsAuthenticated, IsAuthenticated
@@ -60,21 +65,32 @@ class SuratPerintahTugasDeleteView(IsAuthenticated, DeleteView):
         return context
 
 
-class DownloadSuratPerintahTugas(IsAuthenticated, DetailView, GeneratePDF):
+class DownloadSuratPerintahTugas(IsAuthenticated, DetailView):
     model = SuratPerintahTugas
     template_name = 'surat/tugas/download.html'
     context_object_name = 'list_tugas'
     
     def get(self, request, *args, **kwargs):
-        return self.render_to_pdf(
-            {
-                'item': self.get_object(),
-                'ttd_keterangan':'Pimpinan Klinik Refa Pratama',
-                'title': 'SURAT PERINTAH TUGAS ',
-                'host' : f"{self.request.scheme}://{self.request.META['HTTP_HOST']}"
-            },
-            self.template_name,
-            '/css/pdf.css',
-            f'Surat Tugas - {self.get_object().tenaga_medis.nama}'
-        )
+        document_id = '1zcVKz2XstKfRNBCzyQMdXnEmnymVCJs9bM8DRdJddSs'
+        created_at_local = localtime(self.get_object().created_at)
+        month_only = created_at_local.strftime('%m')
+        year_only = created_at_local.strftime('%Y')
+        params = {            
+            'created_at': created_at_local.strftime('%Y-%m-%d'), #created_at_local.strftime('%d %B %Y')
+            'dasar': self.get_object().dasar,
+            'tujuan': self.get_object().tujuan,
+
+            'nama': self.get_object().tenaga_medis.nama,
+            'jabatan':self.get_object().tenaga_medis.jabatan,
+            
+            'no': self.get_object().no,
+            'romawi':conv_month_to_roman(month_only),
+            'year':year_only
+
+            
+        }
+        file_name = f'Surat Kelahiran - {self.get_object()} ({datetime.now()})'
+        document = GoogleDocumentProvider(document_id, params, file_name)
+        proses_document = document.process_document()
+        return document.download_google_docs_as_pdf(proses_document)
 

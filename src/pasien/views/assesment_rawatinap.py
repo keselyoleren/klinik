@@ -133,9 +133,26 @@ class DownloadAssesmentRawatInapView(IsAuthenticated, GeneratePDF,  UpdateView):
         created_at_local = localtime(self.get_object().created_at)
         params = {            
             'created_at': created_at_local.strftime('%Y-%m-%d'), #created_at_local.strftime('%d %B %Y')
+            'nama-pasien': self.get_object().pasien_rawat_inap.pasien.full_name,
+            'no-rm': self.get_object().pasien_rawat_inap.pasien.no_rm,
+            'jnis-kelamin': self.get_object().pasien_rawat_inap.pasien.jenis_kelamin,
+            'tgl-lahir': self.get_object().pasien_rawat_inap.pasien.tanggal_lahir,
+
+            'perubahan_berat_badan': self.get_object().perubahan_berat_badan,
+            'asupan_makanan': self.get_object().asupan_makanan,
+            'gejala_gastrointestinal': self.get_object().gejala_gastrointestinal,
+            'faktor_pemberat': self.get_object().faktor_pemberat,
+            'penurun_kapasitas': self.get_object().penurun_kapasitas,
+            'kategori':self.get_object().kategori,
+            'catatan_skrining_gizi': self.get_object().catatan_skrining_gizi,
+            
+            "alergi":self.get_object().alergi,
+            "jenis_alergi": self.get_object().jenis_alergi,
+
             
         }
         file_name = f'Assesment Awal Rawat Inap - {self.get_object()} ({datetime.now()})'
         document = GoogleDocumentProvider(document_id, params, file_name)
         proses_document = document.process_document()
         return document.download_google_docs_as_pdf(proses_document)
+         
