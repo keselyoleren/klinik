@@ -1,5 +1,5 @@
 from django.utils.translation import gettext as _
-from config.choice import HUBUNGAN_ANGGOTA_KELUARGA, KATEGORI_SKRINING, KONDISI_PASIEN, AsupanMakanTerakhir, BaikTidak, CaraMasuk, CategoryNorton, GejalaChoice, JenisKasus, JenisKelamin, Kesadaran, KondisiUmum, KonsistensiBAB, LancarTidak, MukosaMulut, OnsetChoice, Pembicaraan, PerubahanBeratBadan, StatusAlergi, StatusImunisasi, StatusPasien, StatusPerokok, StatusPersetujuan, StatusPeserta, StatusRawatPasien, KeadaanWaktuKeluar, TypeNyeri, UnitLayanan, WaktuChoice, YesOrNo
+from config.choice import KATEGORI_SKRINING, AsupanMakanTerakhir, BaikTidak, CaraMasuk, CategoryNorton, GejalaChoice, HubunganAnggotaKeluarga, JenisKasus, JenisKelamin, Kesadaran, KondisiPasien, KondisiUmum, KonsistensiBAB, LancarTidak, MukosaMulut, OnsetChoice, Pembicaraan, PerubahanBeratBadan, StatusAlergi, StatusImunisasi, StatusPasien, StatusPerokok, StatusPersetujuan, StatusPeserta, StatusRawatPasien, KeadaanWaktuKeluar, TypeNyeri, UnitLayanan, WaktuChoice, YesOrNo
 from config.models import BaseModel
 from django.db import models
 
@@ -211,8 +211,8 @@ class AssessmentRawatInap(BaseModel):
     kategori_skrining = models.CharField(_("Kategori"), max_length=255, blank=True, null=True, choices=KATEGORI_SKRINING)
 
     # Psikologis dan Sosial Ekonomi
-    kodisi_pasien = models.CharField(_("Pasien dalam kondisi"), max_length=255, blank=True, null=True, choices=KONDISI_PASIEN)
-    hubungan_pasien = models.CharField(_("Hubungan dengan anggota keluarga"), max_length=255, blank=True, null=True, choices=HUBUNGAN_ANGGOTA_KELUARGA)
+    kodisi_pasien = models.CharField(_("Pasien dalam kondisi"), max_length=255, blank=True, null=True, choices=KondisiPasien.choices)
+    hubungan_pasien = models.CharField(_("Hubungan dengan anggota keluarga"), max_length=255, blank=True, null=True, choices=HubunganAnggotaKeluarga.choices)
     keinginan_kusus_pasien = models.TextField(_("Keinginan khusus pasien (misalnya : tidak ingin dijenguk, ingin dirawat dengan perawat dengan jenis kelamin sama, dll)"), blank=True, null=True)
     hambatan_sosial = models.TextField(_("Hambatan sosial, budaya dan ekonomi dalam penyembuhan penyakit (misalnya : larangan dari keyakinan yang dianut mitos budaya setempat,pembiayaan pengobatan dari bantuan yang terbatas, dll)"), blank=True, null=True)
     # Kebuhan  cairan
@@ -251,9 +251,10 @@ class AssessmentRawatInap(BaseModel):
     # kesadaran
     kesadaran = models.CharField(_("Kesadaran"), max_length=100, blank=True, null=True, choices=Kesadaran.choices)
     val_kesadaran_lainya = models.CharField(_("Laiinya"), max_length=100, blank=True, null=True)
+    
+    # kodisi_umum
     kondisi_umum_perawat = models.CharField(_("Kondisi Umum"), max_length=200, blank=True, null=True, choices=KondisiUmum.choices)
     val_kon_laiinya = models.CharField(max_length=255, blank=True, null=True)
-    # kodisi_umum
 
     # tanda_vital
     tekanan_darah = models.CharField(_("Tekanan Darah"), max_length=100, blank=True, null=True)

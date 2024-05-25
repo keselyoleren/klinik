@@ -182,6 +182,11 @@ class TypeNyeri(TextChoices):
     TAJAM_DIRIS = 'Tajam Diris'
     MENCENGKRAM = 'Mencengkram'
     MELILIT = 'Melilit'
+class KondisiPasien(TextChoices):
+    DEPRESI = 'Depresi'
+    KHAWATIR = 'Khawatir'
+    SULIT = 'Sulit/Suka Melawan Perintah'
+    BAIK = 'Baik'
 
 KATEGORI_SKRINING = [
     ('Ketergantungan Total (0-24)', 'Ketergantungan Total (0-24)'),
@@ -191,17 +196,14 @@ KATEGORI_SKRINING = [
     ('Ketergantungan Minimal (91-99)', 'Ketergantungan Minimal (91-99)'),
 ]
 
-KONDISI_PASIEN = [
-    ('Depresi', 'Depresi'),
-    ('Khawatir', 'Khawatir'),
-    ('Sulit/Suka Melawan Perintah', 'Sulit/Suka Melawan Perintah'),
-    ('Baik', 'Baik')
-]
+class HubunganAnggotaKeluarga(TextChoices):
+    BAIK = 'Baik'
+    TIDAK = 'Tidak'
 
-HUBUNGAN_ANGGOTA_KELUARGA = [
-    ('Baik', 'Baik'),
-    ('Tidak', 'Tidak')
-]
+# HUBUNGAN_ANGGOTA_KELUARGA = [
+#     ('Baik', 'Baik'),
+#     ('Tidak', 'Tidak')
+# ]
 
 DAY_CODE = {
     Hari.MINGGU: 0,
