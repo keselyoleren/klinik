@@ -285,6 +285,40 @@ class DownloadAssesmentRawatInapView(IsAuthenticated, GeneratePDF,  UpdateView):
             "kon":self.get_object().kontraktur_nyeri,
             "ket_nyeri":self.get_object().keterangan_nyeri,
 
+            # dokter
+            "aut": "(√)" if self.get_object().autoanamnesis else "()",
+            "all":"(√)" if self.get_object().alloanamnesis else "()",
+            "dengan":self.get_object().dengan,
+            "hub_dengan":self.get_object().hubungan_dengan,
+            "kel_utama":self.get_object().keluhan_utama,
+
+            # riwayat penyakit
+            "pernah_dirawat":self.get_object().pernah_dirawat,
+            "karena":self.get_object().karena,
+            "penyakit_diderita":self.get_object().penyakit_diderita,
+            "riw_pen_kel":self.get_object().riwayat_penyakit_keluarga,
+            "obat-obatan":self.get_object().obat_obatan,
+
+            # jantung
+            "inspeksi":self.get_object().inspeksi,
+            "palpasi":self.get_object().palpasi,
+            "perkusi":self.get_object().perkusi,
+            "auskultasi":self.get_object().auskultasi,
+
+            # paru
+            "inspeksi_p":self.get_object().inspeksi_paru,
+            "palpasi_p":self.get_object().palpasi_paru,
+            "perkusi_p":self.get_object().perkusi_paru,
+            "auskultasi_p":self.get_object().auskultasi_paru,
+
+            # status
+            "status_lokalis":self.get_object().status_lokalis,
+            "informasi_tambahan":self.get_object().informasi_tambahan,
+            "daftar_masalah_medis":self.get_object().daftar_masalah_medis,
+            "daftar_masalah_keperawatan":self.get_object().daftar_masalah_keperawatan,
+            "diagnosa_kerja":self.get_object().diagnosa_kerja,
+            "instruksi_awal_dokter":self.get_object().instruksi_awal_dokter,
+
         }
         file_name = f'Assesment Awal Rawat Inap - {self.get_object()} ({datetime.now()})'
         document = GoogleDocumentProvider(document_id, params, file_name)
