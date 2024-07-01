@@ -115,6 +115,6 @@ class DownloadSuratKematian(IsAuthenticated, DetailView):
             
         }
         file_name = f'Surat Kematian - {self.get_object()} ({datetime.now()})'
-        document = GoogleDocumentProvider(document_id, params, file_name)
+        document = GoogleDocumentProvider(document_id, params, file_name=file_name)
         proses_document = document.process_document()
         return document.download_google_docs_as_pdf(proses_document)

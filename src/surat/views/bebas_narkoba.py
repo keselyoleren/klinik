@@ -89,7 +89,7 @@ class DownloadSuratBebasNarkoba(IsAuthenticated, DetailView):
             'created_at': created_at_local.strftime('%d %B %Y')
         }
         file_name = f'Surat Bebeas Narkoba - {self.get_object().pasien} ({datetime.now()})'
-        document = GoogleDocumentProvider(document_id, params, file_name)
+        document = GoogleDocumentProvider(document_id, params, file_name=file_name)
         proses_document =  document.process_document()
         return document.download_google_docs_as_pdf(proses_document)
 
@@ -137,6 +137,6 @@ class SuratBebasNarkobaGenerateView(IsAuthenticated, CreateView):
             'created_at': created_at_local.strftime('%d %B %Y')
         }
         file_name = f'Surat Bebeas Narkoba - {self.object.pasien} ({datetime.now()})'
-        document = GoogleDocumentProvider(document_id, params, file_name)
+        document = GoogleDocumentProvider(document_id, params, file_name=file_name)
         proses_document =  document.process_document()
         return document.download_google_docs_as_pdf(proses_document)

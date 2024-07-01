@@ -114,7 +114,7 @@ class DownloadKeteranganSakit(IsAuthenticated, DetailView, GeneratePDF):
             
         }
         file_name = f'Surat Keterangan Sakit - {self.get_object()} ({datetime.now()})'
-        document = GoogleDocumentProvider(document_id, params, file_name)
+        document = GoogleDocumentProvider(document_id, params, file_name=file_name)
         proses_document = document.process_document()
         return document.download_google_docs_as_pdf(proses_document)
 
@@ -171,6 +171,6 @@ class KeteraganSakitGenerateView(IsAuthenticated, CreateView):
             
         }
         file_name = f'Surat Keterangan Sakit - {self.object} ({datetime.now()})'
-        document = GoogleDocumentProvider(document_id, params, file_name)
+        document = GoogleDocumentProvider(document_id, params, file_name=file_name)
         proses_document = document.process_document()
         return document.download_google_docs_as_pdf(proses_document)
