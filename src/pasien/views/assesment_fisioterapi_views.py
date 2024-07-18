@@ -119,14 +119,16 @@ class DownloadAssesmentAwalVisioterapiView(IsAuthenticated,  UpdateView):
 
     def get(self, request, *args, **kwargs):
         document_id = '1ZyaFFt8ZSREChhXpjTiWzxtevDhO7qMisWINLOhB6Uo'
-        created_at_local = localtime(self.get_object().created_at)
-        file_name = f'ASSESMENT AWAL FISIOTERAPI - {self.get_object().pasien_fisioterapi.pasien} ({datetime.now()})'
+        created_at_local = localtime(self.get_object().created_at).strftime('%Y-%m-%d')
+        file_name = f'ASSESMENT AWAL FISIOTERAPI - {self.get_object().pasien_fisioterapi.pasien} ({created_at_local})'
         params = {
             'created_at':created_at_local,
             'nama':self.get_object().pasien_fisioterapi.pasien.full_name,
             'alamat':self.get_object().pasien_fisioterapi.pasien.alamat,                
             'jenis_kelamin':self.get_object().pasien_fisioterapi.pasien.jenis_kelamin, 
 
+            'auto_nam':self.get_object().anamnese == 'Autoanamnese' and '(√)' or '( )',
+            'hetero_nam':self.get_object().anamnese == 'Heteroanamnese' and '(√)' or '( )',
             'keluhan_utama':self.get_object().keluhan_utama,                
             'riwayat_penyakit_sekarang':self.get_object().riwayat_penyakit_sekarang,                
             'riwayat_penyakit_dahulu':self.get_object().riwayat_penyakit_dahulu,                
@@ -166,9 +168,14 @@ class DownloadAssesmentAwalVisioterapiView(IsAuthenticated,  UpdateView):
             'prog_ren_terapi':self.get_object().program_rencana_terapi,
             'evaluasi':self.get_object().evaluasi,
 
-
-                  
         }
+        interfensis = Intervensi.objects.filter(asses_fisioterapi_id=self.get_object().id)
+        x = 0
+        for intr in  interfensis:
+            params[f'intervensi_{x}'] = intr.intervensi
+            params[f'tempat_{x}'] = intr.tempat_yang_diterapi
+            params[f'tgl_{x}'] = localtime(intr.created_at).strftime('%Y-%m-%d')
+            x += 1
         document = GoogleDocumentProvider(document_id, params, file_name=file_name)
         proses_document = document.process_document()
         return document.download_google_docs_as_pdf(proses_document)

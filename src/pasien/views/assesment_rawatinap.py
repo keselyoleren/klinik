@@ -318,9 +318,15 @@ class DownloadAssesmentRawatInapView(IsAuthenticated, GeneratePDF,  UpdateView):
             "daftar_masalah_keperawatan":self.get_object().daftar_masalah_keperawatan,
             "diagnosa_kerja":self.get_object().diagnosa_kerja,
             "instruksi_awal_dokter":self.get_object().instruksi_awal_dokter,
-
         }
-        file_name = f'Assesment Awal Rawat Inap - {self.get_object()} ({datetime.now()})'
+        x = 0
+        for operasi in PemerikasanPenunjang.objects.filter(ass_rawat_inap=self.get_object().id):
+            params[f'tgl_{x}'] = localtime(operasi.tanggal).strftime('%d %B %Y')
+            params[f'pemeriksaan_{x}'] = operasi.pemeriksaan     
+            params[f'kesan_{x}'] = operasi.kesan     
+            x += 1
+
+        file_name = f'Assesment Awal Rawat Inap - {self.get_object().pasien_rawat_inap.pasien.full_name} ({created_at_local.strftime("%d %B %Y")})'
         document = GoogleDocumentProvider(document_id, params, file_name=file_name)
         proses_document = document.process_document()
         return document.download_google_docs_as_pdf(proses_document)

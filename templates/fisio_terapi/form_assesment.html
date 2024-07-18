@@ -31,6 +31,16 @@
                         <fieldset class="form-group border p-3">
                             <legend>Anamnese</legend>
                             <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="radio" name="anamnese" {% if form.anamnese.value == 'Autoanamnese' %}checked{% endif %} value="Autoanamnese" id="anamnese_0"> Autoanamnese
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="radio" name="anamnese" {% if form.anamnese.value == 'Heteroanamnese' %}checked{% endif %} value="Heteroanamnese" id="anamnese_0"> Heteroanamnese
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <div class="col">
                                     <label for="{{ form.keluhan_utama.label_tag.id }}">
                                         <h6>
@@ -91,81 +101,85 @@
                                 <div class="col-md-4">
                                     <h4 class="card-title">Tanda-tanda vital</h4>
                                     <div class="form-group row">
-                                        <div class="col">
-                                            <label for="{{ form.td.label_tag.id }}">
-                                                <h6>
-                                                    {{ form.td.label_tag }}
-                                                    {% if form.td.field.required %}
-                                                        <span class="text-red" style="color: red;">*</span>
-                                                    {% endif %}
-                                                </h6>
-                                            </label>
-                                            {{ form.td.help_text }}
-                                            <span class="text-red">
-                                                {{ form.td.errors }}
-                                            </span>
-                                            {{ form.td }}
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="{{ form.td.label_tag.id }}">
+                                                    <h6>
+                                                        {{ form.td.label_tag }}
+                                                        {% if form.td.field.required %}
+                                                            <span class="text-red" style="color: red;">*</span>
+                                                        {% endif %}
+                                                    </h6>
+                                                </label>
+                                                {{ form.td.help_text }}
+                                                <span class="text-red">
+                                                    {{ form.td.errors }}
+                                                </span>
+                                                {{ form.td }}
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="{{ form.hr.label_tag.id }}">
+                                                    <h6>
+                                                        {{ form.hr.label_tag }}
+                                                        {% if form.hr.field.required %}
+                                                            <span class="text-red" style="color: red;">*</span>
+                                                        {% endif %}
+                                                    </h6>
+                                                </label>
+                                                {{ form.hr.help_text }}
+                                                <span class="text-red">
+                                                    {{ form.hr.errors }}
+                                                </span>
+                                                {{ form.hr }}
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="{{ form.suhu.label_tag.id }}">
+                                                    <h6>
+                                                        {{ form.suhu.label_tag }}
+                                                        {% if form.suhu.field.required %}
+                                                            <span class="text-red" style="color: red;">*</span>
+                                                        {% endif %}
+                                                    </h6>
+                                                </label>
+                                                {{ form.suhu.help_text }}
+                                                <span class="text-red">
+                                                    {{ form.suhu.errors }}
+                                                </span>
+                                                {{ form.suhu }}
+                                            </div>
                                         </div>
-                                        <div class="col">
-                                            <label for="{{ form.hr.label_tag.id }}">
-                                                <h6>
-                                                    {{ form.hr.label_tag }}
-                                                    {% if form.hr.field.required %}
-                                                        <span class="text-red" style="color: red;">*</span>
-                                                    {% endif %}
-                                                </h6>
-                                            </label>
-                                            {{ form.hr.help_text }}
-                                            <span class="text-red">
-                                                {{ form.hr.errors }}
-                                            </span>
-                                            {{ form.hr }}
-                                        </div>
-                                        <div class="col">
-                                            <label for="{{ form.suhu.label_tag.id }}">
-                                                <h6>
-                                                    {{ form.suhu.label_tag }}
-                                                    {% if form.suhu.field.required %}
-                                                        <span class="text-red" style="color: red;">*</span>
-                                                    {% endif %}
-                                                </h6>
-                                            </label>
-                                            {{ form.suhu.help_text }}
-                                            <span class="text-red">
-                                                {{ form.suhu.errors }}
-                                            </span>
-                                            {{ form.suhu }}
-                                        </div>
-
-                                        <div class="col">
-                                            <label for="{{ form.rr.label_tag.id }}">
-                                                <h6>
-                                                    {{ form.rr.label_tag }}
-                                                    {% if form.rr.field.required %}
-                                                        <span class="text-red" style="color: red;">*</span>
-                                                    {% endif %}
-                                                </h6>
-                                            </label>
-                                            {{ form.rr.help_text }}
-                                            <span class="text-red">
-                                                {{ form.rr.errors }}
-                                            </span>
-                                            {{ form.rr }}
-                                        </div>
-                                        <div class="col">
-                                            <label for="{{ form.pr.label_tag.id }}">
-                                                <h6>
-                                                    {{ form.pr.label_tag }}
-                                                    {% if form.pr.field.required %}
-                                                        <span class="text-red" style="color: red;">*</span>
-                                                    {% endif %}
-                                                </h6>
-                                            </label>
-                                            {{ form.pr.help_text }}
-                                            <span class="text-red">
-                                                {{ form.pr.errors }}
-                                            </span>
-                                            {{ form.pr }}
+                                        <br><br>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="{{ form.rr.label_tag.id }}">
+                                                    <h6>
+                                                        {{ form.rr.label_tag }}
+                                                        {% if form.rr.field.required %}
+                                                            <span class="text-red" style="color: red;">*</span>
+                                                        {% endif %}
+                                                    </h6>
+                                                </label>
+                                                {{ form.rr.help_text }}
+                                                <span class="text-red">
+                                                    {{ form.rr.errors }}
+                                                </span>
+                                                {{ form.rr }}
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="{{ form.pr.label_tag.id }}">
+                                                    <h6>
+                                                        {{ form.pr.label_tag }}
+                                                        {% if form.pr.field.required %}
+                                                            <span class="text-red" style="color: red;">*</span>
+                                                        {% endif %}
+                                                    </h6>
+                                                </label>
+                                                {{ form.pr.help_text }}
+                                                <span class="text-red">
+                                                    {{ form.pr.errors }}
+                                                </span>
+                                                {{ form.pr }}
+                                            </div>
                                         </div>
                                     </div>
                                     <img src="{% static 'images/fisio_1.png'%}" alt="" class="img-fluid">

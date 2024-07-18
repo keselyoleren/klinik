@@ -391,6 +391,7 @@ class AssesMentFisioTerapi(BaseModel):
     pasien_fisioterapi = models.ForeignKey(PasienFisioterapi, verbose_name=_("Pasien Fisioterapi"), on_delete=models.CASCADE, blank=True, null=True)
 
     # AnnamansePermintaanLabor
+    anamnese = models.CharField(_("Anamnese"), max_length=255, blank=True, null=True)
     keluhan_utama = models.CharField(_("Keluhan Utama"), max_length=255, blank=True, null=True)
     riwayat_penyakit_sekarang = models.TextField(_("Riwayat Penyakit Sekarang"), blank=True, null=True)
     riwayat_penyakit_dahulu = models.TextField(_("Riwayat Penyakit Dahulu"), blank=True, null=True)
